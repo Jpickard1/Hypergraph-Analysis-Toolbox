@@ -2,4 +2,4 @@
 
 ---
 
-This directory manages the Matlab implenentation of PHAT.
+This directory manages the Python implenentation of PHAT.
