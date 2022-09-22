@@ -16,7 +16,7 @@
 % Amit Surana, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
 %% Code
 function [d, dmax] = averageDistance(HG)
-import Decompositions.tensor.uniformEdgeSet
+import Decompositions.TensorDecomp.uniformEdgeSet
 A = uniformEdgeSet(HG);
 n = size(A,2);
 
