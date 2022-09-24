@@ -17,8 +17,8 @@ function [adjMat,lapMat] = lineGraph(HG)
 % is the transpose of the original incidence matrix).
 % H = HG.IM;
 
-dG = dualGraph(HG);
-H = Hypergraph('H', incidenceMatrix(dg)); % Incidence matrix function needs to be changed
-[adjMat, lapMat] = cliqueGraph(H', HG.nodeWeights);
+dG = Decompositions.GraphDecomp.dualGraph(HG);
+H = Hypergraph('H', dG); %incidenceMatrix(dG)); % Incidence matrix function needs to be changed
+[adjMat, lapMat] = Decompositions.GraphDecomp.cliqueGraph(H);
 end
 

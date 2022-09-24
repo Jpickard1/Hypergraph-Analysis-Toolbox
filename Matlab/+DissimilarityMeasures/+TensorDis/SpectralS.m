@@ -20,8 +20,10 @@ D2 = reshape(D2, ones(1, order)*numNodes);
 L1 = reshape(D1-A1, sz);
 L2 = reshape(D2-A2, sz);
 
-heig1 = uniquetol(heig(L1)', 1e-4);
-heig2 = uniquetol(heig(L2)', 1e-4);
+% JP - Joshua changed the below 2 lines from heig to height. It was not
+% working previously
+heig1 = uniquetol(height(L1)', 1e-4);
+heig2 = uniquetol(height(L2)', 1e-4);
 
 if length(heig1) <= length(heig2)
     heig1 = [zeros(length(heig2)-length(heig1), 1); heig1];

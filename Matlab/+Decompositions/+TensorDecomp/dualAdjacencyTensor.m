@@ -14,6 +14,6 @@ function adjTensor = dualAdjacencyTensor(HG)
 % incidence matrix.
 Dual.IM = HG.IM';
 Dual.edgeWeights = HG.nodeWeights;
-adjTensor = adjacencyTensor(Dual);
+adjTensor = Decompositions.TensorDecomp.adjacencyTensor(Dual);
 end
 

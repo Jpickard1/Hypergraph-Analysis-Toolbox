@@ -18,7 +18,7 @@ function [A ,L] = dualGraph(HG)
     for i=1:e
         vxc = find(H(:,i));
         for j=1:length(vxc)
-            A(v(j), n+i) = 1;
+            A(vxc(j), n+i) = 1;
         end
     end
     A = A + A';
