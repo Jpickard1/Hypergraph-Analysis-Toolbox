@@ -12,13 +12,7 @@ clear all
 
 %% 
 
-I = [1 1 0;
-     1 1 1;
-     1 0 1;
-     0 1 1;
-     1 0 1;
-     ]
-A = I;
-figure;
-
-
+I = randi([0 1], 10, 15)
+H = Hypergraph('H', I)
+ax = figure;
+PlotIM.plotIncidenceMatrix(H, ax)
