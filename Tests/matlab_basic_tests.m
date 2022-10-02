@@ -20,6 +20,9 @@ I = [   1     1     1     1     1     1     0     0     0     0;
         0     1     0     1     0     1     1     0     1     1;
         0     0     1     0     1     1     0     1     1     1;]
 
+%% Visualization
+ax = figure;
+PlotIM.plotIncidenceMatrix(I);
 %% Hypergraph dir
 H = Hypergraph('H', I);             % Constructor
 

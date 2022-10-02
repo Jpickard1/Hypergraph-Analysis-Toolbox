@@ -1,10 +1,11 @@
 import numpy as np
 import scipy as sp
 
-class hypergraph:
+class graph:
 
     def __init__(self):
-        self.W = np.zeros(0,0)
+        print('HAT/graph.py')
+        self.A = np.zeros((0,0))
         self.N = 0
         self.E = 0
 
@@ -28,3 +29,7 @@ class hypergraph:
 
     def plot(self):
         print('function stub')
+
+    def cliqueExpand(self):
+        print(self)
+        print('function called')
