@@ -12,27 +12,5 @@ class graph:
         self.A = A
         self.N = len(A)
 
-    def getIncidenceMatrix(self):
-        return self.W
-
-    def getN(self):
-        return self.N
-
-    def getE(self):
-        return self.E
-
-    def setIncidenceMatrix(self, w):
-        self.W = w
-
-    def setN(self, n):
-        self.N = n
-
-    def setE(self, e):
-        self.E = e
-
-    def plot(self):
-        print('function stub')
-
-    def cliqueExpand(self):
-        print(self)
-        print('function called')
+    def avgDistance(self):
+        print('Function stub')

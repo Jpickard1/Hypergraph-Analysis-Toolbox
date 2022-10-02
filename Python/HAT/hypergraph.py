@@ -1,7 +1,7 @@
 import numpy as np
 import scipy as sp
 
-from HAT.graph import graph as G
+from HAT.graph import graph as graph
 
 class hypergraph:
 
@@ -14,7 +14,11 @@ class hypergraph:
         self.W = w
         self.N = len(self.W)
         self.E = len(self.W[0])
-                
+    
+    def avgDistance(self):
+        g = self.cliqueExpand()
+        return g.avgDistance()
+    
     def dualGraph(self):
         W = self.W.T
         return hypergraph(W)
