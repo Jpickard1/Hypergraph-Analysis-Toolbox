@@ -1,7 +1,7 @@
 import numpy as np
 import scipy as sp
 
-from HAT.graph import graph as graph
+from HAT.graph import graph
 
 class hypergraph:
 
@@ -16,14 +16,24 @@ class hypergraph:
         self.E = len(self.W[0])
     
     def avgDistance(self):
+        """
+        The average distance is computed between any vertices in the hypergraph based
+        on the average distance of the clique expansion.
+        """
         g = self.cliqueExpand()
         return g.avgDistance()
     
     def dualGraph(self):
+        """
+        The dual hypergraph is constructed.
+        """
         W = self.W.T
         return hypergraph(W)
 
     def cliqueExpand(self):
+        """
+        The clique expansion graph is constructed.
+        """
         A = np.zeros((len(self.W), len(self.W)))
         for e in range(len(self.W[0])):
             vxc = np.where(self.W[:, e] == 1)[0]
@@ -31,18 +41,24 @@ class hypergraph:
                 for j in range(i+1, len(vxc)):
                     A[vxc[i], vxc[j]] = 1
         A = A + A.T
-        return G(A)
+        return graph(A)
 
     def lineGraph(self):
+        """
+        The line graph, which is the clique expansion of the dual graph is constructed.
+        """
         return self.cliqueGraph(self.dualGraph())
 
     def starGraph(self):
+        """
+        The star graph representation is constructed.
+        """
         A = np.zeros((len(self.W) + len(self.W[0]), len(self.W) + len(self.W[0])))
         for e in range(len(self.W[0])):
             vxc = np.where(self.W[:, e] == 1)[0]
             A[vxc, len(self.W) + e] = 1
         A = A + A.T
-        return G(A)
+        return graph(A)
 
     def bollaLaplacian(self):
         print('function stub')
@@ -72,7 +88,7 @@ class hypergraph:
             D[(np.ones(order) * vx).astype(int)] = sum(W[vx])
         return D
     
-    def laplacianTensor(self)
+    def laplacianTensor(self):
         D = self.degreeTensor()
         A = self.adjacencyTensor()
         L = D - A
