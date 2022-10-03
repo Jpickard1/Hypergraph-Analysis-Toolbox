@@ -2,13 +2,21 @@ import numpy as np
 import scipy as sp
 
 class graph:
-
+    """
+    This class represents pairwise graph structures.
+    """
     def __init__(self):
+        """
+        Constructs a default graph.
+        """
         self.A = np.zeros((0,0))
         self.N = 0
         self.E = 0
         
     def __init__(self, A):
+        """
+        Constructs a graph from an adjacency matrix.
+        """
         self.A = A
         self.N = len(A)
     

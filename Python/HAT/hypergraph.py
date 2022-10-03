@@ -4,13 +4,22 @@ import scipy as sp
 from HAT.graph import graph
 
 class hypergraph:
+    """
+    This class represents multiway hypergraph structures.
+    """
 
     def __init__(self):
+        """
+        This is the default constructor for a hypergraph.
+        """
         self.W = np.zeros((0,0))
         self.N = 0
         self.E = 0
         
     def __init__(self, w):
+        """
+        This constructor initializes a hypergraph based on an incidence matrix.
+        """
         self.W = w
         self.N = len(self.W)
         self.E = len(self.W[0])
@@ -59,17 +68,11 @@ class hypergraph:
             A[vxc, len(self.W) + e] = 1
         A = A + A.T
         return graph(A)
-
-    def bollaLaplacian(self):
-        print('function stub')
-
-    def rodriguezLaplacian(self):
-        print('function stub')
-
-    def zhouLaplacian(self):
-        print('function stub')
         
     def adjacencyTensor(self):
+        """
+        This constructs the adjacency tensor for uniform hypergraphs.
+        """
         order = sum(self.W[:,0])
         modes = len(self.W) * np.ones(order)
         A = np.zeros(modes.astype(int))
@@ -81,6 +84,9 @@ class hypergraph:
         return A
     
     def degreeTensor(self):
+        """
+        This constructs the degree tensor for uniform hypergraphs.
+        """
         order = sum(self.W[:,0])
         modes = len(self.W) * np.ones(order)
         D = np.zeros(modes.astype(int))
@@ -89,6 +95,9 @@ class hypergraph:
         return D
     
     def laplacianTensor(self):
+        """
+        This constructs the Laplacian tensor for uniform hypergraphs.
+        """
         D = self.degreeTensor()
         A = self.adjacencyTensor()
         L = D - A
