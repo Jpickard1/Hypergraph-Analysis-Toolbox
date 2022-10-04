@@ -6,6 +6,7 @@ sys.path.insert(0, os.path.abspath('..'))
 import graph
 import hypergraph
 import plot
+import multilinalg
 
 # Configuration file for the Sphinx documentation builder.
 #

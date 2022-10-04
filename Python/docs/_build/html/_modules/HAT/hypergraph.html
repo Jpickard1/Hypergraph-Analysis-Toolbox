@@ -42,7 +42,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../decompositions.html">Decompositions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../similarity.html">Similarity Measures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../control.html">Controllability</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">HAT</a></li>
 </ul>
 
@@ -103,12 +103,20 @@
     
 <div class="viewcode-block" id="hypergraph.dualGraph"><a class="viewcode-back" href="../../HAT.html#HAT.hypergraph.hypergraph.dualGraph">[docs]</a>    <span class="k">def</span> <span class="nf">dualGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The dual hypergraph is constructed.</span>
+<span class="sd">        </span>
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        .. [1] Yang, Chaoqi, et al. &quot;Hypergraph learning with line expansion.&quot; arXiv preprint arXiv:2005.04843 (2020).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">W</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">T</span>
         <span class="k">return</span> <span class="n">hypergraph</span><span class="p">(</span><span class="n">W</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="hypergraph.cliqueExpand"><a class="viewcode-back" href="../../HAT.html#HAT.hypergraph.hypergraph.cliqueExpand">[docs]</a>    <span class="k">def</span> <span class="nf">cliqueExpand</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The clique expansion graph is constructed.</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        .. [1] Yang, Chaoqi, et al. &quot;Hypergraph learning with line expansion.&quot; arXiv preprint arXiv:2005.04843 (2020).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)))</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
@@ -121,11 +129,19 @@
 
 <div class="viewcode-block" id="hypergraph.lineGraph"><a class="viewcode-back" href="../../HAT.html#HAT.hypergraph.hypergraph.lineGraph">[docs]</a>    <span class="k">def</span> <span class="nf">lineGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The line graph, which is the clique expansion of the dual graph is constructed.</span>
+<span class="sd">        </span>
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        .. [1] Yang, Chaoqi, et al. &quot;Hypergraph learning with line expansion.&quot; arXiv preprint arXiv:2005.04843 (2020).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cliqueGraph</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dualGraph</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="hypergraph.starGraph"><a class="viewcode-back" href="../../HAT.html#HAT.hypergraph.hypergraph.starGraph">[docs]</a>    <span class="k">def</span> <span class="nf">starGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The star graph representation is constructed.</span>
+<span class="sd">        </span>
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        .. [1] Yang, Chaoqi, et al. &quot;Hypergraph learning with line expansion.&quot; arXiv preprint arXiv:2005.04843 (2020).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
@@ -163,8 +179,21 @@
         <span class="n">D</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">degreeTensor</span><span class="p">()</span>
         <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjacencyTensor</span><span class="p">()</span>
         <span class="n">L</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">A</span>
-        <span class="k">return</span> <span class="n">L</span></div></div>
+        <span class="k">return</span> <span class="n">L</span></div>
     
+<div class="viewcode-block" id="hypergraph.entropy"><a class="viewcode-back" href="../../HAT.html#HAT.hypergraph.hypergraph.entropy">[docs]</a>    <span class="k">def</span> <span class="nf">entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes hypergraph entropy based on the singular values of the Laplacian tensor. This comes from definition 7 of [1] and</span>
+<span class="sd">        is implemented with Algorithm 1 from [1].</span>
+<span class="sd">        </span>
+<span class="sd">        References</span>
+<span class="sd">        ----------</span>
+<span class="sd">        .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">laplacienTensor</span>
+        <span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">)</span><span class="o">^</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">W</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">/=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">entropy</span><span class="p">(</span><span class="n">S</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

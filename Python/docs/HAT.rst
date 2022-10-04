@@ -1,5 +1,5 @@
-HAT in Python
-=============
+HAT package
+===========
 
 Submodules
 ----------
@@ -16,6 +16,14 @@ HAT.hypergraph module
 ---------------------
 
 .. automodule:: HAT.hypergraph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+HAT.multilinalg module
+----------------------
+
+.. automodule:: HAT.multilinalg
    :members:
    :undoc-members:
    :show-inheritance:

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HAT in Python &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
+  <title>HAT package &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -45,19 +45,21 @@
 <li class="toctree-l1"><a class="reference internal" href="decompositions.html">Decompositions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="similarity.html">Similarity Measures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="control.html">Controllability</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">HAT in Python</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HAT package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.graph">HAT.graph module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.hypergraph">HAT.hypergraph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.plot">HAT.plot module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">HAT</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">HAT in Python</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HAT package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT.graph">HAT.graph module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT.hypergraph">HAT.hypergraph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT.plot">HAT.plot module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT">Module contents</a></li>
 </ul>
@@ -80,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>HAT in Python</li>
+      <li>HAT package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/HAT.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -90,8 +92,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="hat-in-python">
-<h1>HAT in Python<a class="headerlink" href="#hat-in-python" title="Permalink to this heading"></a></h1>
+  <section id="hat-package">
+<h1>HAT package<a class="headerlink" href="#hat-package" title="Permalink to this heading"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
@@ -176,6 +178,12 @@ on the average distance of the clique expansion.</p>
 <dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.cliqueExpand">
 <span class="sig-name descname"><span class="pre">cliqueExpand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.cliqueExpand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.cliqueExpand" title="Permalink to this definition"></a></dt>
 <dd><p>The clique expansion graph is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -188,6 +196,27 @@ on the average distance of the clique expansion.</p>
 <dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.dualGraph">
 <span class="sig-name descname"><span class="pre">dualGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.dualGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.dualGraph" title="Permalink to this definition"></a></dt>
 <dd><p>The dual hypergraph is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.entropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.entropy" title="Permalink to this definition"></a></dt>
+<dd><p>Computes hypergraph entropy based on the singular values of the Laplacian tensor. This comes from definition 7 of [1] and
+is implemented with Algorithm 1 from [1].</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id5"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="3">
+<li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
+</ol>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -200,14 +229,69 @@ on the average distance of the clique expansion.</p>
 <dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.lineGraph">
 <span class="sig-name descname"><span class="pre">lineGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.lineGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.lineGraph" title="Permalink to this definition"></a></dt>
 <dd><p>The line graph, which is the clique expansion of the dual graph is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.starGraph">
 <span class="sig-name descname"><span class="pre">starGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.starGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.starGraph" title="Permalink to this definition"></a></dt>
 <dd><p>The star graph representation is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id7"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
 </dd></dl>
 
+</dd></dl>
+
+</section>
+<section id="module-HAT.multilinalg">
+<span id="hat-multilinalg-module"></span><h2>HAT.multilinalg module<a class="headerlink" href="#module-HAT.multilinalg" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.hosvd">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">hosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#hosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.hosvd" title="Permalink to this definition"></a></dt>
+<dd><p>Higher Order Singular Value Decomposition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uniform</strong> – Indicates if T is a uniform tensor</p></li>
+<li><p><strong>sym</strong> – Indicates if T is a super symmetric tensor</p></li>
+<li><p><strong>M</strong> – Indicates if the factor matrices are required as well as the core tensor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The singular values of the core diagonal tensor and the factor matrices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.uniformSymHosvd">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">uniformSymHosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#uniformSymHosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.uniformSymHosvd" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the singular values of a uniform, symetric tensor. See Algorithm 1 in [1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> – A uniform, symmetric multidimensional array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The singular values that compose the core tensor of the HOSVD on T.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id8"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="3">
+<li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
+</ol>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
