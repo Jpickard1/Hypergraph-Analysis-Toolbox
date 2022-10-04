@@ -1,1 +1,4 @@
 bluepy
+numpy
+scipy
+matplotlib
