@@ -30,12 +30,20 @@ class hypergraph:
     
     def dualGraph(self):
         """The dual hypergraph is constructed.
+        
+        References
+        ----------
+        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
         """
         W = self.W.T
         return hypergraph(W)
 
     def cliqueExpand(self):
         """The clique expansion graph is constructed.
+
+        References
+        ----------
+        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
         """
         A = np.zeros((len(self.W), len(self.W)))
         for e in range(len(self.W[0])):
@@ -48,11 +56,19 @@ class hypergraph:
 
     def lineGraph(self):
         """The line graph, which is the clique expansion of the dual graph is constructed.
+        
+        References
+        ----------
+        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
         """
         return self.cliqueGraph(self.dualGraph())
 
     def starGraph(self):
         """The star graph representation is constructed.
+        
+        References
+        ----------
+        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
         """
         A = np.zeros((len(self.W) + len(self.W[0]), len(self.W) + len(self.W[0])))
         for e in range(len(self.W[0])):
@@ -92,3 +108,16 @@ class hypergraph:
         L = D - A
         return L
     
+    def entropy(self):
+        """Computes hypergraph entropy based on the singular values of the Laplacian tensor. This comes from definition 7 of [1] and
+        is implemented with Algorithm 1 from [1].
+        
+        References
+        ----------
+        .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
+        """
+        L = self.laplacienTensor
+        L = np.reshape(L, (len(self.W), len(self.W)^(sum(W[:,0]) - 1)))
+        _, S, _ = sp.linalg.svd(L)
+        S /= sum(S)
+        return sp.stats.entropy(S)
