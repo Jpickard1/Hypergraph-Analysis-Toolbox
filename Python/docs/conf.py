@@ -7,6 +7,9 @@ import graph
 import hypergraph
 import plot
 import multilinalg
+import numpy
+import matplotlib
+import scipy
 
 # Configuration file for the Sphinx documentation builder.
 #
