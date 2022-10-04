@@ -5,8 +5,8 @@ from HAT.graph import graph
 from HAT.hypergraph import hypergraph as HG
 
 def IM(H):
-    """
-    Plot the incidence matrix of a hypergraph.
+    """Plot the incidence matrix of a hypergraph.
+    :param H: a hypergraph object
     """
     W = H.W
     y,x = np.where(W == 1)

@@ -2,42 +2,36 @@ import numpy as np
 import scipy as sp
 
 class graph:
-    """
-    This class represents pairwise graph structures.
+    """This class represents pairwise graph structures.
     """
     def __init__(self):
-        """
-        Constructs a default graph.
+        """Constructs a default graph.
         """
         self.A = np.zeros((0,0))
         self.N = 0
         self.E = 0
         
     def __init__(self, A):
-        """
-        Constructs a graph from an adjacency matrix.
+        """Constructs a graph from an adjacency matrix.
         """
         self.A = A
         self.N = len(A)
     
     @property
     def degree(self):
-        """
-        The degree matrix of a graph.
+        """The degree matrix of a graph.
         """
         return np.diag(sum(self.A))
         
     @property
     def laplacian(self):
-        """
-        The Laplacian matrix of a graph.
+        """The Laplacian matrix of a graph.
         """
         return self.degree - self.A
 
     @property
     def clusteringCoef(self):
-        """
-        The clustering coefficient of the graph.
+        """The clustering coefficient of the graph.
         """
         gammas = 0
         for vx in range(len(self.A)):
@@ -45,8 +39,7 @@ class graph:
         return gammas / len(self.A)
         
     def clusteringCoef(self, vx):
-        """
-        Computes the clustering coefficient of a single vertex.
+        """Computes the clustering coefficient of a single vertex.
         """
         neighbors = np.where(self.A[vx,:] == 1)[0]
         if vx not in neighborhood:
@@ -58,8 +51,7 @@ class graph:
         return realEdges / possibleEdges        
 
     def pairwiseDistance(self, vxi, vxj):
-        """
-        Computes the pairwise distance between vertices i and j.
+        """Computes the pairwise distance between vertices i and j.
         """
         d = 1
         N = self.A
@@ -71,9 +63,8 @@ class graph:
         return d
     
     def erdosRenyi(n, p):
-        """
-        Constructs a $G_{n,p}$ Erdős-Rényi random graph.
-
+        """Constructs a $G_{n,p}$ Erdős-Rényi random graph.
+        ...
         References
         ----------
         .. [1] P. Erdős and A. Rényi, On Random Graphs, Publ. Math. 6, 290 (1959).
