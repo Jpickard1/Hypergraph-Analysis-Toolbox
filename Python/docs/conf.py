@@ -7,9 +7,12 @@ import graph
 import hypergraph
 import plot
 import multilinalg
-import numpy
-import matplotlib
-import scipy
+import mock
+ 
+MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy.linalg']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
+
 
 # Configuration file for the Sphinx documentation builder.
 #
