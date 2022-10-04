@@ -7,7 +7,7 @@ Functions
 ---------
 
 .. currentmodule:: HAT.hypergraph
-.. autofunction:: lineGraph
+.. autofunction:: HAT.hypergraph.lineGraph
 
 .. currentmodule:: HAT.hypergraph
 .. autofunction:: dualGraph
