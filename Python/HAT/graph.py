@@ -18,16 +18,32 @@ class graph:
         self.N = len(A)
     
     @property
-    def degree(self):
+    def D(self):
         """The degree matrix of a graph.
         """
         return np.diag(sum(self.A))
         
     @property
-    def laplacian(self):
-        """The Laplacian matrix of a graph.
+    def L(self):
+        """The Laplacian matrix of a graph. See equation 1 in [1].
+        
+        References
+        ----------
+        .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
         """
         return self.degree - self.A
+    
+    @property
+    def normL(self):
+        """The normalized Laplacian matrix of a graph. See chapter 16.3.3 [1].
+        
+        References
+        ----------
+        .. [1] Spielman, Daniel. "Spectral graph theory." Combinatorial scientific computing 18 (2012).
+        """
+        D = np.matrix_power(self.D, -0.5)
+        return D @ self.L @ D
+
 
     @property
     def clusteringCoef(self):
@@ -77,3 +93,67 @@ class graph:
                     A[i, j] = 1
                     A[j, i] = 1
         return graph(A)
+    
+    
+    def structuralDM(G1, G2, metric='Euclidean'):
+        """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
+        between 2 graphs with respect to some metric.
+        
+        :param G1: A graph object
+        :param G2: A graph object
+        :param metric: Specify the metric used to compare the graphs in.
+        :type metric: Euclidean, Manhattan, Canberra, or Jaccard
+        
+        :return: A similarity measure between the two graphs.
+        References
+        ----------
+        .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
+        """
+        print('stub')
+        
+    def spectralDM(G1, G2):
+        """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
+        between 2 graphs with respect to some metric.
+        
+        :param G1: A graph object
+        :param G2: A graph object
+        :param metric: Specify the metric used to compare the graphs in.
+        :type metric: Euclidean, Manhattan, Canberra, or Jaccard
+        
+        :return: A similarity measure between the two graphs.
+        References
+        ----------
+        .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
+        """
+        print('stub')
+        
+    def featureDM(G1, G2):
+        """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
+        between 2 graphs with respect to some metric.
+        
+        :param G1: A graph object
+        :param G2: A graph object
+        :param metric: Specify the metric used to compare the graphs in.
+        :type metric: Euclidean, Manhattan, Canberra, or Jaccard
+        
+        :return: A similarity measure between the two graphs.
+        References
+        ----------
+        .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
+        """
+        print('stub')
+        
+    def DELTACON(G1, G2):
+        """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
+        between 2 graphs with respect to some metric.
+        
+        :param G1: A graph object
+        :param G2: A graph object
+        
+        :return: A similarity measure between the two graphs.
+        References
+        ----------
+        .. [1] Koutra, Danai, Joshua T. Vogelstein, and Christos Faloutsos. "Deltacon: A principled massive-graph similarity function." Proceedings of the 2013 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2013.
+        .. [2] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
+        """
+        print('stub')

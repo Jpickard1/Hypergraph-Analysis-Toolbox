@@ -9,14 +9,13 @@ def hosvd(T, M=True, uniform=False, sym=False):
     :param M: Indicates if the factor matrices are required as well as the core tensor
     
     :return: The singular values of the core diagonal tensor and the factor matrices.
-    
     """
     if uniform and not M:
-        return uniformSymHosvd(T)
+        return supersymHosvd(T)
     else:
         print('Nonuniform SVD not implemented')
         
-def uniformSymHosvd(T):
+def supersymHosvd(T):
     """ Computes the singular values of a uniform, symetric tensor. See Algorithm 1 in [1].
     
     :param T: A uniform, symmetric multidimensional array
