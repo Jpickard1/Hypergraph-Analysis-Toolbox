@@ -82,14 +82,13 @@
 <span class="sd">    :param M: Indicates if the factor matrices are required as well as the core tensor</span>
 <span class="sd">    </span>
 <span class="sd">    :return: The singular values of the core diagonal tensor and the factor matrices.</span>
-<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">uniform</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">M</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">uniformSymHosvd</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">supersymHosvd</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nonuniform SVD not implemented&#39;</span><span class="p">)</span></div>
         
-<div class="viewcode-block" id="uniformSymHosvd"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.uniformSymHosvd">[docs]</a><span class="k">def</span> <span class="nf">uniformSymHosvd</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+<div class="viewcode-block" id="supersymHosvd"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.supersymHosvd">[docs]</a><span class="k">def</span> <span class="nf">supersymHosvd</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Computes the singular values of a uniform, symetric tensor. See Algorithm 1 in [1].</span>
 <span class="sd">    </span>
 <span class="sd">    :param T: A uniform, symmetric multidimensional array</span>

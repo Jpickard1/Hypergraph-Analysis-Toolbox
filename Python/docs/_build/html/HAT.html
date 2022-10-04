@@ -104,16 +104,55 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HAT.graph.</span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class represents pairwise graph structures.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="HAT.graph.graph.D">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">D</span></span><a class="headerlink" href="#HAT.graph.graph.D" title="Permalink to this definition"></a></dt>
+<dd><p>The degree matrix of a graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.DELTACON">
+<span class="sig-name descname"><span class="pre">DELTACON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.DELTACON"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.DELTACON" title="Permalink to this definition"></a></dt>
+<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
+between 2 graphs with respect to some metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G1</strong> – A graph object</p></li>
+<li><p><strong>G2</strong> – A graph object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A similarity measure between the two graphs.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>Koutra, Danai, Joshua T. Vogelstein, and Christos Faloutsos. “Deltacon: A principled massive-graph similarity function.” Proceedings of the 2013 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2013.</p>
+</dd>
+<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="HAT.graph.graph.L">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">L</span></span><a class="headerlink" href="#HAT.graph.graph.L" title="Permalink to this definition"></a></dt>
+<dd><p>The Laplacian matrix of a graph. See equation 1 in [1].</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="HAT.graph.graph.clusteringCoef">
 <span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.clusteringCoef" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the clustering coefficient of a single vertex.</p>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="HAT.graph.graph.degree">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">degree</span></span><a class="headerlink" href="#HAT.graph.graph.degree" title="Permalink to this definition"></a></dt>
-<dd><p>The degree matrix of a graph.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -123,12 +162,12 @@
 …
 .. rubric:: References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
 <dd><ol class="upperalpha simple" start="16">
 <li><p>Erdős and A. Rényi, On Random Graphs, Publ. Math. 6, 290 (1959).</p></li>
 </ol>
 </dd>
-<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dt class="label" id="id5"><span class="brackets">2</span></dt>
 <dd><ol class="upperalpha simple" start="5">
 <li><ol class="upperalpha simple" start="14">
 <li><p>Gilbert, Random Graphs, Ann. Math. Stat., 30, 1141 (1959).</p></li>
@@ -139,16 +178,96 @@
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.featureDM">
+<span class="sig-name descname"><span class="pre">featureDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.featureDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.featureDM" title="Permalink to this definition"></a></dt>
+<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
+between 2 graphs with respect to some metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G1</strong> – A graph object</p></li>
+<li><p><strong>G2</strong> – A graph object</p></li>
+<li><p><strong>centrality</strong> – Specify the centrality measure metric used to compare the graphs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A similarity measure between the two graphs.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id6"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py property">
-<dt class="sig sig-object py" id="HAT.graph.graph.laplacian">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">laplacian</span></span><a class="headerlink" href="#HAT.graph.graph.laplacian" title="Permalink to this definition"></a></dt>
-<dd><p>The Laplacian matrix of a graph.</p>
+<dt class="sig sig-object py" id="HAT.graph.graph.normL">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normL</span></span><a class="headerlink" href="#HAT.graph.graph.normL" title="Permalink to this definition"></a></dt>
+<dd><p>The normalized Laplacian matrix of a graph. See chapter 16.3.3 [1].</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id7"><span class="brackets">1</span></dt>
+<dd><p>Spielman, Daniel. “Spectral graph theory.” Combinatorial scientific computing 18 (2012).</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="HAT.graph.graph.pairwiseDistance">
 <span class="sig-name descname"><span class="pre">pairwiseDistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vxi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vxj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.pairwiseDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.pairwiseDistance" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the pairwise distance between vertices i and j.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.spectralDM">
+<span class="sig-name descname"><span class="pre">spectralDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.spectralDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.spectralDM" title="Permalink to this definition"></a></dt>
+<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
+between 2 graphs with respect to some metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G1</strong> – A graph object</p></li>
+<li><p><strong>G2</strong> – A graph object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A similarity measure between the two graphs.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id8"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.structuralDM">
+<span class="sig-name descname"><span class="pre">structuralDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.structuralDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.structuralDM" title="Permalink to this definition"></a></dt>
+<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
+between 2 graphs with respect to some metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G1</strong> – A graph object</p></li>
+<li><p><strong>G2</strong> – A graph object</p></li>
+<li><p><strong>metric</strong> (<em>Euclidean</em><em>, </em><em>Manhattan</em><em>, </em><em>Canberra</em><em>, or </em><em>Jaccard</em>) – Specify the metric used to compare the graphs in.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A similarity measure between the two graphs.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id9"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -180,7 +299,7 @@ on the average distance of the clique expansion.</p>
 <dd><p>The clique expansion graph is constructed.</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets">1</span></dt>
+<dt class="label" id="id10"><span class="brackets">1</span></dt>
 <dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
 </dd>
 </dl>
@@ -198,7 +317,7 @@ on the average distance of the clique expansion.</p>
 <dd><p>The dual hypergraph is constructed.</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dt class="label" id="id11"><span class="brackets">1</span></dt>
 <dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
 </dd>
 </dl>
@@ -211,7 +330,7 @@ on the average distance of the clique expansion.</p>
 is implemented with Algorithm 1 from [1].</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id5"><span class="brackets">1</span></dt>
+<dt class="label" id="id12"><span class="brackets">1</span></dt>
 <dd><ol class="upperalpha simple" start="3">
 <li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
 </ol>
@@ -231,7 +350,7 @@ is implemented with Algorithm 1 from [1].</p>
 <dd><p>The line graph, which is the clique expansion of the dual graph is constructed.</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id6"><span class="brackets">1</span></dt>
+<dt class="label" id="id13"><span class="brackets">1</span></dt>
 <dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
 </dd>
 </dl>
@@ -243,7 +362,7 @@ is implemented with Algorithm 1 from [1].</p>
 <dd><p>The star graph representation is constructed.</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id7"><span class="brackets">1</span></dt>
+<dt class="label" id="id14"><span class="brackets">1</span></dt>
 <dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
 </dd>
 </dl>
@@ -273,8 +392,8 @@ is implemented with Algorithm 1 from [1].</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.uniformSymHosvd">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">uniformSymHosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#uniformSymHosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.uniformSymHosvd" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="HAT.multilinalg.supersymHosvd">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">supersymHosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#supersymHosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.supersymHosvd" title="Permalink to this definition"></a></dt>
 <dd><p>Computes the singular values of a uniform, symetric tensor. See Algorithm 1 in [1].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -286,7 +405,7 @@ is implemented with Algorithm 1 from [1].</p>
 </dl>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id8"><span class="brackets">1</span></dt>
+<dt class="label" id="id15"><span class="brackets">1</span></dt>
 <dd><ol class="upperalpha simple" start="3">
 <li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
 </ol>

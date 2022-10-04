@@ -110,6 +110,7 @@ class graph:
         .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
         """
         print('stub')
+        print(G1 + G2)
         
     def spectralDM(G1, G2):
         """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
@@ -117,8 +118,6 @@ class graph:
         
         :param G1: A graph object
         :param G2: A graph object
-        :param metric: Specify the metric used to compare the graphs in.
-        :type metric: Euclidean, Manhattan, Canberra, or Jaccard
         
         :return: A similarity measure between the two graphs.
         References
@@ -126,15 +125,16 @@ class graph:
         .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
         """
         print('stub')
-        
+        print(G1 + G2)
+
     def featureDM(G1, G2):
         """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
         between 2 graphs with respect to some metric.
         
         :param G1: A graph object
         :param G2: A graph object
-        :param metric: Specify the metric used to compare the graphs in.
-        :type metric: Euclidean, Manhattan, Canberra, or Jaccard
+        :param centrality: Specify the centrality measure metric used to compare the graphs.
+        :type metric: Eigen, Degree, Betweenness, PageRank
         
         :return: A similarity measure between the two graphs.
         References
@@ -142,7 +142,8 @@ class graph:
         .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
         """
         print('stub')
-        
+        print(G1 + G2)
+
     def DELTACON(G1, G2):
         """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
         between 2 graphs with respect to some metric.
@@ -157,3 +158,4 @@ class graph:
         .. [2] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
         """
         print('stub')
+        print(G1 + G2)
