@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAT in Python &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="HAT" href="modules.html" />
+    <link rel="prev" title="Controllability" href="control.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Hypergraph Analysis Toolbox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="properties.html">Hypergraph Properties</a></li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decompositions.html">Decompositions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="similarity.html">Similarity Measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control.html">Controllability</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HAT in Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-HAT.graph">HAT.graph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-HAT.hypergraph">HAT.hypergraph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-HAT.plot">HAT.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-HAT">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">HAT</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HAT in Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-HAT.graph">HAT.graph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-HAT.hypergraph">HAT.hypergraph module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-HAT.plot">HAT.plot module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-HAT">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Hypergraph Analysis Toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>HAT in Python</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/HAT.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hat-in-python">
+<h1>HAT in Python<a class="headerlink" href="#hat-in-python" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-HAT.graph">
+<span id="hat-graph-module"></span><h2>HAT.graph module<a class="headerlink" href="#module-HAT.graph" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="HAT.graph.graph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HAT.graph.</span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents pairwise graph structures.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.clusteringCoef">
+<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.clusteringCoef" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the clustering coefficient of a single vertex.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="HAT.graph.graph.degree">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">degree</span></span><a class="headerlink" href="#HAT.graph.graph.degree" title="Permalink to this definition"></a></dt>
+<dd><p>The degree matrix of a graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.erdosRenyi">
+<span class="sig-name descname"><span class="pre">erdosRenyi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.erdosRenyi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.erdosRenyi" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a $G_{n,p}$ Erdős-Rényi random graph.
+…
+.. rubric:: References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="16">
+<li><p>Erdős and A. Rényi, On Random Graphs, Publ. Math. 6, 290 (1959).</p></li>
+</ol>
+</dd>
+<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dd><ol class="upperalpha simple" start="5">
+<li><ol class="upperalpha simple" start="14">
+<li><p>Gilbert, Random Graphs, Ann. Math. Stat., 30, 1141 (1959).</p></li>
+</ol>
+</li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="HAT.graph.graph.laplacian">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">laplacian</span></span><a class="headerlink" href="#HAT.graph.graph.laplacian" title="Permalink to this definition"></a></dt>
+<dd><p>The Laplacian matrix of a graph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.pairwiseDistance">
+<span class="sig-name descname"><span class="pre">pairwiseDistance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vxi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vxj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.pairwiseDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.pairwiseDistance" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the pairwise distance between vertices i and j.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-HAT.hypergraph">
+<span id="hat-hypergraph-module"></span><h2>HAT.hypergraph module<a class="headerlink" href="#module-HAT.hypergraph" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HAT.hypergraph.</span></span><span class="sig-name descname"><span class="pre">hypergraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents multiway hypergraph structures.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.adjacencyTensor">
+<span class="sig-name descname"><span class="pre">adjacencyTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.adjacencyTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.adjacencyTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the adjacency tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.avgDistance">
+<span class="sig-name descname"><span class="pre">avgDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.avgDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.avgDistance" title="Permalink to this definition"></a></dt>
+<dd><p>The average distance is computed between any vertices in the hypergraph based
+on the average distance of the clique expansion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.cliqueExpand">
+<span class="sig-name descname"><span class="pre">cliqueExpand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.cliqueExpand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.cliqueExpand" title="Permalink to this definition"></a></dt>
+<dd><p>The clique expansion graph is constructed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.degreeTensor">
+<span class="sig-name descname"><span class="pre">degreeTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.degreeTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.degreeTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the degree tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.dualGraph">
+<span class="sig-name descname"><span class="pre">dualGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.dualGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.dualGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The dual hypergraph is constructed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.laplacianTensor">
+<span class="sig-name descname"><span class="pre">laplacianTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.laplacianTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.laplacianTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the Laplacian tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.lineGraph">
+<span class="sig-name descname"><span class="pre">lineGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.lineGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.lineGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The line graph, which is the clique expansion of the dual graph is constructed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.hypergraph.hypergraph.starGraph">
+<span class="sig-name descname"><span class="pre">starGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/hypergraph.html#hypergraph.starGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.hypergraph.hypergraph.starGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The star graph representation is constructed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-HAT.plot">
+<span id="hat-plot-module"></span><h2>HAT.plot module<a class="headerlink" href="#module-HAT.plot" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.plot.IM">
+<span class="sig-prename descclassname"><span class="pre">HAT.plot.</span></span><span class="sig-name descname"><span class="pre">IM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/plot.html#IM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.plot.IM" title="Permalink to this definition"></a></dt>
+<dd><p>Plot the incidence matrix of a hypergraph.
+:param H: a hypergraph object</p>
+</dd></dl>
+
+</section>
+<section id="module-HAT">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-HAT" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="control.html" class="btn btn-neutral float-left" title="Controllability" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="modules.html" class="btn btn-neutral float-right" title="HAT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Joshua Pickard.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

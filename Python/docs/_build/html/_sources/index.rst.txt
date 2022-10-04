@@ -15,6 +15,8 @@ Welcome to Hypergraph Analysis Toolbox's documentation!
    decompositions.rst
    similarity.rst
    control.rst
+   HAT.rst
+   modules.rst
 
 Introduction
 ============
