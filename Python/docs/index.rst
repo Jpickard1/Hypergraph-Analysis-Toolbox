@@ -36,9 +36,10 @@ HAT is intended as a general purpose, multiplatform software for studying hyperg
 Python
 ******
 The Python implementation of HAT may be installed through pip:
+
 .. code-block:: Python
 
-   >> pip install HypergraphAnalysisPackage
+   >> pip install HypergraphAnalysisToolbox
 
 HAT may be imported to the Python invironment with the command:
 
