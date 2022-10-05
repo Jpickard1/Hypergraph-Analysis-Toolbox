@@ -10,6 +10,8 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200):
     :param shadeRows: shade rows (bool)
     :param connectNodes: connect nodes in each hyperedge (bool)
     :param dpi: the resolution of the image
+    
+    :return: matplotlib axes with figure drawn on to it
     """
     # dpi spec
     plt.rcParams['figure.dpi'] = dpi
@@ -49,8 +51,7 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200):
     
     # plot range spec
     plt.xlim([-0.5, m - 0.5])   
-    plt.tick_params(left=False, 
-                    right=False, 
-                    labelleft=False, 
-                    labelbottom=False, 
-                    bottom=False)
+    
+    plt.gca().axes.get_xaxis().set_visible(False)
+    plt.gca().axes.get_yaxis().set_visible(False)    
+    return plt.gca()
