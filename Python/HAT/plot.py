@@ -52,6 +52,8 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200):
     # plot range spec
     plt.xlim([-0.5, m - 0.5])   
     
-    plt.gca().axes.get_xaxis().set_visible(False)
-    plt.gca().axes.get_yaxis().set_visible(False)    
+    # Turn of axis ticks. Keep labels on
+    plt.yticks([])
+    plt.xticks([])
+    
     return plt.gca()
