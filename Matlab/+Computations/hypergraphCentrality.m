@@ -23,7 +23,7 @@
 %% Output
 % * nodeCentrality - Node centrality scores.
 % * edgeCentrality - Edge centrality scores. 
-%% Disclaimer
+%% References
 % This hypergraph centrality algorithm was obtained from Algorithm (1) in
 % the paper below.
 % 
