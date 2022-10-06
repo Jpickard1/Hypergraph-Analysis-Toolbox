@@ -8,11 +8,11 @@
 % * normalized - bool, indicated whether to normalize the Laplacian matrix or
 % not. *Default*: false. 
 %% Output
-% * entropy - Entropy score for the hypergraph.  
-%% Disclaimer
-% The formula for hypergraph entropy was obtained from the paper below. 
+% * entropy - Entropy score for the hypergraph.
+%% References
+%
+% * Can Chen and Indika Rajapakse. 10/2020. "Tensor Entropy for Uniform Hypergraphs.” IEEE Transactions on Network Science and Engineering, 7, 4, Pp. 2889-2900.
 % 
-% Can Chen and Indika Rajapakse. 10/2020. “Tensor Entropy for Uniform Hypergraphs.” IEEE Transactions on Network Science and Engineering, 7, 4, Pp. 2889-2900.
 %% Code
 function entropy = hypergraphEntropy(HG, normalized)
 if nargin < 2
