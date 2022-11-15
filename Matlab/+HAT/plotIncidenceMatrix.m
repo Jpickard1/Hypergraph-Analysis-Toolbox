@@ -4,7 +4,7 @@ function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars)
 % HG: (n,m) double. Incidence matrix.
     
     arguments 
-        HG
+        HG(:,:)
         nodeshape = '.'
         lineargs = num2cell("-k")
         show_h_bars = true
@@ -22,27 +22,27 @@ function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars)
     
     A = HG.IM;
 
-    A = SortIM.cardinalitySort(A);
-    A = SortIM.min_max_sort(A);
+    A = HAT.SortIM.cardinalitySort(A);
+    A = HAT.SortIM.min_max_sort(A);
 
     ax = gca;
     ax.XLimitMethod = 'padded';
     ax.YLimitMethod = 'padded';
 
     %% Scatter
-    s = PlotIM.ScatterIM.scatterIM(A, ax);
+    s = HAT.ScatterIM.scatterIM(A, ax);
     s.Marker = nodeshape;
     s.CData = [0 0 0];
     hold on;
 
     %% Line Plot
     if class(lineargs) == "cell"
-        p = PlotIM.LinePlotIM.lineplotIM(ax, A, lineargs);
+        p = HAT.LinePlotIM.lineplotIM(ax, A, lineargs);
     end
 
     %% Barh
     if show_h_bars
-        PlotIM.BarhIM.barhIM(ax, A);
+        HAT.BarhIM.barhIM(ax, A);
     end
     hold off;
 
