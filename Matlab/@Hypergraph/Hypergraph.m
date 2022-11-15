@@ -17,19 +17,19 @@ classdef Hypergraph
             %   Takes in any 2D array representing an incidence matrix and
             %   stores it in sparse format. Also can store the hyperedge
             %   set for uniform hypergraphs.
-            arguments 
-                nameValueArgs.H = sparse(1);    
+            arguments
+                nameValueArgs.IM = sparse(1);    
                 nameValueArgs.edgeSet = [];
                 nameValueArgs.edgeWeights = 0;
                 nameValueArgs.nodeWeights = 0;
             end
-            obj.IM = sparse(nameValueArgs.H);
+            obj.IM = sparse(nameValueArgs.IM);
             obj.ES = nameValueArgs.edgeSet;
             if nameValueArgs.edgeWeights == 0
                 nameValueArgs.edgeWeights = ones(size(obj.IM, 2), 1);
             end
             if nameValueArgs.nodeWeights== 0
-                nameValueArgs.nodeWeights = ones(size(obj.IM, 2), 1); 
+                nameValueArgs.nodeWeights = ones(size(obj.IM, 1), 1); 
             end
             obj.edgeWeights = nameValueArgs.edgeWeights;
             obj.nodeWeights = nameValueArgs.nodeWeights;
@@ -82,25 +82,66 @@ classdef Hypergraph
         %   components. 
         [bins, binSize]  = sConnectedComponents(obj, s, outputForm)
 
-        r = sRadius(obj, s)
+        r = sRadius(obj, s);
 
-        d = sDiameter(obj, s)
-        
+        d = sDiameter(obj, s);
 
         %% Translation
-
         function D = getDense(obj)
             %GETDENSE Returns a densely-stored copy of the incidence
             %matrix.
             D = full(obj.IM);
         end
 
+        %% Representation
+        function A = adjTensor(obj)
+            A = Decompositions.TensorDecomp.adjacencyTensor(obj);
+        end
 
+        function D = degreeTensor(obj)
+            D = Decompositions.TensorDecomp.degreeTensor(obj);
+        end
 
+        function L = laplacianTensor(obj)
+            L = obj.degreeTensor - obj.adjTensor;
+        end
+
+        function C = cliqueGraph(obj)
+            C = Decompositions.GraphDecomp.cliqueGraph(obj);
+        end
+
+        function S = starGraph(obj)
+            S = Decompositions.GraphDecomp.starGraph(obj);
+        end
+
+        function L = lineGraph(obj)
+            L = Decompositions.GraphDecomp.lineGraph(obj);
+        end
+
+        function L = laplacianMatrix(obj, type)
+            if nargin == 1
+                warning("Enter Matrix Laplacian Type: Bolla, Rodriguez or Zhou");
+                return
+            end
+            if strcmp(type, "Bolla")
+                L = Decompositions.GraphDecomp.BollaLaplacian(obj);
+            elseif strcmp(type, "Rodriguez")
+                L = Decompositions.GraphDecomp.RodriguezLaplacian(obj);
+            elseif strcmp(type, "Zhou")
+                L = Decompositions.GraphDecomp.ZhouLaplacian(obj);
+            end
+        end
 
         %% Computation
 
+        function E = tensorEntropy(obj)
+            E = Computations.hypergraphEntropy(obj);
+        end
+
         %% Visualization
+        function ax = plot(obj)
+            ax = PlotIM.plotIncidenceMatrix(obj);
+        end
 
     end
 end

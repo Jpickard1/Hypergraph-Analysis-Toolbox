@@ -13,8 +13,6 @@
 %% Code 
 function [adjMat,lapMat] = cliqueGraph(HG)
 H = HG.IM;
-de=sum(H,1)';
-H=H(:,de>1); % remove edges which represent self loops or empty
 eW = HG.edgeWeights;
 de=sum(H,1)';
 

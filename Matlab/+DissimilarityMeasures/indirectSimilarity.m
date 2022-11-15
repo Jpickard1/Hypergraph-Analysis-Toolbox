@@ -1,4 +1,4 @@
-function d = graphDissimilarity(mat1,mat2,NameValueArgs)
+function d = indirectSimilarity(mat1,mat2,NameValueArgs)
 % This function computes the graph-based dissimilarity between two
 % hypergraphs. 
 % 
@@ -141,6 +141,5 @@ switch type
             lam1=sort(lam1);
             lam2=sort(lam2);
             d=1/n*norm(lam1-lam2);
-        end    
-        
+        end        
 end

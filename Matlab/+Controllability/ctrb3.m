@@ -23,3 +23,5 @@ while rank(ctrbMatrix) < numNodes && j < numNodes
     ctrbMatrix = U(:, 1:rankCtrbMatrix);
     j = j+1;
 end 
+
+end

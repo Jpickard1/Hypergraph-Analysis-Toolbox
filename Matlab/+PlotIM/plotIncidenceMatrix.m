@@ -1,10 +1,10 @@
-function ax = plotIncidenceMatrix(A, nodeshape, lineargs, show_h_bars)
+function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars)
 %PLOT_INCIDENCE_MATRIX creates a new figure and plots the incidence matrix
 %onto it. Returns the axes on which the incidence matrix is plotted. 
-% A: (n,m) double. Incidence matrix.
+% HG: (n,m) double. Incidence matrix.
     
     arguments 
-        A (:,:) 
+        HG(:,:)
         nodeshape = '.'
         lineargs = num2cell("-k")
         show_h_bars = true
@@ -20,6 +20,11 @@ function ax = plotIncidenceMatrix(A, nodeshape, lineargs, show_h_bars)
     % Then we flip the graphics array of the axes.
     % 
     
+    A = HG.IM;
+
+    A = SortIM.cardinalitySort(A);
+    A = SortIM.min_max_sort(A);
+
     ax = gca;
     ax.XLimitMethod = 'padded';
     ax.YLimitMethod = 'padded';

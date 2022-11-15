@@ -19,7 +19,7 @@ function [adjMat,lapMat] = RodriguezLaplacian(HG)
 %   Detailed explanation goes here
 H = HG.IM;
 de=sum(H,1)';
-H=H(:,de>1); % remove edges which represent self loops or empty
+H=H(:,de>1); 
 
 adjMat=H*1*H';
 adjMat=adjMat-diag(diag(adjMat));
