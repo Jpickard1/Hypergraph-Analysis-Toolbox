@@ -111,6 +111,10 @@ classdef Hypergraph
             L = HAT.GraphRepresentation.lineGraph(obj);
         end
 
+        function HG = dual(obj)
+            HG = Hypergraph(obj.IM');
+        end
+
         function L = laplacianMatrix(obj, type)
             if nargin == 1
                 warning("Enter Matrix Laplacian Type: Bolla, Rodriguez or Zhou");
