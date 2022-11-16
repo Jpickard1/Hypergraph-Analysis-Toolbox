@@ -131,31 +131,10 @@ classdef Hypergraph
             E = HAT.hypergraphEntropy(obj);
         end
 
-        function M = matrixEntropy(obj)
-            M = HAT.matrixEntropy(obj);
-        end
+        function M = matrixEntropp
 
         function B = ctrbk(obj, driverNodes)
             B = HAT.ctrbk(obj, driverNodes);
-        end
-
-        function A = avgDistance(obj)
-            A = HAT.averageDistance(obj);
-        end
-
-        function c = clusteringCoef(obj)
-            c = HAT.clusteringCoefficient(obj);
-        end
-
-        function c = centrality(obj, NameValueArgs)
-            arguments
-                obj
-                NameValueArgs.Tolerance = 1e-4
-                NameValueArgs.MaxIter = 3000
-                NameValueArgs.Model = 'LogExp'
-                NameValueArgs.Alpha = 10
-            end
-            c = HAT.centrality(obj, NameValueArgs);
         end
 
         %% Visualization

@@ -19,7 +19,7 @@ laplacianUnfold = reshape(laplacianTensor, numNodes, numNodes^2);
 
 singularValues = svd(laplacianUnfold, 'econ');
 normalizedValues = singularValues./sum(singularValues);
-normalizedValues = normalizedValues(normalizedValues > 0);
+normalizedValues = normalizedValues(normalizedValues > 1e-8);
 tensorEntropy = -sum(normalizedValues.*log(normalizedValues));
 
 end

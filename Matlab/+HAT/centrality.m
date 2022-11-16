@@ -29,7 +29,7 @@
 % 
 % Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). https://doi.org/10.1038/s42005-021-00704-2
 %% Code
-function [nodeCentrality, edgeCentrality] = hypergraphCentrality(HG, NameValueArgs)
+function [nodeCentrality, edgeCentrality] = centrality(HG, NameValueArgs)
 arguments
     HG
     NameValueArgs.Tolerance = 1e-4

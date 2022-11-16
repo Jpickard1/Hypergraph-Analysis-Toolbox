@@ -1,7 +1,7 @@
-%% Computations.clusteringCoefficient
+%% HAT.clusteringCoefficient
 % Computes the generalized clustering coefficient on a k-uniform hypergraph.
 %% Syntax
-%   p = clusteringCoefficient(HG)
+%   p = HG.clusteringCoefficient()
 %% Input 
 % * HG - Hypergraph object. HG must represent a k-uniform hypergraph.
 %% Output

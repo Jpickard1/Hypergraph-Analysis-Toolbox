@@ -17,6 +17,7 @@ H = HG.IM;
 
 adjMat = zeros(n + m);
 adjMat(n+1:n+m,1:n) = H';
-adjMat(1:n,m:m+n) = H;
+adjMat(1:n,n+1:m+n) = H;
+
 end
 

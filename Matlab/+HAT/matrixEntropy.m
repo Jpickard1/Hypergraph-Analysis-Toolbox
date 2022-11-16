@@ -10,8 +10,7 @@
 %% Output
 % * entropy - Entropy score for the hypergraph.
 %% References
-%
-% * Can Chen and Indika Rajapakse. 10/2020. "Tensor Entropy for Uniform Hypergraphs.” IEEE Transactions on Network Science and Engineering, 7, 4, Pp. 2889-2900.
+% * Dotson, Gabrielle A., et al. "Deciphering multi-way interactions in the human genome." Nature communications 13.1 (2022): 1-15.
 % 
 %% Code
 function entropy = matrixEntropy(HG, normalized)

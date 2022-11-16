@@ -1,11 +1,11 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Hypergraph Analysis Toolbox.prj" location="C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox" name="Hypergraph Analysis Toolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration file="C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Distributions\Hypergraph Analysis Toolbox.prj" location="C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Distributions" name="Hypergraph Analysis Toolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Hypergraph Analysis Toolbox</param.appname>
     <param.authnamewatermark>Joshua Pickard</param.authnamewatermark>
     <param.email>jpic@umich.edu</param.email>
     <param.company>Rajapakse Lab @ Michigan &amp; iReprogram Inc.</param.company>
-    <param.summary />
-    <param.description />
+    <param.summary>Hypergraph Analysis Toolbox (HAT) is a general purpose software for studying multi-way relationships through hypergraphs.</param.summary>
+    <param.description>Hypergraph Analysis Toolbox (HAT) is a general purpose software for studying multi-way relationships through hypergraphs. Methods for hypergraph constructions, visualization, and the analysis of structural and dynamical properties are provided.</param.description>
     <param.screenshot />
     <param.version>1.0</param.version>
     <param.output>${PROJECT_ROOT}\Hypergraph Analysis Toolbox.mltbx</param.output>
@@ -26,9 +26,7 @@
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons>
-      <requiredaddons>
-        <requiredAddOn downloadURL="" earliest="earliest" fromRepository="false" id="8f9fb961-389d-4dfc-8eed-29f57dc1bc48" include="false" latest="latest">PoreC Hypergraph Analysis Toolbox</requiredAddOn>
-      </requiredaddons>
+      <requiredaddons />
     </param.required.addons>
     <param.matlab.project.id />
     <param.matlab.project.name />
@@ -46,8 +44,6 @@
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.summary />
-      <param.description />
       <param.screenshot />
       <param.version />
       <param.output />
@@ -82,16 +78,12 @@
     <fileset.rootdir>
       <file>${PROJECT_ROOT}\Matlab</file>
     </fileset.rootdir>
-    <fileset.rootfiles>
-      <file>${PROJECT_ROOT}\Matlab\+HAT</file>
-      <file>${PROJECT_ROOT}\Matlab\@Hypergraph</file>
-      <file>${PROJECT_ROOT}\Matlab\README.md</file>
-    </fileset.rootfiles>
+    <fileset.rootfiles />
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Hypergraph Analysis Toolbox.mltbx" optional="false">C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Hypergraph Analysis Toolbox.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Hypergraph Analysis Toolbox.mltbx" optional="false">C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Distributions\Hypergraph Analysis Toolbox.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
