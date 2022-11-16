@@ -112,17 +112,17 @@ classdef Hypergraph
             HG = Hypergraph(obj.IM');
         end
 
-        function L = laplacianMatrix(obj, type)
+        function [A, L] = laplacianMatrix(obj, type)
             if nargin == 1
                 warning("Enter Matrix Laplacian Type: Bolla, Rodriguez or Zhou");
                 return
             end
             if strcmp(type, "Bolla")
-                L = HAT.GraphRepresentation.BollaLaplacian(obj);
+                [A, L] = HAT.GraphRepresentation.BollaLaplacian(obj);
             elseif strcmp(type, "Rodriguez")
-                L = HAT.GraphRepresentation.RodriguezLaplacian(obj);
+                [A, L] = HAT.GraphRepresentation.RodriguezLaplacian(obj);
             elseif strcmp(type, "Zhou")
-                L = HAT.GraphRepresentation.ZhouLaplacian(obj);
+                [A, L] = HAT.GraphRepresentation.ZhouLaplacian(obj);
             end
         end
 

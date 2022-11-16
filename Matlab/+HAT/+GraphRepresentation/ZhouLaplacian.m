@@ -10,16 +10,13 @@
 % * adjMat - adjacency matrix of the decomposed hypergraph
 % * lapMat - graph Laplacian matrix of the decomposed hypergraph
 %% Disclaimer
-% The definition of Bolla's Laplacian from a hypergraph was taken from the
-% below paper.
+% The definition of Bolla's Laplacian from a hypergraph was taken from
+% equation 3.3 of the below paper:
 %
-% Zhou, D., Huang, J., & Sch¨olkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs (Technical Report 143). Max Plank Institute for Biological Cybernetics, T¨ubingen, Germany.%% Code 
+% Zhou, D., Huang, J., & Sch¨olkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs (Technical Report 143). Max Plank Institute for Biological Cybernetics, T¨ubingen, Germany.
+%% Code 
 function [adjMat,lapMat] = ZhouLaplacian(HG)
-%ZHOULAPLACIAN Summary of this function goes here
-%   Detailed explanation goes here
 H = HG.IM;
-de=sum(H,1)';
-H=H(:,de>1); % remove edges which represent self loops or empty
 eW = HG.edgeWeights;
 de=sum(H,1)';
 

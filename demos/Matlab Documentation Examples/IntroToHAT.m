@@ -27,9 +27,9 @@ S = full(HG.starGraph())
 L = full(HG.lineGraph())
 
 % Laplacians
-L1 = full(HG.laplacianMatrix("Bolla"))
-L2 = full(HG.laplacianMatrix("Rodriguez"))
-L3 = full(HG.laplacianMatrix("Zhou"))
+[A1, L1] = full(HG.laplacianMatrix("Bolla"))
+[A2, L2] = full(HG.laplacianMatrix("Rodriguez"))
+[A3, L3] = full(HG.laplacianMatrix("Zhou"))
 
 % Hypergraph Similarity
 I1 = randi([0,1], 5,8)
@@ -72,6 +72,17 @@ HG = HAT.uniformErdosRenyi(6,8,3);
 avg = HG.avgDistance
 clusterCoef = HG.clusteringCoef
 centrality = HAT.centrality(HG)
+
+%% Python Comparison
+IM = [1 1 0;
+      1 1 0;
+      1 0 1;
+      0 1 1;
+      0 0 1];
+HG = Hypergraph('IM',IM)
+[A1, L1] = (HG.laplacianMatrix("Bolla"))
+[A2, L2] = (HG.laplacianMatrix("Rodriguez"))
+[A3, L3] = (HG.laplacianMatrix("Zhou"))
 
 %% Doc 2
 % 1. Construction
