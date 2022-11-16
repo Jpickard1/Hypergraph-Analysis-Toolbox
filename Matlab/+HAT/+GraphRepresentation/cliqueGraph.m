@@ -18,6 +18,7 @@ de=sum(H,1)';
 
 adjMat=H*sparse(1:length(eW),1:length(eW),eW,length(eW),length(eW))*H';
 adjMat=adjMat-diag(diag(adjMat));
+adjMat(adjMat>0) = 1;
 eW1=(de-1).*eW;
 dvc=H*eW1; %this should be same as sum(adjMat,2)
 dvc(dvc==0)=Inf; % convention

@@ -17,7 +17,7 @@ function [adjMat,lapMat] = lineGraph(HG)
 % is the transpose of the original incidence matrix).
 
 H = Hypergraph('IM', HG.IM');
-[adjMat, lapMat] = Decompositions.GraphDecomp.cliqueGraph(H);
+[adjMat, lapMat] = HAT.GraphRepresentation.cliqueGraph(H);
 
 end
 

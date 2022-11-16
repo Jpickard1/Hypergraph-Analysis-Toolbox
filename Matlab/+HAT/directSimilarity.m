@@ -16,28 +16,25 @@ end
 mat1 = HG1.adjTensor;
 mat2 = HG2.adjTensor;
 
-import Computations.hypergraphCentrality;
-import DissimilarityMeasures.tensor.*;
-
 d=NaN;
 switch type
     
     case 'Hamming'
         
         if ~isempty(mat1) && ~isempty(mat2)
-            d = DissimilarityMeasures.TensorDis.Hamming(mat1, mat2);
+            d = HAT.TensorSimilarity.Hamming(mat1, mat2);
         end
         
     case 'Spectral-S'
         
         if ~isempty(mat1) && ~isempty(mat2)
-            d = DissimilarityMeasures.TensorDis.SpectralS(mat1, mat2);
+            d = HAT.TensorSimilarity.SpectralS(mat1, mat2);
         end
         
     case 'Spectral-H'
         
         if ~isempty(mat1) && ~isempty(mat2)
-            d = DissimilarityMeasures.TensorDis.SpectralH(mat1, mat2);
+            d = HAT.TensorSimilarity.SpectralH(mat1, mat2);
         end        
         
     case 'Centrality'
@@ -63,8 +60,8 @@ switch type
         alpha = NameValueArgs.Alpha;
 
         cenArgs = {'Tolerance', tol, 'MaxIter', maxIter, 'Model', model, 'Alpha', alpha};
-        [nodeCentrality1, ~] = hypergraphCentrality(HG1, cenArgs{:}); 
-        [nodeCentrality2, ~] = hypergraphCentrality(HG2, cenArgs{:});
+        [nodeCentrality1, ~] = HAT.centrality(HG1, cenArgs{:}); 
+        [nodeCentrality2, ~] = HAT.centrality(HG2, cenArgs{:});
         nodeCentrality1=nodeCentrality1/norm(nodeCentrality1);
         nodeCentrality2=nodeCentrality2/norm(nodeCentrality2);
         d=norm(nodeCentrality1-nodeCentrality2)/length(nodeCentrality1);

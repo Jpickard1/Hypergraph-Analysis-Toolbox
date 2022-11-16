@@ -1,4 +1,4 @@
-function tensorEntropy = tensorEntropy(edgeSet, numNodes)
+function tensorEntropy = tensorEntropy(HG) %edgeSet, numNodes)
 %% Tensor Entropy
 % Compute the tensor entropy for k-uniform hypergraphs
 % edgeSet is a m by k matrix such that each row is a hyperedge
@@ -11,9 +11,11 @@ function tensorEntropy = tensorEntropy(edgeSet, numNodes)
 %   Can Chen
 %   Rahmy Salman
 
-adjacencyTensor = hypergraphk(edgeSet, numNodes);
-degreeTensor = degreek(edgeSet, numNodes);
-laplacianTensor = degreeTensor-adjacencyTensor;
+% adjacencyTensor = hypergraphk(edgeSet, numNodes);
+% degreeTensor = degreek(edgeSet, numNodes);
+% laplacianTensor = degreeTensor-adjacencyTensor;
+laplacianTensor = HG.laplacianTensor;
+numNodes = size(HG.IM, 1);
 
 laplacianUnfold = reshape(laplacianTensor, numNodes, numNodes^2);
 

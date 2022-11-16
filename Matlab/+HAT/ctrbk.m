@@ -14,7 +14,7 @@ numNodes = size(adjacencyTensor, 1);
 k = length(size(adjacencyTensor));
 adjacencyUnfold = reshape(adjacencyTensor, numNodes, numNodes^(k-1));
 
-ctrbMatrix = Controllability.getBmatrix(inputNodesVector, numNodes);
+ctrbMatrix = HAT.getBmatrix(inputNodesVector, numNodes);
 
 j = 0;
 while rank(ctrbMatrix) < numNodes && j < numNodes

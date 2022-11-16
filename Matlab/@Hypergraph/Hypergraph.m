@@ -128,7 +128,7 @@ classdef Hypergraph
 
         %% Computation
         function E = tensorEntropy(obj)
-            E = HAT.hypergraphEntropy(obj);
+            E = HAT.tensorEntropy(obj);
         end
 
         function M = matrixEntropy(obj)
@@ -147,16 +147,11 @@ classdef Hypergraph
             c = HAT.clusteringCoefficient(obj);
         end
 
+        %{
         function c = centrality(obj, NameValueArgs)
-            arguments
-                obj
-                NameValueArgs.Tolerance = 1e-4
-                NameValueArgs.MaxIter = 3000
-                NameValueArgs.Model = 'LogExp'
-                NameValueArgs.Alpha = 10
-            end
             c = HAT.centrality(obj, NameValueArgs);
         end
+        %}
 
         %% Visualization
         function ax = plot(obj)
