@@ -3,7 +3,7 @@ I = randi([0,1], 5, 10)
 HG = Hypergraph('IM',I)
 
 % Visualize
-HG.plot()
+p = HG.plot()
 
 % Tensor representations
 I = [1 1 1 0;
