@@ -22,9 +22,7 @@ H = HG.IM;
 
 adjMat=H*1*H';
 adjMat=adjMat-diag(diag(adjMat));
-disp(full(adjMat))
 Dvr=diag(sum(adjMat,2));
-disp(full(Dvr))
 lapMat=Dvr-adjMat;
 end
 

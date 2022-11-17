@@ -27,19 +27,13 @@ S = full(HG.starGraph())
 L = full(HG.lineGraph())
 
 % Laplacians
-[A1, L1] = full(HG.laplacianMatrix("Bolla"))
-[A2, L2] = full(HG.laplacianMatrix("Rodriguez"))
-[A3, L3] = full(HG.laplacianMatrix("Zhou"))
+[A1, L1] = (HG.laplacianMatrix("Bolla"))
+[A2, L2] = (HG.laplacianMatrix("Rodriguez"))
+[A3, L3] = (HG.laplacianMatrix("Zhou"))
 
 % Hypergraph Similarity
-I1 = randi([0,1], 5,8)
-I2 = randi([0,1], 5,8)
-
-I1(:,1) = 1;
-I2(:,1) = 1;
-
-HG1 = Hypergraph('IM',I1)
-HG2 = Hypergraph('IM',I2)
+HG1 = HAT.uniformErdosRenyi(6,8,3);
+HG2 = HAT.uniformErdosRenyi(6,8,3);
 
 D1 = HAT.directSimilarity(HG1,HG2,'Hamming')
 D2 = HAT.directSimilarity(HG1,HG2,'Spectral-S')
