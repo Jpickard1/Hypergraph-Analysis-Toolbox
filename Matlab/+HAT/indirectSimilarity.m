@@ -72,7 +72,7 @@ switch type
            D1=diag(sum(mat1,1));
            D2=diag(sum(mat2,1));
            S1=inv(eye(size(mat1))+eps^2*D1-eps*mat1);
-           S2=inv(eye(size(mat2))+eps*D2-eps*mat2);
+           S2=inv(eye(size(mat2))+eps^2*D2-eps*mat2);
            n1=size(mat1,1); 
            n2=size(mat2,1);
            d1=(sqrt(S1)-sqrt(S2)).^2;
