@@ -67,6 +67,7 @@ switch type
        
     
     case 'deltaCon'
+        % Algorithm 1: https://web.eecs.umich.edu/~dkoutra/papers/DeltaCon_KoutraVF_withAppendix.pdf
         % mat1 and mat2 are adjacency matrices
         if ~isempty(mat1) && ~isempty(mat2)
            D1=diag(sum(mat1,1));
