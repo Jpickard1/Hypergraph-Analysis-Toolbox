@@ -36,6 +36,8 @@ problems:
 5. Controllability
 6. Similarity Measures
 
+The capabilities and use cases of HAT are outlined in `this short notice <https://arxiv.org/submit/4609700/view>`.
+
 Instillation
 ============
 
@@ -64,9 +66,10 @@ Once installed, HAT may be imported to the Python invironment with the command:
    import HAT.Hypergraph   # Hypergraph class
    import HAT.plot         # Visualization tools
 
-Development
-***********
-All implementations of HAT are managed through a common git repository available at: https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox
+Development Distribution
+************************
+All implementations of HAT are managed through a `common git repository <https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox>`. This is public, so it may be
+cloned and modified. If interested in modifying or contributing to HAT, please contact Joshua Pickard at jpic@umich.edu
 
 Indices and tables
 ==================
