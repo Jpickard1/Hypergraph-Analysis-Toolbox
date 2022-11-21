@@ -39,7 +39,7 @@ problems:
 
 The capabilities and use cases of HAT are outlined in `this short notice <https://arxiv.org/submit/4609700/view>`_.
 
-Instillation
+Installation
 ============
 
 MATLAB
