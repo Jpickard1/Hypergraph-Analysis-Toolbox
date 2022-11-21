@@ -17,15 +17,17 @@
 function [adjMat,lapMat] = BollaLaplacian(HG)
 %BOLALAPLACIAN Summary of this function goes here
 %   Detailed explanation goes here
+
 H = HG.IM;
 de=sum(H,1)';
-H=H(:,de>1); % remove edges which represent self loops or empty
+H=H(:,de>1);
 de=sum(H,1)';
 
 Deinv=sparse(1:length(de),1:length(de),1./de,length(de),length(de)); %diag(1./de)
 adjMat=H*Deinv*H';
-dv=sum(H,2); %this should be same as sum(adjMat,2)
+dv=sum(H,2);
 Dv=sparse(1:length(dv),1:length(dv),dv,length(dv),length(dv));
 lapMat=Dv-adjMat;
+
 end
 

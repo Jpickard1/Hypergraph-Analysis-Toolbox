@@ -15,10 +15,9 @@
 function [adjMat,lapMat] = lineGraph(HG)
 %LINEGRAPH the line graph is the clique expansion of the dual (and the dual
 % is the transpose of the original incidence matrix).
-% H = HG.IM;
 
-dG = Decompositions.GraphDecomp.dualGraph(HG);
-H = Hypergraph('H', dG); %incidenceMatrix(dG)); % Incidence matrix function needs to be changed
+H = Hypergraph('IM', HG.IM');
 [adjMat, lapMat] = Decompositions.GraphDecomp.cliqueGraph(H);
+
 end
 
