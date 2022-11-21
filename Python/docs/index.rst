@@ -18,41 +18,51 @@ Hypergraph Analysis Toolbox
    HAT.rst
    modules.rst
 
-Note
-====
-The software for HAT is complete, but the online documentation is still a work in progress.
+*Important Note*
+****************
+The software for HAT is complete, but the online documentation is a work in progress.
 
 Introduction
 ============
-Hypergraph Analysis Tolbox (HAT) is a software suite for analyzing higher order structures. HAT is implemented
-in Python and Matlab. There are 5 main modules of HAT including:
+Hypergraph Analysis Tolbox (HAT) is a software suite for the analysis and visualization of hypergraphs and
+higher order structures. Motivated to investigate Pore-C data, HAT is intended as a general prupose, versatile
+software for hypergraph construction, visualization, and analysis. HAT addresses the following hypergraph
+problems:
 
-1. Visualization
-2. Hypergraph Properties
-3. Controlability
-4. Similarity Measures
-5. Decompositions
+1. Construction
+2. Visualization
+3. Expansion and numeric representation
+4. Structral Properties
+5. Controllability
+6. Similarity Measures
 
-Motivation
-**********
-HAT is intended as a general purpose, multiplatform software for studying hypergraphs.
+Instillation
+============
+
+MATLAB
+******
+The MATLAB distribution of HAT can be installed through either the `MathWorks file exchange <https://www.mathworks.com/matlabcentral/fileexchange/>`
+or this `link here <https://rajapakse.lab.medicine.umich.edu/software>`. Both links provide a MathWorks .mltbx which is installed through the add on manager
+in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.
+
+The MATLAB distribution has the following dependencies:
+1. 
 
 Python
 ******
-The Python implementation of HAT may be installed through pip:
+The Python distribution of HAT may be installed through pip:
 
 .. code-block:: Python
 
    >> pip install HypergraphAnalysisToolbox
 
-HAT may be imported to the Python invironment with the command:
+Once installed, HAT may be imported to the Python invironment with the command:
 
 .. code-block:: Python
 
    import HAT              # Import package
-   import HAT.hypergraph   # hypergraph class
-   import HAT.graph        # graph class
-   import HAT.plot         # visualization tools
+   import HAT.Hypergraph   # Hypergraph class
+   import HAT.plot         # Visualization tools
 
 Development
 ***********
