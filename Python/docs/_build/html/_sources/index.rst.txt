@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Hypergraph Analysis Toolbox's documentation!
-=======================================================
+Hypergraph Analysis Toolbox
+===========================
 
 .. toctree::
    :maxdepth: 2
@@ -17,6 +17,10 @@ Welcome to Hypergraph Analysis Toolbox's documentation!
    control.rst
    HAT.rst
    modules.rst
+
+Note
+====
+The software for HAT is complete, but the online documentation is still a work in progress.
 
 Introduction
 ============
