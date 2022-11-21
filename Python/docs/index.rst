@@ -49,7 +49,8 @@ or this `link here <https://rajapakse.lab.medicine.umich.edu/software>`_. Both l
 in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.
 
 The MATLAB distribution has the following dependencies:
-1. `TenEig — Tensor Eigenpairs Solver <https://users.math.msu.edu/users/chenlipi/teneig.html>`_
+
+1. `TenEig — Tensor Eigenpairs Solver <https://users.math.msu.edu/users/chenlipi/teneig.html>`_
 
 Python
 ******
@@ -68,6 +69,7 @@ Information on the PiPy distribution is available `here <https://pypi.org/projec
    import HAT.plot         # Visualization tools
 
 The Python distribution has the following dependencies:
+
 1. numpy
 2. scipy
 3. matplotlib
