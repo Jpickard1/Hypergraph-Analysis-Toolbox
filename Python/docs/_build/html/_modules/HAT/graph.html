@@ -77,27 +77,19 @@
 <div class="viewcode-block" id="graph"><a class="viewcode-back" href="../../HAT.html#HAT.graph.graph">[docs]</a><span class="k">class</span> <span class="nc">graph</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;This class represents pairwise graph structures.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Constructs a default graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">E</span> <span class="o">=</span> <span class="mi">0</span>
-        
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructs a graph from an adjacency matrix.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">A</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">a</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The degree matrix of a graph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">))</span>
         
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">L</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">laplacian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The Laplacian matrix of a graph. See equation 1 in [1].</span>
 <span class="sd">        </span>
 <span class="sd">        References</span>
@@ -107,7 +99,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">degree</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span>
     
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">normL</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">normLaplacian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The normalized Laplacian matrix of a graph. See chapter 16.3.3 [1].</span>
 <span class="sd">        </span>
 <span class="sd">        References</span>
@@ -137,16 +129,14 @@
         <span class="n">neighborhood</span> <span class="o">=</span> <span class="n">neighborhood</span><span class="p">[:,</span> <span class="n">neighbors</span><span class="p">]</span>
         <span class="n">realEdges</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">neighborhood</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">possibleEdges</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neighbors</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">realEdges</span> <span class="o">/</span> <span class="n">possibleEdges</span>        </div>
+        <span class="k">return</span> <span class="n">realEdges</span> <span class="o">/</span> <span class="n">possibleEdges</span></div>
 
 <div class="viewcode-block" id="graph.pairwiseDistance"><a class="viewcode-back" href="../../HAT.html#HAT.graph.graph.pairwiseDistance">[docs]</a>    <span class="k">def</span> <span class="nf">pairwiseDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vxi</span><span class="p">,</span> <span class="n">vxj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Computes the pairwise distance between vertices i and j.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
         <span class="k">while</span> <span class="n">N</span><span class="p">[</span><span class="n">vxi</span><span class="p">,</span><span class="n">vxj</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
             <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
             <span class="n">d</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">d</span></div>
@@ -213,22 +203,6 @@
 <span class="sd">        References</span>
 <span class="sd">        ----------</span>
 <span class="sd">        .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. &quot;Hypergraph dissimilarity measures.&quot; arXiv preprint arXiv:2106.08206 (2021).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stub&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">G1</span> <span class="o">+</span> <span class="n">G2</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="graph.DELTACON"><a class="viewcode-back" href="../../HAT.html#HAT.graph.graph.DELTACON">[docs]</a>    <span class="k">def</span> <span class="nf">DELTACON</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes a graph distance measure defined by comparing the distance of the adjacency matrices </span>
-<span class="sd">        between 2 graphs with respect to some metric.</span>
-<span class="sd">        </span>
-<span class="sd">        :param G1: A graph object</span>
-<span class="sd">        :param G2: A graph object</span>
-<span class="sd">        </span>
-<span class="sd">        :return: A similarity measure between the two graphs.</span>
-<span class="sd">        References</span>
-<span class="sd">        ----------</span>
-<span class="sd">        .. [1] Koutra, Danai, Joshua T. Vogelstein, and Christos Faloutsos. &quot;Deltacon: A principled massive-graph similarity function.&quot; Proceedings of the 2013 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2013.</span>
-<span class="sd">        .. [2] Surana, Amit, Can Chen, and Indika Rajapakse. &quot;Hypergraph dissimilarity measures.&quot; arXiv preprint arXiv:2106.08206 (2021).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stub&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">G1</span> <span class="o">+</span> <span class="n">G2</span><span class="p">)</span></div></div>

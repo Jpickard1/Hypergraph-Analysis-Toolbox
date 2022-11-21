@@ -75,20 +75,75 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">HAT.graph</span> <span class="kn">import</span> <span class="n">graph</span>
-<span class="kn">from</span> <span class="nn">HAT.hypergraph</span> <span class="kn">import</span> <span class="n">hypergraph</span> <span class="k">as</span> <span class="n">HG</span>
+<span class="kn">from</span> <span class="nn">HAT.Hypergraph</span> <span class="kn">import</span> <span class="n">Hypergraph</span> <span class="k">as</span> <span class="n">HG</span>
 
-<div class="viewcode-block" id="IM"><a class="viewcode-back" href="../../HAT.html#HAT.plot.IM">[docs]</a><span class="k">def</span> <span class="nf">IM</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+<div class="viewcode-block" id="incidencePlot"><a class="viewcode-back" href="../../HAT.html#HAT.plot.incidencePlot">[docs]</a><span class="k">def</span> <span class="nf">incidencePlot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">shadeRows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">connectNodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">edgeColors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot the incidence matrix of a hypergraph.</span>
-<span class="sd">    :param H: a hypergraph object</span>
+<span class="sd">    :param H: a HAT.hypergraph object</span>
+<span class="sd">    :param shadeRows: shade rows (bool)</span>
+<span class="sd">    :param connectNodes: connect nodes in each hyperedge (bool)</span>
+<span class="sd">    :param dpi: the resolution of the image</span>
+<span class="sd">    </span>
+<span class="sd">    :return: matplotlib axes with figure drawn on to it</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">W</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">W</span>
-    <span class="n">y</span><span class="p">,</span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-        <span class="n">i_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i_pts</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i_pts</span><span class="p">])],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">labelleft</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">labelbottom</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Incidence Matrix&#39;</span><span class="p">)</span></div>
+    <span class="c1"># dpi spec</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dpi</span>
+    
+    <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">W</span><span class="o">.</span><span class="n">shape</span>
+    
+    <span class="c1"># plot the incidence matrix</span>
+    <span class="c1"># y, x = np.where(H.W == 1)</span>
+    <span class="c1"># plt.scatter(x, y, </span>
+    <span class="c1">#             edgecolor=&#39;k&#39;,</span>
+    <span class="c1">#             zorder=2)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">W</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),)</span>
+        <span class="k">if</span> <span class="n">edgeColors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">edgeColors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> 
+                    <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                    <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                    <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>     
+
+    <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">W</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># create row shading</span>
+    <span class="k">if</span> <span class="n">shadeRows</span><span class="p">:</span>
+        <span class="n">yBar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">xBar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">xBar</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.5</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">yBar</span><span class="p">,</span> 
+                 <span class="n">xBar</span><span class="p">,</span> 
+                 <span class="n">height</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> 
+                 <span class="n">left</span><span class="o">=-</span><span class="mf">0.25</span><span class="p">,</span>
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># plot each hyperedge with a black connector</span>
+    <span class="k">if</span> <span class="n">connectNodes</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">H</span><span class="o">.</span><span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">i_pts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i_pts</span><span class="p">]),</span> 
+                      <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i_pts</span><span class="p">])],</span> 
+                      <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                      <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                      <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># plot range spec</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">])</span>   
+    
+    <span class="c1"># Turn of axis ticks. Keep labels on</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+    
+    <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span></div>
 </pre></div>
 
            </div>
