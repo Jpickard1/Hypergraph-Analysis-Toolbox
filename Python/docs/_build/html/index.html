@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hypergraph Properties" href="properties.html" /> 
+    <link rel="next" title="Tutorials" href="tutorials.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,6 +39,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="properties.html">Hypergraph Properties</a></li>
 <li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="decompositions.html">Decompositions</a></li>
@@ -77,6 +78,11 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#matlab">MATLAB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#python">Python</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="properties.html">Hypergraph Properties</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="properties.html#diameter">Diameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="properties.html#clustering-coefficient">Clustering Coefficient</a></li>
@@ -112,7 +118,7 @@
 </div>
 <section id="important-note">
 <h2><em>Important Note</em><a class="headerlink" href="#important-note" title="Permalink to this heading"></a></h2>
-<p>The software for HAT is complete, but the online documentation is a work in progress.</p>
+<p>The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git, but it will be published via PiPy and the MathWorks File Exchange shortly.</p>
 </section>
 </section>
 <section id="introduction">
@@ -129,16 +135,18 @@ problems:</p>
 <li><p>Controllability</p></li>
 <li><p>Similarity Measures</p></li>
 </ol>
+<p>The capabilities and use cases of HAT are outlined in <a class="reference external" href="https://arxiv.org/submit/4609700/view">this short notice</a>.</p>
 </section>
 <section id="instillation">
 <h1>Instillation<a class="headerlink" href="#instillation" title="Permalink to this heading"></a></h1>
 <section id="matlab">
 <h2>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this heading"></a></h2>
-<p>The MATLAB distribution of HAT can be installed through either the <cite>MathWorks file exchange &lt;https://www.mathworks.com/matlabcentral/fileexchange/&gt;</cite>
-or this <cite>link here &lt;https://rajapakse.lab.medicine.umich.edu/software&gt;</cite>. Both links provide a MathWorks .mltbx which is installed through the add on manager
-in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.</p>
-<p>The MATLAB distribution has the following dependencies:
-1.</p>
+<p>The MATLAB distribution of HAT can be installed through either the <a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/121013-hypergraph-analysis-toolbox">MATLAB Central</a>. A MathWorks <code class="code docutils literal notranslate"><span class="pre">.mltbx</span></code> file can be downloaded from the site,
+and installed through the add on manager in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.</p>
+<p>The MATLAB distribution has the following dependencies:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://users.math.msu.edu/users/chenlipi/teneig.html">TenEig — Tensor Eigenpairs Solver</a></p></li>
+</ol>
 </section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this heading"></a></h2>
@@ -146,16 +154,24 @@ in the MATLAB Home environment. Once installed as a toolbox, you will have acces
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">HypergraphAnalysisToolbox</span>
 </pre></div>
 </div>
-<p>Once installed, HAT may be imported to the Python invironment with the command:</p>
+<p>Information on the PiPy distribution is available <a class="reference external" href="https://pypi.org/project/HypergraphAnalysisToolbox/">here</a>. Once installed, HAT may be imported into the Python invironment with the command:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">HAT</span>              <span class="c1"># Import package</span>
 <span class="kn">import</span> <span class="nn">HAT.Hypergraph</span>   <span class="c1"># Hypergraph class</span>
 <span class="kn">import</span> <span class="nn">HAT.plot</span>         <span class="c1"># Visualization tools</span>
 </pre></div>
 </div>
+<p>The Python distribution has the following dependencies:</p>
+<ol class="arabic simple">
+<li><p>numpy</p></li>
+<li><p>scipy</p></li>
+<li><p>matplotlib</p></li>
+<li><p>itertools</p></li>
+</ol>
 </section>
-<section id="development">
-<h2>Development<a class="headerlink" href="#development" title="Permalink to this heading"></a></h2>
-<p>All implementations of HAT are managed through a common git repository available at: <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox">https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox</a></p>
+<section id="development-distribution">
+<h2>Development Distribution<a class="headerlink" href="#development-distribution" title="Permalink to this heading"></a></h2>
+<p>All implementations of HAT are managed through a <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox">common git repository</a>. This is public, so it may be
+cloned and modified. If interested in modifying or contributing to HAT, please contact Joshua Pickard at <a class="reference external" href="mailto:jpic&#37;&#52;&#48;umich&#46;edu">jpic<span>&#64;</span>umich<span>&#46;</span>edu</a></p>
 </section>
 </section>
 <section id="indices-and-tables">
@@ -171,7 +187,7 @@ in the MATLAB Home environment. Once installed as a toolbox, you will have acces
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="properties.html" class="btn btn-neutral float-right" title="Hypergraph Properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

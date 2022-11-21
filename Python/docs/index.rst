@@ -10,7 +10,7 @@ Hypergraph Analysis Toolbox
    :maxdepth: 2
    :caption: Contents:
 
-   demos.rst
+   tutorials.rst
    properties.rst
    visualization.rst
    decompositions.rst
