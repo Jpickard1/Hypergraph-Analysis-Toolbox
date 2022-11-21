@@ -10,6 +10,7 @@ Hypergraph Analysis Toolbox
    :maxdepth: 2
    :caption: Contents:
 
+   demos.rst
    properties.rst
    visualization.rst
    decompositions.rst
@@ -20,7 +21,7 @@ Hypergraph Analysis Toolbox
 
 *Important Note*
 ****************
-The software for HAT is complete, but the online documentation is a work in progress.
+The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git, but it will be published via PiPy and the MathWorks File Exchange shortly.
 
 Introduction
 ============
@@ -48,7 +49,7 @@ or this `link here <https://rajapakse.lab.medicine.umich.edu/software>`_. Both l
 in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.
 
 The MATLAB distribution has the following dependencies:
-1. 
+1. `TenEig — Tensor Eigenpairs Solver <https://users.math.msu.edu/users/chenlipi/teneig.html>`_
 
 Python
 ******
@@ -65,6 +66,12 @@ Information on the PiPy distribution is available `here <https://pypi.org/projec
    import HAT              # Import package
    import HAT.Hypergraph   # Hypergraph class
    import HAT.plot         # Visualization tools
+
+The Python distribution has the following dependencies:
+1. numpy
+2. scipy
+3. matplotlib
+4. itertools
 
 Development Distribution
 ************************
