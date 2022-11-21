@@ -84,6 +84,9 @@ HG = Hypergraph('IM',IM)
 [A2, L2] = (HG.laplacianMatrix("Rodriguez"))
 [A3, L3] = (HG.laplacianMatrix("Zhou"))
 
+A = HG.adjTensor
+HAT.directSimilarity(HG, HG, 'Spectral-S')
+
 %% Doc 2
 % 1. Construction
 IM = [1 1 0;
