@@ -44,9 +44,8 @@ Instillation
 
 MATLAB
 ******
-The MATLAB distribution of HAT can be installed through either the `MATLAB Central <https://www.mathworks.com/matlabcentral/fileexchange/121013-hypergraph-analysis-toolbox>`_
-or this `link here <https://rajapakse.lab.medicine.umich.edu/software>`_. Both links provide a MathWorks :code:`.mltbx` which is installed through the add on manager
-in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.
+The MATLAB distribution of HAT can be installed through either the `MATLAB Central <https://www.mathworks.com/matlabcentral/fileexchange/121013-hypergraph-analysis-toolbox>`_. A MathWorks :code:`.mltbx` file can be downloaded from the site,
+and installed through the add on manager in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.
 
 The MATLAB distribution has the following dependencies:
 
