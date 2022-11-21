@@ -30,3 +30,20 @@ def supersymHosvd(T):
     m = len(T.shape)
     M = np.reshape(T, (d, d**(m-1)))
     return sp.linalg.svd(M)
+
+def multirelation(D,order=3,type='Drezner'):
+    R = np.corrcoef(D)
+    cbns = itertools.combinations(range(len(D[0])),order)
+    for i in range(len(cbns)):
+        r = R[cbns[i], cbns]
+    if type == 'Drezner':
+        M = drezner(D, order)
+    elif type == 'Taylor':
+        M = taylor(D, order)
+    else:
+        M = wangZheng(D, order)
+    return M
+
+# def drezner(D, order):
+
+    
