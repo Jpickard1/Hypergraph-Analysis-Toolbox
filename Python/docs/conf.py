@@ -10,7 +10,7 @@ for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
 import graph
-import hypergraph
+import Hypergraph
 import plot
 import multilinalg
 
