@@ -1,26 +1,19 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="C:\Joshua\Hypergraph-Analysis-Toolbox\Distributions\Hypergraph Analysis Toolbox.prj" location="C:\Joshua\Hypergraph-Analysis-Toolbox\Distributions" name="Hypergraph Analysis Toolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration file="C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Distributions\Hypergraph Analysis Toolbox.prj" location="C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Distributions" name="Hypergraph Analysis Toolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Hypergraph Analysis Toolbox</param.appname>
     <param.authnamewatermark>Joshua Pickard</param.authnamewatermark>
     <param.email>jpic@umich.edu</param.email>
-    <param.company>Rajapakse Lab &amp; iReprogram</param.company>
-    <param.summary>Hypergraph Analysis Toolbox (HAT) is a software for the analysis and visualization of multi-way interactions in data as hypergraphs.</param.summary>
-    <param.description>Hypergraph Analysis Tolbox (HAT) is a software suite for the analysis and visualization of hypergraphs and higher order structures. Motivated to investigate Pore-C data, HAT is intended as a general prupose, versatile software for hypergraph construction, visualization, and analysis. HAT addresses the following hypergraph problems:
-1. Construction
-2. Visualization
-3. Expansion and numeric representation
-4. Structral Properties
-5. Controllability
-6. Similarity Measures
-Documentation of HAT, information on the Python distribution, and related work are available at: https://hypergraph-analysis-toolbox.readthedocs.io/</param.description>
-    <param.screenshot>C:\Users\test\Desktop\HAT Cover.png</param.screenshot>
+    <param.company>Rajapakse Lab @ Michigan &amp; iReprogram Inc.</param.company>
+    <param.summary>Hypergraph Analysis Toolbox (HAT) is a general purpose software for studying multi-way relationships through hypergraphs.</param.summary>
+    <param.description>Hypergraph Analysis Toolbox (HAT) is a general purpose software for studying multi-way relationships through hypergraphs. Methods for hypergraph constructions, visualization, and the analysis of structural and dynamical properties are provided.</param.description>
+    <param.screenshot />
     <param.version>1.0</param.version>
     <param.output>${PROJECT_ROOT}\Hypergraph Analysis Toolbox.mltbx</param.output>
     <param.products.name />
     <param.products.id />
     <param.products.version />
     <param.platforms />
-    <param.guid>3a4bf4e2-8c4a-45f0-9f0a-01a88d403ed4</param.guid>
+    <param.guid>3a560f8f-b0a2-4e14-b8b4-6512dcf93fec</param.guid>
     <param.exclude.filters />
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
@@ -32,12 +25,14 @@ Documentation of HAT, information on the Python distribution, and related work a
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
-    <param.required.addons />
+    <param.required.addons>
+      <requiredaddons />
+    </param.required.addons>
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start />
-    <param.release.end />
-    <param.release.current.only>false</param.release.current.only>
+    <param.release.start>R2022b</param.release.start>
+    <param.release.end>R2022b</param.release.end>
+    <param.release.current.only>true</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
     <param.compatiblity.macos>true</param.compatiblity.macos>
     <param.compatiblity.linux>true</param.compatiblity.linux>
@@ -49,6 +44,7 @@ Documentation of HAT, information on the Python distribution, and related work a
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
+      <param.screenshot />
       <param.version />
       <param.output />
       <param.products.name />
@@ -66,12 +62,8 @@ Documentation of HAT, information on the Python distribution, and related work a
       <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
-      <param.required.addons />
       <param.matlab.project.id />
       <param.matlab.project.name />
-      <param.release.start />
-      <param.release.end />
-      <param.release.current.only />
       <param.compatiblity.windows />
       <param.compatiblity.macos />
       <param.compatiblity.linux />
@@ -84,30 +76,19 @@ Documentation of HAT, information on the Python distribution, and related work a
       <param.additional.sw.linux.url />
     </unset>
     <fileset.rootdir>
-      <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab</file>
+      <file>${PROJECT_ROOT}\Matlab</file>
     </fileset.rootdir>
-    <fileset.rootfiles>
-      <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\+HAT</file>
-      <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\@Hypergraph</file>
-      <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\README.md</file>
-    </fileset.rootfiles>
+    <fileset.rootfiles />
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Hypergraph Analysis Toolbox.mltbx" optional="false">C:\Joshua\Hypergraph-Analysis-Toolbox\Distributions\Hypergraph Analysis Toolbox.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Hypergraph Analysis Toolbox.mltbx" optional="false">C:\Users\picka\Documents\my_projects\DBTM\PoreC-Hypergraph-Analysis-Toolbox\Distributions\Hypergraph Analysis Toolbox.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2021b</root>
-      <toolboxes>
-        <toolbox name="neuralnetwork" />
-      </toolboxes>
-      <toolbox>
-        <neuralnetwork>
-          <enabled>true</enabled>
-        </neuralnetwork>
-      </toolbox>
+      <root>C:\Program Files\MATLAB\R2022b</root>
+      <toolboxes />
     </matlab>
     <platform>
       <unix>false</unix>
