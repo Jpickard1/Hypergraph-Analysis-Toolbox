@@ -6,6 +6,29 @@
 Hypergraph Analysis Toolbox
 ===========================
 
+.. image:: _static/index_dyadic_decomp.png
+    :align: center
+
+*Important Note*
+****************
+The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git, but it will be published via PiPy and the MathWorks File Exchange shortly.
+
+Introduction
+============
+Hypergraph Analysis Toolbox (HAT) is a software suite for the analysis and visualization of hypergraphs and
+higher order structures. Motivated to investigate Pore-C data, HAT is intended as a general prupose, versatile
+software for hypergraph construction, visualization, and analysis. HAT addresses the following hypergraph
+problems:
+
+1. Construction
+2. Visualization
+3. Expansion and numeric representation
+4. Structral Properties
+5. Controllability
+6. Similarity Measures
+
+The capabilities and use cases of HAT are outlined in `this short notice <https://drive.google.com/file/d/1Mx8ifUtjR05ufhTXc5QgYKlwmfQjfItv/view?usp=share_link>`_. 
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -19,27 +42,7 @@ Hypergraph Analysis Toolbox
    HAT.rst
    modules.rst
 
-*Important Note*
-****************
-The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git, but it will be published via PiPy and the MathWorks File Exchange shortly.
-
-Introduction
-============
-Hypergraph Analysis Tolbox (HAT) is a software suite for the analysis and visualization of hypergraphs and
-higher order structures. Motivated to investigate Pore-C data, HAT is intended as a general prupose, versatile
-software for hypergraph construction, visualization, and analysis. HAT addresses the following hypergraph
-problems:
-
-1. Construction
-2. Visualization
-3. Expansion and numeric representation
-4. Structral Properties
-5. Controllability
-6. Similarity Measures
-
-The capabilities and use cases of HAT are outlined in `this short notice <https://arxiv.org/submit/4609700/view>`_.
-
-Instillation
+Installation
 ============
 
 MATLAB
