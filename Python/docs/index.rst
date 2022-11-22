@@ -34,11 +34,6 @@ The capabilities and use cases of HAT are outlined in `this short notice <https:
    :caption: Contents:
 
    tutorials.rst
-   properties.rst
-   visualization.rst
-   decompositions.rst
-   similarity.rst
-   control.rst
    HAT.rst
 
 Installation

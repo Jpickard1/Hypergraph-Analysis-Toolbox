@@ -11,7 +11,7 @@ Hypergraph Analysis Toolbox
 
 *Important Note*
 ****************
-The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git, but it will be published via PiPy and the MathWorks File Exchange shortly.
+The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git and the Mathworks file exchange, but it will be published via PiPy shortly.
 
 Introduction
 ============
@@ -34,13 +34,7 @@ The capabilities and use cases of HAT are outlined in `this short notice <https:
    :caption: Contents:
 
    tutorials.rst
-   properties.rst
-   visualization.rst
-   decompositions.rst
-   similarity.rst
-   control.rst
    HAT.rst
-   modules.rst
 
 Installation
 ============
