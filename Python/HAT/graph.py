@@ -4,27 +4,19 @@ import scipy as sp
 class graph:
     """This class represents pairwise graph structures.
     """
-    def __init__(self):
+    def __init__(self, a=None):
         """Constructs a default graph.
         """
-        self.A = np.zeros((0,0))
-        self.N = 0
-        self.E = 0
-        
-    def __init__(self, A):
-        """Constructs a graph from an adjacency matrix.
-        """
-        self.A = A
-        self.N = len(A)
+        self.A = a
     
     @property
-    def D(self):
+    def degree(self):
         """The degree matrix of a graph.
         """
         return np.diag(sum(self.A))
         
     @property
-    def L(self):
+    def laplacian(self):
         """The Laplacian matrix of a graph. See equation 1 in [1].
         
         References
@@ -34,7 +26,7 @@ class graph:
         return self.degree - self.A
     
     @property
-    def normL(self):
+    def normLaplacian(self):
         """The normalized Laplacian matrix of a graph. See chapter 16.3.3 [1].
         
         References
@@ -64,16 +56,14 @@ class graph:
         neighborhood = neighborhood[:, neighbors]
         realEdges = sum(neighborhood) / 2
         possibleEdges = sp.special.binom(len(neighbors), 2)
-        return realEdges / possibleEdges        
+        return realEdges / possibleEdges
 
     def pairwiseDistance(self, vxi, vxj):
         """Computes the pairwise distance between vertices i and j.
         """
         d = 1
         N = self.A
-        print(N)
         while N[vxi,vxj] == 0:
-            print(N)
             N = np.matmul(N, self.A)
             d += 1
         return d
@@ -140,22 +130,6 @@ class graph:
         References
         ----------
         .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
-        """
-        print('stub')
-        print(G1 + G2)
-
-    def DELTACON(G1, G2):
-        """Computes a graph distance measure defined by comparing the distance of the adjacency matrices 
-        between 2 graphs with respect to some metric.
-        
-        :param G1: A graph object
-        :param G2: A graph object
-        
-        :return: A similarity measure between the two graphs.
-        References
-        ----------
-        .. [1] Koutra, Danai, Joshua T. Vogelstein, and Christos Faloutsos. "Deltacon: A principled massive-graph similarity function." Proceedings of the 2013 SIAM international conference on data mining. Society for Industrial and Applied Mathematics, 2013.
-        .. [2] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
         """
         print('stub')
         print(G1 + G2)
