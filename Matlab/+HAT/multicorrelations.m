@@ -4,6 +4,7 @@ function [M, idxs] = multicorrelations(D, order, type)
 % * order is the number of variables considered for multicorrelations
 % * type denotes the multicorrelation measures: 'Drezner', 'Wang', 'Taylor'
 % Auth: Joshua Pickard
+% Date: November 2022
 
 R = corrcoef(D);
 

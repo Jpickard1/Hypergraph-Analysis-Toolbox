@@ -1,9 +1,16 @@
 function IM = hyperedge2IM(edgeSet)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%HYPEREDGE2IM This function returns an incidence matrix corresponding to an
+%   edge set.
+%
 % Auth: Joshua Pickard
 % Date: November 28, 2022
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+
+n = max(max(edgeSet));
+e = length(edgeSet);
+IM = zeros(n, e);
+for e=1:length(IM)
+    IM(edgeSet(e,:), e) = 1;
+end
+
 end
 
