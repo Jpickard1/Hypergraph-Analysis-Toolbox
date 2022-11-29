@@ -1,15 +1,20 @@
-function [M, idxs] = multicorrelations(D, order, type)
+function [M, idxs] = multicorrelations(D, order, type, idxs)
 %MULTIWAYCORRELATIONS This function computes multi-correlations among data
 % * D is m x n data matrix
 % * order is the number of variables considered for multicorrelations
 % * type denotes the multicorrelation measures: 'Drezner', 'Wang', 'Taylor'
+% * idxs denotes pairs of indices to have mutli-correlations computed to
+%   avoid the combinatorial complexity of trying all n choose k pairs.
 % Auth: Joshua Pickard
 % Date: November 2022
 
 R = corrcoef(D);
 
 [m, n] = size(D);
-idxs = nchoosek(1:n, order);
+if nargin == 3
+    idxs = nchoosek(1:n, order);
+end
+
 M = zeros(length(idxs), 1);
 
 if strcmp(type, 'Taylor')
