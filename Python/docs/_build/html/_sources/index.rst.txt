@@ -29,16 +29,12 @@ problems:
 
 The capabilities and use cases of HAT are outlined in `this short notice <https://drive.google.com/file/d/1Mx8ifUtjR05ufhTXc5QgYKlwmfQjfItv/view?usp=share_link>`_. 
 
-.. automodule:: HAT.HAT
-   :members:
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    tutorials.rst
    HAT.rst
-   modules.rst
 
 Installation
 ============

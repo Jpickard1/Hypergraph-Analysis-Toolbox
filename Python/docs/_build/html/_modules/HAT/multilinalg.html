@@ -38,8 +38,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">HAT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT Package</a></li>
 </ul>
 
         </div>
@@ -101,6 +100,20 @@
     <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">M</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HammingSimilarity"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.HammingSimilarity">[docs]</a><span class="k">def</span> <span class="nf">HammingSimilarity</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the Spectral-S similarity of 2 Adjacency tensors [1].</span>
+
+<span class="sd">    :param A1: adjacency tensor 1</span>
+<span class="sd">    :type A1: *ndarray*</span>
+<span class="sd">    :param A2: adjacency tensor 2</span>
+<span class="sd">    :type A2: *ndarray*</span>
+<span class="sd">    :return: Hamming similarity measure</span>
+<span class="sd">    :rtype: *float*</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+<span class="sd">    .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">modes</span> <span class="o">=</span> <span class="n">A1</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">))</span>
@@ -110,6 +123,19 @@
     <span class="k">return</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">modes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">order</span> <span class="o">-</span> <span class="n">modes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="SpectralHSimilarity"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.SpectralHSimilarity">[docs]</a><span class="k">def</span> <span class="nf">SpectralHSimilarity</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the Spectral-S similarity of 2 Laplacian tensors [1].</span>
+
+<span class="sd">    :param L1: Laplacian tensor 1</span>
+<span class="sd">    :type L1: *ndarray*</span>
+<span class="sd">    :param L2: Laplacian tensor 2</span>
+<span class="sd">    :type L2: *ndarray*</span>
+<span class="sd">    :return: Spectral-S similarity measure</span>
+<span class="sd">    :rtype: *float*</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+<span class="sd">    .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">supersymHosvd</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">supersymHosvd</span><span class="p">(</span><span class="n">L2</span><span class="p">)</span>
     <span class="n">S1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">S1</span><span class="p">))</span> <span class="o">*</span> <span class="n">S1</span>
@@ -118,24 +144,28 @@
     <span class="k">return</span> <span class="n">S</span></div>
     
 <div class="viewcode-block" id="kronExponentiation"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.kronExponentiation">[docs]</a><span class="k">def</span> <span class="nf">kronExponentiation</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Kronecker Product Exponential.</span>
+
+<span class="sd">    :param M: a matrix</span>
+<span class="sd">    :type M: *ndarray*</span>
+<span class="sd">    :param x: power of exponentiation</span>
+<span class="sd">    :type x: *int*</span>
+<span class="sd">    :return: Krnoecker Product exponentiation of **M** a total of **x** times</span>
+<span class="sd">    :rtype: *ndarray*    </span>
+
+<span class="sd">    This function performs the Kronecker Product on a matrix :math:`M` a total of </span>
+<span class="sd">    :math:`x` times. The Kronecker product is defined for two matrices </span>
+<span class="sd">    :math:`A\in\mathbf{R}^{l \\times m}, B\in\mathbf{R}^{m \\times n}` as the matrix</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        A \\bigotimes B= \\begin{pmatrix} A_{1,1}B &amp; A_{1,2}B &amp; \dots &amp; A_{1,m}B \\\\ A_{2,1}B &amp; A_{2,2}B &amp; \dots &amp; A_{2,m}B \\\\ \\vdots &amp; \\vdots &amp; \\ddots &amp; \\vdots \\\\ A_{l,1}B &amp; A_{l,2}B &amp; \dots &amp; A_{l,n}B \\end{pmatrix}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">M</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">T</span></div>
     
-<div class="viewcode-block" id="multirelation"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.multirelation">[docs]</a><span class="k">def</span> <span class="nf">multirelation</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Drezner&#39;</span><span class="p">):</span>
-    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-    <span class="n">cbns</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span><span class="n">order</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cbns</span><span class="p">)):</span>
-        <span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">cbns</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cbns</span><span class="p">]</span>
-    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;Drezner&#39;</span><span class="p">:</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">drezner</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">type</span> <span class="o">==</span> <span class="s1">&#39;Taylor&#39;</span><span class="p">:</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">taylor</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">M</span> <span class="o">=</span> <span class="n">wangZheng</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">M</span></div>
-
 </pre></div>
 
            </div>

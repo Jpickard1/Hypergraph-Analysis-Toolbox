@@ -9,11 +9,12 @@ MOCK_MODULES = ['numpy', 'scipy', 'matplotlib', 'matplotlib.pyplot', 'scipy.lina
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
-import HAT.HAT
-import HAT.Hypergraph
-import HAT.draw
-import HAT.multilinalg
-import Hypergraph
+# import HAT.HAT
+# import HAT.Hypergraph
+# import HAT.multilinalg
+# import HAT.draw
+# import Hypergraph
+# from HAT.HAT import *
 
 # Configuration file for the Sphinx documentation builder.
 #

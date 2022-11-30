@@ -38,8 +38,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">HAT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT Package</a></li>
 </ul>
 
         </div>
@@ -76,21 +75,58 @@
 <span class="kn">import</span> <span class="nn">HAT.multilinalg</span>
 <span class="kn">import</span> <span class="nn">HAT</span>
 
-<span class="k">def</span> <span class="nf">directSimilarity</span><span class="p">(</span><span class="n">HG1</span><span class="p">,</span> <span class="n">HG2</span><span class="p">,</span> <span class="n">measure</span><span class="p">):</span>
+<div class="viewcode-block" id="directSimilarity"><a class="viewcode-back" href="../../HAT.html#HAT.HAT.directSimilarity">[docs]</a><span class="k">def</span> <span class="nf">directSimilarity</span><span class="p">(</span><span class="n">HG1</span><span class="p">,</span> <span class="n">HG2</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="s1">&#39;Hamming&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function computes the direct similarity between two uniform hypergraphs.</span>
+
+<span class="sd">    :param HG1: Hypergraph 1</span>
+<span class="sd">    :type HG1: *Hypergraph*</span>
+<span class="sd">    :param HG2: Hypergraph 2</span>
+<span class="sd">    :type HG2: *Hypergraph*</span>
+<span class="sd">    :param measure: This sepcifies which similarity measure to apply. It defaults to</span>
+<span class="sd">        ``Hamming``, and ``Spectral-S`` and ``Centrality`` are available as other options</span>
+<span class="sd">        as well.</span>
+<span class="sd">    :type measure: str, optional</span>
+<span class="sd">    :return: Hypergraph similarity</span>
+<span class="sd">    :rtype: *float*</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+<span class="sd">    .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">measure</span> <span class="o">==</span> <span class="s1">&#39;Hamming&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">HAT</span><span class="o">.</span><span class="n">multilinalg</span><span class="o">.</span><span class="n">HammingSimilarity</span><span class="p">(</span><span class="n">HG1</span><span class="o">.</span><span class="n">laplacianTensor</span><span class="p">(),</span> <span class="n">HG2</span><span class="o">.</span><span class="n">laplacianTensor</span><span class="p">())</span>
     <span class="k">elif</span> <span class="n">measure</span> <span class="o">==</span> <span class="s1">&#39;Spectral-S&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">HAT</span><span class="o">.</span><span class="n">multilinalg</span><span class="o">.</span><span class="n">SpectralHSimilarity</span><span class="p">(</span><span class="n">HG1</span><span class="o">.</span><span class="n">laplacianTensor</span><span class="p">(),</span> <span class="n">HG2</span><span class="o">.</span><span class="n">laplacianTensor</span><span class="p">())</span>
     <span class="c1"># elif measure == &#39;Spectral-H&#39;: # Not implemented until we get a H-eigenvalue solver</span>
-    <span class="k">elif</span> <span class="n">measure</span> <span class="o">==</span> <span class="s1">&#39;centrality&#39;</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">measure</span> <span class="o">==</span> <span class="s1">&#39;Centrality&#39;</span><span class="p">:</span>
         <span class="n">C1</span> <span class="o">=</span> <span class="n">HG1</span><span class="o">.</span><span class="n">centrality</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">C2</span> <span class="o">=</span> <span class="n">HG2</span><span class="o">.</span><span class="n">centrality</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">C1</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">C1</span><span class="p">)</span>
         <span class="n">C2</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">C2</span><span class="p">)</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">C1</span> <span class="o">-</span> <span class="n">C2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">C1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">m</span>
+        <span class="k">return</span> <span class="n">m</span></div>
     
-<span class="k">def</span> <span class="nf">indirectSimilarity</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span> <span class="n">centralityType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">10e-3</span><span class="p">):</span>
+<div class="viewcode-block" id="indirectSimilarity"><a class="viewcode-back" href="../../HAT.html#HAT.HAT.indirectSimilarity">[docs]</a><span class="k">def</span> <span class="nf">indirectSimilarity</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="s1">&#39;Hamming&#39;</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">10e-3</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function computes the indirect similarity between two hypergraphs.</span>
+
+<span class="sd">    :param G1: Hypergraph 1 expansion</span>
+<span class="sd">    :type G1: *nx.Graph* or *ndarray*</span>
+<span class="sd">    :param G2: Hypergraph 2 expansion</span>
+<span class="sd">    :type G2: *nx.Graph* or *ndarray*</span>
+<span class="sd">    :param measure: This specifies which similarity measure to apply. It defaults to ``Hamming``, and</span>
+<span class="sd">        ``Jaccard``, ``deltaCon``, ``Spectral``, and ``Centrality`` are provided as well. When ``Centrality``</span>
+<span class="sd">        is used as the similarity measure, ``G1`` and ``G2`` should *ndarray*s of centrality values; Otherwise</span>
+<span class="sd">        ``G1`` and ``G2`` are *nx.Graph*s or *ndarray**s as adjacency matrices.</span>
+<span class="sd">    :type measure: *str*, optional</span>
+<span class="sd">    :param eps: a hyperparameter required for deltaCon similarity, defaults to 10e-3</span>
+<span class="sd">    :type eps: *float*, optional</span>
+<span class="sd">    :return: similarity measure</span>
+<span class="sd">    :rtype: *float*</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+<span class="sd">    .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">G1</span><span class="p">,</span> <span class="n">nx</span><span class="o">.</span><span class="n">classes</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">Graph</span><span class="p">):</span>
         <span class="n">M1</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">adjacency_matrix</span><span class="p">(</span><span class="n">G1</span><span class="p">)</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
         <span class="n">M1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">M1</span><span class="p">)</span>
@@ -125,17 +161,33 @@
         <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v1</span><span class="o">-</span><span class="n">v2</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">measure</span> <span class="o">==</span> <span class="s1">&#39;Centrality&#39;</span><span class="p">:</span>
         <span class="c1"># In this case mat1 and mat2 are centrality vectors</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mat1</span><span class="o">-</span><span class="n">mat2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">s</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v1</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">M1</span><span class="o">-</span><span class="n">M2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span></div>
 
-<div class="viewcode-block" id="multicorrelations"><a class="viewcode-back" href="../../index.html#HAT.HAT.multicorrelations">[docs]</a><span class="k">def</span> <span class="nf">multicorrelations</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">mtype</span><span class="p">,</span> <span class="n">idxs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="multicorrelations"><a class="viewcode-back" href="../../HAT.html#HAT.HAT.multicorrelations">[docs]</a><span class="k">def</span> <span class="nf">multicorrelations</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">mtype</span><span class="o">=</span><span class="s1">&#39;Drezner&#39;</span><span class="p">,</span> <span class="n">idxs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function computes the multicorrelation among pairwise or 2D data.</span>
+
+<span class="sd">    :param D: 2D or pairwise data</span>
+<span class="sd">    :type D: *ndarray*</span>
+<span class="sd">    :param order: order of the multi-way interactions</span>
+<span class="sd">    :type order: *int*</span>
+<span class="sd">    :param mtype: This specifies which multicorrelation measure to use. It defaults to</span>
+<span class="sd">        ``Drezner`` [1], but ``Wang`` [2] and ``Taylor`` [3] are options as well.</span>
+<span class="sd">    :type mtype: *str*</span>
+<span class="sd">    :param idxs: specify which indices of ``D`` to compute multicorrelations of. The default is ``None``, in which case</span>
+<span class="sd">        all combinations of ``order`` indices are computed.</span>
+<span class="sd">    :type idxs: *ndarray*, optional</span>
+<span class="sd">    :return: A vector of the multicorrelation scores computed and a vector of the column indices of</span>
+<span class="sd">        ``D`` used to compute each multicorrelation.</span>
+<span class="sd">    :rtype: *(ndarray, ndarray)*</span>
+
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. [1] Zvi Drezner. Multirelation—a correlation among more than two variables. Computational Statistics &amp; Data Analysis, 19(3):283–292, 1995.</span>
 <span class="sd">    .. [2] Jianji Wang and Nanning Zheng. Measures of correlation for multiple variables. arXiv preprint arXiv:1401.4827, 2014.</span>
 <span class="sd">    .. [3] Benjamin M Taylor. A multi-way correlation coefficient. arXiv preprint arXiv:2003.02561, 2020.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">idxs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -160,12 +212,23 @@
 
     <span class="k">return</span> <span class="n">M</span><span class="p">,</span> <span class="n">idxs</span></div>
 
-<span class="k">def</span> <span class="nf">uniformErdosRenyi</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<div class="viewcode-block" id="uniformErdosRenyi"><a class="viewcode-back" href="../../HAT.html#HAT.HAT.uniformErdosRenyi">[docs]</a><span class="k">def</span> <span class="nf">uniformErdosRenyi</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This function generates a uniform, random hypergraph.</span>
+
+<span class="sd">    :param v: number of vertices</span>
+<span class="sd">    :type v: *int*</span>
+<span class="sd">    :param e: number of edges</span>
+<span class="sd">    :type e: *int*</span>
+<span class="sd">    :param k: order of hypergraph</span>
+<span class="sd">    :type k: *int*</span>
+<span class="sd">    :return: Hypergraph</span>
+<span class="sd">    :rtype: *Hypergraph*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">IM</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">v</span><span class="p">,</span><span class="n">e</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
         <span class="n">IM</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">HAT</span><span class="o">.</span><span class="n">Hypergraph</span><span class="p">(</span><span class="n">IM</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">HAT</span><span class="o">.</span><span class="n">Hypergraph</span><span class="p">(</span><span class="n">IM</span><span class="p">)</span></div>
 
 </pre></div>
 

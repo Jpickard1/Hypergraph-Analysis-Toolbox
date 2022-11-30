@@ -38,8 +38,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">HAT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT Package</a></li>
 </ul>
 
         </div>
@@ -75,10 +74,12 @@
 
 <div class="viewcode-block" id="incidencePlot"><a class="viewcode-back" href="../../HAT.html#HAT.draw.incidencePlot">[docs]</a><span class="k">def</span> <span class="nf">incidencePlot</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">shadeRows</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">connectNodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">edgeColors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plot the incidence matrix of a hypergraph.</span>
+<span class="sd">    </span>
 <span class="sd">    :param H: a HAT.hypergraph object</span>
 <span class="sd">    :param shadeRows: shade rows (bool)</span>
 <span class="sd">    :param connectNodes: connect nodes in each hyperedge (bool)</span>
-<span class="sd">    :param dpi: the resolution of the image</span>
+<span class="sd">    :param dpi: the resolution of the image (int)</span>
+<span class="sd">    :param edgeColors: The colors of edges represented in the incidence matrix. This is random by default</span>
 <span class="sd">    </span>
 <span class="sd">    :return: matplotlib axes with figure drawn on to it</span>
 <span class="sd">    &quot;&quot;&quot;</span>

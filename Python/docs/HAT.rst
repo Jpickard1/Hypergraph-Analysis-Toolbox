@@ -1,4 +1,4 @@
-HAT package
+HAT Package
 ===========
 
 Submodules
@@ -11,6 +11,15 @@ HAT.Hypergraph module
    :members:
    :undoc-members:
    :show-inheritance:
+
+HAT.HAT module
+---------------
+
+.. automodule:: HAT.HAT
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 HAT.draw module
 ---------------
@@ -28,18 +37,3 @@ HAT.multilinalg module
    :undoc-members:
    :show-inheritance:
 
-HAT.graph module
-----------------
-
-.. automodule:: HAT.graph
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: HAT
-   :members:
-   :undoc-members:
-   :show-inheritance:
