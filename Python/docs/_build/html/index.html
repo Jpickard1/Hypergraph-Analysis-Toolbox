@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to Hypergraph Analysis Toolbox’s documentation! &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
+  <title>Hypergraph Analysis Toolbox &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hypergraph Properties" href="properties.html" /> 
+    <link rel="next" title="Tutorials" href="tutorials.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,13 +39,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="properties.html">Hypergraph Properties</a></li>
-<li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="decompositions.html">Decompositions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="similarity.html">Similarity Measures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="control.html">Controllability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HAT.html">HAT package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">HAT</a></li>
 </ul>
 
         </div>
@@ -62,7 +57,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>Welcome to Hypergraph Analysis Toolbox’s documentation!</li>
+      <li>Hypergraph Analysis Toolbox</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -72,78 +67,84 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="welcome-to-hypergraph-analysis-toolbox-s-documentation">
-<h1>Welcome to Hypergraph Analysis Toolbox’s documentation!<a class="headerlink" href="#welcome-to-hypergraph-analysis-toolbox-s-documentation" title="Permalink to this heading"></a></h1>
+  <section id="hypergraph-analysis-toolbox">
+<h1>Hypergraph Analysis Toolbox<a class="headerlink" href="#hypergraph-analysis-toolbox" title="Permalink to this heading"></a></h1>
+<img alt="_images/index_dyadic_decomp.png" class="align-center" src="_images/index_dyadic_decomp.png" />
+<section id="important-note">
+<h2><em>Important Note</em><a class="headerlink" href="#important-note" title="Permalink to this heading"></a></h2>
+<p>The software for HAT is complete, but the online documentation is a work in progress. Currently, the software is only accessable via git and the Mathworks file exchange, but it will be published via PiPy shortly.</p>
+</section>
+</section>
+<section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<p>Hypergraph Analysis Toolbox (HAT) is a software suite for the analysis and visualization of hypergraphs and
+higher order structures. Motivated to investigate Pore-C data, HAT is intended as a general prupose, versatile
+software for hypergraph construction, visualization, and analysis. HAT addresses the following hypergraph
+problems:</p>
+<ol class="arabic simple">
+<li><p>Construction</p></li>
+<li><p>Visualization</p></li>
+<li><p>Expansion and numeric representation</p></li>
+<li><p>Structral Properties</p></li>
+<li><p>Controllability</p></li>
+<li><p>Similarity Measures</p></li>
+</ol>
+<p>The capabilities and use cases of HAT are outlined in <a class="reference external" href="https://drive.google.com/file/d/1Mx8ifUtjR05ufhTXc5QgYKlwmfQjfItv/view?usp=share_link">this short notice</a>.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="properties.html">Hypergraph Properties</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="properties.html#diameter">Diameter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="properties.html#clustering-coefficient">Clustering Coefficient</a></li>
-<li class="toctree-l2"><a class="reference internal" href="properties.html#average-distance">Average Distance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#matlab">MATLAB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#python">Python</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="visualization.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="decompositions.html">Decompositions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="decompositions.html#higher-order-decompositions">Higher Order Decompositions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="decompositions.html#pairwise-decompositions">Pairwise Decompositions</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="similarity.html">Similarity Measures</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="similarity.html#direct-measures">Direct Measures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="similarity.html#indirect-measures">Indirect Measures</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="control.html">Controllability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HAT.html">HAT package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="HAT.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HAT.html#module-HAT.graph">HAT.graph module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HAT.html#module-HAT.hypergraph">HAT.hypergraph module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HAT.html#hat-hypergraph-module">HAT.hypergraph module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HAT.html#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HAT.html#module-HAT.plot">HAT.plot module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="HAT.html#module-HAT">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">HAT</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="HAT.html">HAT package</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </section>
-<section id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
-<p>Hypergraph Analysis Tolbox (HAT) is a software suite for analyzing higher order structures. HAT is implemented
-in Python and Matlab. There are 5 main modules of HAT including:</p>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<section id="matlab">
+<h2>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this heading"></a></h2>
+<p>The MATLAB distribution of HAT can be installed through either the <a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/121013-hypergraph-analysis-toolbox">MATLAB Central</a>. A MathWorks <code class="code docutils literal notranslate"><span class="pre">.mltbx</span></code> file can be downloaded from the site,
+and installed through the add on manager in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.</p>
+<p>The MATLAB distribution has the following dependencies:</p>
 <ol class="arabic simple">
-<li><p>Visualization</p></li>
-<li><p>Hypergraph Properties</p></li>
-<li><p>Controlability</p></li>
-<li><p>Similarity Measures</p></li>
-<li><p>Decompositions</p></li>
+<li><p><a class="reference external" href="https://users.math.msu.edu/users/chenlipi/teneig.html">TenEig — Tensor Eigenpairs Solver</a></p></li>
 </ol>
-<section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h2>
-<p>HAT is intended as a general purpose, multiplatform software for studying hypergraphs.</p>
 </section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Permalink to this heading"></a></h2>
-<p>The Python implementation of HAT may be installed through pip:
-.. code-block:: Python</p>
-<blockquote>
-<div><p>&gt;&gt; pip install HypergraphAnalysisPackage</p>
-</div></blockquote>
-<p>HAT may be imported to the Python invironment with the command:</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">HAT</span>              <span class="c1"># Import package</span>
-<span class="kn">import</span> <span class="nn">HAT.hypergraph</span>   <span class="c1"># hypergraph class</span>
-<span class="kn">import</span> <span class="nn">HAT.graph</span>        <span class="c1"># graph class</span>
-<span class="kn">import</span> <span class="nn">HAT.plot</span>         <span class="c1"># visualization tools</span>
+<p>The Python distribution of HAT may be installed through pip:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">HypergraphAnalysisToolbox</span>
 </pre></div>
 </div>
+<p>Information on the PiPy distribution is available <a class="reference external" href="https://pypi.org/project/HypergraphAnalysisToolbox/">here</a>. Once installed, HAT may be imported into the Python invironment with the command:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">HAT</span>              <span class="c1"># Import package</span>
+<span class="kn">import</span> <span class="nn">HAT.Hypergraph</span>   <span class="c1"># Hypergraph class</span>
+<span class="kn">import</span> <span class="nn">HAT.plot</span>         <span class="c1"># Visualization tools</span>
+</pre></div>
+</div>
+<p>The Python distribution has the following dependencies:</p>
+<ol class="arabic simple">
+<li><p>numpy</p></li>
+<li><p>scipy</p></li>
+<li><p>matplotlib</p></li>
+<li><p>itertools</p></li>
+</ol>
 </section>
-<section id="development">
-<h2>Development<a class="headerlink" href="#development" title="Permalink to this heading"></a></h2>
-<p>All implementations of HAT are managed through a common git repository available at: <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox">https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox</a></p>
+<section id="development-distribution">
+<h2>Development Distribution<a class="headerlink" href="#development-distribution" title="Permalink to this heading"></a></h2>
+<p>All implementations of HAT are managed through a <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox">common git repository</a>. This is public, so it may be
+cloned and modified. If interested in modifying or contributing to HAT, please contact Joshua Pickard at <a class="reference external" href="mailto:jpic&#37;&#52;&#48;umich&#46;edu">jpic<span>&#64;</span>umich<span>&#46;</span>edu</a></p>
 </section>
 </section>
 <section id="indices-and-tables">
@@ -159,7 +160,7 @@ in Python and Matlab. There are 5 main modules of HAT including:</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="properties.html" class="btn btn-neutral float-right" title="Hypergraph Properties" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
