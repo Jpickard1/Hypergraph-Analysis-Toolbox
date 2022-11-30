@@ -6,7 +6,6 @@ classdef Hypergraph
     % columns as hyperedges. 
     properties
         IM (:,:) % incidence matrix 
-        ES (:,:) % edge set for uniform hypergraphs
         edgeWeights 
         nodeWeights
     end
@@ -18,13 +17,11 @@ classdef Hypergraph
             %   stores it in sparse format. Also can store the hyperedge
             %   set for uniform hypergraphs.
             arguments
-                nameValueArgs.IM = sparse(1);    
-                nameValueArgs.edgeSet = [];
+                nameValueArgs.IM = sparse(1);
                 nameValueArgs.edgeWeights = 0;
                 nameValueArgs.nodeWeights = 0;
             end
             obj.IM = sparse(nameValueArgs.IM);
-            obj.ES = nameValueArgs.edgeSet;
             if nameValueArgs.edgeWeights == 0
                 nameValueArgs.edgeWeights = ones(size(obj.IM, 2), 1);
             end
@@ -86,20 +83,13 @@ classdef Hypergraph
 
         d = sDiameter(obj, s);
 
-        %% Translation
-        function D = getDense(obj)
-            %GETDENSE Returns a densely-stored copy of the incidence
-            %matrix.
-            D = full(obj.IM);
-        end
-
         %% Representation
         function A = adjTensor(obj)
-            A = Decompositions.TensorDecomp.adjacencyTensor(obj);
+            A = HAT.TensorRepresentation.adjacencyTensor(obj);
         end
 
         function D = degreeTensor(obj)
-            D = Decompositions.TensorDecomp.degreeTensor(obj);
+            D = HAT.TensorRepresentation.degreeTensor(obj);
         end
 
         function L = laplacianTensor(obj)
@@ -107,40 +97,65 @@ classdef Hypergraph
         end
 
         function C = cliqueGraph(obj)
-            C = Decompositions.GraphDecomp.cliqueGraph(obj);
+            C = HAT.GraphRepresentation.cliqueGraph(obj);
         end
 
         function S = starGraph(obj)
-            S = Decompositions.GraphDecomp.starGraph(obj);
+            S = HAT.GraphRepresentation.starGraph(obj);
         end
 
         function L = lineGraph(obj)
-            L = Decompositions.GraphDecomp.lineGraph(obj);
+            L = HAT.GraphRepresentation.lineGraph(obj);
         end
 
-        function L = laplacianMatrix(obj, type)
+        function HG = dual(obj)
+            HG = Hypergraph(obj.IM');
+        end
+
+        function [A, L] = laplacianMatrix(obj, type)
             if nargin == 1
                 warning("Enter Matrix Laplacian Type: Bolla, Rodriguez or Zhou");
                 return
             end
             if strcmp(type, "Bolla")
-                L = Decompositions.GraphDecomp.BollaLaplacian(obj);
+                [A, L] = HAT.GraphRepresentation.BollaLaplacian(obj);
             elseif strcmp(type, "Rodriguez")
-                L = Decompositions.GraphDecomp.RodriguezLaplacian(obj);
+                [A, L] = HAT.GraphRepresentation.RodriguezLaplacian(obj);
             elseif strcmp(type, "Zhou")
-                L = Decompositions.GraphDecomp.ZhouLaplacian(obj);
+                [A, L] = HAT.GraphRepresentation.ZhouLaplacian(obj);
             end
         end
 
         %% Computation
-
         function E = tensorEntropy(obj)
-            E = Computations.hypergraphEntropy(obj);
+            E = HAT.tensorEntropy(obj);
         end
+
+        function M = matrixEntropy(obj)
+            M = HAT.matrixEntropy(obj);
+        end
+
+        function B = ctrbk(obj, driverNodes)
+            B = HAT.ctrbk(obj, driverNodes);
+        end
+
+        function A = avgDistance(obj)
+            A = HAT.averageDistance(obj);
+        end
+
+        function c = clusteringCoef(obj)
+            c = HAT.clusteringCoefficient(obj);
+        end
+
+        %{
+        function c = centrality(obj, NameValueArgs)
+            c = HAT.centrality(obj, NameValueArgs);
+        end
+        %}
 
         %% Visualization
         function ax = plot(obj)
-            ax = PlotIM.plotIncidenceMatrix(obj);
+            ax = HAT.plotIncidenceMatrix(obj);
         end
 
     end

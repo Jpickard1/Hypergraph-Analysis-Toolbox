@@ -15,7 +15,7 @@ class Hypergraph:
         """
         self.IM = im
         self.edgeWeight = ew
-        self.nodeWeight = nw 
+        self.nodeWeight = nw
 
         if self.edgeWeight is None:
             self.edgeWeight = np.ones(self.IM.shape[1])

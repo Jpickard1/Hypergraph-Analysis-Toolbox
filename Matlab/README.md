@@ -1,5 +1,5 @@
-# Pore-C Hypergraph Analysis Toolbox: Matlab Implementation
+# Hypergraph Analysis Toolbox: Matlab Implementation
 
 ---
 
-This directory manages the Matlab implenentation of PHAT.
+This directory manages the Matlab implenentation of HAT.
