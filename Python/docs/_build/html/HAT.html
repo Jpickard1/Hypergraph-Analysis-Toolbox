@@ -45,8 +45,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">HAT package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.Hypergraph">HAT.Hypergraph module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.draw">HAT.draw module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.graph">HAT.graph module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT">Module contents</a></li>
 </ul>
@@ -55,8 +55,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">HAT package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT.Hypergraph">HAT.Hypergraph module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT.draw">HAT.draw module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT.graph">HAT.graph module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-HAT">Module contents</a></li>
 </ul>
@@ -120,84 +120,6 @@ as tensors, which precisely model multi-way interactions.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.BMatrix">
-<span class="sig-name descname"><span class="pre">BMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.BMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.BMatrix" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.adjTensor">
-<span class="sig-name descname"><span class="pre">adjTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.adjTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.adjTensor" title="Permalink to this definition"></a></dt>
-<dd><p>This constructs the adjacency tensor for uniform hypergraphs.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.avgDistance">
-<span class="sig-name descname"><span class="pre">avgDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.avgDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.avgDistance" title="Permalink to this definition"></a></dt>
-<dd><p>The average distance is computed between any vertices in the hypergraph based
-on the average distance of the clique expansion.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.bolla">
-<span class="sig-name descname"><span class="pre">bolla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.bolla"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.bolla" title="Permalink to this definition"></a></dt>
-<dd><p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
-<dd><p>Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
-<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0012365X9390322K">https://www.sciencedirect.com/science/article/pii/0012365X9390322K</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.centrality">
-<span class="sig-name descname"><span class="pre">centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxIter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LogExp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.centrality" title="Permalink to this definition"></a></dt>
-<dd><p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets">1</span></dt>
-<dd><p>% Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). <a class="reference external" href="https://doi.org/10.1038/s42005-021-00704-2">https://doi.org/10.1038/s42005-021-00704-2</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.cliqueGraph">
-<span class="sig-name descname"><span class="pre">cliqueGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.cliqueGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.cliqueGraph" title="Permalink to this definition"></a></dt>
-<dd><p>The clique expansion graph is constructed.</p>
-<p>The clique expansion algorithm constructs a <em>graph</em> on the same set of vertices as the hypergraph by defining an
-edge set where every pair of vertices contained within the same edge in the hypergraph have an edge between them
-in the graph. Given a hypergraph <span class="math notranslate nohighlight">\(H=(V,E_h)\)</span>, then the corresponding clique graph is <span class="math notranslate nohighlight">\(C=(V,E_c)\)</span> where</p>
-<p>This is called clique expansion because the vertices contained in each <span class="math notranslate nohighlight">\(h\in E_h\)</span> forms a clique in <span class="math notranslate nohighlight">\(C\)</span>.
-While the map from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(C\)</span> is well-defined, the transformation to a clique graph is a lossy process,
-so the hypergraph structure of <span class="math notranslate nohighlight">\(H\)</span> cannot be uniquely recovered from the clique graph <span class="math notranslate nohighlight">\(C\)</span> alone [1].</p>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets">1</span></dt>
-<dd><p>Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</p>
-</dd>
-<dt class="label" id="id4"><span class="brackets">2</span></dt>
-<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.clusteringCoef">
-<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.clusteringCoef" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.ctrbk">
-<span class="sig-name descname"><span class="pre">ctrbk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.ctrbk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.ctrbk" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.degreeTensor">
-<span class="sig-name descname"><span class="pre">degreeTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.degreeTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.degreeTensor" title="Permalink to this definition"></a></dt>
-<dd><p>This constructs the degree tensor for uniform hypergraphs.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.draw">
 <span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shadeRows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectNodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgeColors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.draw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.draw" title="Permalink to this definition"></a></dt>
 <dd><p>This function draws the incidence matrix of the hypergraph object. It calls the function
@@ -231,6 +153,51 @@ transpose of the incidence matrix of a hypergraph is the incidence matrix of the
 </dl>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.cliqueGraph">
+<span class="sig-name descname"><span class="pre">cliqueGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.cliqueGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.cliqueGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The clique expansion graph is constructed.</p>
+<p>The clique expansion algorithm constructs a <em>graph</em> on the same set of vertices as the hypergraph by defining an
+edge set where every pair of vertices contained within the same edge in the hypergraph have an edge between them
+in the graph. Given a hypergraph <span class="math notranslate nohighlight">\(H=(V,E_h)\)</span>, then the corresponding clique graph is <span class="math notranslate nohighlight">\(C=(V,E_c)\)</span> where</p>
+<p>This is called clique expansion because the vertices contained in each <span class="math notranslate nohighlight">\(h\in E_h\)</span> forms a clique in <span class="math notranslate nohighlight">\(C\)</span>.
+While the map from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(C\)</span> is well-defined, the transformation to a clique graph is a lossy process,
+so the hypergraph structure of <span class="math notranslate nohighlight">\(H\)</span> cannot be uniquely recovered from the clique graph <span class="math notranslate nohighlight">\(C\)</span> alone [1].</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets">1</span></dt>
+<dd><p>Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</p>
+</dd>
+<dt class="label" id="id3"><span class="brackets">2</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.lineGraph">
+<span class="sig-name descname"><span class="pre">lineGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.lineGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.lineGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The line graph, which is the clique expansion of the dual graph, is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id4"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.starGraph">
+<span class="sig-name descname"><span class="pre">starGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.starGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.starGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The star graph representation is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
 <dt class="label" id="id5"><span class="brackets">1</span></dt>
 <dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
 </dd>
@@ -243,27 +210,15 @@ transpose of the incidence matrix of a hypergraph is the incidence matrix of the
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.laplacianTensor">
-<span class="sig-name descname"><span class="pre">laplacianTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.laplacianTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.laplacianTensor" title="Permalink to this definition"></a></dt>
-<dd><p>This constructs the Laplacian tensor for uniform hypergraphs.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.lineGraph">
-<span class="sig-name descname"><span class="pre">lineGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.lineGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.lineGraph" title="Permalink to this definition"></a></dt>
-<dd><p>The line graph, which is the clique expansion of the dual graph, is constructed.</p>
-<p class="rubric">References</p>
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.bolla">
+<span class="sig-name descname"><span class="pre">bolla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.bolla"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.bolla" title="Permalink to this definition"></a></dt>
+<dd><p class="rubric">References</p>
 <dl class="footnote brackets">
 <dt class="label" id="id6"><span class="brackets">1</span></dt>
-<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+<dd><p>Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0012365X9390322K">https://www.sciencedirect.com/science/article/pii/0012365X9390322K</a></p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.matrixEntropy">
-<span class="sig-name descname"><span class="pre">matrixEntropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Rodriguez'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.matrixEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.matrixEntropy" title="Permalink to this definition"></a></dt>
-<dd><p>Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -283,15 +238,33 @@ transpose of the incidence matrix of a hypergraph is the incidence matrix of the
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.starGraph">
-<span class="sig-name descname"><span class="pre">starGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.starGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.starGraph" title="Permalink to this definition"></a></dt>
-<dd><p>The star graph representation is constructed.</p>
-<p class="rubric">References</p>
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.zhou">
+<span class="sig-name descname"><span class="pre">zhou</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.zhou"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.zhou" title="Permalink to this definition"></a></dt>
+<dd><p class="rubric">References</p>
 <dl class="footnote brackets">
 <dt class="label" id="id9"><span class="brackets">1</span></dt>
-<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+<dd><p>Zhou, D., Huang, J., &amp; Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
+<a class="reference external" href="https://dennyzhou.github.io/papers/hyper_tech.pdf">https://dennyzhou.github.io/papers/hyper_tech.pdf</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.adjTensor">
+<span class="sig-name descname"><span class="pre">adjTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.adjTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.adjTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the adjacency tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.degreeTensor">
+<span class="sig-name descname"><span class="pre">degreeTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.degreeTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.degreeTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the degree tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.laplacianTensor">
+<span class="sig-name descname"><span class="pre">laplacianTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.laplacianTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.laplacianTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the Laplacian tensor for uniform hypergraphs.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -310,80 +283,134 @@ is implemented with Algorithm 1 from [1].</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.zhou">
-<span class="sig-name descname"><span class="pre">zhou</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.zhou"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.zhou" title="Permalink to this definition"></a></dt>
-<dd><p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id11"><span class="brackets">1</span></dt>
-<dd><p>Zhou, D., Huang, J., &amp; Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
-<a class="reference external" href="https://dennyzhou.github.io/papers/hyper_tech.pdf">https://dennyzhou.github.io/papers/hyper_tech.pdf</a></p>
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.matrixEntropy">
+<span class="sig-name descname"><span class="pre">matrixEntropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Rodriguez'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.matrixEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.matrixEntropy" title="Permalink to this definition"></a></dt>
+<dd><p>Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.avgDistance">
+<span class="sig-name descname"><span class="pre">avgDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.avgDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.avgDistance" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the average pairwise distance between any 2 vertices in the hypergraph.</p>
+<p>The hypergraph is clique expanded to a graph object, and the average shortest path on
+the clique expanded graph is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>avgDist</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.ctrbk">
+<span class="sig-name descname"><span class="pre">ctrbk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.ctrbk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.ctrbk" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.bMatrix">
+<span class="sig-name descname"><span class="pre">bMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.bMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.bMatrix" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs controllability <span class="math notranslate nohighlight">\(B\)</span> matrix commonly used in the linear control system</p>
+<blockquote>
+<div></div></blockquote>
+<p>rac{dx}{dt} = Ax+Bu</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param inputVxc</dt>
+<dd class="field-odd"><p>a list of input control nodes</p>
+</dd>
+<dt class="field-even">type inputVxc</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">np.array</span></code></p>
+</dd>
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p>control matrix</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">np.array</span></code></p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id11"><span class="brackets">1</span></dt>
+<dd><p>Can Chen, Amit Surana, Anthony M Bloch, and Indika Rajapakse. Controllability of hypergraphs. IEEE Transactions</p>
+</dd>
+</dl>
+<p>on Network Science and Engineering, 8(2):1646–1657, 2021. <a class="reference external" href="https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view">https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view</a></p>
+</div></blockquote>
 </dd></dl>
 
-</section>
-<section id="module-HAT.multilinalg">
-<span id="hat-multilinalg-module"></span><h2>HAT.multilinalg module<a class="headerlink" href="#module-HAT.multilinalg" title="Permalink to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.HammingSimilarity">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">HammingSimilarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#HammingSimilarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.HammingSimilarity" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.clusteringCoef">
+<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.clusteringCoef" title="Permalink to this definition"></a></dt>
+<dd><p>Computes clustering average clustering coefficient of the hypergraph.</p>
+<blockquote>
+<div><p>For a uniform hypergraph, the clustering coefficient of a vertex <span class="math notranslate nohighlight">\(v_i\)</span>
+is defined as the number of edges the vertex participates in (i.e. <span class="math notranslate nohighlight">\(deg(v_i)\)</span>) divided
+by the number of <span class="math notranslate nohighlight">\(k-\)</span> and its neighbors
+(See equation 31 in [1]). This is written</p>
+</div></blockquote>
+<p>rac{deg(v_i)}{inom{<a href="#id35"><span class="problematic" id="id36">|N_i|</span></a>}{k}}</p>
+<blockquote>
+<div><p>where <span class="math notranslate nohighlight">\(N_i\)</span> is the set of neighbors or vertices adjacent to <span class="math notranslate nohighlight">\(v_i\)</span>. The hypergraph
+clustering coefficient computed here is the average clustering coefficient for all vertices,
+written</p>
+<dl class="field-list simple">
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p>Average clustering coefficient</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id12"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph Similarity Measures.”</p>
+</dd>
+</dl>
+<p>IEEE Transactions on Network Science and Engineering (2022).</p>
+</div></blockquote>
+</dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.SpectralHSimilarity">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">SpectralHSimilarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#SpectralHSimilarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.SpectralHSimilarity" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.hosvd">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">hosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#hosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.hosvd" title="Permalink to this definition"></a></dt>
-<dd><p>Higher Order Singular Value Decomposition</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.Hypergraph.centrality">
+<span class="sig-name descname"><span class="pre">centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxIter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LogExp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.Hypergraph.centrality" title="Permalink to this definition"></a></dt>
+<dd><p>Computes node and edge centralities.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>uniform</strong> – Indicates if T is a uniform tensor</p></li>
-<li><p><strong>sym</strong> – Indicates if T is a super symmetric tensor</p></li>
-<li><p><strong>M</strong> – Indicates if the factor matrices are required as well as the core tensor</p></li>
+<li><p><strong>tol</strong> (<em>_type_</em><em>, </em><em>optional</em>) – threshold tolerance for the convergence of the centrality measures, defaults to 1e-4</p></li>
+<li><p><strong>maxIter</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of iterations for the centrality measures to converge in, defaults to 3000</p></li>
+<li><p><strong>model</strong> – the set of functions used to compute centrality. This defaults to ‘LogExp’, and other choices include</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The singular values of the core diagonal tensor and the factor matrices.</p>
-</dd>
 </dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.kronExponentiation">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">kronExponentiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#kronExponentiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.kronExponentiation" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.multirelation">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">multirelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Drezner'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#multirelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.multirelation" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="HAT.multilinalg.supersymHosvd">
-<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">supersymHosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#supersymHosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.supersymHosvd" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the singular values of a uniform, symetric tensor. See Algorithm 1 in [1].</p>
+<p>‘Linear’, ‘Max’ or a list of 4 custom function handles (See [1]).
+:type model: str, optional
+:param alpha: Hyperparameter used for computing centrality (See [1]), defaults to 10
+:type alpha: int, optional</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>T</strong> – A uniform, symmetric multidimensional array</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>vxcCentrality</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The singular values that compose the core tensor of the HOSVD on T.</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><em>ndarray</em> containing centrality scores for each vertex in the hypergraph</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>edgeCentrality</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><em>ndarray</em> containing centrality scores for each edge in the hypergraph</p>
 </dd>
 </dl>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id12"><span class="brackets">1</span></dt>
-<dd><ol class="upperalpha simple" start="3">
-<li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
-</ol>
+<dt class="label" id="id13"><span class="brackets">1</span></dt>
+<dd><p>% Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). <a class="reference external" href="https://doi.org/10.1038/s42005-021-00704-2">https://doi.org/10.1038/s42005-021-00704-2</a></p>
 </dd>
 </dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -405,6 +432,69 @@ is implemented with Algorithm 1 from [1].</p>
 </dd></dl>
 
 </section>
+<section id="module-HAT.multilinalg">
+<span id="hat-multilinalg-module"></span><h2>HAT.multilinalg module<a class="headerlink" href="#module-HAT.multilinalg" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.hosvd">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">hosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#hosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.hosvd" title="Permalink to this definition"></a></dt>
+<dd><p>Higher Order Singular Value Decomposition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uniform</strong> – Indicates if T is a uniform tensor</p></li>
+<li><p><strong>sym</strong> – Indicates if T is a super symmetric tensor</p></li>
+<li><p><strong>M</strong> – Indicates if the factor matrices are required as well as the core tensor</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The singular values of the core diagonal tensor and the factor matrices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.supersymHosvd">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">supersymHosvd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#supersymHosvd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.supersymHosvd" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the singular values of a uniform, symetric tensor. See Algorithm 1 in [1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> – A uniform, symmetric multidimensional array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The singular values that compose the core tensor of the HOSVD on T.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id14"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="3">
+<li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.HammingSimilarity">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">HammingSimilarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">A2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#HammingSimilarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.HammingSimilarity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.SpectralHSimilarity">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">SpectralHSimilarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">L2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#SpectralHSimilarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.SpectralHSimilarity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.kronExponentiation">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">kronExponentiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#kronExponentiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.kronExponentiation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.multilinalg.multirelation">
+<span class="sig-prename descclassname"><span class="pre">HAT.multilinalg.</span></span><span class="sig-name descname"><span class="pre">multirelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Drezner'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/multilinalg.html#multirelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.multilinalg.multirelation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
 <section id="module-HAT.graph">
 <span id="hat-graph-module"></span><h2>HAT.graph module<a class="headerlink" href="#module-HAT.graph" title="Permalink to this heading"></a></h2>
 <dl class="py class">
@@ -412,64 +502,10 @@ is implemented with Algorithm 1 from [1].</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">HAT.graph.</span></span><span class="sig-name descname"><span class="pre">graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This class represents pairwise graph structures.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.graph.graph.clusteringCoef">
-<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.clusteringCoef" title="Permalink to this definition"></a></dt>
-<dd><p>Computes the clustering coefficient of a single vertex.</p>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="HAT.graph.graph.degree">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">degree</span></span><a class="headerlink" href="#HAT.graph.graph.degree" title="Permalink to this definition"></a></dt>
 <dd><p>The degree matrix of a graph.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.graph.graph.erdosRenyi">
-<span class="sig-name descname"><span class="pre">erdosRenyi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.erdosRenyi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.erdosRenyi" title="Permalink to this definition"></a></dt>
-<dd><p>Constructs a $G_{n,p}$ Erdős-Rényi random graph.
-…
-.. rubric:: References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id13"><span class="brackets">1</span></dt>
-<dd><ol class="upperalpha simple" start="16">
-<li><p>Erdős and A. Rényi, On Random Graphs, Publ. Math. 6, 290 (1959).</p></li>
-</ol>
-</dd>
-<dt class="label" id="id14"><span class="brackets">2</span></dt>
-<dd><ol class="upperalpha simple" start="5">
-<li><ol class="upperalpha simple" start="14">
-<li><p>Gilbert, Random Graphs, Ann. Math. Stat., 30, 1141 (1959).</p></li>
-</ol>
-</li>
-</ol>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.graph.graph.featureDM">
-<span class="sig-name descname"><span class="pre">featureDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.featureDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.featureDM" title="Permalink to this definition"></a></dt>
-<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
-between 2 graphs with respect to some metric.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G1</strong> – A graph object</p></li>
-<li><p><strong>G2</strong> – A graph object</p></li>
-<li><p><strong>centrality</strong> – Specify the centrality measure metric used to compare the graphs.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A similarity measure between the two graphs.</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id15"><span class="brackets">1</span></dt>
-<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -478,7 +514,7 @@ between 2 graphs with respect to some metric.</p>
 <dd><p>The Laplacian matrix of a graph. See equation 1 in [1].</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id16"><span class="brackets">1</span></dt>
+<dt class="label" id="id15"><span class="brackets">1</span></dt>
 <dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
 </dd>
 </dl>
@@ -490,10 +526,16 @@ between 2 graphs with respect to some metric.</p>
 <dd><p>The normalized Laplacian matrix of a graph. See chapter 16.3.3 [1].</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id17"><span class="brackets">1</span></dt>
+<dt class="label" id="id16"><span class="brackets">1</span></dt>
 <dd><p>Spielman, Daniel. “Spectral graph theory.” Combinatorial scientific computing 18 (2012).</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.clusteringCoef">
+<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.clusteringCoef" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the clustering coefficient of a single vertex.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -503,25 +545,24 @@ between 2 graphs with respect to some metric.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.graph.graph.spectralDM">
-<span class="sig-name descname"><span class="pre">spectralDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.spectralDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.spectralDM" title="Permalink to this definition"></a></dt>
-<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
-between 2 graphs with respect to some metric.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G1</strong> – A graph object</p></li>
-<li><p><strong>G2</strong> – A graph object</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A similarity measure between the two graphs.</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
+<dt class="sig sig-object py" id="HAT.graph.graph.erdosRenyi">
+<span class="sig-name descname"><span class="pre">erdosRenyi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.erdosRenyi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.erdosRenyi" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs a $G_{n,p}$ Erdős-Rényi random graph.
+…
+.. rubric:: References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id18"><span class="brackets">1</span></dt>
-<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+<dt class="label" id="id17"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="16">
+<li><p>Erdős and A. Rényi, On Random Graphs, Publ. Math. 6, 290 (1959).</p></li>
+</ol>
+</dd>
+<dt class="label" id="id18"><span class="brackets">2</span></dt>
+<dd><ol class="upperalpha simple" start="5">
+<li><ol class="upperalpha simple" start="14">
+<li><p>Gilbert, Random Graphs, Ann. Math. Stat., 30, 1141 (1959).</p></li>
+</ol>
+</li>
+</ol>
 </dd>
 </dl>
 </dd></dl>
@@ -546,6 +587,55 @@ between 2 graphs with respect to some metric.</p>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
 <dt class="label" id="id19"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.spectralDM">
+<span class="sig-name descname"><span class="pre">spectralDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.spectralDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.spectralDM" title="Permalink to this definition"></a></dt>
+<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
+between 2 graphs with respect to some metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G1</strong> – A graph object</p></li>
+<li><p><strong>G2</strong> – A graph object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A similarity measure between the two graphs.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id20"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.graph.graph.featureDM">
+<span class="sig-name descname"><span class="pre">featureDM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/graph.html#graph.featureDM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.graph.graph.featureDM" title="Permalink to this definition"></a></dt>
+<dd><p>Computes a graph distance measure defined by comparing the distance of the adjacency matrices
+between 2 graphs with respect to some metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>G1</strong> – A graph object</p></li>
+<li><p><strong>G2</strong> – A graph object</p></li>
+<li><p><strong>centrality</strong> – Specify the centrality measure metric used to compare the graphs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A similarity measure between the two graphs.</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id21"><span class="brackets">1</span></dt>
 <dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph dissimilarity measures.” arXiv preprint arXiv:2106.08206 (2021).</p>
 </dd>
 </dl>
@@ -580,84 +670,6 @@ as tensors, which precisely model multi-way interactions.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.BMatrix">
-<span class="sig-name descname"><span class="pre">BMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.BMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.BMatrix" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.adjTensor">
-<span class="sig-name descname"><span class="pre">adjTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.adjTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.adjTensor" title="Permalink to this definition"></a></dt>
-<dd><p>This constructs the adjacency tensor for uniform hypergraphs.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.avgDistance">
-<span class="sig-name descname"><span class="pre">avgDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.avgDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.avgDistance" title="Permalink to this definition"></a></dt>
-<dd><p>The average distance is computed between any vertices in the hypergraph based
-on the average distance of the clique expansion.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.bolla">
-<span class="sig-name descname"><span class="pre">bolla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.bolla"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.bolla" title="Permalink to this definition"></a></dt>
-<dd><p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id20"><span class="brackets">1</span></dt>
-<dd><p>Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
-<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0012365X9390322K">https://www.sciencedirect.com/science/article/pii/0012365X9390322K</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.centrality">
-<span class="sig-name descname"><span class="pre">centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxIter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LogExp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.centrality" title="Permalink to this definition"></a></dt>
-<dd><p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id21"><span class="brackets">1</span></dt>
-<dd><p>% Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). <a class="reference external" href="https://doi.org/10.1038/s42005-021-00704-2">https://doi.org/10.1038/s42005-021-00704-2</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.cliqueGraph">
-<span class="sig-name descname"><span class="pre">cliqueGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.cliqueGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.cliqueGraph" title="Permalink to this definition"></a></dt>
-<dd><p>The clique expansion graph is constructed.</p>
-<p>The clique expansion algorithm constructs a <em>graph</em> on the same set of vertices as the hypergraph by defining an
-edge set where every pair of vertices contained within the same edge in the hypergraph have an edge between them
-in the graph. Given a hypergraph <span class="math notranslate nohighlight">\(H=(V,E_h)\)</span>, then the corresponding clique graph is <span class="math notranslate nohighlight">\(C=(V,E_c)\)</span> where</p>
-<p>This is called clique expansion because the vertices contained in each <span class="math notranslate nohighlight">\(h\in E_h\)</span> forms a clique in <span class="math notranslate nohighlight">\(C\)</span>.
-While the map from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(C\)</span> is well-defined, the transformation to a clique graph is a lossy process,
-so the hypergraph structure of <span class="math notranslate nohighlight">\(H\)</span> cannot be uniquely recovered from the clique graph <span class="math notranslate nohighlight">\(C\)</span> alone [1].</p>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id22"><span class="brackets">1</span></dt>
-<dd><p>Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</p>
-</dd>
-<dt class="label" id="id23"><span class="brackets">2</span></dt>
-<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.clusteringCoef">
-<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.clusteringCoef" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.ctrbk">
-<span class="sig-name descname"><span class="pre">ctrbk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.ctrbk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.ctrbk" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.degreeTensor">
-<span class="sig-name descname"><span class="pre">degreeTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.degreeTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.degreeTensor" title="Permalink to this definition"></a></dt>
-<dd><p>This constructs the degree tensor for uniform hypergraphs.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="HAT.Hypergraph.draw">
 <span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shadeRows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connectNodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgeColors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.draw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.draw" title="Permalink to this definition"></a></dt>
 <dd><p>This function draws the incidence matrix of the hypergraph object. It calls the function
@@ -691,21 +703,31 @@ transpose of the incidence matrix of a hypergraph is the incidence matrix of the
 </dl>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id24"><span class="brackets">1</span></dt>
+<dt class="label" id="id22"><span class="brackets">1</span></dt>
 <dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.laplacianMatrix">
-<span class="sig-name descname"><span class="pre">laplacianMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.laplacianMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.laplacianMatrix" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.laplacianTensor">
-<span class="sig-name descname"><span class="pre">laplacianTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.laplacianTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.laplacianTensor" title="Permalink to this definition"></a></dt>
-<dd><p>This constructs the Laplacian tensor for uniform hypergraphs.</p>
+<dt class="sig sig-object py" id="HAT.Hypergraph.cliqueGraph">
+<span class="sig-name descname"><span class="pre">cliqueGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.cliqueGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.cliqueGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The clique expansion graph is constructed.</p>
+<p>The clique expansion algorithm constructs a <em>graph</em> on the same set of vertices as the hypergraph by defining an
+edge set where every pair of vertices contained within the same edge in the hypergraph have an edge between them
+in the graph. Given a hypergraph <span class="math notranslate nohighlight">\(H=(V,E_h)\)</span>, then the corresponding clique graph is <span class="math notranslate nohighlight">\(C=(V,E_c)\)</span> where</p>
+<p>This is called clique expansion because the vertices contained in each <span class="math notranslate nohighlight">\(h\in E_h\)</span> forms a clique in <span class="math notranslate nohighlight">\(C\)</span>.
+While the map from <span class="math notranslate nohighlight">\(H\)</span> to <span class="math notranslate nohighlight">\(C\)</span> is well-defined, the transformation to a clique graph is a lossy process,
+so the hypergraph structure of <span class="math notranslate nohighlight">\(H\)</span> cannot be uniquely recovered from the clique graph <span class="math notranslate nohighlight">\(C\)</span> alone [1].</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id23"><span class="brackets">1</span></dt>
+<dd><p>Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.</p>
+</dd>
+<dt class="label" id="id24"><span class="brackets">2</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -721,9 +743,32 @@ transpose of the incidence matrix of a hypergraph is the incidence matrix of the
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.matrixEntropy">
-<span class="sig-name descname"><span class="pre">matrixEntropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Rodriguez'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.matrixEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.matrixEntropy" title="Permalink to this definition"></a></dt>
-<dd><p>Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.</p>
+<dt class="sig sig-object py" id="HAT.Hypergraph.starGraph">
+<span class="sig-name descname"><span class="pre">starGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.starGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.starGraph" title="Permalink to this definition"></a></dt>
+<dd><p>The star graph representation is constructed.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id26"><span class="brackets">1</span></dt>
+<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.laplacianMatrix">
+<span class="sig-name descname"><span class="pre">laplacianMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.laplacianMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.laplacianMatrix" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.bolla">
+<span class="sig-name descname"><span class="pre">bolla</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.bolla"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.bolla" title="Permalink to this definition"></a></dt>
+<dd><p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id27"><span class="brackets">1</span></dt>
+<dd><p>Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/0012365X9390322K">https://www.sciencedirect.com/science/article/pii/0012365X9390322K</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -731,40 +776,13 @@ transpose of the incidence matrix of a hypergraph is the incidence matrix of the
 <span class="sig-name descname"><span class="pre">rodriguez</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.rodriguez"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.rodriguez" title="Permalink to this definition"></a></dt>
 <dd><p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id26"><span class="brackets">1</span></dt>
+<dt class="label" id="id28"><span class="brackets">1</span></dt>
 <dd><p>Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
 <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/03081080290011692">https://www.tandfonline.com/doi/abs/10.1080/03081080290011692</a></p>
 </dd>
-<dt class="label" id="id27"><span class="brackets">2</span></dt>
+<dt class="label" id="id29"><span class="brackets">2</span></dt>
 <dd><p>Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
 <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374">https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.starGraph">
-<span class="sig-name descname"><span class="pre">starGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.starGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.starGraph" title="Permalink to this definition"></a></dt>
-<dd><p>The star graph representation is constructed.</p>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id28"><span class="brackets">1</span></dt>
-<dd><p>Yang, Chaoqi, et al. “Hypergraph learning with line expansion.” arXiv preprint arXiv:2005.04843 (2020).</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="HAT.Hypergraph.tensorEntropy">
-<span class="sig-name descname"><span class="pre">tensorEntropy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.tensorEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.tensorEntropy" title="Permalink to this definition"></a></dt>
-<dd><p>Computes hypergraph entropy based on the singular values of the Laplacian tensor. This comes from definition 7 of [1] and
-is implemented with Algorithm 1 from [1].</p>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id29"><span class="brackets">1</span></dt>
-<dd><ol class="upperalpha simple" start="3">
-<li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
-</ol>
 </dd>
 </dl>
 </dd></dl>
@@ -777,6 +795,168 @@ is implemented with Algorithm 1 from [1].</p>
 <dt class="label" id="id30"><span class="brackets">1</span></dt>
 <dd><p>Zhou, D., Huang, J., &amp; Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
 <a class="reference external" href="https://dennyzhou.github.io/papers/hyper_tech.pdf">https://dennyzhou.github.io/papers/hyper_tech.pdf</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.adjTensor">
+<span class="sig-name descname"><span class="pre">adjTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.adjTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.adjTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the adjacency tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.degreeTensor">
+<span class="sig-name descname"><span class="pre">degreeTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.degreeTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.degreeTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the degree tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.laplacianTensor">
+<span class="sig-name descname"><span class="pre">laplacianTensor</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.laplacianTensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.laplacianTensor" title="Permalink to this definition"></a></dt>
+<dd><p>This constructs the Laplacian tensor for uniform hypergraphs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.tensorEntropy">
+<span class="sig-name descname"><span class="pre">tensorEntropy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.tensorEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.tensorEntropy" title="Permalink to this definition"></a></dt>
+<dd><p>Computes hypergraph entropy based on the singular values of the Laplacian tensor. This comes from definition 7 of [1] and
+is implemented with Algorithm 1 from [1].</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id31"><span class="brackets">1</span></dt>
+<dd><ol class="upperalpha simple" start="3">
+<li><p>Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)</p></li>
+</ol>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.matrixEntropy">
+<span class="sig-name descname"><span class="pre">matrixEntropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Ltype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Rodriguez'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.matrixEntropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.matrixEntropy" title="Permalink to this definition"></a></dt>
+<dd><p>Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.avgDistance">
+<span class="sig-name descname"><span class="pre">avgDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.avgDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.avgDistance" title="Permalink to this definition"></a></dt>
+<dd><p>Computes the average pairwise distance between any 2 vertices in the hypergraph.</p>
+<p>The hypergraph is clique expanded to a graph object, and the average shortest path on
+the clique expanded graph is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>avgDist</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.ctrbk">
+<span class="sig-name descname"><span class="pre">ctrbk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.ctrbk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.ctrbk" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.bMatrix">
+<span class="sig-name descname"><span class="pre">bMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputVxc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.bMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.bMatrix" title="Permalink to this definition"></a></dt>
+<dd><p>Constructs controllability <span class="math notranslate nohighlight">\(B\)</span> matrix commonly used in the linear control system</p>
+<blockquote>
+<div></div></blockquote>
+<p>rac{dx}{dt} = Ax+Bu</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param inputVxc</dt>
+<dd class="field-odd"><p>a list of input control nodes</p>
+</dd>
+<dt class="field-even">type inputVxc</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">np.array</span></code></p>
+</dd>
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p>control matrix</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">np.array</span></code></p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id32"><span class="brackets">1</span></dt>
+<dd><p>Can Chen, Amit Surana, Anthony M Bloch, and Indika Rajapakse. Controllability of hypergraphs. IEEE Transactions</p>
+</dd>
+</dl>
+<p>on Network Science and Engineering, 8(2):1646–1657, 2021. <a class="reference external" href="https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view">https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view</a></p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.clusteringCoef">
+<span class="sig-name descname"><span class="pre">clusteringCoef</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.clusteringCoef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.clusteringCoef" title="Permalink to this definition"></a></dt>
+<dd><p>Computes clustering average clustering coefficient of the hypergraph.</p>
+<blockquote>
+<div><p>For a uniform hypergraph, the clustering coefficient of a vertex <span class="math notranslate nohighlight">\(v_i\)</span>
+is defined as the number of edges the vertex participates in (i.e. <span class="math notranslate nohighlight">\(deg(v_i)\)</span>) divided
+by the number of <span class="math notranslate nohighlight">\(k-\)</span> and its neighbors
+(See equation 31 in [1]). This is written</p>
+</div></blockquote>
+<p>rac{deg(v_i)}{inom{<a href="#id37"><span class="problematic" id="id38">|N_i|</span></a>}{k}}</p>
+<blockquote>
+<div><p>where <span class="math notranslate nohighlight">\(N_i\)</span> is the set of neighbors or vertices adjacent to <span class="math notranslate nohighlight">\(v_i\)</span>. The hypergraph
+clustering coefficient computed here is the average clustering coefficient for all vertices,
+written</p>
+<dl class="field-list simple">
+<dt class="field-odd">return</dt>
+<dd class="field-odd"><p>Average clustering coefficient</p>
+</dd>
+<dt class="field-even">rtype</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id33"><span class="brackets">1</span></dt>
+<dd><p>Surana, Amit, Can Chen, and Indika Rajapakse. “Hypergraph Similarity Measures.”</p>
+</dd>
+</dl>
+<p>IEEE Transactions on Network Science and Engineering (2022).</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="HAT.Hypergraph.centrality">
+<span class="sig-name descname"><span class="pre">centrality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxIter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LogExp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/Hypergraph.html#Hypergraph.centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.Hypergraph.centrality" title="Permalink to this definition"></a></dt>
+<dd><p>Computes node and edge centralities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tol</strong> (<em>_type_</em><em>, </em><em>optional</em>) – threshold tolerance for the convergence of the centrality measures, defaults to 1e-4</p></li>
+<li><p><strong>maxIter</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of iterations for the centrality measures to converge in, defaults to 3000</p></li>
+<li><p><strong>model</strong> – the set of functions used to compute centrality. This defaults to ‘LogExp’, and other choices include</p></li>
+</ul>
+</dd>
+</dl>
+<p>‘Linear’, ‘Max’ or a list of 4 custom function handles (See [1]).
+:type model: str, optional
+:param alpha: Hyperparameter used for computing centrality (See [1]), defaults to 10
+:type alpha: int, optional</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>vxcCentrality</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><em>ndarray</em> containing centrality scores for each vertex in the hypergraph</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>edgeCentrality</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><em>ndarray</em> containing centrality scores for each edge in the hypergraph</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id34"><span class="brackets">1</span></dt>
+<dd><p>% Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). <a class="reference external" href="https://doi.org/10.1038/s42005-021-00704-2">https://doi.org/10.1038/s42005-021-00704-2</a></p>
 </dd>
 </dl>
 </dd></dl>
