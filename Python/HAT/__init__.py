@@ -1,2 +1,6 @@
 
-__all__ = ['graph', 'hypergraph', 'plot']
+__all__ = ['hypergraph', 'plot']
+
+from .Hypergraph import Hypergraph
+from .HAT import *
+from .draw import *

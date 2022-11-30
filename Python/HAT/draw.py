@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from HAT.graph import graph
-from HAT.Hypergraph import Hypergraph as HG
+# from HAT.graph import graph
+# from HAT.Hypergraph import Hypergraph as HG
 
 def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
     """Plot the incidence matrix of a hypergraph.
@@ -16,16 +16,16 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None
     # dpi spec
     plt.rcParams['figure.dpi'] = dpi
     
-    n, m = H.W.shape
+    n, m = H.IM.shape
     
     # plot the incidence matrix
-    # y, x = np.where(H.W == 1)
-    # plt.scatter(x, y, 
-    #             edgecolor='k',
-    #             zorder=2)
+    y, x = np.where(H.IM == 1)
+    plt.scatter(x, y, 
+                edgecolor='k',
+                zorder=2)
     
     for i in range(m):
-        y = np.where(H.W[:,i] == 1)[0]
+        y = np.where(H.IM[:,i] == 1)[0]
         x = i * np.ones(len(y),)
         if edgeColors is None:
             c = None
@@ -36,7 +36,7 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None
                     edgecolor='k',
                     zorder=2)     
 
-    y, x = np.where(H.W == 1)
+    y, x = np.where(H.IM == 1)
     
     # create row shading
     if shadeRows:
@@ -54,7 +54,7 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None
     
     # plot each hyperedge with a black connector
     if connectNodes:
-        for i in range(len(H.W[0])):
+        for i in range(len(H.IM[0])):
             i_pts = np.where(x == i)
             plt.plot([i,i], 
                      [np.min(y[i_pts]), 
