@@ -4,18 +4,10 @@ HAT package
 Submodules
 ----------
 
-HAT.graph module
-----------------
-
-.. automodule:: HAT.graph
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-HAT.hypergraph module
+HAT.Hypergraph module
 ---------------------
 
-.. automodule:: HAT.hypergraph
+.. automodule:: HAT.Hypergraph
    :members:
    :undoc-members:
    :show-inheritance:
@@ -28,10 +20,18 @@ HAT.multilinalg module
    :undoc-members:
    :show-inheritance:
 
-HAT.plot module
+HAT.draw module
 ---------------
 
-.. automodule:: HAT.plot
+.. automodule:: HAT.draw
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+HAT.graph module
+----------------
+
+.. automodule:: HAT.graph
    :members:
    :undoc-members:
    :show-inheritance:

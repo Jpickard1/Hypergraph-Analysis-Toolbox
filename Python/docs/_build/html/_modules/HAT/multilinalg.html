@@ -37,11 +37,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../properties.html">Hypergraph Properties</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../visualization.html">Visualization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../decompositions.html">Decompositions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../similarity.html">Similarity Measures</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../control.html">Controllability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../HAT.html">HAT package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">HAT</a></li>
 </ul>
@@ -104,6 +100,29 @@
     <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">d</span><span class="o">**</span><span class="p">(</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">M</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="HammingSimilarity"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.HammingSimilarity">[docs]</a><span class="k">def</span> <span class="nf">HammingSimilarity</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">):</span>
+    <span class="n">modes</span> <span class="o">=</span> <span class="n">A1</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">modes</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">))</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">modes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="n">order</span> <span class="o">-</span> <span class="n">modes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="SpectralHSimilarity"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.SpectralHSimilarity">[docs]</a><span class="k">def</span> <span class="nf">SpectralHSimilarity</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span> <span class="n">L2</span><span class="p">):</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">supersymHosvd</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">supersymHosvd</span><span class="p">(</span><span class="n">L2</span><span class="p">)</span>
+    <span class="n">S1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">S1</span><span class="p">))</span> <span class="o">*</span> <span class="n">S1</span>
+    <span class="n">S2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">S1</span><span class="p">))</span> <span class="o">*</span> <span class="n">S2</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">S1</span> <span class="o">-</span> <span class="n">S2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">S1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">S</span></div>
+    
+<div class="viewcode-block" id="kronExponentiation"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.kronExponentiation">[docs]</a><span class="k">def</span> <span class="nf">kronExponentiation</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">M</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">T</span></div>
+    
 <div class="viewcode-block" id="multirelation"><a class="viewcode-back" href="../../HAT.html#HAT.multilinalg.multirelation">[docs]</a><span class="k">def</span> <span class="nf">multirelation</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;Drezner&#39;</span><span class="p">):</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
     <span class="n">cbns</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span><span class="n">order</span><span class="p">)</span>
@@ -117,9 +136,6 @@
         <span class="n">M</span> <span class="o">=</span> <span class="n">wangZheng</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">M</span></div>
 
-<span class="c1"># def drezner(D, order):</span>
-
-    
 </pre></div>
 
            </div>
