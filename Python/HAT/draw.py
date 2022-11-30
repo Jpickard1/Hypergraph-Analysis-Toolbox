@@ -6,10 +6,12 @@ import matplotlib.pyplot as plt
 
 def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
     """Plot the incidence matrix of a hypergraph.
+    
     :param H: a HAT.hypergraph object
     :param shadeRows: shade rows (bool)
     :param connectNodes: connect nodes in each hyperedge (bool)
-    :param dpi: the resolution of the image
+    :param dpi: the resolution of the image (int)
+    :param edgeColors: The colors of edges represented in the incidence matrix. This is random by default
     
     :return: matplotlib axes with figure drawn on to it
     """
