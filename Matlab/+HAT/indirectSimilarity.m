@@ -96,7 +96,7 @@ switch type
                     c2=c2/norm(c2);
             end
             n1=size(mat1,1); 
-            n2=size(mat2,1);
+            n2=size(mat2,1); 
             d=1/(n1)*norm(c1-c2);
         end
         

@@ -37,7 +37,7 @@ HG2 = HAT.uniformErdosRenyi(6,8,3);
 
 D1 = HAT.directSimilarity(HG1,HG2,'Hamming')
 D2 = HAT.directSimilarity(HG1,HG2,'Spectral-S')
-D3 = HAT.directSimilarity(HG1,HG2,'Spectral-H')
+D3 = HAT.directSimilarity(HG1,HG2,'Spectral-H') % Not implemented in Python
 D4 = HAT.directSimilarity(HG1,HG2,'Centrality')
 
 A1 = HG1.cliqueGraph();
