@@ -10,7 +10,7 @@
 % The formula for average distance was obtained from equation 31 of the
 % paper below.
 %
-% Amit Surana, Can Chen, and Indika Rajapakse. "Hypergraph dissimilarity measures." arXiv preprint arXiv:2106.08206 (2021).
+% Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph Similarity Measures." IEEE Transactions on Network Science and Engineering (2022).
 %% Code
 function p = clusteringCoefficient(HG)
 

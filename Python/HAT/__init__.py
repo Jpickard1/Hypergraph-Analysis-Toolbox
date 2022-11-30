@@ -1,5 +1,5 @@
 
-__all__ = ['hypergraph', 'plot']
+__all__ = ['Hypergraph', 'draw']
 
 from .Hypergraph import Hypergraph
 from .HAT import *
