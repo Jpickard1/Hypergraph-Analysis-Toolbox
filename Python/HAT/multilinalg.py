@@ -31,6 +31,29 @@ def supersymHosvd(T):
     M = np.reshape(T, (d, d**(m-1)))
     return sp.linalg.svd(M)
 
+def HammingSimilarity(A1, A2):
+    modes = A1.shape
+    order = len(modes)
+    s = sum(abs(A1 - A2))
+    while len(s.shape) != 1:
+        s = sum(s)
+    s = sum(s)
+    return s / (modes[0]**order - modes[0])
+
+def SpectralHSimilarity(L1, L2):
+    _, S1, _ = supersymHosvd(L1)
+    _, S2, _ = supersymHosvd(L2)
+    S1 = (1/sum(S1)) * S1
+    S2 = (1/sum(S1)) * S2
+    S = sum(abs(S1 - S2)**2)/len(S1)
+    return S
+    
+def kronExponentiation(M, x):
+    T = M
+    for i in range(x-1):
+        T = np.kron(T, M)
+    return T
+    
 def multirelation(D,order=3,type='Drezner'):
     R = np.corrcoef(D)
     cbns = itertools.combinations(range(len(D[0])),order)
@@ -44,6 +67,3 @@ def multirelation(D,order=3,type='Drezner'):
         M = wangZheng(D, order)
     return M
 
-# def drezner(D, order):
-
-    
