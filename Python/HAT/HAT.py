@@ -22,7 +22,7 @@ def directSimilarity(HG1, HG2, measure='Hamming'):
     :rtype: *float*
 
     References
-    ==========
+    ----------
     .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
     """
     if measure == 'Hamming':
@@ -45,10 +45,10 @@ def indirectSimilarity(G1, G2, measure='Hamming', eps=10e-3):
     :type G1: *nx.Graph* or *ndarray*
     :param G2: Hypergraph 2 expansion
     :type G2: *nx.Graph* or *ndarray*
-    :param measure: This specifies which similarity measure to apply. It defaults to ``Hamming``, and
-        ``Jaccard``, ``deltaCon``, ``Spectral``, and ``Centrality`` are provided as well. When ``Centrality``
-        is used as the similarity measure, ``G1`` and ``G2`` should *ndarray*s of centrality values; Otherwise
-        ``G1`` and ``G2`` are *nx.Graph*s or *ndarray**s as adjacency matrices.
+    :param measure: This specifies which similarity measure to apply. It defaults to ``Hamming`` , and
+        ``Jaccard`` , ``deltaCon`` , ``Spectral`` , and ``Centrality`` are provided as well. When ``Centrality``
+        is used as the similarity measure, ``G1`` and ``G2`` should *ndarray* s of centrality values; Otherwise
+        ``G1`` and ``G2`` are *nx.Graph*s or *ndarray** s as adjacency matrices.
     :type measure: *str*, optional
     :param eps: a hyperparameter required for deltaCon similarity, defaults to 10e-3
     :type eps: *float*, optional

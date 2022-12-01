@@ -35,6 +35,7 @@ The capabilities and use cases of HAT are outlined in `this short notice <https:
 
    tutorials.rst
    HAT.rst
+   ref.rst
 
 Installation
 ============
