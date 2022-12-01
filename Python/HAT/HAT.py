@@ -131,8 +131,7 @@ def multicorrelations(D, order, mtype='Drezner', idxs=None):
         taylorCoef = 1/np.sqrt(order)
 
     for i in range(len(idxs)):
-        minor = R[idxs[i,:], :]
-        minor = minor[:, idxs[i,:]]
+        minor = R[np.ix_(idxs[i,:], idxs[i,:])]
         if mtype == 'Drezner':
             w, _ = np.linalg.eigh(minor)
             M[i] = 1 - w[0]
@@ -162,3 +161,4 @@ def uniformErdosRenyi(v, e, k):
         IM[idx,i] = 1
     return HAT.Hypergraph(IM)
 
+def 
