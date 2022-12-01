@@ -1,5 +1,5 @@
-HAT Package
-===========
+HAT Documentation
+=================
 
 Submodules
 ----------
