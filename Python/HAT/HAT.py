@@ -123,7 +123,7 @@ def multicorrelations(D, order, mtype='Drezner', idxs=None):
     R = np.corrcoef(D.T)
     
     if idxs == None:
-        idxs = np.array(list(itertools.combinations(range(4),3)))
+        idxs = np.array(list(itertools.combinations(range(len(R)), order)))
     
     M = np.zeros(len(idxs),)
     
