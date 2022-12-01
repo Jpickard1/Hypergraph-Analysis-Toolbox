@@ -500,7 +500,7 @@ class Hypergraph:
         """Computes node and edge centralities.
 
         :param tol: threshold tolerance for the convergence of the centrality measures, defaults to 1e-4
-        :type tol: _type_, optional
+        :type tol: *int*, optional
         :param maxIter: maximum number of iterations for the centrality measures to converge in, defaults to 3000
         :type maxIter: int, optional
         :param model: the set of functions used to compute centrality. This defaults to 'LogExp', and other choices include
