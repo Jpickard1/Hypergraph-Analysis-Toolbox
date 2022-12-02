@@ -6,7 +6,9 @@ This page contains a series of tutorials for using HAT. Every tutorial is availa
 Python
 ******
 
-Each Python tutorial open as a Google CoLab notebook and can be run online. The tutorials can be downloaded from the link as well and run locally as a jupyter notebook as well.
+Each Python tutorial open as a Google CoLab notebook and can be run online. You need to be logged into a google account in order to
+access the notebooks. The links below may open to seemingly large .txt documents, in which case there will be a button near the top
+to open the links in CoLab. Additionally, the tutorials can be downloaded from the links and run locally as a jupyter notebook as well.
 
 1. `Introduction to HAT in Python <https://drive.google.com/file/d/17zxsB8kW8-bjJUGyXGm9vxDzYrIQa7mW/view?usp=share_link>`_
 2. `Constructing Hypergraphs from Multicorrealtions <https://drive.google.com/file/d/1m4fYOhRrYYgT1wFGwY9SPcMXXk2aqQTR/view?usp=share_link>`_
