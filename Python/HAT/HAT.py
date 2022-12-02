@@ -161,4 +161,17 @@ def uniformErdosRenyi(v, e, k):
         IM[idx,i] = 1
     return HAT.Hypergraph(IM)
 
-def 
+def load(dataset):
+    """This function loads built-in datasets.
+    """
+    if dataset == 'Karate':
+        return nx.karate_club_graph()
+
+def hyperedges2IM(edgeSet):
+    n = np.max(edgeSet)
+    e = len(edgeSet)
+    IM = np.zeros((n+1,e))
+    for e in range(n):
+        IM[edgeSet[e,:],:] = 1
+    return IM
+    
