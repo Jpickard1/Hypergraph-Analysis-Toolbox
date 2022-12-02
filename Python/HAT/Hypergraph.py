@@ -97,8 +97,8 @@ class Hypergraph:
 
         References
         ----------
-        .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
-        .. [2] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
+        .. [*] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
+        .. [*] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
         """
         # Auth: Joshua Pickard
         #       jpic@umich.edu
@@ -166,7 +166,7 @@ class Hypergraph:
         and ``zhouLaplacian()``).
 
         References
-        ==========
+        ----------
         .. [1] Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117. 
             https://www.sciencedirect.com/science/article/pii/0012365X9390322K
         .. [2] Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
@@ -290,14 +290,14 @@ class Hypergraph:
         :return: Degree Tensor
         :rtype: *ndarray*
 
-        The degree tensor :math:`D` is the hypergraph analog of the degree matrix. For a :math:`k-`order hypergraph
+        The degree tensor :math:`D` is the hypergraph analog of the degree matrix. For a :math:`k-` order hypergraph
          :math:`H=(V,E)` the degree tensor :math:`D` is a diagonal supersymmetric tensor defined
 
         .. math::
             D \in \mathbf{R}^{ \overbrace{n \\times \dots \\times n}^{k \\text{ times}}} \\text{ where }{D}_{i\dots i} = degree(v_i) \\text{ for all } v_i\in V
 
         References
-        ==========        
+        ----------
         .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
             https://arxiv.org/pdf/1912.09624.pdf
         """
@@ -400,7 +400,7 @@ class Hypergraph:
         return avgDist
     
     def ctrbk(self, inputVxc):
-        """Compute the reduced controllability matrix for :math:`k-`uniform hypergraphs.
+        """Compute the reduced controllability matrix for :math:`k-` uniform hypergraphs.
 
         :param inputVxc: List of vertices that may be controlled
         :type inputVxc: *ndarray*
@@ -446,7 +446,7 @@ class Hypergraph:
         References
         ==========
         .. [1] Can Chen, Amit Surana, Anthony M Bloch, and Indika Rajapakse. Controllability of hypergraphs. IEEE Transactions
-        on Network Science and Engineering, 8(2):1646–1657, 2021. https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view
+            on Network Science and Engineering, 8(2):1646–1657, 2021. https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view
         """
         # Auth: Joshua Pickard
         #       jpic@umich.edu
