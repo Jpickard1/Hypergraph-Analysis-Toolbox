@@ -14,7 +14,7 @@
 6. Similarity Measures
 Documentation of HAT, information on the Python distribution, and related work are available at: https://hypergraph-analysis-toolbox.readthedocs.io/</param.description>
     <param.screenshot>C:\Users\test\Desktop\HAT Cover.png</param.screenshot>
-    <param.version>1.0</param.version>
+    <param.version>1.0.1</param.version>
     <param.output>${PROJECT_ROOT}\Hypergraph Analysis Toolbox.mltbx</param.output>
     <param.products.name />
     <param.products.id />
@@ -32,7 +32,11 @@ Documentation of HAT, information on the Python distribution, and related work a
     <param.matlabpath.excludes />
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
-    <param.required.addons />
+    <param.required.addons>
+      <requiredaddons>
+        <requiredAddOn earliest="earliest" fromRepository="true" id="3a4bf4e2-8c4a-45f0-9f0a-01a88d403ed4" include="true" latest="latest">Hypergraph Analysis Toolbox</requiredAddOn>
+      </requiredaddons>
+    </param.required.addons>
     <param.matlab.project.id />
     <param.matlab.project.name />
     <param.release.start />
@@ -49,7 +53,6 @@ Documentation of HAT, information on the Python distribution, and related work a
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.version />
       <param.output />
       <param.products.name />
       <param.products.id />
@@ -66,7 +69,6 @@ Documentation of HAT, information on the Python distribution, and related work a
       <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
-      <param.required.addons />
       <param.matlab.project.id />
       <param.matlab.project.name />
       <param.release.start />
@@ -87,6 +89,7 @@ Documentation of HAT, information on the Python distribution, and related work a
       <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab</file>
     </fileset.rootdir>
     <fileset.rootfiles>
+      <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\+Data</file>
       <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\+HAT</file>
       <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\@Hypergraph</file>
       <file>C:\Joshua\Hypergraph-Analysis-Toolbox\Matlab\README.md</file>
