@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "HypergraphAnalysisToolbox"
-version = "0.0.1"
+version = "1.0"
 authors = [
   { name="Joshua Pickard", email="jpic@umich.edu" },
 ]
@@ -17,5 +17,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox"
+"Homepage" = "https://hypergraph-analysis-toolbox.readthedocs.io/en/latest/"
 "Bug Tracker" = "https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox/issues"
