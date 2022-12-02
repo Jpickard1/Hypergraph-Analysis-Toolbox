@@ -13,7 +13,7 @@ function [N, DS] = load(dataset)
 % Auth: Joshua Pickard
 % Date: November 28, 2022
 
-current_path = pwd;
+[current_path,~,~] = fileparts(mfilename('fullpath'))
 len = length(current_path);
 current_path(len-3:end) = [];
 dp = string(current_path) + "+Data/";

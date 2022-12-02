@@ -1,4 +1,4 @@
-function IM = hyperedge2IM(edgeSet)
+function IM = hyperedges2IM(edgeSet)
 %HYPEREDGE2IM This function returns an incidence matrix corresponding to an
 %   edge set.
 %
