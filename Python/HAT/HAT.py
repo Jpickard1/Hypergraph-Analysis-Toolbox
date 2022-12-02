@@ -25,6 +25,9 @@ def directSimilarity(HG1, HG2, measure='Hamming'):
     ----------
     .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     if measure == 'Hamming':
         return HAT.multilinalg.HammingSimilarity(HG1.laplacianTensor(), HG2.laplacianTensor())
     elif measure == 'Spectral-S':
@@ -59,6 +62,9 @@ def indirectSimilarity(G1, G2, measure='Hamming', eps=10e-3):
     ==========
     .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     if isinstance(G1, nx.classes.graph.Graph):
         M1 = nx.adjacency_matrix(G1).todense()
         M1 = np.array(M1)
@@ -119,7 +125,9 @@ def multicorrelations(D, order, mtype='Drezner', idxs=None):
     .. [2] Jianji Wang and Nanning Zheng. Measures of correlation for multiple variables. arXiv preprint arXiv:1401.4827, 2014.
     .. [3] Benjamin M Taylor. A multi-way correlation coefficient. arXiv preprint arXiv:2003.02561, 2020.
     """
-
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     R = np.corrcoef(D.T)
     
     if idxs == None:
@@ -155,19 +163,40 @@ def uniformErdosRenyi(v, e, k):
     :return: Hypergraph
     :rtype: *Hypergraph*
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     IM = np.zeros((v,e))
     for i in range(e):
         idx = np.random.choice(v, size = k, replace = False)
         IM[idx,i] = 1
     return HAT.Hypergraph(IM)
 
-def load(dataset):
-    """This function loads built-in datasets.
+def load(dataset='Karate'):
+    """This function loads built-in datasets. Currently only one dataset is available and we are working to expand this.
+
+    :param dataset: sets which dataset to load in, defaults to 'Karate'
+    :type dataset: str, optional
+    :return: graph object
+    :rtype: *nx.Graph*
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     if dataset == 'Karate':
         return nx.karate_club_graph()
 
 def hyperedges2IM(edgeSet):
+    """This function constructs an incidence matrix from an edge set.
+
+    :param edgeSet: a :math:`e \times k` matrix where each row contains :math:`k` integers that are contained within the same hyperedge
+    :type edgeSet: *ndarray*
+    :return: a :math:`n \times e` incidence matrix where each row of the edge set corresponds to a column of the incidence matrix. :math:`n` is the number of nodes contained in the edgeset.
+    :rtype: *ndarray*
+    """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     n = np.max(edgeSet)
     e = len(edgeSet)
     IM = np.zeros((n+1,e))

@@ -10,6 +10,9 @@ def hosvd(T, M=True, uniform=False, sym=False):
     
     :return: The singular values of the core diagonal tensor and the factor matrices.
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     if uniform and not M:
         return supersymHosvd(T)
     else:
@@ -26,6 +29,9 @@ def supersymHosvd(T):
     ----------
     .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     d = T.shape[0]
     m = len(T.shape)
     M = np.reshape(T, (d, d**(m-1)))
@@ -46,6 +52,9 @@ def HammingSimilarity(A1, A2):
     .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
 
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     modes = A1.shape
     order = len(modes)
     s = sum(abs(A1 - A2))
@@ -68,6 +77,9 @@ def SpectralHSimilarity(L1, L2):
     ==========
     .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     _, S1, _ = supersymHosvd(L1)
     _, S2, _ = supersymHosvd(L2)
     S1 = (1/sum(S1)) * S1
@@ -93,6 +105,9 @@ def kronExponentiation(M, x):
         A \\bigotimes B= \\begin{pmatrix} A_{1,1}B & A_{1,2}B & \dots & A_{1,m}B \\\\ A_{2,1}B & A_{2,2}B & \dots & A_{2,m}B \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ A_{l,1}B & A_{l,2}B & \dots & A_{l,n}B \\end{pmatrix}
 
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 2, 2022
     T = M
     for i in range(x-1):
         T = np.kron(T, M)
