@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HAT Package &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
+  <title>HAT Documentation &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,7 +20,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="HAT" href="modules.html" />
+    <link rel="next" title="Hypergraph References" href="ref.html" />
     <link rel="prev" title="Tutorials" href="tutorials.html" /> 
 </head>
 
@@ -41,26 +41,19 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">HAT Package</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HAT Documentation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.Hypergraph">HAT.Hypergraph module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.HAT">HAT.HAT module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.draw">HAT.draw module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#bug-reporting">Bug Reporting</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">HAT</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">HAT Package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-HAT.Hypergraph">HAT.Hypergraph module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-HAT.HAT">HAT.HAT module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-HAT.draw">HAT.draw module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-HAT.multilinalg">HAT.multilinalg module</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">Hypergraph References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
 </ul>
 
         </div>
@@ -77,7 +70,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>HAT Package</li>
+      <li>HAT Documentation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/HAT.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,8 +80,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="hat-package">
-<h1>HAT Package<a class="headerlink" href="#hat-package" title="Permalink to this heading"></a></h1>
+  <section id="hat-documentation">
+<h1>HAT Documentation<a class="headerlink" href="#hat-documentation" title="Permalink to this heading"></a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
@@ -581,7 +574,7 @@ IEEE Transactions on Network Science and Engineering (2022).
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>tol</strong> (<em>_type_</em><em>, </em><em>optional</em>) – threshold tolerance for the convergence of the centrality measures, defaults to 1e-4</p></li>
+<li><p><strong>tol</strong> (<em>int</em>, optional) – threshold tolerance for the convergence of the centrality measures, defaults to 1e-4</p></li>
 <li><p><strong>maxIter</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum number of iterations for the centrality measures to converge in, defaults to 3000</p></li>
 <li><p><strong>model</strong> (<em>str</em><em>, </em><em>optional</em>) – the set of functions used to compute centrality. This defaults to ‘LogExp’, and other choices include
 ‘Linear’, ‘Max’ or a list of 4 custom function handles (See [1]).</p></li>
@@ -732,6 +725,40 @@ all combinations of <code class="docutils literal notranslate"><span class="pre"
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.HAT.load">
+<span class="sig-prename descclassname"><span class="pre">HAT.HAT.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Karate'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/HAT.html#load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.HAT.load" title="Permalink to this definition"></a></dt>
+<dd><p>This function loads built-in datasets. Currently only one dataset is available and we are working to expand this.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> (<em>str</em><em>, </em><em>optional</em>) – sets which dataset to load in, defaults to ‘Karate’</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>graph object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><em>nx.Graph</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="HAT.HAT.hyperedges2IM">
+<span class="sig-prename descclassname"><span class="pre">HAT.HAT.</span></span><span class="sig-name descname"><span class="pre">hyperedges2IM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edgeSet</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/HAT/HAT.html#hyperedges2IM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#HAT.HAT.hyperedges2IM" title="Permalink to this definition"></a></dt>
+<dd><p>This function constructs an incidence matrix from an edge set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>edgeSet</strong> (<em>ndarray</em>) – a <span class="math notranslate nohighlight">\(e  imes k\)</span> matrix where each row contains <span class="math notranslate nohighlight">\(k\)</span> integers that are contained within the same hyperedge</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a <span class="math notranslate nohighlight">\(n         imes e\)</span> incidence matrix where each row of the edge set corresponds to a column of the incidence matrix. <span class="math notranslate nohighlight">\(n\)</span> is the number of nodes contained in the edgeset.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><em>ndarray</em></p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="module-HAT.draw">
 <span id="hat-draw-module"></span><h2>HAT.draw module<a class="headerlink" href="#module-HAT.draw" title="Permalink to this heading"></a></h2>
@@ -876,6 +903,10 @@ all combinations of <code class="docutils literal notranslate"><span class="pre"
 </dd></dl>
 
 </section>
+<section id="bug-reporting">
+<h2>Bug Reporting<a class="headerlink" href="#bug-reporting" title="Permalink to this heading"></a></h2>
+<p>Please report all bugs or defects in HAT to <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox/issues">this page</a>.</p>
+</section>
 </section>
 
 
@@ -883,7 +914,7 @@ all combinations of <code class="docutils literal notranslate"><span class="pre"
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="modules.html" class="btn btn-neutral float-right" title="HAT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ref.html" class="btn btn-neutral float-right" title="Hypergraph References" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

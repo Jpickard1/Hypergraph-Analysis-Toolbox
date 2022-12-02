@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tutorials &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
+  <title>Installation &mdash; Hypergraph Analysis Toolbox 0.0.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="HAT Documentation" href="HAT.html" />
-    <link rel="prev" title="Installation" href="install.html" /> 
+    <link rel="next" title="Tutorials" href="tutorials.html" />
+    <link rel="prev" title="Hypergraph Analysis Toolbox" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,15 +40,16 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#python">Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#matlab">MATLAB</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#python-distribution">Python Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matlab-distribution">MATLAB Distribution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#development-distribution">Development Distribution</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#bug-reporting">Bug Reporting</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HAT.html">HAT Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">Hypergraph References</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Development</a></li>
@@ -68,9 +69,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Tutorials</li>
+      <li>Installation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/tutorials.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -78,24 +79,41 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tutorials">
-<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this heading"></a></h1>
-<p>This page contains a series of tutorials for using HAT. Every tutorial is available in both Python and MATLAB.</p>
-<section id="python">
-<h2>Python<a class="headerlink" href="#python" title="Permalink to this heading"></a></h2>
-<p>Each Python tutorial open as a Google CoLab notebook and can be run online. The tutorials can be downloaded from the link as well and run locally as a jupyter notebook as well.</p>
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h1>
+<p>An instillation guide for the MATLAB, Python, and Development versions of HAT is available here.</p>
+<section id="python-distribution">
+<h2>Python Distribution<a class="headerlink" href="#python-distribution" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference external" href="https://pypi.org/project/HypergraphAnalysisToolbox/">Python distribution</a> of HAT may be installed through pip:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">HypergraphAnalysisToolbox</span>
+</pre></div>
+</div>
+<p>Once installed, HAT may be imported into the Python environment with the command:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">HAT</span>
+</pre></div>
+</div>
+<p>The Python distribution has the following dependencies:</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="https://drive.google.com/file/d/17zxsB8kW8-bjJUGyXGm9vxDzYrIQa7mW/view?usp=share_link">Introduction to HAT in Python</a></p></li>
-<li><p><a class="reference external" href="https://drive.google.com/file/d/1m4fYOhRrYYgT1wFGwY9SPcMXXk2aqQTR/view?usp=share_link">Constructing Hypergraphs from Multicorrealtions</a></p></li>
+<li><p>numpy</p></li>
+<li><p>scipy</p></li>
+<li><p>matplotlib</p></li>
+<li><p>itertools</p></li>
+<li><p>networkx</p></li>
 </ol>
 </section>
-<section id="matlab">
-<h2>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this heading"></a></h2>
-<p>Each MATLAB tutorial opens to MATLAB Online. If you have a MATLAB account you can run it online. Otherwise, you can download the tutorial file from MATLAB Online and run it as a live script locally.</p>
+<section id="matlab-distribution">
+<h2>MATLAB Distribution<a class="headerlink" href="#matlab-distribution" title="Permalink to this heading"></a></h2>
+<p>The MATLAB distribution of HAT can be installed through either the <a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/121013-hypergraph-analysis-toolbox">MATLAB Central</a>. A MathWorks <code class="code docutils literal notranslate"><span class="pre">.mltbx</span></code> file can be downloaded from the site,
+and installed through the add on manager in the MATLAB Home environment. Once installed as a toolbox, you will have access to all HAT functionality.</p>
+<p>The MATLAB distribution has the following dependencies which need to be installed separately:</p>
 <ol class="arabic simple">
-<li><p><a class="reference external" href="https://drive.matlab.com/sharing/7d77b042-c3cb-4ae9-8c06-515089fbccef">Introduction to HAT in MATLAB</a></p></li>
-<li><p><a class="reference external" href="https://drive.matlab.com/sharing/999692ae-26df-4b34-9cd4-c31af10d0bc3">Constructing Hypergraphs from Multicorrealtions</a></p></li>
+<li><p><a class="reference external" href="https://users.math.msu.edu/users/chenlipi/teneig.html">TenEig — Tensor Eigenpairs Solver</a></p></li>
 </ol>
+</section>
+<section id="development-distribution">
+<h2>Development Distribution<a class="headerlink" href="#development-distribution" title="Permalink to this heading"></a></h2>
+<p>All implementations of HAT are managed through a <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox">common git repository</a>. This is public, so it may be
+cloned and modified. If interested in modifying or contributing to HAT, please see information on the Development page and contact Joshua Pickard at <a class="reference external" href="mailto:jpic&#37;&#52;&#48;umich&#46;edu">jpic<span>&#64;</span>umich<span>&#46;</span>edu</a>.</p>
 <section id="bug-reporting">
 <h3>Bug Reporting<a class="headerlink" href="#bug-reporting" title="Permalink to this heading"></a></h3>
 <p>Please report all bugs or defects in HAT to <a class="reference external" href="https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox/issues">this page</a>.</p>
@@ -107,8 +125,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="HAT.html" class="btn btn-neutral float-right" title="HAT Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Hypergraph Analysis Toolbox" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

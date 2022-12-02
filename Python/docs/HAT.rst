@@ -37,3 +37,6 @@ HAT.multilinalg module
    :undoc-members:
    :show-inheritance:
 
+Bug Reporting
+-------------
+Please report all bugs or defects in HAT to `this page <https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox/issues>`_.
