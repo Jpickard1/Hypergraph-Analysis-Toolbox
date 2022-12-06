@@ -204,3 +204,31 @@ def hyperedges2IM(edgeSet):
         IM[edgeSet[e,:],:] = 1
     return IM
     
+def hyperedgeHomophily(G, H, method='CN'):
+    """This function computes the hyperedge homophily score according to the below methods. The homophily score is the average score based on
+    structural similarity of the vertices in hypredge `H` in the clique expanded graph `G`. This function is an interface from `HAT` to `networkx`
+    link prediction algorithms.
+
+    :param G: a pairwise hypergraph expansion
+    :type G: `networkx.Graph`
+    :param H: hyperedge containing individual vertices within the edge
+    :type H: `ndarray`
+    :param method: specifies which structural similarity method to use. This defaults to `CN` common neighbors.
+    """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 6, 2022
+    pairwise = list(itertools.combinations(H, 2))
+
+    # Compute pairwise scores with networkx
+    if method == 'CN':
+        pairwiseScores = nx.common_neighbor_centrality(G, pairwise)
+    elif method == 'RA':
+        pairwiseScores = nx.resource_allocation_index(G, pairwise)
+    elif method == 'JC':
+        pairwiseScores = nx.jaccard_coefficient(G, pairwise)
+        
+    # Compute average pairwise score
+    pairwiseScores = pairwiseScores[:, 2]
+    hyperedgeHomophily = sum(pairwiseScores)/len(pairwiseScores)
+    return hyperedgeHomophily
