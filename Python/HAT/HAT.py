@@ -2,7 +2,9 @@ import itertools
 from itertools import combinations
 import numpy as np
 import scipy as sp
+import scipy.io
 import networkx as nx
+import os
 
 import HAT.multilinalg
 import HAT
@@ -177,14 +179,41 @@ def load(dataset='Karate'):
 
     :param dataset: sets which dataset to load in, defaults to 'Karate'
     :type dataset: str, optional
-    :return: graph object
-    :rtype: *nx.Graph*
+    :return: incidence matrix or graph object
+    :rtype: *ndarray* or *nx.Graph*
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Dec 2, 2022
+
+    current_path = os.path.dirname(os.path.realpath(__file__))
+    current_path += '/Data/'
     if dataset == 'Karate':
         return nx.karate_club_graph()
+    elif dataset == 'ArnetMiner Citation':
+        mat = sp.io.loadmat(current_path + 'aminer_cocitation.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'ArnetMiner Reference':
+        mat = sp.io.loadmat(current_path + 'aminer_coreference.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Citeseer Citation':
+        mat = sp.io.loadmat(current_path + 'citeseer_cocitation.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Cora Citation':
+        mat = sp.io.loadmat(current_path + 'cora_coreference.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Cora Citation':
+        mat = sp.io.loadmat(current_path + 'cora_coreference.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'DBLP':
+        mat = sp.io.loadmat(current_path + 'dblp.mat')
+        S = mat['S']
+        return S
 
 def hyperedges2IM(edgeSet):
     """This function constructs an incidence matrix from an edge set.
