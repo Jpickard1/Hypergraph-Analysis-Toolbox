@@ -204,7 +204,7 @@ def hyperedges2IM(edgeSet):
         IM[edgeSet[e,:],:] = 1
     return IM
     
-def hyperedgeHomophily(G, H, method='CN'):
+def hyperedgeHomophily(H, HG=None, G=None, method='CN'):
     """This function computes the hyperedge homophily score according to the below methods. The homophily score is the average score based on
     structural similarity of the vertices in hypredge `H` in the clique expanded graph `G`. This function is an interface from `HAT` to `networkx`
     link prediction algorithms.
@@ -227,8 +227,35 @@ def hyperedgeHomophily(G, H, method='CN'):
         pairwiseScores = nx.resource_allocation_index(G, pairwise)
     elif method == 'JC':
         pairwiseScores = nx.jaccard_coefficient(G, pairwise)
-        
+    elif method == 'AA':
+        pairwiseScores = nx.adamic_adar_index(G, pairwise)
+    elif method == 'PA':
+        pairwiseScores = nx.preferential_attachment(G, pairwise)
+
     # Compute average pairwise score
     pairwiseScores = pairwiseScores[:, 2]
     hyperedgeHomophily = sum(pairwiseScores)/len(pairwiseScores)
     return hyperedgeHomophily
+
+def edgeRemoval(HG, p, method='Random'):
+    """This function randomly removes edges from a hypergraph. In [1], four primary reasons are given for data missing in pairwise networks:
+        1. random edge removal
+        2. right censoring
+        3. snowball effect
+        4. cold-ends
+    This method removes edes from hypergraphs according to the multi-way analogue of these.
+    
+    References
+    ----------
+    .. [1] Yan, Bowen, and Steve Gregory. "Finding missing edges and communities in incomplete networks." Journal of Physics A: Mathematical and Theoretical 
+        44.49 (2011): 495102.
+    """
+    IM = HG.IM
+    n, e = IM.shape
+    if method == 'Random':
+        known = np.
+        known = IM[:,known]
+        unknown = IM[:,!known]
+    if method == 'RC':
+        
+    return known, unknown
