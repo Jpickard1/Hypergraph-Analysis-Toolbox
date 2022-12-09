@@ -23,7 +23,7 @@ jobs:
         run: |
           cd Python/
           python -m pip install --upgrade build twine
-          python -m build
+          python -m build Python/
           twine check --strict dist/*
       - name: Publish distribution to PyPI
         uses: pypa/gh-action-pypi-publish@master
