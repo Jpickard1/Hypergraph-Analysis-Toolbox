@@ -249,13 +249,158 @@ def edgeRemoval(HG, p, method='Random'):
     ----------
     .. [1] Yan, Bowen, and Steve Gregory. "Finding missing edges and communities in incomplete networks." Journal of Physics A: Mathematical and Theoretical 
         44.49 (2011): 495102.
+    .. [2] Zhu, Yu-Xiao, et al. "Uncovering missing links with cold ends." Physica A: Statistical Mechanics and its Applications 391.22 (2012): 5769-5778.
     """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
     IM = HG.IM
     n, e = IM.shape
+    
     if method == 'Random':
-        known = np.
-        known = IM[:,known]
-        unknown = IM[:,!known]
-    if method == 'RC':
-        
+        # Randome edge removal
+        known, unknown = randomRemoval(HG, p)
+    elif method == 'RC':
+        # Right censoring
+        known, unknown = rightCensorRemoval(HG, p)
+    elif method == 'SB':
+        # Snowball Effect
+        known, unknown = snowBallRemoval(HG, p)
+    elif method == 'CE':
+        # Cold Ends
+        known, unknown = coldEndsRemoval(HG, p)
+    else:
+        print('Enter a valid edge removal method')
+        return
+    
+    # Bradcast from 3d to 2d
+    a, _, c = unknown.shape
+    unknown = np.reshape(unknown, (a, c))
+    a, _, c = known.shape
+    known = np.reshape(known, (a, c))
+
+    # Return hypergraph objects
+    K = HAT.Hypergraph(known)
+    U = HAT.Hypergraph(unknown)
+
+    return K, U
+
+def randomRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM
+    n, e = IM.shape
+    knownIdxs = np.random.choice([0, 1], size=(e,), p=[p, 1-p])
+    known = IM[:, np.where(knownIdxs == 1)]
+    unknown = IM[:, np.where(knownIdxs == 0)]
     return known, unknown
+
+def rightCensorRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM.copy()
+    n, e = IM.shape
+    
+    # Determine number of known edges in remaining graph
+    numknownEdges = sum(np.random.choice([0, 1], size=(e,), p=[p, 1-p]))
+
+    # Vertex degree
+    vxDegree = np.sum(IM, axis=1)
+    
+    # Iteratively remove edges
+    removedEdges = 0
+    knownIdxs = np.ones(e,)
+    while sum(knownIdxs) > numknownEdges:
+        # Select vertex with maximum degree
+        vx = np.argmax(vxDegree)
+        # Select edges vx participates in
+        vxEdges = np.where(IM[vx,:] != 0)[0]
+        # Select single edge to remove
+        removeEdge = np.random.choice(vxEdges)
+        # Remove edge from incidence matrix
+        IM[:, removeEdge] = 0
+        # Remove it from list of known edges
+        knownIdxs[removeEdge] = 0
+        # Decrease degree of vx
+        vxDegree[vx] -= 1
+    print(IM)
+    print(HG.IM)
+    known = HG.IM[:, np.where(knownIdxs == 1)]
+    unknown = HG.IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+
+def coldEndsRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM.copy()
+    n, e = IM.shape
+    
+    # Determine number of known edges in remaining graph
+    numknownEdges = sum(np.random.choice([0, 1], size=(e,), p=[p, 1-p]))
+
+    # Vertex degree
+    vxDegree = np.sum(IM, axis=1)
+    
+    # Iteratively remove edges
+    removedEdges = 0
+    
+    knownIdxs = np.ones(e,)
+    while sum(knownIdxs) > numknownEdges:
+        # Select vertex with maximum degree
+        vx = np.argmin(vxDegree)
+        if vxDegree[vx] == 1:
+            # Does not remove vxc with degree one. The degree value is set
+            # to max and the process continues
+            vxDegree[vx] = max(vxDegree)
+            continue
+        # Select edges vx participates in
+        vxEdges = np.where(IM[vx,:] != 0)[0]
+        # Select single edge to remove
+        removeEdge = np.random.choice(vxEdges)
+        # Remove edge from incidence matrix
+        IM[:, removeEdge] = 0
+        # Remove it from list of known edges
+        knownIdxs[removeEdge] = 0
+        # Decrease degree of vx
+        vxDegree[vx] -= 1
+    
+    known = HG.IM[:, np.where(knownIdxs == 1)]
+    unknown = HG.IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+
+def snowBallRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    n, e = HG.IM.shape
+    source = np.random.choice(n)
+    # Clique expand HG
+    C = HG.cliqueGraph()
+    # Perform BFS on C. BFSedgeList is an ordered list of tuples containing each edge discovered in BFS
+    BFSedgeList = list(nx.bfs_tree(C, 5).edges())
+    # List of tuples to list preserving order nodes are visited
+    orderedVxc = [item for e in BFSedgeList for item in e]
+    _, idx = np.unique(orderedVxc, return_index=True)
+    # Ordered list vertices are visited
+    vxOrder = np.array(orderedVxc)[np.sort(idx)]
+
+    # Set which vertices will remain known in the hypergraph
+    numKnownVxc = sum(np.random.choice([0, 1], size=(n,), p=[p, 1-p]))    
+    knownVxc = vxOrder[0:numKnownVxc]
+    
+    # Only include edges where every vertex in the edge is known
+    knownIdxs = np.ones(e,)
+    for edge in range(e):
+        edgeVxc = np.where(HG.IM[:, edge] != 0)
+        numRecognizedNodes = np.intersect1d(edgeVxc, knownVxc)
+        if len(numRecognizedNodes) != len(edgeVxc):
+            knownIdxs[edge] = 0
+
+    known = HG.IM[:, np.where(knownIdxs == 1)]
+    unknown = HG.IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+    
+    
