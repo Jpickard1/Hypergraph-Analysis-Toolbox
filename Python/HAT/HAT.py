@@ -187,7 +187,7 @@ def load(dataset='Karate'):
     # Date: Dec 2, 2022
 
     current_path = os.path.dirname(os.path.realpath(__file__))
-    current_path += '/Data/'
+    current_path += '/data/'
     if dataset == 'Karate':
         return nx.karate_club_graph()
     elif dataset == 'ArnetMiner Citation':
