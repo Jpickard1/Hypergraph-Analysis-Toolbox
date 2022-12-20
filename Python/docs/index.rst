@@ -27,7 +27,7 @@ The capabilities and use cases of HAT are outlined in `this short notice <https:
 
 Contributors
 ************
-Joshua Pickard, Can Chen, Rahmy Salman, Cooper Stansbury, Sion Kim, Amit Surana, and Indika Rajapakse
+Joshua Pickard, Can Chen, Rahmy Salman, Cooper Stansbury, Sion Kim, Amit Surana, Anthony Bloch, and Indika Rajapakse
 
 Bug Reporting
 -------------
@@ -41,6 +41,7 @@ Please report all bugs or defects in HAT to `this page <https://github.com/Jpick
    install.rst
    tutorials.rst
    HAT.rst
+   data.rst
    ref.rst
    dev.rst
 
