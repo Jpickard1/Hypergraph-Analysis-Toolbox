@@ -214,6 +214,16 @@ def load(dataset='Karate'):
         mat = sp.io.loadmat(current_path + 'dblp.mat')
         S = mat['S']
         return S
+    elif dataset == 'Oddysey':
+        mat = sp.io.loadmat(current_path + 'oddysey.mat')
+        IM = mat['IM']
+        words = mat['Nodes']
+        return IM, words
+    elif dataset == 'Harry Potter':
+        mat = sp.io.loadmat(current_path + 'Harry Potter and the Sorcerers Stone.mat')
+        IM = mat['IM']
+        words = mat['Nodes']
+        return IM, words
 
 def hyperedges2IM(edgeSet):
     """This function constructs an incidence matrix from an edge set.
