@@ -189,7 +189,7 @@ def load(dataset='Karate'):
 def hyperedges2IM(edgeSet):
     """This function constructs an incidence matrix from an edge set.
 
-    :param edgeSet: a :math:`e \times k` matrix where each row contains :math:`k` integers that are contained within the same hyperedge
+    :param edgeSet: a :math:`e \\times k` matrix where each row contains :math:`k` integers that are contained within the same hyperedge
     :type edgeSet: *ndarray*
     :return: a :math:`n \times e` incidence matrix where each row of the edge set corresponds to a column of the incidence matrix. :math:`n` is the number of nodes contained in the edgeset.
     :rtype: *ndarray*
