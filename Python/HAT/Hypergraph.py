@@ -49,7 +49,7 @@ class Hypergraph:
         :param dpi: the resolution of the image (int)
         :param edgeColors: The colors of edges represented in the incidence matrix. This is random by default
         
-        :return: ``matplotlib`` axes with figure drawn on to it
+        :return: *matplotlib* axes with figure drawn on to it
         """
         # Auth: Joshua Pickard
         #       jpic@umich.edu
@@ -291,7 +291,7 @@ class Hypergraph:
         :rtype: *ndarray*
 
         The degree tensor :math:`D` is the hypergraph analog of the degree matrix. For a :math:`k-` order hypergraph
-         :math:`H=(V,E)` the degree tensor :math:`D` is a diagonal supersymmetric tensor defined
+        :math:`H=(V,E)` the degree tensor :math:`D` is a diagonal supersymmetric tensor defined
 
         .. math::
             D \in \mathbf{R}^{ \overbrace{n \\times \dots \\times n}^{k \\text{ times}}} \\text{ where }{D}_{i\dots i} = degree(v_i) \\text{ for all } v_i\in V
@@ -363,8 +363,8 @@ class Hypergraph:
         """Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.
 
         :param type: Type of hypergraph Laplacian matrix. This defaults to 'Rodriguez' and other
-            choices inclue 'Bolla' and 'Zhou' (See: ``laplacianMatrix()``).
-        :type type: str, optional
+            choices inclue ``Bolla`` and ``Zhou`` (See: ``laplacianMatrix()``).
+        :type type: *str, optional*
         :return: Matrix based hypergraph entropy
         :rtype: *float*
 
@@ -387,7 +387,7 @@ class Hypergraph:
         """Computes the average pairwise distance between any 2 vertices in the hypergraph.
 
         :return: avgDist
-        :rtype: float
+        :rtype: *float*
 
         The hypergraph is clique expanded to a graph object, and the average shortest path on
         the clique expanded graph is returned.

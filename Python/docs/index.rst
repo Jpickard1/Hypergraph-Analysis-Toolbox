@@ -23,7 +23,7 @@ problems:
 5. Controllability
 6. Similarity Measures
 
-The capabilities and use cases of HAT are outlined in `this short notice <https://drive.google.com/file/d/1Mx8ifUtjR05ufhTXc5QgYKlwmfQjfItv/view?usp=share_link>`_. 
+The capabilities and use cases of HAT are outlined in `this notice <https://arxiv.org/pdf/2211.11166.pdf>`_. 
 
 Contributors
 ************
