@@ -202,11 +202,15 @@ def load(dataset='Karate'):
         mat = sp.io.loadmat(current_path + 'citeseer_cocitation.mat')
         S = mat['S']
         return S
-    elif dataset == 'Cora Citation':
-        mat = sp.io.loadmat(current_path + 'cora_coreference.mat')
+    elif dataset == 'Citeseer Reference':
+        mat = sp.io.loadmat(current_path + 'citeseer_coreference.mat')
         S = mat['S']
         return S
     elif dataset == 'Cora Citation':
+        mat = sp.io.loadmat(current_path + 'cora_cocitation.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Cora Reference':
         mat = sp.io.loadmat(current_path + 'cora_coreference.mat')
         S = mat['S']
         return S
@@ -224,6 +228,9 @@ def load(dataset='Karate'):
         IM = mat['IM']
         words = mat['Nodes']
         return IM, words
+    else:
+        print('ERROR: INVALID DATASET')
+        print(dataset)
 
 def hyperedges2IM(edgeSet):
     """This function constructs an incidence matrix from an edge set.
@@ -257,6 +264,9 @@ def hyperedgeHomophily(H, HG=None, G=None, method='CN'):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Dec 6, 2022
+    if HG is not None:
+        G = HG.cliqueGraph()
+    
     pairwise = list(itertools.combinations(H, 2))
 
     # Compute pairwise scores with networkx

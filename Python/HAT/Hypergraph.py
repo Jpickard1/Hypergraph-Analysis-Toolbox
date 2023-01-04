@@ -1,7 +1,7 @@
 import numpy as np
 import scipy as sp
 import scipy.linalg
-# import scipy.stats
+import scipy.stats
 from itertools import permutations
 import networkx as nx
 
@@ -380,8 +380,9 @@ class Hypergraph:
         #       jpic@umich.edu
         # Date: Nov 30, 2022
         L = self.laplacianMatrix(type)
-        U, V = np.linalg.eig(L)
-        return sp.stats.entropy(U)
+        U, _ = np.linalg.eig(L)
+        U = U[(U>1e-8)]
+        return sp.stats.entropy(U.real)
     
     def avgDistance(self):
         """Computes the average pairwise distance between any 2 vertices in the hypergraph.
