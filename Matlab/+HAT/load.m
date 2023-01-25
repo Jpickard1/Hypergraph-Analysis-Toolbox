@@ -23,6 +23,34 @@ switch dataset
         load(dp + "karate.mat");
         DS = Problem;
         N = DS.A;
+    case 'ArnetMiner Citation'
+        load(dp + "aminer_cocitation.mat");
+        N = S;
+        DS = [];
+    case 'ArnetMiner Reference'
+        load(dp + "aminer_coreference.mat");
+        N = S;
+        DS = [];
+    case 'Citeseer Citation'
+        load(dp + "citeseer_cocitation.mat");
+        N = S;
+        DS = [];
+    case 'Citeseer Reference'
+        load(dp + "citeseer_coreference.mat");
+        N = S;
+        DS = [];
+    case 'Cora Citation'
+        load(dp + "cora_cocitation.mat");
+        N = S;
+        DS = [];
+    case 'Cora Reference'
+        load(dp + "cora_coreference.mat");
+        N = S;
+        DS = [];
+    case 'DBLP'
+        load(dp + "dblp.mat");
+        N = S;
+        DS = [];
 end
 
 end
