@@ -395,15 +395,20 @@ def coldEndsRemoval(HG, p):
     
     # Iteratively remove edges
     removedEdges = 0
-    
+    c = 0
     knownIdxs = np.ones(e,)
     while sum(knownIdxs) > numknownEdges:
         # Select vertex with maximum degree
         vx = np.argmin(vxDegree)
+        print('vx:' + str(vx))
+        print('known edges:' + str(sum(knownIdxs)))
         if vxDegree[vx] == 1:
             # Does not remove vxc with degree one. The degree value is set
             # to max and the process continues
             vxDegree[vx] = max(vxDegree)
+            print('min D:' + str(min(vxDegree)))
+            print('double loop:' + str(c))
+            c+=1
             continue
         # Select edges vx participates in
         vxEdges = np.where(IM[vx,:] != 0)[0]
