@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
 name = "HypergraphAnalysisToolbox"
-version = "1.0.10"
+version = "1.0.20"
 authors = [
   { name="Joshua Pickard", email="jpic@umich.edu" },
 ]
