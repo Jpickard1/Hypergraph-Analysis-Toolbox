@@ -2,7 +2,9 @@ import itertools
 from itertools import combinations
 import numpy as np
 import scipy as sp
+import scipy.io
 import networkx as nx
+import os
 
 import HAT.multilinalg
 import HAT
@@ -177,14 +179,41 @@ def load(dataset='Karate'):
 
     :param dataset: sets which dataset to load in, defaults to 'Karate'
     :type dataset: str, optional
-    :return: graph object
-    :rtype: *nx.Graph*
+    :return: incidence matrix or graph object
+    :rtype: *ndarray* or *nx.Graph*
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Dec 2, 2022
+
+    current_path = os.path.dirname(os.path.realpath(__file__))
+    current_path += '/data/'
     if dataset == 'Karate':
         return nx.karate_club_graph()
+    elif dataset == 'ArnetMiner Citation':
+        mat = sp.io.loadmat(current_path + 'aminer_cocitation.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'ArnetMiner Reference':
+        mat = sp.io.loadmat(current_path + 'aminer_coreference.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Citeseer Citation':
+        mat = sp.io.loadmat(current_path + 'citeseer_cocitation.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Cora Citation':
+        mat = sp.io.loadmat(current_path + 'cora_coreference.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'Cora Citation':
+        mat = sp.io.loadmat(current_path + 'cora_coreference.mat')
+        S = mat['S']
+        return S
+    elif dataset == 'DBLP':
+        mat = sp.io.loadmat(current_path + 'dblp.mat')
+        S = mat['S']
+        return S
 
 def hyperedges2IM(edgeSet):
     """This function constructs an incidence matrix from an edge set.
@@ -203,4 +232,204 @@ def hyperedges2IM(edgeSet):
     for e in range(n):
         IM[edgeSet[e,:],:] = 1
     return IM
+    
+def hyperedgeHomophily(H, HG=None, G=None, method='CN'):
+    """This function computes the hyperedge homophily score according to the below methods. The homophily score is the average score based on
+    structural similarity of the vertices in hypredge `H` in the clique expanded graph `G`. This function is an interface from `HAT` to `networkx`
+    link prediction algorithms.
+
+    :param G: a pairwise hypergraph expansion
+    :type G: `networkx.Graph`
+    :param H: hyperedge containing individual vertices within the edge
+    :type H: `ndarray`
+    :param method: specifies which structural similarity method to use. This defaults to `CN` common neighbors.
+    """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 6, 2022
+    pairwise = list(itertools.combinations(H, 2))
+
+    # Compute pairwise scores with networkx
+    if method == 'CN':
+        pairwiseScores = nx.common_neighbor_centrality(G, pairwise)
+    elif method == 'RA':
+        pairwiseScores = nx.resource_allocation_index(G, pairwise)
+    elif method == 'JC':
+        pairwiseScores = nx.jaccard_coefficient(G, pairwise)
+    elif method == 'AA':
+        pairwiseScores = nx.adamic_adar_index(G, pairwise)
+    elif method == 'PA':
+        pairwiseScores = nx.preferential_attachment(G, pairwise)
+
+    # Compute average pairwise score
+    pairwiseScores = pairwiseScores[:, 2]
+    hyperedgeHomophily = sum(pairwiseScores)/len(pairwiseScores)
+    return hyperedgeHomophily
+
+def edgeRemoval(HG, p, method='Random'):
+    """This function randomly removes edges from a hypergraph. In [1], four primary reasons are given for data missing in pairwise networks:
+        1. random edge removal
+        2. right censoring
+        3. snowball effect
+        4. cold-ends
+    This method removes edes from hypergraphs according to the multi-way analogue of these.
+    
+    References
+    ----------
+    .. [1] Yan, Bowen, and Steve Gregory. "Finding missing edges and communities in incomplete networks." Journal of Physics A: Mathematical and Theoretical 
+        44.49 (2011): 495102.
+    .. [2] Zhu, Yu-Xiao, et al. "Uncovering missing links with cold ends." Physica A: Statistical Mechanics and its Applications 391.22 (2012): 5769-5778.
+    """
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM
+    n, e = IM.shape
+    
+    if method == 'Random':
+        # Randome edge removal
+        known, unknown = randomRemoval(HG, p)
+    elif method == 'RC':
+        # Right censoring
+        known, unknown = rightCensorRemoval(HG, p)
+    elif method == 'SB':
+        # Snowball Effect
+        known, unknown = snowBallRemoval(HG, p)
+    elif method == 'CE':
+        # Cold Ends
+        known, unknown = coldEndsRemoval(HG, p)
+    else:
+        print('Enter a valid edge removal method')
+        return
+    
+    # Bradcast from 3d to 2d
+    a, _, c = unknown.shape
+    unknown = np.reshape(unknown, (a, c))
+    a, _, c = known.shape
+    known = np.reshape(known, (a, c))
+
+    # Return hypergraph objects
+    K = HAT.Hypergraph(known)
+    U = HAT.Hypergraph(unknown)
+
+    return K, U
+
+def randomRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM
+    n, e = IM.shape
+    knownIdxs = np.random.choice([0, 1], size=(e,), p=[p, 1-p])
+    known = IM[:, np.where(knownIdxs == 1)]
+    unknown = IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+
+def rightCensorRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM.copy()
+    n, e = IM.shape
+    
+    # Determine number of known edges in remaining graph
+    numknownEdges = sum(np.random.choice([0, 1], size=(e,), p=[p, 1-p]))
+
+    # Vertex degree
+    vxDegree = np.sum(IM, axis=1)
+    
+    # Iteratively remove edges
+    removedEdges = 0
+    knownIdxs = np.ones(e,)
+    while sum(knownIdxs) > numknownEdges:
+        # Select vertex with maximum degree
+        vx = np.argmax(vxDegree)
+        # Select edges vx participates in
+        vxEdges = np.where(IM[vx,:] != 0)[0]
+        # Select single edge to remove
+        removeEdge = np.random.choice(vxEdges)
+        # Remove edge from incidence matrix
+        IM[:, removeEdge] = 0
+        # Remove it from list of known edges
+        knownIdxs[removeEdge] = 0
+        # Decrease degree of vx
+        vxDegree[vx] -= 1
+    print(IM)
+    print(HG.IM)
+    known = HG.IM[:, np.where(knownIdxs == 1)]
+    unknown = HG.IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+
+def coldEndsRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    IM = HG.IM.copy()
+    n, e = IM.shape
+    
+    # Determine number of known edges in remaining graph
+    numknownEdges = sum(np.random.choice([0, 1], size=(e,), p=[p, 1-p]))
+
+    # Vertex degree
+    vxDegree = np.sum(IM, axis=1)
+    
+    # Iteratively remove edges
+    removedEdges = 0
+    
+    knownIdxs = np.ones(e,)
+    while sum(knownIdxs) > numknownEdges:
+        # Select vertex with maximum degree
+        vx = np.argmin(vxDegree)
+        if vxDegree[vx] == 1:
+            # Does not remove vxc with degree one. The degree value is set
+            # to max and the process continues
+            vxDegree[vx] = max(vxDegree)
+            continue
+        # Select edges vx participates in
+        vxEdges = np.where(IM[vx,:] != 0)[0]
+        # Select single edge to remove
+        removeEdge = np.random.choice(vxEdges)
+        # Remove edge from incidence matrix
+        IM[:, removeEdge] = 0
+        # Remove it from list of known edges
+        knownIdxs[removeEdge] = 0
+        # Decrease degree of vx
+        vxDegree[vx] -= 1
+    
+    known = HG.IM[:, np.where(knownIdxs == 1)]
+    unknown = HG.IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+
+def snowBallRemoval(HG, p):
+    # Auth: Joshua Pickard
+    #       jpic@umich.edu
+    # Date: Dec 9, 2022
+    n, e = HG.IM.shape
+    source = np.random.choice(n)
+    # Clique expand HG
+    C = HG.cliqueGraph()
+    # Perform BFS on C. BFSedgeList is an ordered list of tuples containing each edge discovered in BFS
+    BFSedgeList = list(nx.bfs_tree(C, 5).edges())
+    # List of tuples to list preserving order nodes are visited
+    orderedVxc = [item for e in BFSedgeList for item in e]
+    _, idx = np.unique(orderedVxc, return_index=True)
+    # Ordered list vertices are visited
+    vxOrder = np.array(orderedVxc)[np.sort(idx)]
+
+    # Set which vertices will remain known in the hypergraph
+    numKnownVxc = sum(np.random.choice([0, 1], size=(n,), p=[p, 1-p]))    
+    knownVxc = vxOrder[0:numKnownVxc]
+    
+    # Only include edges where every vertex in the edge is known
+    knownIdxs = np.ones(e,)
+    for edge in range(e):
+        edgeVxc = np.where(HG.IM[:, edge] != 0)
+        numRecognizedNodes = np.intersect1d(edgeVxc, knownVxc)
+        if len(numRecognizedNodes) != len(edgeVxc):
+            knownIdxs[edge] = 0
+
+    known = HG.IM[:, np.where(knownIdxs == 1)]
+    unknown = HG.IM[:, np.where(knownIdxs == 0)]
+    return known, unknown
+    
     
