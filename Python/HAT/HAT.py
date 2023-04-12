@@ -229,8 +229,8 @@ def hyperedges2IM(edgeSet):
     n = np.max(edgeSet)
     e = len(edgeSet)
     IM = np.zeros((n+1,e))
-    for e in range(n):
-        IM[edgeSet[e,:],:] = 1
+    for e in range(e):
+        IM[edgeSet[e,:],e] = 1
     return IM
     
 def hyperedgeHomophily(H, HG=None, G=None, method='CN'):

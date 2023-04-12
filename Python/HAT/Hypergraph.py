@@ -108,7 +108,7 @@ class Hypergraph:
         np.fill_diagonal(M, self.edgeWeights)
         A = self.IM @ M @ self.IM.T
         np.fill_diagonal(A,0) # Omit self loops
-        return nx.from_numpy_matrix(A)
+        return nx.from_numpy_array(A)
 
     def lineGraph(self):
         """The line graph, which is the clique expansion of the dual graph, is constructed.
@@ -150,7 +150,7 @@ class Hypergraph:
         A = np.zeros((n,n))
         A[len(A) - len(self.IM):len(A),0:len(self.IM[0])] = self.IM
         A[0:len(self.IM[0]),len(A) - len(self.IM):len(A)] = self.IM.T
-        return nx.from_numpy_matrix(A)
+        return nx.from_numpy_array(A)
     
     def laplacianMatrix(self, type='Bolla'):
         """This function returns a version of the higher order Laplacian matrix of the hypergraph.
