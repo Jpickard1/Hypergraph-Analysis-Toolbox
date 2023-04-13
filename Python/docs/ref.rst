@@ -13,6 +13,8 @@ Hypergraph References
     .. [10] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020) https://arxiv.org/pdf/1912.09624.pdf
     .. [11] Chen C, Surana A, Bloch A, Rajapakse I. "Controllability of Hypergraphs." IEEE Transactions on Network Science and Engineering, 2021. https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view
     .. [12] Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). https://doi.org/10.1038/s42005-021-00704-2
+    .. [13] Joshua Pickard, Amit Surana, Anthony Bloch, and Indika Rajapakse. Observability of Hypergraphs. arXiv preprint arXiv:2304.04883
+
 
 Bug Reporting
 -------------
