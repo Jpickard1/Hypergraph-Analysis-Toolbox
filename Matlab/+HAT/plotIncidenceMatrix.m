@@ -1,4 +1,4 @@
-function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars)
+function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars, NameValueArgs)
 %PLOT_INCIDENCE_MATRIX creates a new figure and plots the incidence matrix
 %onto it. Returns the axes on which the incidence matrix is plotted. 
 % HG: (n,m) double. Incidence matrix.
@@ -8,6 +8,7 @@ function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars)
         nodeshape = '.'
         lineargs = num2cell("-k")
         show_h_bars = true
+        NameValueArgs.sort
     end
 
     % The gray bars need to go underneath the line plot, which needs to go
@@ -21,9 +22,10 @@ function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars)
     % 
     
     A = HG.IM;
-
-    A = HAT.SortIM.cardinalitySort(A);
-    A = HAT.SortIM.min_max_sort(A);
+    if NameValueArgs.sort
+        A = HAT.SortIM.cardinalitySort(A);
+        A = HAT.SortIM.min_max_sort(A);
+    end
 
     ax = gca;
     ax.XLimitMethod = 'padded';
