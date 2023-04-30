@@ -8,7 +8,7 @@ function ax = plotIncidenceMatrix(HG, nodeshape, lineargs, show_h_bars, NameValu
         nodeshape = '.'
         lineargs = num2cell("-k")
         show_h_bars = true
-        NameValueArgs.sort
+        NameValueArgs.sort (1,1) logical = true
     end
 
     % The gray bars need to go underneath the line plot, which needs to go
