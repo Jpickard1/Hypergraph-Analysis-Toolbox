@@ -6,9 +6,9 @@ function IM = hyperedges2IM(edgeSet)
 % Date: November 28, 2022
 
 n = max(max(edgeSet));
-e = length(edgeSet);
-IM = zeros(n, e);
-for e=1:length(IM)
+E = size(edgeSet, 1);
+IM = zeros(n, E);
+for e=1:E
     IM(edgeSet(e,:), e) = 1;
 end
 
