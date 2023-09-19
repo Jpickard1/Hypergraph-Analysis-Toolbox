@@ -17,7 +17,9 @@ function tensorEntropy = tensorEntropy(HG) %edgeSet, numNodes)
 laplacianTensor = HG.laplacianTensor;
 numNodes = size(HG.IM, 1);
 
-laplacianUnfold = reshape(laplacianTensor, numNodes, numNodes^2);
+k = ndims(laplacianTensor);
+
+laplacianUnfold = reshape(laplacianTensor, numNodes, numNodes^(k-1));
 
 singularValues = svd(laplacianUnfold, 'econ');
 normalizedValues = singularValues./sum(singularValues);
