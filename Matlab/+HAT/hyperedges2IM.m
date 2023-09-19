@@ -8,7 +8,7 @@ function IM = hyperedges2IM(edgeSet)
 n = max(max(edgeSet));
 e = length(edgeSet);
 IM = zeros(n, e);
-for e=1:length(IM)
+for e=1:size(IM,2)
     IM(edgeSet(e,:), e) = 1;
 end
 
