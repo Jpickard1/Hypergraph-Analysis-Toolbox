@@ -559,7 +559,7 @@ class Hypergraph:
             x = u / sum(u)
             y = v / sum(v)
             
-            check = sum(x - x0) + sum(y - y0)
+            check = sum(np.abs(x - x0)) + sum(np.abs(y - y0))
             if check < tol:
                 break
             else:
