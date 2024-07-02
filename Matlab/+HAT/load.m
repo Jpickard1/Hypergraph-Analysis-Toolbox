@@ -51,6 +51,10 @@ switch dataset
         load(dp + "dblp.mat");
         N = S;
         DS = [];
+    case 'Oddysey'
+        load(dp + "oddysey.mat");
+        N = IM;
+        DS = [];
 end
 
 end

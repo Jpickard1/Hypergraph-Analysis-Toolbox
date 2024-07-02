@@ -5,6 +5,7 @@ function [M, idxs] = multicorrelations(D, order, type, idxs)
 % * type denotes the multicorrelation measures: 'Drezner', 'Wang', 'Taylor'
 % * idxs denotes pairs of indices to have mutli-correlations computed to
 %   avoid the combinatorial complexity of trying all n choose k pairs.
+%
 % Auth: Joshua Pickard
 % Date: November 2022
 

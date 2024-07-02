@@ -8,6 +8,8 @@ classdef Hypergraph
         IM (:,:) % incidence matrix 
         edgeWeights 
         nodeWeights
+        edgeNames
+        nodeNames
     end
     
     methods
@@ -20,6 +22,8 @@ classdef Hypergraph
                 nameValueArgs.IM = sparse(1);
                 nameValueArgs.edgeWeights = 0;
                 nameValueArgs.nodeWeights = 0;
+                nameValueArgs.edgeNames = 0;
+                nameValueArgs.nodeNames = 0;
             end
             obj.IM = sparse(nameValueArgs.IM);
             if nameValueArgs.edgeWeights == 0
@@ -28,8 +32,16 @@ classdef Hypergraph
             if nameValueArgs.nodeWeights== 0
                 nameValueArgs.nodeWeights = ones(size(obj.IM, 1), 1); 
             end
+            if nameValueArgs.edgeNames == 0
+                nameValueArgs.edgeNames = 1:size(obj.IM, 2);
+            end
+            if nameValueArgs.nodeNames== 0
+                nameValueArgs.nodeNames = 1:size(obj.IM, 1); 
+            end
             obj.edgeWeights = nameValueArgs.edgeWeights;
             obj.nodeWeights = nameValueArgs.nodeWeights;
+            obj.edgeNames = nameValueArgs.edgeNames;
+            obj.nodeNames = nameValueArgs.nodeNames;
         end
         
         %% Summarization

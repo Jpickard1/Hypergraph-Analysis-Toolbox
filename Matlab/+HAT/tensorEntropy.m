@@ -10,14 +10,16 @@ function tensorEntropy = tensorEntropy(HG) %edgeSet, numNodes)
 %% Authors
 %   Can Chen
 %   Rahmy Salman
+%   Joshua Pickard
 
 % adjacencyTensor = hypergraphk(edgeSet, numNodes);
 % degreeTensor = degreek(edgeSet, numNodes);
 % laplacianTensor = degreeTensor-adjacencyTensor;
 laplacianTensor = HG.laplacianTensor;
 numNodes = size(HG.IM, 1);
+order = length(size(laplacianTensor));
 
-laplacianUnfold = reshape(laplacianTensor, numNodes, numNodes^2);
+laplacianUnfold = reshape(laplacianTensor, numNodes, numNodes^(order-1));
 
 singularValues = svd(laplacianUnfold, 'econ');
 normalizedValues = singularValues./sum(singularValues);
