@@ -20,7 +20,7 @@ class Hypergraph:
     edge :math:`e` can contain any number of vertices, which allows for efficient representation of multi-way
     relationships.
     
-    In a uniform Hypergraph, all edges contain the same number of vertices. Uniform hypergraphs are represnted
+    In a uniform Hypergraph, all edges contain the same number of vertices. Uniform hypergraphs are represented
     as tensors, which precisely model multi-way interactions.
 
     :param im: Incidence matrix
@@ -104,9 +104,13 @@ class Hypergraph:
         #       jpic@umich.edu
         # Date: Nov 30, 2022
         edgeOrder = np.sum(self.IM, axis=0)
-        M = np.zeros((len(edgeOrder),len(edgeOrder)))
-        np.fill_diagonal(M, self.edgeWeights)
-        A = self.IM @ M @ self.IM.T
+        ew = np.unique(self.edgeWeights)
+        if len(ew) > 1:
+            M = np.zeros((len(edgeOrder),len(edgeOrder)))
+            np.fill_diagonal(M, self.edgeWeights)
+            A = self.IM @ M @ self.IM.T
+        else:
+            A = ew[0] * self.IM @ self.IM.T
         np.fill_diagonal(A,0) # Omit self loops
         return nx.from_numpy_array(A)
 
@@ -492,7 +496,8 @@ class Hypergraph:
         for v in range(n):
             edges = np.where(self.IM[v,:] > 0)[0]
             neighbors = np.where(np.sum(self.IM[:, edges], axis=1) > 0)[0]
-            avgClusterCoef += (len(edges) / sp.special.comb(len(neighbors), order))
+            if len(neighbors) >= order:
+                avgClusterCoef += (len(edges) / sp.special.comb(len(neighbors), order))
         avgClusterCoef /= n
         return avgClusterCoef
                                    

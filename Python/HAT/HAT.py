@@ -6,8 +6,8 @@ import scipy.io
 import networkx as nx
 import os
 
-import HAT.multilinalg
 import HAT
+import HAT.multilinalg
 
 def directSimilarity(HG1, HG2, measure='Hamming'):
     """This function computes the direct similarity between two uniform hypergraphs.
