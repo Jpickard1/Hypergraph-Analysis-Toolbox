@@ -5,6 +5,7 @@ import scipy as sp
 import scipy.io
 import networkx as nx
 import os
+import pandas as pd
 
 import HAT.multilinalg
 import HAT
