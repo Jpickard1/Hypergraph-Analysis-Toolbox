@@ -27,18 +27,63 @@ class Hypergraph:
     :param ew: Edge weight vector
     :param nw: Node weight vector
     """
-    def __init__(self, im, ew=None, nw=None):
+    def __init__(self, E=None, A=None, IM=None, nodes=None, edges=None, uniform=None, k=None, directed=False):
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        self.IM = im
-        self.edgeWeights = ew
-        self.nodeWeights = nw
+        # If all E, A, and IM are None, display a warning
+        if E is None and A is None and IM is None:
+            warnings.warn("Warning: All of E, A, and IM are None.", UserWarning)
 
-        if self.edgeWeights is None:
-            self.edgeWeights = np.ones(self.IM.shape[1])
-        if self.nodeWeights is None:
-            self.nodeWeights = np.ones(self.IM.shape[0])
+        # Assigning instance attributes
+        self.edgelist = E
+        self.adj_tensor = A
+        self.IM = IM
+        self.nodes = nodes
+        self.edges = edges
+        self.uniform = uniform
+        self.k = -1
+
+        # Determine if the hypergraph is uniform
+        if self.uniform is None:
+            if self.adj_tensor is not None:
+                self.uniform = True
+                self.k = len(self.adj_tensor.shape)
+            elif self.IM is not None:
+                nonzero_counts = np.count_nonzero(arr, axis=0)
+                self.uniform = np.all(nonzero_counts == nonzero_counts[0])
+                self.k = nonzero_counts[0]
+            elif self.edgelist is not None:
+                k = len(self.edgelist[0])
+                for e in self.edgelist:
+                    if len(e) != k:
+                        self.uniform = False
+                        break
+                if self.uniform is None:
+                    self.k = k
+                    self.uniform = True
+
+    def num_nodes(self):
+        return self.nodes.shape[0]
+
+    def num_edges(self):
+        if self.edgelist is not None:
+            return len(self.edgelist)
+        elif self.IM is not None:
+            return self.IM.shape[1]
+        else:
+            return False
+    
+    def set_IM(self):
+        """ Create the incidence matrix (IM) based on the edge list (E). """
+        if self.edgelist is not None:
+            # Initialize the incidence matrix with zeros
+            self.IM = np.zeros((self.num_nodes(), len(self.edgelist)), dtype=int)
+            
+            # Fill the incidence matrix
+            for i, edge in enumerate(self.edgelist):
+                for node in edge:
+                    self.IM[node, i] = 1
     
     def draw(self, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
         """ This function draws the incidence matrix of the hypergraph object. It calls the function
@@ -103,10 +148,17 @@ class Hypergraph:
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        edgeOrder = np.sum(self.IM, axis=0)
-        M = np.zeros((len(edgeOrder),len(edgeOrder)))
-        np.fill_diagonal(M, self.edgeWeights)
-        A = self.IM @ M @ self.IM.T
+        if self.IM is None:
+            self.set_IM()
+
+        if self.edges is not None and 'weight' in self.edges.columns:
+                edge_weights = np.array(list(self.edges['weight'].values))
+                edgeOrder = self.k
+                M = np.zeros((len(edgeOrder),len(edgeOrder)))
+                np.fill_diagonal(M, edge_weights)
+                A = self.IM @ M @ self.IM.T
+
+        A = self.IM @ self.IM.T
         np.fill_diagonal(A,0) # Omit self loops
         return nx.from_numpy_array(A)
 
