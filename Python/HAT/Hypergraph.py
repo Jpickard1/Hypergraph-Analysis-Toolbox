@@ -1,7 +1,6 @@
 import numpy as np
 import scipy as sp
 import scipy.linalg
-# import scipy.stats
 from itertools import permutations
 import networkx as nx
 
@@ -10,22 +9,56 @@ import HAT.draw
 import HAT.HAT
 
 class Hypergraph:
-    """This is the base class representing a Hypergraph object. It is the primary entry point and
-    provides an interface to functions implemented in HAT's other modules. The underlying data
-    structure of this class is an incidence matrix, but many methods exploit tensor representation
-    of uniform hypergraphs.
+    """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.
 
-    Formally, a Hypergraph :math:`H=(V,E)` is a set of vertices :math:`V` and a set of edges :math:`E`
-    where each edge :math:`e\in E` is defined :math:`e\subseteq V.` In contrast to a graph, a hypergraph
-    edge :math:`e` can contain any number of vertices, which allows for efficient representation of multi-way
-    relationships.
-    
-    In a uniform Hypergraph, all edges contain the same number of vertices. Uniform hypergraphs are represnted
-    as tensors, which precisely model multi-way interactions.
+    This class implements a hypergraph where edges (or hyperedges) can connect multiple vertices. 
+    Internally, the hypergraph can be represented by an incidence matrix, an adjacency tensor, or an 
+    edge list, depending on the available inputs and the uniformity of the hypergraph.
 
-    :param im: Incidence matrix
-    :param ew: Edge weight vector
-    :param nw: Node weight vector
+    Formally, a hypergraph :math:`H=(V,E)` is defined by a set of vertices :math:`V` and a set of 
+    edges :math:`E`, where each edge :math:`e \\in E` may contain any subset of vertices in :math:`V`. 
+    Unlike traditional graphs, hypergraph edges can connect more than two vertices, allowing for 
+    multi-way interactions. Uniform hypergraphs, where all edges have the same number of vertices, 
+    can be efficiently represented using tensors.
+
+    Parameters
+    ----------
+    E : list of lists, optional
+        List of edges where each edge is represented by a list of node indices. 
+        Each list element corresponds to an edge.
+    A : ndarray, optional
+        Adjacency tensor of the hypergraph, primarily used if the hypergraph is uniform.
+    IM : ndarray, optional
+        Incidence matrix representing node-edge connections, where rows represent nodes 
+        and columns represent edges.
+    nodes : ndarray, optional
+        Array of nodes or vertices in the hypergraph.
+    edges : ndarray, optional
+        Array of edges (or hyperedges), where each entry is a collection of nodes.
+    uniform : bool, optional
+        Whether the hypergraph is uniform (all edges contain the same number of vertices).
+        If not specified, it will be inferred from other inputs.
+    k : int, optional
+        The edge degree for uniform hypergraphs (i.e., the number of nodes per edge).
+    directed : bool, default=False
+        Indicates if the hypergraph is directed.
+
+    Attributes
+    ----------
+    edgelist : list of lists or None
+        Stores the list of edges if provided during initialization.
+    adj_tensor : ndarray or None
+        Stores the adjacency tensor if provided during initialization.
+    IM : ndarray or None
+        Stores the incidence matrix if generated or provided during initialization.
+    nodes : ndarray or None
+        Array of nodes (vertices) in the hypergraph.
+    edges : ndarray or None
+        Array of edges (hyperedges) in the hypergraph.
+    uniform : bool
+        Indicates if the hypergraph is uniform.
+    k : int
+        The degree of uniformity in terms of edge size, if applicable.
     """
     def __init__(self, E=None, A=None, IM=None, nodes=None, edges=None, uniform=None, k=None, directed=False):
         # Auth: Joshua Pickard
@@ -64,9 +97,23 @@ class Hypergraph:
                     self.uniform = True
 
     def num_nodes(self):
+        """Returns the number of nodes (vertices) in the hypergraph.
+
+        Returns
+        -------
+        int
+            Number of nodes in the hypergraph.
+        """
         return self.nodes.shape[0]
 
     def num_edges(self):
+        """Returns the number of edges (hyperedges) in the hypergraph.
+
+        Returns
+        -------
+        int or bool
+            Number of edges if available, otherwise False if edges are not defined.
+        """
         if self.edgelist is not None:
             return len(self.edgelist)
         elif self.IM is not None:
@@ -75,7 +122,18 @@ class Hypergraph:
             return False
     
     def set_IM(self):
-        """ Create the incidence matrix (IM) based on the edge list (E). """
+        """Constructs the incidence matrix (IM) from the edge list (E).
+
+        This method creates a binary incidence matrix representing connections 
+        between nodes and edges, where each element at (i, j) is 1 if node i 
+        is part of edge j, and 0 otherwise. This method requires that an 
+        edge list is already provided in `self.edgelist`.
+        
+        Updates
+        -------
+        self.IM : ndarray
+            The incidence matrix after construction based on `self.edgelist`.
+        """
         if self.edgelist is not None:
             # Initialize the incidence matrix with zeros
             self.IM = np.zeros((self.num_nodes(), len(self.edgelist)), dtype=int)
