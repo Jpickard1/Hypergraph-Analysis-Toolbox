@@ -41,7 +41,6 @@ Please report all bugs or defects in HAT to `this page <https://github.com/Jpick
    install.rst
    tutorials.rst
    HAT.rst
-   ref.rst
    dev.rst
 
 Indices and tables
