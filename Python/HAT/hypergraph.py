@@ -3,6 +3,7 @@ import scipy as sp
 import scipy.linalg
 from itertools import permutations
 import networkx as nx
+import warnings
 
 import multilinalg as mla
 import draw
@@ -69,9 +70,9 @@ class Hypergraph:
             warnings.warn("Warning: All of E, A, and IM are None.", UserWarning)
 
         # Assigning instance attributes
-        self.edgelist = E
-        self.adj_tensor = A
-        self.IM = IM
+        self.edge_list = E
+        self.adjacency_tensor = A
+        self.incidence_matrix = IM
         self.nodes = nodes
         self.edges = edges
         self.uniform = uniform
@@ -96,52 +97,209 @@ class Hypergraph:
                     self.k = k
                     self.uniform = True
 
-    def num_nodes(self):
-        """Returns the number of nodes (vertices) in the hypergraph.
-
-        Returns
-        -------
-        int
-            Number of nodes in the hypergraph.
-        """
-        return self.nodes.shape[0]
-
-    def num_edges(self):
-        """Returns the number of edges (hyperedges) in the hypergraph.
-
-        Returns
-        -------
-        int or bool
-            Number of edges if available, otherwise False if edges are not defined.
-        """
-        if self.edgelist is not None:
-            return len(self.edgelist)
-        elif self.IM is not None:
-            return self.IM.shape[1]
-        else:
-            return False
     
-    def set_IM(self):
-        """Constructs the incidence matrix (IM) from the edge list (E).
-
-        This method creates a binary incidence matrix representing connections 
-        between nodes and edges, where each element at (i, j) is 1 if node i 
-        is part of edge j, and 0 otherwise. This method requires that an 
-        edge list is already provided in `self.edgelist`.
-        
-        Updates
-        -------
-        self.IM : ndarray
-            The incidence matrix after construction based on `self.edgelist`.
+    def set_incidence_matrix(self, IM=None):
         """
-        if self.edgelist is not None:
+        Constructs and sets the incidence matrix for the hypergraph based on either a provided incidence matrix, 
+        an edge list, or an adjacency tensor. 
+    
+        This method creates a binary incidence matrix (`self.incidence_matrix`) that represents connections 
+        between nodes and hyperedges. The incidence matrix is a 2D array where each entry (i, j) is 1 if node i 
+        is part of hyperedge j, and 0 otherwise. This matrix can be provided directly or derived from an edge 
+        list (`self.edge_list`) or an adjacency tensor (`self.adjacency_tensor`). If an incidence matrix is 
+        provided as an argument, it will override any previously set matrix.
+    
+        Parameters
+        ----------
+        IM : ndarray, optional
+            A predefined incidence matrix to set directly. If this is provided, it will be used as the 
+            incidence matrix for the hypergraph, and any existing incidence matrix or data will not be recalculated.
+    
+        Attributes Updated
+        ------------------
+        self.incidence_matrix : ndarray
+            The constructed or provided incidence matrix, stored as a 2D array of shape 
+            (number of nodes, number of hyperedges).
+    
+        Raises
+        ------
+        Warning
+            If `self.incidence_matrix` is already set, or if neither an edge list nor an adjacency tensor 
+            is provided to construct the incidence matrix.
+    
+        Notes
+        -----
+        This method requires that either `self.edge_list` or `self.adjacency_tensor` is set if `IM` is not provided.
+        If both are available, `self.edge_list` takes precedence over `self.adjacency_tensor`.
+    
+        Examples
+        --------
+        >>> hypergraph = Hypergraph()
+        >>> hypergraph.edge_list = [[0, 1], [1, 2, 3], [0, 3]]  # List of hyperedges
+        >>> hypergraph.set_incidence_matrix()
+        >>> print(hypergraph.incidence_matrix)
+        [[1 0 1]
+         [1 1 0]
+         [0 1 0]
+         [0 1 1]]
+        """
+        if self.incidence_matrix is not None:
+            warning.warn("The Incidence matrix is already set.")
+        elif IM is not None:
+            self.incidence_matrix = IM
+
+        elif self.edge_list is not None:
             # Initialize the incidence matrix with zeros
-            self.IM = np.zeros((self.num_nodes(), len(self.edgelist)), dtype=int)
+            self.incidence_matrix = np.zeros((self.num_nodes(), len(self.edge_list)), dtype=int)
             
             # Fill the incidence matrix
-            for i, edge in enumerate(self.edgelist):
+            for i, edge in enumerate(self.edge_list):
                 for node in edge:
-                    self.IM[node, i] = 1
+                    self.incidence_matrix[node, i] = 1
+                    
+        elif self.adjacency_tensor is not None:
+            # Identify the non-zero entries, which represent hyperedges
+            hyperedges = np.argwhere(self.adjacency_tensor != 0)
+            self.incidence_matrix = np.zeros((self.num_nodes(), len(hyperedges)), dtype=int)
+            
+            # Populate the incidence matrix
+            for k, edge in enumerate(hyperedges):
+                for node in edge:
+                    incidence_matrix[node, k] = 1  # Node participates in hyperedge `k`
+        else:
+            warning.warn("Cannot set the incidence matrix without more information.")
+
+
+    def set_edge_list(self, EL=None):
+        """
+        Constructs and sets the edge list for the hypergraph based on either a provided edge list, 
+        an incidence matrix, or an adjacency tensor.
+
+        This method creates an edge list (`self.edge_list`) representation of the hypergraph, where 
+        each entry in the list is a collection of nodes that form a hyperedge. The edge list can be 
+        provided directly, or derived from an incidence matrix (`self.incidence_matrix`) or an adjacency 
+        tensor (`self.adjacency_tensor`). If an edge list is provided as an argument, it will override 
+        any previously set data.
+
+        Parameters
+        ----------
+        EL : list of list of int, optional
+            A predefined edge list to set directly. If provided, it will be used as the hypergraph's 
+            edge list, and any existing data will not be recalculated.
+
+        Attributes Updated
+        ------------------
+        self.edge_list : list of list of int
+            A list where each sub-list represents a hyperedge as a list of node indices that form the 
+            hyperedge.
+
+        Raises
+        ------
+        Warning
+            If `self.edge_list` is already set, or if neither an incidence matrix nor an adjacency tensor 
+            is provided to construct the edge list.
+
+        Notes
+        -----
+        This method requires that either `self.incidence_matrix` or `self.adjacency_tensor` is set 
+        if `EL` is not provided. If both are available, `self.incidence_matrix` takes precedence over 
+        `self.adjacency_tensor`.
+        """
+        if self.edge_list is not None:
+            warnings.warn("The edge list is already set.")
+        elif EL is not None:
+            self.edge_list = EL
+        elif self.incidence_matrix is not None:
+            # Create edge list from incidence matrix
+            self.edge_list = []
+            for col in range(self.incidence_matrix.shape[1]):
+                edge = np.where(self.incidence_matrix[:, col] != 0)[0].tolist()
+                self.edge_list.append(edge)
+        elif self.adjacency_tensor is not None:
+            # Create edge list from adjacency tensor
+            self.edge_list = []
+            hyperedges = np.argwhere(self.adjacency_tensor != 0)
+            for edge in hyperedges:
+                self.edge_list.append(edge.tolist())
+        else:
+            warnings.warn("Cannot set the edge list without more information.")
+
+
+    def set_adjacency_tensor(self, AT=None):
+        """
+        Constructs and sets the adjacency tensor for a k-uniform hypergraph based on either a provided 
+        adjacency tensor, an incidence matrix, or an edge list.
+
+        This method creates a k-dimensional adjacency tensor (`self.adjacency_tensor`) to represent the 
+        hypergraph. For a k-uniform hypergraph, each entry in this k-dimensional tensor is 1 if the 
+        corresponding combination of nodes forms a hyperedge, and 0 otherwise. The adjacency tensor can be 
+        provided directly or derived from the incidence matrix (`self.incidence_matrix`) or the edge list 
+        (`self.edge_list`). If an adjacency tensor is provided as an argument, it will override any previously set data.
+
+        Parameters
+        ----------
+        AT : ndarray, optional
+            A predefined adjacency tensor to set directly. If provided, it will be used as the hypergraph's 
+            adjacency tensor, and any existing data will not be recalculated.
+
+        Attributes Updated
+        ------------------
+        self.adjacency_tensor : ndarray
+            The constructed or provided adjacency tensor, with a shape of (num_nodes, num_nodes, ..., num_nodes)
+            with `k` dimensions, where each entry represents a k-node hyperedge with a non-zero value.
+
+        Raises
+        ------
+        Warning
+            If `self.adjacency_tensor` is already set, or if the hypergraph is non-uniform, or if neither 
+            an incidence matrix nor an edge list is provided to construct the adjacency tensor.
+
+        Notes
+        -----
+        This method requires that the hypergraph be k-uniform. If the hypergraph is non-uniform, 
+        an adjacency tensor cannot be constructed. This method also requires either 
+        `self.incidence_matrix` or `self.edge_list` to be set if `AT` is not provided.
+        """
+        if not self.uniform:
+            warnings.warn("Cannot set an adjacency tensor for a nonuniform hypergraph.")
+            return
+        else:
+            k = self.k
+
+        if self.adjacency_tensor is not None:
+            warnings.warn("The adjacency tensor is already set.")
+        elif AT is not None:
+            self.adjacency_tensor = AT
+        elif self.incidence_matrix is not None:
+            # Create adjacency tensor from incidence matrix for k-uniform hypergraph
+            num_nodes = self.incidence_matrix.shape[0]
+            self.adjacency_tensor = np.zeros((num_nodes,) * k, dtype=int)
+            num_edges = self.incidence_matrix.shape[1]
+
+            # Populate adjacency tensor based on incidence matrix
+            for i in range(num_edges):
+                nodes = np.where(self.incidence_matrix[:, i] == 1)[0]
+                if len(nodes) == k:
+                    # Use multi-dimensional indexing to set entries for the k-node hyperedge
+                    self.adjacency_tensor[tuple(nodes)] = 1
+                else:
+                    warnings.warn(f"Edge {i} does not have exactly {k} nodes; skipping.")
+
+        elif self.edge_list is not None:
+            # Create adjacency tensor from edge list for k-uniform hypergraph
+            num_nodes = self.num_nodes()
+            self.adjacency_tensor = np.zeros((num_nodes,) * k, dtype=int)
+
+            # Populate adjacency tensor based on edge list
+            for i, edge in enumerate(self.edge_list):
+                if len(edge) == k:
+                    # Use multi-dimensional indexing to set entries for the k-node hyperedge
+                    self.adjacency_tensor[tuple(edge)] = 1
+                else:
+                    warnings.warn(f"Edge {i} does not have exactly {k} nodes; skipping.")
+        else:
+            warnings.warn("Cannot set the adjacency tensor without more information.")
+
     
     def draw(self, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
         """ This function draws the incidence matrix of the hypergraph object. It calls the function
