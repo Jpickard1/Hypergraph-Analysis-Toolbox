@@ -10,6 +10,10 @@ import pandas as pd
 import HAT.multilinalg
 import HAT
 
+"""
+HAT.HAT module contains miscilaneous hypergraph methods
+"""
+
 def directSimilarity(HG1, HG2, measure='Hamming'):
     """This function computes the direct similarity between two uniform hypergraphs.
 
