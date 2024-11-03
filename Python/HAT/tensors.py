@@ -4,8 +4,8 @@ import scipy.linalg
 from itertools import permutations
 import networkx as nx
 
-import HAT.multilinalg as mla
-from HAT import hypergraph
+import multilinalg as mla
+import hypergraph
 
 """
 This file implements tensor representations of hypergraph

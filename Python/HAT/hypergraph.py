@@ -4,9 +4,9 @@ import scipy.linalg
 from itertools import permutations
 import networkx as nx
 
-import HAT.multilinalg as mla
-import HAT.draw
-import HAT.HAT
+import multilinalg as mla
+import draw
+import HAT
 
 class Hypergraph:
     """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.

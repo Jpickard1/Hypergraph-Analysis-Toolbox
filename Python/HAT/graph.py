@@ -1,6 +1,6 @@
 import numpy as np
 import scipy as sp
-from HAT import hypergraph
+import hypergraph
 
 
 """

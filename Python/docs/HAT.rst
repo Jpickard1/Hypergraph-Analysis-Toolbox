@@ -4,10 +4,50 @@ HAT Documentation
 Submodules
 ----------
 
-HAT.Hypergraph module
+Hypergraph Class
 ---------------------
 
-.. automodule:: HAT.Hypergraph
+.. automodule:: HAT.hypergraph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Graph Interface
+---------------------
+
+.. automodule:: HAT.graph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Hypergraph Metrics
+---------------------
+
+.. automodule:: HAT.metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Dynamics and Control
+---------------------
+
+.. automodule:: HAT.dynamics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Tensor Representations
+----------------------
+
+.. automodule:: HAT.tensors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Laplacians
+----------------------
+
+.. automodule:: HAT.laplacian
    :members:
    :undoc-members:
    :show-inheritance:

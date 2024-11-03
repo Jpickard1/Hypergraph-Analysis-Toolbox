@@ -1,5 +1,5 @@
 import numpy as np
-from HAT import hypergraph
+import hypergraph
 
 """
 This file implements hypergraph laplacian methods.

@@ -7,8 +7,8 @@ import networkx as nx
 import os
 import pandas as pd
 
-import HAT.multilinalg
-import HAT
+import multilinalg
+# import HAT
 
 """
 HAT.HAT module contains miscilaneous hypergraph methods
