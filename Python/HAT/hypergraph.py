@@ -97,7 +97,70 @@ class Hypergraph:
                     self.k = k
                     self.uniform = True
 
-    
+    @property
+    def num_nodes(self):
+        """Returns the number of nodes (vertices) in the hypergraph.
+
+        Returns
+        -------
+        int
+            Number of nodes in the hypergraph.
+        """
+        return self.nodes.shape[0] if self.nodes is not None else 0
+
+    @property
+    def num_edges(self):
+        """Returns the number of edges (hyperedges) in the hypergraph.
+
+        Returns
+        -------
+        int or bool
+            Number of edges if available, otherwise False if edges are not defined.
+        """
+        if self.edge_list is not None:
+            return len(self.edge_list)
+        elif self.incidence_matrix is not None:
+            return self.incidence_matrix.shape[1]
+        else:
+            return 0
+
+    @property
+    def incidence_matrix(self):
+        """Returns the incidence matrix of the hypergraph, constructing it if necessary."""
+        if self._incidence_matrix is None:
+            self.set_incidence_matrix()  # Automatically set if not yet defined
+        return self.incidence_matrix
+
+    @incidence_matrix.setter
+    def incidence_matrix(self, IM):
+        """Sets the incidence matrix for the hypergraph."""
+        self.incidence_matrix = IM
+
+    @property
+    def edge_list(self):
+        """Returns the edge list of the hypergraph, constructing it if necessary."""
+        if self._edge_list is None:
+            self.set_edge_list()  # Automatically set if not yet defined
+        return self.edge_list
+
+    @edge_list.setter
+    def edge_list(self, EL):
+        """Sets the edge list for the hypergraph."""
+        self.edge_list = EL
+
+    @property
+    def adjacency_tensor(self):
+        """Returns the adjacency tensor of the hypergraph, constructing it if necessary."""
+        if self._adjacency_tensor is None:
+            self.set_adjacency_tensor()  # Automatically set if not yet defined
+        return self.adjacency_tensor
+
+    @adjacency_tensor.setter
+    def adjacency_tensor(self, AT):
+        """Sets the adjacency tensor for the hypergraph."""
+        self.adjacency_tensor = AT
+
+
     def set_incidence_matrix(self, IM=None):
         """
         Constructs and sets the incidence matrix for the hypergraph based on either a provided incidence matrix, 
