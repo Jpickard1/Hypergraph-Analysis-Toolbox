@@ -119,7 +119,15 @@ class Hypergraph:
                 num_edges = self.incidence_matrix.shape[1]
                 self._edges = pd.DataFrame({'Edges': np.arange(num_edges)})
             elif self._adjacency_tensor is not None:
-                warning.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
+                warnings.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
+
+    @property
+    def nodes(self):
+        return self._nodes
+        
+    @property
+    def edges(self):
+        return self._edges
 
     @property
     def num_nodes(self):
