@@ -2,32 +2,33 @@ import numpy as np
 import hypergraph
 
 """
-This file implements hypergraph laplacian methods.
+Several version of the hypergraph Laplacian are defined in [1-4]. These aim to capture
+the higher order structure as a matrix.
+
+References
+----------
+
+    [1] Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117. https://www.sciencedirect.com/science/article/pii/0012365X9390322K
+
+    [2] Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14. https://www.tandfonline.com/doi/abs/10.1080/03081080290011692
+
+    [3] Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297. https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374
+
+    [4] Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3) https://dennyzhou.github.io/papers/hyper_tech.pdf
+
 """
 
 def laplacianMatrix(HG, type='Bolla'):
     """This function returns a version of the higher order Laplacian matrix of the hypergraph.
 
+    This function serves as a wrapper to call functions that generate different specific Laplacians (See ``bollaLaplacian()``, ``rodriguezLaplacian()``,
+    and ``zhouLaplacian()``).
+    
     :param type: Indicates which version of the Laplacin matrix to return. It defaults to ``Bolla`` [1], but ``Rodriguez`` [2,3] and ``Zhou`` [4] are valid arguments as well.
     :type type: str, optional
     :return: Laplacian matrix
     :rtype: *ndarray*
-
-    Several version of the hypergraph Laplacian are defined in [1-4]. These aim to capture
-    the higher order structure as a matrix. This function serves as a wrapper to call functions
-    that generate different specific Laplacians (See ``bollaLaplacian()``, ``rodriguezLaplacian()``,
-    and ``zhouLaplacian()``).
-
-    References
-    ----------
-    .. [1] Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117. 
-        https://www.sciencedirect.com/science/article/pii/0012365X9390322K
-    .. [2] Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
-        https://www.tandfonline.com/doi/abs/10.1080/03081080290011692
-    .. [3] Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
-        https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374
-    .. [4] Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
-        https://dennyzhou.github.io/papers/hyper_tech.pdf
+            
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
@@ -45,10 +46,6 @@ def bollaLaplacian(HG):
     :return: Bolla Laplacian matrix
     :rtype: *ndarray*
 
-    References
-    ----------
-    .. [1] Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
-           https://www.sciencedirect.com/science/article/pii/0012365X9390322K
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
@@ -64,17 +61,11 @@ def bollaLaplacian(HG):
     return L
     
 def rodriguezLaplacian(HG):
-    """This function constructs the hypergraph Laplacian according to [1, 2].
+    """This function constructs the hypergraph Laplacian according to [2, 3].
 
     :return: Rodriguez Laplacian matrix
     :rtype: *ndarray*
 
-    References
-    ----------
-    .. [1] Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
-           https://www.tandfonline.com/doi/abs/10.1080/03081080290011692
-    .. [2] Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
-           https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
@@ -85,15 +76,11 @@ def rodriguezLaplacian(HG):
     return L
 
 def zhouLaplacian(HG):
-    """This function constructs the hypergraph Laplacian according to [1].
+    """This function constructs the hypergraph Laplacian according to [4].
 
     :return: Zhou Laplacian matrix
     :rtype: *ndarray*
 
-    References
-    ----------
-    .. [1] Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
-           https://dennyzhou.github.io/papers/hyper_tech.pdf
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
