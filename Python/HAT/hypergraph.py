@@ -113,7 +113,7 @@ class Hypergraph:
         if self._uniform is False:
             self._order = k
 
-        if self._order != order or self._uniform != uniform:
+        if (order is not None or uniform is not None) and (self._order != order or self._uniform != uniform):
             warnings.warn("The provided hypergraph order and uniformity are not consistent withe the detected values")
 
         # Set directed property of the hypergraph
@@ -136,6 +136,10 @@ class Hypergraph:
                 for edge in self._edge_list:
                     if not (len(edge) >= 2 and isinstance(edge[0], list) and isinstance(edge[1], list)):
                         self._directed = False
+
+            # By default, the system is undirected
+            else:
+                self._directed = False
 
         # Set the nodes dataframe
         if self._nodes is None:
@@ -482,8 +486,24 @@ class Hypergraph:
                 else:
                     warnings.warn(f"Edge {i} does not have exactly {k} nodes; skipping.")
 
+    def dual(self):
+        """The dual hypergraph is constructed.
+        Let :math:`H=(V,E)` be a hypergraph. In the dual hypergraph each original edge :math:`e in E`
+        is represented as a vertex and each original vertex :math:`v in E` is represented as an edge. Numerically, the
+        transpose of the incidence matrix of a hypergraph is the incidence matrix of the dual hypergraph.
+        
+        :return: Hypergraph object
+        :rtype: *Hypergraph*
 
-
+        References
+        ----------
+        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
+        """
+        # Auth: Joshua Pickard
+        #       jpic@umich.edu
+        # Date: Nov 30, 2022
+        IM = self.IM.T
+        return Hypergraph(IM)
     
     def draw(self, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
         """ This function draws the incidence matrix of the hypergraph object. It calls the function
@@ -499,26 +519,6 @@ class Hypergraph:
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        return HAT.draw.incidencePlot(self, shadeRows=shadeRows, connectNodes=connectNodes, dpi=dpi, edgeColors=edgeColors)
-        
-    def dual(self):
-        """The dual hypergraph is constructed.
-
-        :return: Hypergraph object
-        :rtype: *Hypergraph*
-
-        Let :math:`H=(V,E)` be a hypergraph. In the dual hypergraph each original edge :math:`e\in E`
-        is represented as a vertex and each original vertex :math:`v\in E` is represented as an edge. Numerically, the
-        transpose of the incidence matrix of a hypergraph is the incidence matrix of the dual hypergraph.
-        
-        References
-        ----------
-        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
-        """
-        # Auth: Joshua Pickard
-        #       jpic@umich.edu
-        # Date: Nov 30, 2022
-        IM = self.IM.T
-        return Hypergraph(IM)
-
+        # return HAT.draw.incidencePlot(self, shadeRows=shadeRows, connectNodes=connectNodes, dpi=dpi, edgeColors=edgeColors)
+        pass
 
