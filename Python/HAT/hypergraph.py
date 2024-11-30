@@ -164,16 +164,22 @@ class Hypergraph:
                 num_edges = self.incidence_matrix.shape[1]
                 self._edges = pd.DataFrame({'Edges': np.arange(num_edges)})
             elif self._adjacency_tensor is not None:
-                warnings.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
+                idxs = np.where(self._adjacency_tensor != 0) 
+                order = len(self._adjacency_tensor.shape)
+                df = pd.DataFrame({i:idxs[i] for i in range(order)})
+                sorted_df = pd.DataFrame(np.sort(df.values, axis=1), columns=df.columns)
+                self._edges = sorted_df.drop_duplicates()
+                self._edges['Edges'] = np.arange(self._edges.shape[0])
+                self._edges = self._edges[['Edges']]
+#                warnings.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
         elif 'Edges' not in self._edges.columns:
             self._edges['Edges'] = np.arange(self._edges.shape[0])
             warnings.warn('"Edges" column not found in the provided nodes dataframe.')
             warnings.warn('This column has been appended.')
 
-        if self._directed:
-            if self._edges is not None and ('Head' not in self._edges.columns or 'Tail' not in self._edges.columns):
-                self.set_edge_directions()
-
+#        if self._directed:
+#            if self._edges is not None and ('Head' not in self._edges.columns or 'Tail' not in self._edges.columns):
+#                self.set_edge_directions()
 #    def set_edge_directions(self):
 #        if self._adjacency_tensor is not None:
 #        if self._edge_list is not None:
@@ -328,6 +334,7 @@ class Hypergraph:
         """
         if self._incidence_matrix is not None:
             warning.warn("The Incidence matrix is already set.")
+
         elif IM is not None:
             self._incidence_matrix = IM
 
@@ -343,15 +350,20 @@ class Hypergraph:
         elif self._adjacency_tensor is not None:
             # Identify the non-zero entries, which represent hyperedges
             hyperedges = np.argwhere(self._adjacency_tensor != 0)
-            self._incidence_matrix = np.zeros((self.num_nodes, len(hyperedges)), dtype=int)
+            self._incidence_matrix = np.zeros((self._nodes.shape[0], hyperedges.shape[0]), dtype=int)
             
             # Populate the incidence matrix
             for k, edge in enumerate(hyperedges):
-                for node in edge:
+                for i, node in enumerate(edge):
                     self._incidence_matrix[node, k] = 1  # Node participates in hyperedge `k`
+                    if i == 0:
+                        self._incidence_matrix[node, k] = -1
         else:
             warning.warn("Cannot set the incidence matrix without more information.")
 
+        # TODO: ensure .edges aligns after this sort
+        _, unique_indices = np.unique(self._incidence_matrix, axis=1, return_index=True)
+        self._incidence_matrix = self._incidence_matrix[:, np.sort(unique_indices)]
 
     def set_edge_list(self, EL=None):
         """
@@ -390,23 +402,41 @@ class Hypergraph:
         """
         if self._edge_list is not None:
             warnings.warn("The edge list is already set.")
-        elif EL is not None:
+        elif self._directed is False and EL is not None:
             self._edge_list = EL
-        elif self.incidence_matrix is not None:
+        elif self._directed is False and self.incidence_matrix is not None:
             # Create edge list from incidence matrix
             self._edge_list = []
             for col in range(self.incidence_matrix.shape[1]):
                 edge = np.where(self.incidence_matrix[:, col] != 0)[0].tolist()
                 self._edge_list.append(edge)
+        # Adjacency tensor assumes it is directed
         elif self._adjacency_tensor is not None:
             # Create edge list from adjacency tensor
             self._edge_list = []
             hyperedges = np.argwhere(self.adjacency_tensor != 0)
             for edge in hyperedges:
-                self._edge_list.append(edge.tolist())
+                edge_nodes = edge.tolist()
+                self._edge_list.append([[edge_nodes[0]], sorted(edge_nodes[1:])])
         else:
             warnings.warn("Cannot set the edge list without more information.")
+        self._edge_list = self._remove_duplicates(self._edge_list)
 
+    def _remove_duplicates(self, list_of_lists):
+        if isinstance(list_of_lists[0][0], int):
+            return list_of_lists
+        # Use a set to track unique items
+        unique_items = set()
+        deduplicated_list = []
+
+        for item in list_of_lists:
+            # Convert the two inner lists to a tuple of sorted tuples
+            normalized_item = tuple(sorted(map(tuple, item)))
+            if normalized_item not in unique_items:
+                unique_items.add(normalized_item)
+                deduplicated_list.append(item)
+
+        return deduplicated_list
 
     def set_adjacency_tensor(self, adjacency_tensor=None):
         """
