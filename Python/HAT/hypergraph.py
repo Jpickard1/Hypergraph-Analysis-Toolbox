@@ -76,70 +76,33 @@ class Hypergraph:
         #       jpic@umich.edu
         # Date: Nov 30, 2022
 
-        # Assign hypergraph representations
-        self._edge_list = edge_list
+        # Validate arguments
+        self._validate_constructor_arguments(
+            edge_list        = edge_list,
+            adjacency_tensor = adjacency_tensor,
+            incidence_matrix = incidence_matrix,
+            nodes            = nodes,
+            edges            = edges,
+            uniform          = uniform,
+            order            = order,
+            directed         = directed
+        )
+
+        # Assign object data
+        self._edge_list        = edge_list
         self._adjacency_tensor = adjacency_tensor
         self._incidence_matrix = incidence_matrix
-
-        # Assign annotations dataframes
-        self._nodes = nodes
-        self._edges = edges
-
-        # Assign hypergraph properties 
-        self._uniform = uniform
-        self._order = order
-        self._directed = directed
-
-        # Validate arguments
-        if self._edge_list is None and self._adjacency_tensor is None and self._incidence_matrix is None:
-            warnings.warn("Warning: All of E, A, and IM are None.", UserWarning)
+        self._nodes            = nodes
+        self._edges            = edges
+        self._uniform          = uniform
+        self._order            = order
+        self._directed         = directed
 
         # Set uniform and order of the hypergraph
-        if self._adjacency_tensor is not None:
-            self._uniform = True
-            self._order = len(self._adjacency_tensor.shape)
-        elif self._incidence_matrix is not None:
-            nonzero_counts = np.count_nonzero(self._incidence_matrix, axis=0)
-            self._uniform = np.all(nonzero_counts == nonzero_counts[0])
-            self._order = nonzero_counts[0]
-        elif self._edge_list is not None:
-            k = len(self._edge_list[0])
-            for e in self._edge_list:
-                if len(e) != k:
-                    self._uniform = False
-                    break
-            self._order = k
-            self._uniform = True
-        if self._uniform is False:
-            self._order = k
-
-        if (order is not None or uniform is not None) and (self._order != order or self._uniform != uniform):
-            warnings.warn("The provided hypergraph order and uniformity are not consistent withe the detected values")
+        self._detect_uniform_and_order(uniform, order)
 
         # Set directed property of the hypergraph
-        if self._directed is None:
-
-            if self._edges is not None and 'Head' in self._edges.columns and 'Tail' in self._edges.columns:
-                self._directed = True
-
-            # The adjacency tensor is directed
-            elif self._adjacency_tensor is not None:
-                self._directed = True
-
-            # The indicence matrix is directed if there are +/- terms
-            elif self._incidence_matrix is not None and np.sum(self._incidence_matrix > 0) > 0 and np.sum(self._incidence_matrix < 0) > 0:
-                self._directed = True
-
-            # The edge list is directed if an edge has the form: [[head], [tail]]
-            elif self._edge_list is not None:
-                self._directed = True
-                for edge in self._edge_list:
-                    if not (len(edge) >= 2 and isinstance(edge[0], list) and isinstance(edge[1], list)):
-                        self._directed = False
-
-            # By default, the system is undirected
-            else:
-                self._directed = False
+        self._detect_directed(directed)
 
         # Set the nodes dataframe
         if self._nodes is None:
@@ -185,6 +148,86 @@ class Hypergraph:
 #        if self._edge_list is not None:
 #        if self._incidence_matrix is not None:
 
+    def _validate_constructor_arguments(
+        self,
+        edge_list=None,
+        adjacency_tensor=None,
+        incidence_matrix=None,
+        nodes=None,
+        edges=None,
+        uniform=None,
+        order=None,
+        directed=None
+    ):
+        # At least one numerical representation should be supplied
+        if edge_list is None and adjacency_tensor is None and incidence_matrix is None:
+            warnings.warn("The edge list, incidence matrix, and adjacency tensor are None.", UserWarning)
+
+        if order is not None and not (uniform == True):
+            warnings.warn("If the hypergraph order is fixed then it should be k-uniform")
+
+        # TODO: add more conditions to validate / warn the user of during construction
+
+    def _detect_uniform_and_order(self, uniform, order):
+        if self._adjacency_tensor is not None:
+            self._uniform = True
+            self._order = len(self._adjacency_tensor.shape)
+        elif self._incidence_matrix is not None:
+            nonzero_counts = np.count_nonzero(self._incidence_matrix, axis=0)
+            self._uniform = np.all(nonzero_counts == nonzero_counts[0])
+            self._order = nonzero_counts[0]
+        elif self._edge_list is not None:
+            # Determine if the hypergraph is directed
+            if isinstance(self._edge_list[0][0], int): # (undirected)
+                k = len(self._edge_list[0])
+                self._uniform = True
+                self._order = k
+                for e in self._edge_list:
+                    if len(e) != k:
+                        self._uniform = False
+                        break
+            else:  # (directed)
+                k = len(self._edge_list[0][0])
+                self._uniform = True
+                self._order = k
+                for e in self._edge_list:
+                    if len(e[0]) != k:
+                        self._uniform = False
+                        break
+        if self._uniform == False:
+            self._order = -1
+
+        if self._uniform != uniform and uniform is not None:
+            warnings.warn('The provided and detected `uniform` are not in agreement!')
+
+        if self._order != order and order is not None:
+            warnings.warn('The provided and detected `order` are not in agreement!')
+
+    def _detect_directed(self, directed):
+        if self._edges is not None and 'Head' in self._edges.columns and 'Tail' in self._edges.columns:
+            self._directed = True
+
+        # The adjacency tensor is directed
+        elif self._adjacency_tensor is not None:
+            self._directed = True
+
+        # The indicence matrix is directed if there are +/- terms
+        elif self._incidence_matrix is not None and np.sum(self._incidence_matrix > 0) > 0 and np.sum(self._incidence_matrix < 0) > 0:
+            self._directed = True
+
+        # The edge list is directed if an edge has the form: [[head], [tail]]
+        elif self._edge_list is not None:
+            self._directed = True
+            for edge in self._edge_list:
+                if not (len(edge) >= 2 and isinstance(edge[0], list) and isinstance(edge[1], list)):
+                    self._directed = False
+
+        # By default, the system is undirected
+        else:
+            self._directed = False
+
+        if self._directed != directed and directed is not None:
+            warnings.warn('The provided and detected `directed` are not in agreement!')
 
     @property
     def nodes(self):

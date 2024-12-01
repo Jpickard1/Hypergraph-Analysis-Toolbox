@@ -27,8 +27,10 @@ class HypergraphConstructorTestCase(unittest.TestCase):
         Validation of 3 numerical representations and other properties
         """
         print('constructor_1 start')
-        edge_list = [[0,1,2],
-                    [0,1,3]]
+        edge_list = [
+            [0,1,2],
+            [0,1,3]
+        ]
         HG = Hypergraph(edge_list=edge_list)
         node_df = pd.DataFrame({'Nodes': [0,1,2,3]})
         edges_df = pd.DataFrame({'Edges': [0,1]})
