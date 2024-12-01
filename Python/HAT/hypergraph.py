@@ -375,7 +375,7 @@ class Hypergraph:
          [0 1 1]]
         """
         if self._incidence_matrix is not None:
-            warning.warn("The Incidence matrix is already set.")
+            warnings.warn("The Incidence matrix is already set.")
 
         elif IM is not None:
             self._incidence_matrix = IM
@@ -543,7 +543,7 @@ class Hypergraph:
                         for nodes_indices in permutations(nodes):
                             self._adjacency_tensor[tuple(nodes_indices)] = 1
                     else:
-                        warnings.warn(f"Edge {i} does not have exactly {k} nodes; skipping.")
+                        warnings.warn(f"Edge {i} does not have exactly {self._order} nodes; skipping.")
 
         elif not self.directed and self.edge_list is not None:
             # Create adjacency tensor from edge list for k-uniform hypergraph
