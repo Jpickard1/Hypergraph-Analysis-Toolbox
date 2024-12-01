@@ -62,53 +62,60 @@ class Hypergraph:
     k : int
         The degree of uniformity in terms of edge size, if applicable.
     """
-    def __init__(self, edge_list=None, adjacency_tensor=None, incidence_matrix=None, nodes=None, edges=None, uniform=None, k=None, directed=False):
+    def __init__(self,
+            edge_list=None,
+            adjacency_tensor=None,
+            incidence_matrix=None,
+            nodes=None,
+            edges=None,
+            uniform=None,
+            order=None,
+            directed=None
+        ):
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        # If all E, A, and IM are None, display a warning
-        if edge_list is None and adjacency_tensor is None and incidence_matrix is None:
-            warnings.warn("Warning: All of E, A, and IM are None.", UserWarning)
 
-        # Assigning instance attributes
-        self._edge_list = edge_list
+        # Validate arguments
+        self._validate_constructor_arguments(
+            edge_list        = edge_list,
+            adjacency_tensor = adjacency_tensor,
+            incidence_matrix = incidence_matrix,
+            nodes            = nodes,
+            edges            = edges,
+            uniform          = uniform,
+            order            = order,
+            directed         = directed
+        )
+
+        # Assign object data
+        self._edge_list        = edge_list
         self._adjacency_tensor = adjacency_tensor
         self._incidence_matrix = incidence_matrix
-        self._nodes = nodes
-        self._edges = edges
-        self._uniform = uniform
-        self._k = -1
+        self._nodes            = nodes
+        self._edges            = edges
+        self._uniform          = uniform
+        self._order            = order
+        self._directed         = directed
 
-        # Determine if the hypergraph is uniform
-        if self._uniform is None:
-            if self._adjacency_tensor is not None:
-                self._uniform = True
-                self._k = len(self._adjacency_tensor.shape)
-            elif self._incidence_matrix is not None:
-                nonzero_counts = np.count_nonzero(self._incidence_matrix, axis=0)
-                self._uniform = np.all(nonzero_counts == nonzero_counts[0])
-                self._k = nonzero_counts[0]
-            elif self._edge_list is not None:
-                k = len(self._edge_list[0])
-                for e in self._edge_list:
-                    if len(e) != k:
-                        self._uniform = False
-                        break
-                if self._uniform is None:
-                    self._k = k
-                    self._uniform = True
+        # Set uniform and order of the hypergraph
+        self._detect_uniform_and_order(uniform, order)
+
+        # Set directed property of the hypergraph
+        self._detect_directed(directed)
 
         # Set the nodes dataframe
         if self._nodes is None:
             if self._adjacency_tensor is not None:
                 num_nodes = self._adjacency_tensor.shape[0]
-                self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
             elif self._edge_list is not None:
                 num_nodes = len(list(set([j for edge in edge_list for j in edge])))
-                self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
             elif self._incidence_matrix is not None:
                 num_nodes = self.incidence_matrix.shape[0]
-                self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
+            self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
+        elif 'Nodes' not in self._nodes.columns:
+            self._nodes['Nodes'] = np.arange(self._nodes.shape[0])
+            warnings.warn('`Nodes` column not found in the provided in self._nodes. It has been added')
 
         # Set the edges dataframe
         if self._edges is None:
@@ -119,7 +126,107 @@ class Hypergraph:
                 num_edges = self.incidence_matrix.shape[1]
                 self._edges = pd.DataFrame({'Edges': np.arange(num_edges)})
             elif self._adjacency_tensor is not None:
-                warnings.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
+                idxs = np.where(self._adjacency_tensor != 0) 
+                order = len(self._adjacency_tensor.shape)
+                df = pd.DataFrame({i:idxs[i] for i in range(order)})
+                sorted_df = pd.DataFrame(np.sort(df.values, axis=1), columns=df.columns)
+                self._edges = sorted_df.drop_duplicates()
+                self._edges['Edges'] = np.arange(self._edges.shape[0])
+                self._edges = self._edges[['Edges']]
+#                warnings.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
+        elif 'Edges' not in self._edges.columns:
+            self._edges['Edges'] = np.arange(self._edges.shape[0])
+            warnings.warn('"Edges" column not found in the provided nodes dataframe.')
+            warnings.warn('This column has been appended.')
+
+#        if self._directed:
+#            if self._edges is not None and ('Head' not in self._edges.columns or 'Tail' not in self._edges.columns):
+#                self.set_edge_directions()
+#    def set_edge_directions(self):
+#        if self._adjacency_tensor is not None:
+#        if self._edge_list is not None:
+#        if self._incidence_matrix is not None:
+
+    def _validate_constructor_arguments(
+        self,
+        edge_list=None,
+        adjacency_tensor=None,
+        incidence_matrix=None,
+        nodes=None,
+        edges=None,
+        uniform=None,
+        order=None,
+        directed=None
+    ):
+        # At least one numerical representation should be supplied
+        if edge_list is None and adjacency_tensor is None and incidence_matrix is None:
+            warnings.warn("The edge list, incidence matrix, and adjacency tensor are None.", UserWarning)
+
+        if order is not None and not (uniform == True):
+            warnings.warn("If the hypergraph order is fixed then it should be k-uniform")
+
+        # TODO: add more conditions to validate / warn the user of during construction
+
+    def _detect_uniform_and_order(self, uniform, order):
+        if self._adjacency_tensor is not None:
+            self._uniform = True
+            self._order = len(self._adjacency_tensor.shape)
+        elif self._incidence_matrix is not None:
+            nonzero_counts = np.count_nonzero(self._incidence_matrix, axis=0)
+            self._uniform = np.all(nonzero_counts == nonzero_counts[0])
+            self._order = nonzero_counts[0]
+        elif self._edge_list is not None:
+            # Determine if the hypergraph is directed
+            if isinstance(self._edge_list[0][0], int): # (undirected)
+                k = len(self._edge_list[0])
+                self._uniform = True
+                self._order = k
+                for e in self._edge_list:
+                    if len(e) != k:
+                        self._uniform = False
+                        break
+            else:  # (directed)
+                k = len(self._edge_list[0][0])
+                self._uniform = True
+                self._order = k
+                for e in self._edge_list:
+                    if len(e[0]) != k:
+                        self._uniform = False
+                        break
+        if self._uniform == False:
+            self._order = -1
+
+        if self._uniform != uniform and uniform is not None:
+            warnings.warn('The provided and detected `uniform` are not in agreement!')
+
+        if self._order != order and order is not None:
+            warnings.warn('The provided and detected `order` are not in agreement!')
+
+    def _detect_directed(self, directed):
+        if self._edges is not None and 'Head' in self._edges.columns and 'Tail' in self._edges.columns:
+            self._directed = True
+
+        # The adjacency tensor is directed
+        elif self._adjacency_tensor is not None:
+            self._directed = True
+
+        # The indicence matrix is directed if there are +/- terms
+        elif self._incidence_matrix is not None and np.sum(self._incidence_matrix > 0) > 0 and np.sum(self._incidence_matrix < 0) > 0:
+            self._directed = True
+
+        # The edge list is directed if an edge has the form: [[head], [tail]]
+        elif self._edge_list is not None:
+            self._directed = True
+            for edge in self._edge_list:
+                if not (len(edge) >= 2 and isinstance(edge[0], list) and isinstance(edge[1], list)):
+                    self._directed = False
+
+        # By default, the system is undirected
+        else:
+            self._directed = False
+
+        if self._directed != directed and directed is not None:
+            warnings.warn('The provided and detected `directed` are not in agreement!')
 
     @property
     def nodes(self):
@@ -128,6 +235,10 @@ class Hypergraph:
     @property
     def edges(self):
         return self._edges
+
+    @property
+    def directed(self):
+        return self._directed
 
     @property
     def num_nodes(self):
@@ -162,9 +273,24 @@ class Hypergraph:
         return self._uniform
     
     @property
+    def order(self):
+        if self._uniform is None or self._uniform is False:
+            return None
+        elif self._order is not None:
+            return self._order
+        elif self._adjacency_tensor is not None:
+            return len(self._adjacency_tensor.shape)
+        elif self._edge_list is not None:
+            return len(self._edge_list[0])
+        elif self._incidence_matrix is not None:
+            return np.count_nonzero(self._incidence_matrix, axis=0)[0]
+        else:
+            warnings.warn('This hypergraph is not set properly')
+
+    @property
     def k(self):
         """Returns the order of uniform hypergraph edges."""
-        return self._k
+        return self._order
     
     @property
     def incidence_matrix(self):
@@ -249,7 +375,8 @@ class Hypergraph:
          [0 1 1]]
         """
         if self._incidence_matrix is not None:
-            warning.warn("The Incidence matrix is already set.")
+            warnings.warn("The Incidence matrix is already set.")
+
         elif IM is not None:
             self._incidence_matrix = IM
 
@@ -265,15 +392,20 @@ class Hypergraph:
         elif self._adjacency_tensor is not None:
             # Identify the non-zero entries, which represent hyperedges
             hyperedges = np.argwhere(self._adjacency_tensor != 0)
-            self._incidence_matrix = np.zeros((self.num_nodes, len(hyperedges)), dtype=int)
+            self._incidence_matrix = np.zeros((self._nodes.shape[0], hyperedges.shape[0]), dtype=int)
             
             # Populate the incidence matrix
             for k, edge in enumerate(hyperedges):
-                for node in edge:
+                for i, node in enumerate(edge):
                     self._incidence_matrix[node, k] = 1  # Node participates in hyperedge `k`
+                    if i == 0:
+                        self._incidence_matrix[node, k] = -1
         else:
             warning.warn("Cannot set the incidence matrix without more information.")
 
+        # TODO: ensure .edges aligns after this sort
+        _, unique_indices = np.unique(self._incidence_matrix, axis=1, return_index=True)
+        self._incidence_matrix = self._incidence_matrix[:, np.sort(unique_indices)]
 
     def set_edge_list(self, EL=None):
         """
@@ -312,25 +444,43 @@ class Hypergraph:
         """
         if self._edge_list is not None:
             warnings.warn("The edge list is already set.")
-        elif EL is not None:
+        elif self._directed is False and EL is not None:
             self._edge_list = EL
-        elif self.incidence_matrix is not None:
+        elif self._directed is False and self.incidence_matrix is not None:
             # Create edge list from incidence matrix
             self._edge_list = []
             for col in range(self.incidence_matrix.shape[1]):
                 edge = np.where(self.incidence_matrix[:, col] != 0)[0].tolist()
                 self._edge_list.append(edge)
+        # Adjacency tensor assumes it is directed
         elif self._adjacency_tensor is not None:
             # Create edge list from adjacency tensor
             self._edge_list = []
             hyperedges = np.argwhere(self.adjacency_tensor != 0)
             for edge in hyperedges:
-                self._edge_list.append(edge.tolist())
+                edge_nodes = edge.tolist()
+                self._edge_list.append([[edge_nodes[0]], sorted(edge_nodes[1:])])
         else:
             warnings.warn("Cannot set the edge list without more information.")
+        self._edge_list = self._remove_duplicates(self._edge_list)
 
+    def _remove_duplicates(self, list_of_lists):
+        if isinstance(list_of_lists[0][0], int):
+            return list_of_lists
+        # Use a set to track unique items
+        unique_items = set()
+        deduplicated_list = []
 
-    def set_adjacency_tensor(self, AT=None):
+        for item in list_of_lists:
+            # Convert the two inner lists to a tuple of sorted tuples
+            normalized_item = tuple(sorted(map(tuple, item)))
+            if normalized_item not in unique_items:
+                unique_items.add(normalized_item)
+                deduplicated_list.append(item)
+
+        return deduplicated_list
+
+    def set_adjacency_tensor(self, adjacency_tensor=None):
         """
         Constructs and sets the adjacency tensor for a k-uniform hypergraph based on either a provided 
         adjacency tensor, an incidence matrix, or an edge list.
@@ -343,7 +493,7 @@ class Hypergraph:
 
         Parameters
         ----------
-        AT : ndarray, optional
+        adjacency_tensor : ndarray, optional
             A predefined adjacency tensor to set directly. If provided, it will be used as the hypergraph's 
             adjacency tensor, and any existing data will not be recalculated.
 
@@ -365,48 +515,67 @@ class Hypergraph:
         an adjacency tensor cannot be constructed. This method also requires either 
         `self.incidence_matrix` or `self.edge_list` to be set if `AT` is not provided.
         """
+        if self._adjacency_tensor is not None:
+            warnings.warn("The adjacency tensor is already set. Unclear why this is being reset.")
+
         if not self.uniform:
             warnings.warn("Cannot set an adjacency tensor for a nonuniform hypergraph.")
             return
-        else:
-            k = self.k
 
-        if self._adjacency_tensor is not None:
-            warnings.warn("The adjacency tensor is already set.")
-        elif AT is not None:
-            self._adjacency_tensor = AT
-        elif self._incidence_matrix is not None:
-            # Create adjacency tensor from incidence matrix for k-uniform hypergraph
-            num_nodes = self.incidence_matrix.shape[0]
-            self._adjacency_tensor = np.zeros((num_nodes,) * k, dtype=int)
-            num_edges = self.incidence_matrix.shape[1]
+        if adjacency_tensor is not None:
+            self._adjacency_tensor = adjacency_tensor
+            # TODO: in this case, we may want to reset the _nodes and _edges.
+            #       I am not sure when a user may want to do this
+            return
 
-            # Populate adjacency tensor based on incidence matrix
-            for i in range(num_edges):
-                nodes = np.where(self.incidence_matrix[:, i] == 1)[0]
-                if len(nodes) == k:
-                    # Use multi-dimensional indexing to set entries for the k-node hyperedge
-                    self._adjacency_tensor[tuple(nodes)] = 1
-                else:
-                    warnings.warn(f"Edge {i} does not have exactly {k} nodes; skipping.")
+        # If the system is directed, then we set it one way        
+        if not self.directed and self._incidence_matrix is not None:
+                # Create adjacency tensor from incidence matrix for k-uniform hypergraph
+                num_nodes = self.incidence_matrix.shape[0]
+                self._adjacency_tensor = np.zeros((num_nodes,) * self.order, dtype=int)
+                num_edges = self.incidence_matrix.shape[1]
 
-        elif self.edge_list is not None:
+                # Populate adjacency tensor based on incidence matrix
+                for i in range(num_edges):
+                    nodes = np.where(self.incidence_matrix[:, i] == 1)[0]
+                    if len(nodes) == self.order:
+                        # Use multi-dimensional indexing to set entries for the k-node hyperedge
+                        for nodes_indices in permutations(nodes):
+                            self._adjacency_tensor[tuple(nodes_indices)] = 1
+                    else:
+                        warnings.warn(f"Edge {i} does not have exactly {self._order} nodes; skipping.")
+
+        elif not self.directed and self.edge_list is not None:
             # Create adjacency tensor from edge list for k-uniform hypergraph
             num_nodes = self.num_nodes
-            self._adjacency_tensor = np.zeros((num_nodes,) * k, dtype=int)
-            # print(f"{self._adjacency_tensor.shape=}")
+            self._adjacency_tensor = np.zeros((num_nodes,) * self.order, dtype=int)
             # Populate adjacency tensor based on edge list
             for i, edge in enumerate(self.edge_list):
-                if len(edge) == k:
-                    # print(f"{edge=}")
-                    # print(f"{tuple(edge)=}")
+                if len(edge) == self.order:
                     # Use multi-dimensional indexing to set entries for the k-node hyperedge
-                    self._adjacency_tensor[tuple(edge)] = 1
+                    for nodes_indices in permutations(edge):
+                        self._adjacency_tensor[tuple(nodes_indices)] = 1
                 else:
                     warnings.warn(f"Edge {i} does not have exactly {k} nodes; skipping.")
-        else:
-            warnings.warn("Cannot set the adjacency tensor without more information.")
 
+    def dual(self):
+        """The dual hypergraph is constructed.
+        Let :math:`H=(V,E)` be a hypergraph. In the dual hypergraph each original edge :math:`e in E`
+        is represented as a vertex and each original vertex :math:`v in E` is represented as an edge. Numerically, the
+        transpose of the incidence matrix of a hypergraph is the incidence matrix of the dual hypergraph.
+        
+        :return: Hypergraph object
+        :rtype: *Hypergraph*
+
+        References
+        ----------
+        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
+        """
+        # Auth: Joshua Pickard
+        #       jpic@umich.edu
+        # Date: Nov 30, 2022
+        IM = self.IM.T
+        return Hypergraph(IM)
     
     def draw(self, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
         """ This function draws the incidence matrix of the hypergraph object. It calls the function
@@ -422,26 +591,6 @@ class Hypergraph:
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        return HAT.draw.incidencePlot(self, shadeRows=shadeRows, connectNodes=connectNodes, dpi=dpi, edgeColors=edgeColors)
-        
-    def dual(self):
-        """The dual hypergraph is constructed.
-
-        :return: Hypergraph object
-        :rtype: *Hypergraph*
-
-        Let :math:`H=(V,E)` be a hypergraph. In the dual hypergraph each original edge :math:`e\in E`
-        is represented as a vertex and each original vertex :math:`v\in E` is represented as an edge. Numerically, the
-        transpose of the incidence matrix of a hypergraph is the incidence matrix of the dual hypergraph.
-        
-        References
-        ----------
-        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
-        """
-        # Auth: Joshua Pickard
-        #       jpic@umich.edu
-        # Date: Nov 30, 2022
-        IM = self.IM.T
-        return Hypergraph(IM)
-
+        # return HAT.draw.incidencePlot(self, shadeRows=shadeRows, connectNodes=connectNodes, dpi=dpi, edgeColors=edgeColors)
+        pass
 
