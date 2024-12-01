@@ -19,8 +19,8 @@ def are_nested_lists_equivalent(list1, list2):
     # Compare the sorted lists
     return sorted_list1 == sorted_list2
 
-class HypergraphConstructorTestCase(unittest.TestCase):
-
+class HypergraphConstructorTestCase1(unittest.TestCase):
+    logging.info("Set Up: HypergraphConstructorTestCase1")
     def setUp(self):
         """Set up shared resources for edge_list-based tests."""
         self.edge_list = [[0, 1, 2], [0, 1, 3]]
@@ -231,4 +231,6 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
+

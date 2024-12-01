@@ -131,21 +131,11 @@ class Hypergraph:
                 df = pd.DataFrame({i:idxs[i] for i in range(order)})
                 sorted_df = pd.DataFrame(np.sort(df.values, axis=1), columns=df.columns)
                 self._edges = sorted_df.drop_duplicates()
-                self._edges['Edges'] = np.arange(self._edges.shape[0])
-                self._edges = self._edges[['Edges']]
-#                warnings.warn("Edge list dataframe is not set when only the adjacency tensor is provided.")
+                self._edges = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
         elif 'Edges' not in self._edges.columns:
-            self._edges['Edges'] = np.arange(self._edges.shape[0])
+            self._edges = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
             warnings.warn('"Edges" column not found in the provided nodes dataframe.')
             warnings.warn('This column has been appended.')
-
-#        if self._directed:
-#            if self._edges is not None and ('Head' not in self._edges.columns or 'Tail' not in self._edges.columns):
-#                self.set_edge_directions()
-#    def set_edge_directions(self):
-#        if self._adjacency_tensor is not None:
-#        if self._edge_list is not None:
-#        if self._incidence_matrix is not None:
 
     def _validate_constructor_arguments(
         self,
