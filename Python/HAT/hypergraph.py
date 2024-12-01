@@ -115,8 +115,7 @@ class Hypergraph:
             self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
         elif 'Nodes' not in self._nodes.columns:
             self._nodes['Nodes'] = np.arange(self._nodes.shape[0])
-            warnings.warn('"Nodes" column not found in the provided nodes dataframe.')
-            warnings.warn('This column has been appended.')
+            warnings.warn('`Nodes` column not found in the provided in self._nodes. It has been added')
 
         # Set the edges dataframe
         if self._edges is None:
