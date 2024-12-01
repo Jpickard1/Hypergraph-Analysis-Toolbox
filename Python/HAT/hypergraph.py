@@ -119,23 +119,57 @@ class Hypergraph:
 
         # Set the edges dataframe
         if self._edges is None:
+            # Determine the number of edges, the nodes, the head, and the tail
+            num_edges, edge_nodes, head, tail = 0, [], [], []
             if self._edge_list is not None:
                 num_edges = len(self._edge_list)
-                self._edges = pd.DataFrame({'Edges': np.arange(num_edges)})
+                if self._directed:
+                    for edge in self._edge_list:
+                        edge_nodes.append(edge[0] + edge[1])
+                        head.append(edge[0])
+                        tail.append(edge[1])
+                else:
+                    edge_nodes = self._edge_list
             elif self._incidence_matrix is not None:
                 num_edges = self.incidence_matrix.shape[1]
-                self._edges = pd.DataFrame({'Edges': np.arange(num_edges)})
+                for iedge in range(num_edges):
+                    edge_nodes.append(np.where(self._incidence_matrix[:,iedge] != 0)[0])
+                    if self._directed:
+                        head.append(np.where(self._incidence_matrix[:,iedge] > 0)[0])
+                        tail.append(np.where(self._incidence_matrix[:,iedge] < 0)[0])
             elif self._adjacency_tensor is not None:
                 idxs = np.where(self._adjacency_tensor != 0) 
-                order = len(self._adjacency_tensor.shape)
-                df = pd.DataFrame({i:idxs[i] for i in range(order)})
-                sorted_df = pd.DataFrame(np.sort(df.values, axis=1), columns=df.columns)
-                self._edges = sorted_df.drop_duplicates()
-                self._edges = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
+                head = list(idxs[0])
+                for iedge in range(len(idxs[0])):
+                    tail.append([idxs[k][iedge] for k in range(1,len(idxs))])
+                    edge_nodes.append(head[iedge] + tail[-1])
+                num_edges = len(head)
+            if self.directed:
+                self._edges = pd.DataFrame(
+                    {
+                        'Edges' : np.arange(num_edges),
+                        'Nodes' : edge_nodes,
+                        'Head'  : head,
+                        'Tail'  : tail
+                    }
+                )
+            else:
+                self._edges = pd.DataFrame(
+                    {
+                        'Edges' : np.arange(num_edges),
+                        'Nodes' : edge_nodes,
+                    }
+                )
         elif 'Edges' not in self._edges.columns:
             self._edges = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
             warnings.warn('"Edges" column not found in the provided nodes dataframe.')
             warnings.warn('This column has been appended.')
+
+        if self._directed:
+            if 'Head' not in self._edges.columns:
+                self._edges['Head'] = self._edges['Nodes']
+            if 'Tail' not in self._edges.columns:
+                self._edges['Tail'] = self._edges['Nodes']
 
     def _validate_constructor_arguments(
         self,
@@ -355,7 +389,7 @@ class Hypergraph:
 
         elif self._edge_list is not None:
             # Initialize the incidence matrix with zeros
-            self._incidence_matrix = np.zeros((self.num_nodes, len(self.edge_list)), dtype=int)
+            self._incidence_matrix = np.zeros((self.nnodes, len(self.edge_list)), dtype=int)
             
             # Fill the incidence matrix
             for i, edge in enumerate(self.edge_list):
@@ -520,7 +554,7 @@ class Hypergraph:
 
         elif not self.directed and self.edge_list is not None:
             # Create adjacency tensor from edge list for k-uniform hypergraph
-            num_nodes = self.num_nodes
+            num_nodes = self.nnodes
             self._adjacency_tensor = np.zeros((num_nodes,) * self.order, dtype=int)
             # Populate adjacency tensor based on edge list
             for i, edge in enumerate(self.edge_list):

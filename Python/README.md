@@ -20,6 +20,13 @@ This directory manages the Python implenentation of HAT.
 - order
 - directed
 
+**Construction**
+
+*Criteria to be directed*
+- We assume adjacency tensors are directed
+- Signed incidence matrices are directed, else undirected
+- head tail edge lists are directed
+
 ### Data Schema:
 
 **Numerical Representation**
