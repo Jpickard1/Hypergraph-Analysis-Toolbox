@@ -100,3 +100,10 @@ HG.adjacency_tensor = np.array(
 - order (int, None): the order of the uniformity
 - directed (bool): if hyperedges have direction associated with them
 - weighted (bool): if hyperedges have associated weights
+
+
+## TODO:
+
+1. decide to remove setters of incidence matrix, adjacency tensors, and edge sets.
+    Argument for: this should be supplied at creation or by modifiation of adding new vertices. If it is already set, why would we reset it?
+    Argument against: not sure.

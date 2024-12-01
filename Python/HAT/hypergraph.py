@@ -231,7 +231,7 @@ class Hypergraph:
         return self._directed
 
     @property
-    def num_nodes(self):
+    def nnodes(self):
         """Returns the number of nodes (vertices) in the hypergraph.
 
         Returns
@@ -242,7 +242,7 @@ class Hypergraph:
         return self._nodes.shape[0] if self._nodes is not None else 0
 
     @property
-    def num_edges(self):
+    def nedges(self):
         """Returns the number of edges (hyperedges) in the hypergraph.
 
         Returns
@@ -264,22 +264,6 @@ class Hypergraph:
     
     @property
     def order(self):
-        if self._uniform is None or self._uniform is False:
-            return None
-        elif self._order is not None:
-            return self._order
-        elif self._adjacency_tensor is not None:
-            return len(self._adjacency_tensor.shape)
-        elif self._edge_list is not None:
-            return len(self._edge_list[0])
-        elif self._incidence_matrix is not None:
-            return np.count_nonzero(self._incidence_matrix, axis=0)[0]
-        else:
-            warnings.warn('This hypergraph is not set properly')
-
-    @property
-    def k(self):
-        """Returns the order of uniform hypergraph edges."""
         return self._order
     
     @property
@@ -289,10 +273,10 @@ class Hypergraph:
             self.set_incidence_matrix()  # Automatically set if not yet defined
         return self._incidence_matrix
 
-    @incidence_matrix.setter
-    def incidence_matrix(self, IM):
-        """Sets the incidence matrix for the hypergraph."""
-        self._incidence_matrix = IM
+#    @incidence_matrix.setter
+#    def incidence_matrix(self, IM):
+#        """Sets the incidence matrix for the hypergraph."""
+#        self._incidence_matrix = IM
 
     @property
     def edge_list(self):
@@ -301,10 +285,10 @@ class Hypergraph:
             self.set_edge_list()  # Automatically set if not yet defined
         return self._edge_list
 
-    @edge_list.setter
-    def edge_list(self, EL):
-        """Sets the edge list for the hypergraph."""
-        self._edge_list = EL
+#    @edge_list.setter
+#    def edge_list(self, EL):
+#        """Sets the edge list for the hypergraph."""
+#        self._edge_list = EL
 
     @property
     def adjacency_tensor(self):
@@ -313,11 +297,10 @@ class Hypergraph:
             self.set_adjacency_tensor()  # Automatically set if not yet defined
         return self._adjacency_tensor
 
-    @adjacency_tensor.setter
-    def adjacency_tensor(self, AT):
-        """Sets the adjacency tensor for the hypergraph."""
-        self._adjacency_tensor = AT
-
+#    @adjacency_tensor.setter
+#    def adjacency_tensor(self, AT):
+#        """Sets the adjacency tensor for the hypergraph."""
+#        self._adjacency_tensor = AT
 
     def set_incidence_matrix(self, IM=None):
         """
