@@ -70,7 +70,9 @@ class Hypergraph:
             edges=None,
             uniform=None,
             order=None,
-            directed=None
+            directed=None,
+            compress=True # this argument tells the constructor to rearrange the numerical 
+                          # representation based on the set .edges dataframe.
         ):
         # Auth: Joshua Pickard
         #       jpic@umich.edu
@@ -138,11 +140,12 @@ class Hypergraph:
                         head.append(np.where(self._incidence_matrix[:,iedge] > 0)[0])
                         tail.append(np.where(self._incidence_matrix[:,iedge] < 0)[0])
             elif self._adjacency_tensor is not None:
+                compress = True
                 idxs = np.where(self._adjacency_tensor != 0) 
                 head = list(idxs[0])
                 for iedge in range(len(idxs[0])):
-                    tail.append([idxs[k][iedge] for k in range(1,len(idxs))])
-                    edge_nodes.append(head[iedge] + tail[-1])
+                    tail.append(sorted([idxs[k][iedge] for k in range(1,len(idxs))]))
+                    edge_nodes.append(sorted([head[iedge]] + tail[-1]))
                 num_edges = len(head)
             if self.directed:
                 self._edges = pd.DataFrame(
@@ -165,11 +168,13 @@ class Hypergraph:
             warnings.warn('"Edges" column not found in the provided nodes dataframe.')
             warnings.warn('This column has been appended.')
 
-        if self._directed:
-            if 'Head' not in self._edges.columns:
-                self._edges['Head'] = self._edges['Nodes']
-            if 'Tail' not in self._edges.columns:
-                self._edges['Tail'] = self._edges['Nodes']
+        if compress:
+            # TODO: filter self._edges to achieve:
+            #   1. no duplicate rows
+            #   2. no duplicate tails (if directed)
+            # TODO: reset the incidence matrix, edge list, or adjacency tensor based
+            #       on self.edges
+            pass
 
     def _validate_constructor_arguments(
         self,

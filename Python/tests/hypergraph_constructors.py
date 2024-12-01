@@ -154,7 +154,7 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
 
         logging.info('constructor_2 complete')
 
-    def ttest_constructor_adjacency_tensor_1(self):
+    def test_constructor_adjacency_tensor_1(self):
         """
         Test construction from adjacency_tensor.
 
@@ -210,6 +210,7 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
             logging.info(f"DataFrames are not equal: {e}")
 
         try:
+            print(HG.edges)
             assert_frame_equal(edges_df, HG.edges, check_dtype=False)
         except AssertionError as e:
             logging.info(f"DataFrames are not equal: {e}")
