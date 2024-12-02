@@ -172,9 +172,15 @@ class Hypergraph:
             # TODO: filter self._edges to achieve:
             #   1. no duplicate rows
             #   2. no duplicate tails (if directed)
+
             # TODO: reset the incidence matrix, edge list, or adjacency tensor based
             #       on self.edges
-            pass
+            if incidence_matrix is not None:
+                self.set_incidence_matrix()
+            if edge_list is not None:
+                self.set_edge_list()
+            if adjacency_tensor is not None:
+                self.set_adjacency_tensor()
 
     def _validate_constructor_arguments(
         self,
@@ -289,12 +295,14 @@ class Hypergraph:
         int or bool
             Number of edges if available, otherwise False if edges are not defined.
         """
-        if self._edge_list is not None:
-            return len(self._edge_list)
-        elif self._incidence_matrix is not None:
-            return self._incidence_matrix.shape[1]
-        else:
-            return 0
+        return self.edges.shape()
+    
+#        if self._edge_list is not None:
+#            return len(self._edge_list)
+#        elif self._incidence_matrix is not None:
+#            return self._incidence_matrix.shape[1]
+#        else:
+#            return 0
 
     @property
     def uniform(self):
@@ -340,6 +348,46 @@ class Hypergraph:
 #    def adjacency_tensor(self, AT):
 #        """Sets the adjacency tensor for the hypergraph."""
 #        self._adjacency_tensor = AT
+
+    def _set_incidence_matrix(self):
+        """Sets self._incidence_matrix based on self._edges
+        """
+        incidence_matrix = np.zeros((self.nnodes, self.nedges))
+        for iedge in range(self.nedges):
+            if self.directed:
+                tail = self.edges['Tail'].iloc[iedge]
+                head = self.edges['Head'].iloc[iedge]
+                for node in tail:
+                    incidence_matrix[node, iedge] = -1
+                for node in head:
+                    incidence_matrix[node, iedge] = 1
+            else:
+                nodes = self.edges['Node'].iloc[iedge]
+                for node in nodes:
+                    incidence_matrix[node, iedge] = 1
+        self._incidence_matrix = incidence_matrix
+
+    def _set_edge_list(self):
+        """Sets self._edge_lsit based on self._edges
+        """
+        edge_list = []
+        if self.directed:
+            for iedge in range(self.nedges):
+                edge_list.append([self.edges['Head'], self.edges['Tail']])
+        else:
+            for iedge in range(self.nedges):
+                edge_list.append(self.edges['Nodes'])
+        self._edge_list = edge_list
+
+    def _set_adjacency_tensor(self):
+        """Sets self._adjacency_tensor based on self._edges
+        """
+        adjacency_tensor = np.zeros((num_nodes,) * self.order, dtype=int)
+        if self.directed:
+            pass
+        else:
+            pass
+        self._adjacency_tensor = adjacency_tensor
 
     def set_incidence_matrix(self, IM=None):
         """
