@@ -1,14 +1,17 @@
+# Incidence matrix and related manipulations
 import numpy as np
-import scipy as sp
-import scipy.linalg
+
+# Adjacency tensor construction
 from itertools import permutations
-import networkx as nx
+
+# User output
 import warnings
+
+# Hypergraph metadata
 import pandas as pd
 
-# import multilinalg as mla
-# import draw
-# import HAT
+# Nice printing
+from rich import print
 
 class Hypergraph:
     """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.
@@ -111,6 +114,7 @@ class Hypergraph:
             if self._adjacency_tensor is not None:
                 num_nodes = self._adjacency_tensor.shape[0]
             elif self._edge_list is not None:
+                # TODO: note I dont think the below line works for a directed edge list
                 num_nodes = len(list(set([j for edge in edge_list for j in edge])))
             elif self._incidence_matrix is not None:
                 num_nodes = self.incidence_matrix.shape[0]
@@ -150,7 +154,6 @@ class Hypergraph:
             if self.directed:
                 self._edges = pd.DataFrame(
                     {
-                        'Edges' : np.arange(num_edges),
                         'Nodes' : edge_nodes,
                         'Head'  : head,
                         'Tail'  : tail
@@ -159,7 +162,6 @@ class Hypergraph:
             else:
                 self._edges = pd.DataFrame(
                     {
-                        'Edges' : np.arange(num_edges),
                         'Nodes' : edge_nodes,
                     }
                 )
@@ -170,11 +172,13 @@ class Hypergraph:
 
         if compress:
             # TODO: filter self._edges to achieve:
-            #   1. no duplicate rows
+            #   1. no duplicate rows (done)
             #   2. no duplicate tails (if directed)
+            # Identify duplicate rows based on string representations
+            self._edges['row_hash'] = self._edges.apply(lambda row: str(row.values), axis=1)
+            self._edges = self._edges.drop_duplicates(subset=['row_hash']).drop(columns=['row_hash'])
 
-            # TODO: reset the incidence matrix, edge list, or adjacency tensor based
-            #       on self.edges
+            # reset the incidence matrix, edge list, or adjacency tensor based on self.edges
             if incidence_matrix is not None:
                 self._set_incidence_matrix()
             if edge_list is not None:
@@ -193,6 +197,9 @@ class Hypergraph:
         order=None,
         directed=None
     ):
+        '''
+        This appears to do nothing and can be killed
+        '''
         # At least one numerical representation should be supplied
         if edge_list is None and adjacency_tensor is None and incidence_matrix is None:
             warnings.warn("The edge list, incidence matrix, and adjacency tensor are None.", UserWarning)
