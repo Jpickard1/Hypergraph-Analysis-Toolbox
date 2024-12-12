@@ -114,3 +114,9 @@ HG.adjacency_tensor = np.array(
 1. decide to remove setters of incidence matrix, adjacency tensors, and edge sets.
     Argument for: this should be supplied at creation or by modifiation of adding new vertices. If it is already set, why would we reset it?
     Argument against: not sure.
+
+2. Testing:
+
+```
+python -m unittest -v .\tests\hypergraph_constructors.py
+```

@@ -172,10 +172,10 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
         node_df = pd.DataFrame({'Nodes': [0,1,2,3]})
         edges_df = pd.DataFrame({'Edges': [0,1]})
         incidence_matrix = np.array(
-        [[-1, -1,  1,  1,  1,  1],
-        [ 1,  1, -1, -1,  1,  1],
-        [ 1,  0,  1,  0, -1,  0],
-        [ 0,  1,  0,  1,  0, -1]]
+        [[1,   1, -1, -1, -1, -1],
+        [ -1, -1,  1,  1, -1, -1],
+        [ -1,  0, -1,  0,  1,  0],
+        [ 0,  -1,  0, -1,  0,  1]]
         )
         adjacency_tensor = np.array(
             [[[0, 0, 0, 0],
@@ -223,8 +223,67 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
         logging.info('constructor_3 complete')
 
 class HypergraphConstructorTestCase2(unittest.TestCase):
-    def ttest_constructor_edge_set_1(self):
-        logging.info('Test set 2')
+    def test_add_node_1(self):
+        incidence_matrix=np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+        HG.add_node()
+
+        node_df = pd.DataFrame({'Nodes': [0,1,2,3,4]})
+        assert_frame_equal(node_df, HG.nodes, check_dtype=False)
+
+    def test_add_node_2(self):
+        incidence_matrix=np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+        HG.nodes['key'] = ['a', 'b', 'c', 'd']
+        HG.add_node(properties={'key':'e'})
+
+        node_df = pd.DataFrame({'Nodes': [0,1,2,3,4],
+                                'key':['a','b','c','d','e']})
+        assert_frame_equal(node_df, HG.nodes, check_dtype=False)
+
+    def test_add_node_2(self):
+        incidence_matrix=np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+        HG.nodes['key'] = ['a', 'b', 'c', 'd']
+        HG.add_node(properties={'key':'e', 'value':'z'})
+
+        node_df = pd.DataFrame({'Nodes': [0,1,2,3,4],
+                                'key':['a','b','c','d','e'],
+                                'value':[pd.NA, pd.NA, pd.NA, pd.NA, 'z']})
+        assert_frame_equal(node_df, HG.nodes, check_dtype=False)
+
+    def test_add_node_3(self):
+        incidence_matrix=np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+        HG.nodes['key'] = ['a', 'b', 'c', 'd']
+        HG.nodes['value'] = ['w','x','y','z']
+        HG.add_node(properties={'key':'e'})
+
+        node_df = pd.DataFrame({'Nodes': [0,1,2,3,4],
+                                'key':['a','b','c','d','e'],
+                                'value':['w','x','y','z',pd.NA]})
+        assert_frame_equal(node_df, HG.nodes, check_dtype=False)
+
 
 logging.basicConfig(
     level=logging.INFO,
