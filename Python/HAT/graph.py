@@ -1,7 +1,6 @@
 import numpy as np
 import scipy as sp
-import hypergraph
-
+import networkx as nx
 
 """
 This file interfaces HAT with networkx. It provides several methods to create graph representations from hypergraphs.
@@ -35,18 +34,9 @@ def cliqueGraph(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    if HG.IM is None:
-        HG.set_IM()
 
-    if HG.edges is not None and 'weight' in HG.edges.columns:
-            edge_weights = np.array(list(HG.edges['weight'].values))
-            edgeOrder = HG.k
-            M = np.zeros((len(edgeOrder),len(edgeOrder)))
-            np.fill_diagonal(M, edge_weights)
-            A = HG.IM @ M @ HG.IM.T
-
-    A = HG.IM @ HG.IM.T
-    np.fill_diagonal(A,0) # Omit self loops
+    A = HG.incidence_matrix @ HG.incidence_matrix.T
+    np.fill_diagonal(A,0)         # Omit self loops
     return nx.from_numpy_array(A)
 
 def lineGraph(HG):
@@ -85,10 +75,10 @@ def starGraph(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    n = len(HG.IM) + len(HG.IM[0])
+    n = len(HG.incidence_matrix) + len(HG.incidence_matrix[0])
     A = np.zeros((n,n))
-    A[len(A) - len(HG.IM):len(A),0:len(HG.IM[0])] = HG.IM
-    A[0:len(HG.IM[0]),len(A) - len(HG.IM):len(A)] = HG.IM.T
+    A[len(A) - len(HG.incidence_matrix):len(A),0:len(HG.incidence_matrix[0])] = HG.incidence_matrix
+    A[0:len(HG.incidence_matrix[0]),len(A) - len(HG.incidence_matrix):len(A)] = HG.incidence_matrix.T
     return nx.from_numpy_array(A)
 
 

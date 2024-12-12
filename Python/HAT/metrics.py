@@ -11,7 +11,7 @@ import numpy as np
 import networkx as np
 import scipy as sp
 
-def matrixEntropy(HG, type='Rodriguez'):
+def matrix_entropy(HG, type='Rodriguez'):
     """Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.
 
     :param type: Type of hypergraph Laplacian matrix. This defaults to 'Rodriguez' and other
@@ -35,7 +35,7 @@ def matrixEntropy(HG, type='Rodriguez'):
     U, V = np.linalg.eig(L)
     return sp.stats.entropy(U)
 
-def avgDistance(HG):
+def avgerage_distance(HG):
     """Computes the average pairwise distance between any 2 vertices in the hypergraph.
 
     :return: avgDist
@@ -51,7 +51,7 @@ def avgDistance(HG):
     avgDist = nx.average_shortest_path_length(G)
     return avgDist
 
-def clusteringCoef(HG):
+def clustering_coefficient(HG):
     """Computes clustering average clustering coefficient of the hypergraph.
 
     :return: average clustering coefficient
@@ -81,8 +81,8 @@ def clusteringCoef(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    n, e = HG.IM.shape
-    order = sum(HG.IM[:,0])
+    n, e = HG.nnodes, HG.nedges
+    order = sum(HG.incidence_matrix[:,0])
     avgClusterCoef = 0
     for v in range(n):
         edges = np.where(HG.IM[v,:] > 0)[0]
@@ -139,16 +139,16 @@ def nonlinear_eigenvector_centrality(HG, tol=1e-4, maxIter=3000, model='LogExp',
     else:
         print('Enter a valid centrality model')
         
-    B = HG.IM
-    W = HG.edgeWeights
-    N = HG.nodeWeights
+    B = HG.incidence_matrix
+    W = HG.edge_weights
+    N = HG.node_weights
     W = np.diag(W)
     N = np.diag(N)
-    n, m = B.shape        
+    n, m = B.shape
     x0 = np.ones(n,) / n
     y0 = np.ones(m,) / m
     
-    for i in range(maxIter):
+    for _ in range(maxIter):
         u = np.sqrt(np.multiply(np.array(x0),np.array(g(B @ W @ f(y0)))))
         v = np.sqrt(np.multiply(np.array(y0),np.array(psi(B.T @ N @ phi(x0)))))
         x = u / sum(u)
@@ -161,8 +161,8 @@ def nonlinear_eigenvector_centrality(HG, tol=1e-4, maxIter=3000, model='LogExp',
             x0 = x
             y0 = y
             
-    vxcCentrality = x
-    edgeCentrality = y
+    vertex_centrality = x
+    edge_centrality = y
     
-    return vxcCentrality, edgeCentrality
+    return vertex_centrality, edge_centrality
 

@@ -6,7 +6,7 @@ from HAT import Hypergraph
 This file implements hypergraph laplacian methods.
 """
 
-def laplacianMatrix(HG, type='Bolla'):
+def laplacian_matrix(HG, type='Bolla'):
     """This function returns a version of the higher order Laplacian matrix of the hypergraph.
 
     :param type: Indicates which version of the Laplacin matrix to return. It defaults to ``Bolla`` [1], but ``Rodriguez`` [2,3] and ``Zhou`` [4] are valid arguments as well.
