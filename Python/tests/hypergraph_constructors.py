@@ -256,7 +256,7 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
                                 'key':['a','b','c','d','e']})
         assert_frame_equal(node_df, HG.nodes, check_dtype=False)
 
-    def test_add_node_2(self):
+    def test_add_node_3(self):
         incidence_matrix=np.array(
             [[1, 1],
             [1, 1],
