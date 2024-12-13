@@ -2,3 +2,5 @@ bluepy
 numpy
 scipy
 matplotlib
+pandas
+networkx
