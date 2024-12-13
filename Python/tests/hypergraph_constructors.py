@@ -1,5 +1,5 @@
 import sys
-# sys.path.append('../')
+sys.path.append('../')
 from HAT import Hypergraph
 import numpy as np
 import pandas as pd
