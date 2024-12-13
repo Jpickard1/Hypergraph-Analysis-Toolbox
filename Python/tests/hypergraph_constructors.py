@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../')
+# sys.path.append('../')
 from HAT import Hypergraph
 import numpy as np
 import pandas as pd
@@ -28,7 +28,6 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
         self.expected_node_df = pd.DataFrame({'Nodes': [0, 1, 2, 3]})
         self.expected_edges_df = pd.DataFrame(
             {
-                'Edges': [0, 1],
                 'Nodes': [[0,1,2],
                           [0,1,3]]
             }
@@ -102,7 +101,6 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
 
         Validation of 3 numerical representations and other properties
         """
-        logging.info('constructor_2 start')
         edge_list = [[0,1,2],
                     [0,1,3]]
         incidence_matrix=np.array(
@@ -170,7 +168,15 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
             [[3], [0, 1]]
         ]
         node_df = pd.DataFrame({'Nodes': [0,1,2,3]})
-        edges_df = pd.DataFrame({'Edges': [0,1]})
+        data = {
+            'Nodes': [[0, 1, 2], [0, 1, 3], [0, 1, 2], [0, 1, 3], [0, 1, 2], [0, 1, 3]],
+            'Head': [[0], [0], [1], [1], [2], [3]],
+            'Tail': [[1, 2], [1, 3], [0, 2], [0, 3], [0, 1], [0, 1]]
+        }
+
+        # Create the DataFrame with specified indices
+        edges_df = pd.DataFrame(data, index=[0, 1, 4, 5, 8, 10])
+
         incidence_matrix = np.array(
         [[1,   1, -1, -1, -1, -1],
         [ -1, -1,  1,  1, -1, -1],
@@ -210,7 +216,6 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
             logging.info(f"DataFrames are not equal: {e}")
 
         try:
-            print(HG.edges)
             assert_frame_equal(edges_df, HG.edges, check_dtype=False)
         except AssertionError as e:
             logging.info(f"DataFrames are not equal: {e}")
@@ -284,6 +289,74 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
                                 'value':['w','x','y','z',pd.NA]})
         assert_frame_equal(node_df, HG.nodes, check_dtype=False)
 
+    def test_add_edge_1(self):
+        incidence_matrix = np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+
+        # Add properties to nodes and edges
+        HG.edges['weight'] = [1.5, 2.5]
+
+        # Add an edge
+        HG.add_edge(nodes=[2, 3], properties={'weight': 3.0})
+
+        # Define expected edge DataFrame
+        edge_df = pd.DataFrame({
+            'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
+            'weight': [1.5, 2.5, 3.0]
+        })
+
+        # Assert the edges match
+        assert_frame_equal(edge_df, HG.edges, check_dtype=False)
+
+    def test_add_edge_2(self):
+        incidence_matrix = np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+
+        # Add properties to nodes and edges
+        HG.edges['weight'] = [1.5, 2.5]
+
+        # Add an edge
+        HG.add_edge(nodes=[2, 3])
+
+        # Define expected edge DataFrame
+        edge_df = pd.DataFrame({
+            'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
+            'weight': [1.5, 2.5, pd.NA]
+        })
+
+        # Assert the edges match
+        assert_frame_equal(edge_df, HG.edges, check_dtype=False)
+
+    def test_add_edge_3(self):
+        incidence_matrix = np.array(
+            [[1, 1],
+            [1, 1],
+            [1, 0],
+            [0, 1]]
+        )
+        HG = Hypergraph(incidence_matrix=incidence_matrix)
+
+        # Add an edge
+        HG.add_edge(nodes=[2, 3], properties={'weight': 3.0})
+
+        # Define expected edge DataFrame
+        edge_df = pd.DataFrame({
+            'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
+            'weight': [pd.NA, pd.NA, 3.0]
+        })
+
+        # Assert the edges match
+        assert_frame_equal(edge_df, HG.edges, check_dtype=False)
 
 logging.basicConfig(
     level=logging.INFO,
