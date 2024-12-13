@@ -3,4 +3,4 @@ scipy
 matplotlib
 pandas
 networkx
-unittest
+rich
