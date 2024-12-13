@@ -20,6 +20,13 @@ This directory manages the Python implenentation of HAT.
 - order
 - directed
 
+**Construction**
+
+*Criteria to be directed*
+- We assume adjacency tensors are directed
+- Signed incidence matrices are directed, else undirected
+- head tail edge lists are directed
+
 ### Data Schema:
 
 **Numerical Representation**
@@ -100,3 +107,16 @@ HG.adjacency_tensor = np.array(
 - order (int, None): the order of the uniformity
 - directed (bool): if hyperedges have direction associated with them
 - weighted (bool): if hyperedges have associated weights
+
+
+## TODO:
+
+1. decide to remove setters of incidence matrix, adjacency tensors, and edge sets.
+    Argument for: this should be supplied at creation or by modifiation of adding new vertices. If it is already set, why would we reset it?
+    Argument against: not sure.
+
+2. Testing:
+
+```
+python -m unittest -v .\tests\hypergraph_constructors.py
+```

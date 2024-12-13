@@ -1,11 +1,12 @@
 import numpy as np
-import hypergraph
+import scipy as sp
+from HAT import Hypergraph
 
 """
 This file implements hypergraph laplacian methods.
 """
 
-def laplacianMatrix(HG, type='Bolla'):
+def laplacian_matrix(HG, type='Bolla'):
     """This function returns a version of the higher order Laplacian matrix of the hypergraph.
 
     :param type: Indicates which version of the Laplacin matrix to return. It defaults to ``Bolla`` [1], but ``Rodriguez`` [2,3] and ``Zhou`` [4] are valid arguments as well.
@@ -33,11 +34,11 @@ def laplacianMatrix(HG, type='Bolla'):
     #       jpic@umich.edu
     # Date: Nov 30, 2022
     if type == 'Bolla':
-        return HG.bollaLaplacian()
+        return bollaLaplacian(HG)
     elif type == 'Rodriguez':
-        return HG.rodriguezLaplacian()
+        return rodriguezLaplacian(HG)
     elif type == 'Zhou':
-        return HG.zhouLaplacian()
+        return zhouLaplacian(HG)
     
 def bollaLaplacian(HG):
     """This function constructs the hypergraph Laplacian according to [1].
@@ -53,14 +54,14 @@ def bollaLaplacian(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    dv = np.sum(HG.IM, axis=1)
+    dv = np.sum(HG.incidence_matrix, axis=1)
     Dv = np.zeros((len(dv), len(dv)))
     np.fill_diagonal(Dv, dv)
-    de = np.sum(HG.IM, axis=0)
+    de = np.sum(HG.incidence_matrix, axis=0)
     De = np.zeros((len(de), len(de)))
     np.fill_diagonal(De, de)
     DeInv = sp.linalg.inv(De, overwrite_a=True)
-    L = Dv - (HG.IM @ DeInv @ HG.IM.T)
+    L = Dv - (HG.incidence_matrix @ DeInv @ HG.incidence_matrix.T)
     return L
     
 def rodriguezLaplacian(HG):
@@ -79,7 +80,7 @@ def rodriguezLaplacian(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    A = HG.IM @ HG.IM.T
+    A = HG.incidence_matrix @ HG.incidence_matrix.T
     np.fill_diagonal(A, 0)
     L = np.diag(sum(A)) - A
     return L
@@ -98,9 +99,9 @@ def zhouLaplacian(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    Dvinv = np.diag(1/np.sqrt(HG.IM @ HG.edgeWeights))
-    Deinv = np.diag(1/np.sum(HG.IM, axis=0))
-    W = np.diag(HG.edgeWeights)
-    L = np.eye(len(HG.IM)) - Dvinv @ HG.IM @ W @ Deinv @ HG.IM.T @ Dvinv
+    Dvinv = np.diag(1/np.sqrt(HG.incidence_matrix @ HG.edge_weights))
+    Deinv = np.diag(1/np.sum(HG.incidence_matrix, axis=0))
+    W = np.diag(HG.edge_weights)
+    L = np.eye(len(HG.incidence_matrix)) - Dvinv @ HG.incidence_matrix @ W @ Deinv @ HG.incidence_matrix.T @ Dvinv
     return L
 
