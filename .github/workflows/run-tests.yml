@@ -29,4 +29,4 @@ jobs:
     # Run the test cases
     - name: Run test cases
       run: |
-        python -m unittest -v ./tests/hypergraph_constructors.py
+        python -m unittest -v ./Python/tests/hypergraph_constructors.py
