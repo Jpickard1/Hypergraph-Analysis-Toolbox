@@ -26,6 +26,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r Python/requirements.txt
 
+    # Install the package to be tested
+    - name: Install HAT
+      run: |
+        cd Python
+        pip install -e .
+        cd ..
+
     # Run the test cases
     - name: Run test cases
       run: |
