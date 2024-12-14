@@ -4,44 +4,44 @@ import matplotlib.pyplot as plt
 # from HAT.graph import graph
 # from HAT.Hypergraph import Hypergraph as HG
 
-def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
+def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors=None):
     """Plot the incidence matrix of a hypergraph.
     
     :param H: a HAT.hypergraph object
-    :param shadeRows: shade rows (bool)
-    :param connectNodes: connect nodes in each hyperedge (bool)
+    :param shade_rows: shade rows (bool)
+    :param connect_nodes: connect nodes in each hyperedge (bool)
     :param dpi: the resolution of the image (int)
-    :param edgeColors: The colors of edges represented in the incidence matrix. This is random by default
+    :param edge_colors: The colors of edges represented in the incidence matrix. This is random by default
     
     :return: matplotlib axes with figure drawn on to it
     """
     # dpi spec
     plt.rcParams['figure.dpi'] = dpi
     
-    n, m = H.IM.shape
+    n, m = HG.nnodes, HG.nedges
     
     # plot the incidence matrix
-    y, x = np.where(H.IM == 1)
+    y, x = np.where(HG.incidence_matrix != 0)
     plt.scatter(x, y, 
                 edgecolor='k',
                 zorder=2)
     
     for i in range(m):
-        y = np.where(H.IM[:,i] == 1)[0]
+        y = np.where(HG.incidence_matrix[:,i] != 0)[0]
         x = i * np.ones(len(y),)
-        if edgeColors is None:
+        if edge_colors is None:
             c = None
         else:
-            c = edgeColors[i]
+            c = edge_colors[i]
         plt.scatter(x, y, 
                     color=c,
                     edgecolor='k',
                     zorder=2)     
 
-    y, x = np.where(H.IM == 1)
+    y, x = np.where(HG.incidence_matrix != 0)
     
     # create row shading
-    if shadeRows:
+    if shade_rows:
         yBar = np.arange(n)
         xBar = np.zeros(n)
         xBar[::2] = m - 0.5
@@ -55,8 +55,8 @@ def incidencePlot(H, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None
                  zorder=1)
     
     # plot each hyperedge with a black connector
-    if connectNodes:
-        for i in range(len(H.IM[0])):
+    if connect_nodes:
+        for i in range(len(HG.incidence_matrix[0])):
             i_pts = np.where(x == i)
             plt.plot([i,i], 
                      [np.min(y[i_pts]), 
