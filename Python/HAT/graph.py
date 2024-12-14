@@ -7,7 +7,7 @@ This file interfaces HAT with networkx. It provides several methods to create gr
 """
 
 
-def cliqueGraph(HG):
+def clique_graph(HG):
     """The clique expansion graph is constructed.
 
     :return: Clique expanded graph
@@ -55,7 +55,7 @@ def lineGraph(HG):
     D = HG.dual()
     return D.cliqueGraph()
 
-def starGraph(HG):
+def star_graph(HG):
     """The star graph representation is constructed.
 
     :return: Star graph

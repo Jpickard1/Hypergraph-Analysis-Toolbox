@@ -1,8 +1,70 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import networkx as nx
+
+from scipy.spatial.distance import pdist
+
+import matplotlib.pyplot as plt
+from matplotlib.collections import PolyCollection
+from matplotlib import colormaps
 
 # from HAT.graph import graph
 # from HAT.Hypergraph import Hypergraph as HG
+
+def bipartite(
+    HG,
+    ax=None
+):
+    G = HG.star_graph
+    pos = nx.layout.bipartite_layout(G, nodes=np.arange(HG.nedges))
+    ax = ax or plt.gca()
+    nx.draw(G, pos=pos, ax=ax)
+    return ax
+
+def pairwise(
+    HG,
+    ax=None
+):
+    G = HG.clique_graph
+    pos = nx.layout.spring_layout(G)
+    ax = ax or plt.gca()
+    nx.draw(G, pos=pos)
+    return ax
+
+def clique(
+    HG,
+    ax=None
+):
+    G = HG.clique_graph
+    pos = nx.layout.spring_layout(G)
+    pos_list = []
+    for k, v in pos.items():
+        pos_list.append(v)
+    pos_arr = np.array(pos_list)
+
+    ax = ax or plt.gca()
+
+    cmap = colormaps['viridis']
+    for edge in range(HG.nedges):
+        color = cmap(edge)
+        print(color)
+        nodes = HG.edges['Nodes'].iloc[edge]
+        for i, nodei in enumerate(nodes):
+            for j, nodej in enumerate(nodes):
+                if j <= i:
+                    continue
+                plt.plot(
+                    [pos_arr[nodei, 0], pos_arr[nodej, 0]],
+                    [pos_arr[nodei, 1], pos_arr[nodej, 1]],
+                    color
+                )
+
+    plt.scatter(pos_arr[:,0], pos_arr[:,1], s=10)
+
+    ax.set_xticks([])
+    ax.set_yticks([])
+    return ax
+
 
 def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors=None):
     """Plot the incidence matrix of a hypergraph.
@@ -73,3 +135,106 @@ def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors
     plt.xticks([])
     
     return plt.gca()
+
+def rubber_bands(
+    HG,
+    pos=None,
+    with_color=True,
+    with_node_counts=False,
+    with_edge_counts=False,
+    layout=nx.spring_layout,
+    layout_kwargs={},
+    ax=None,
+    node_radius=None,
+    edges_kwargs={},
+    nodes_kwargs={},
+    edge_labels_on_edge=True,
+    edge_labels={},
+    edge_labels_kwargs={},
+    node_labels={},
+    node_labels_kwargs={},
+    with_edge_labels=True,
+    with_node_labels=True,
+    node_label_alpha=0.35,
+    edge_label_alpha=0.35,
+    with_additional_edges=None,
+    contain_hyper_edges=False,
+    additional_edges_kwargs={},
+    return_pos=False,
+):
+    ax = ax or plt.gca()
+    if pos is None:
+        pos = layout_node_link(HG, with_additional_edges, layout=layout, **layout_kwargs)
+
+    # TODO: this line will not work
+    r0 =0.0125 * np.median(
+            [pdist(np.vstack(list(map(pos.get, HG.nodes)))).max() for nodes in HG.edges()]
+        )
+    a0 = np.pi * r0**2
+
+    # TODO: this line will not work
+    node_radius = {v: get_node_radius(v) for v in HG.nodes}
+
+    edges_kwargs = edges_kwargs.copy()
+    edges_kwargs.setdefault("edgecolors", plt.cm.tab10(np.arange(len(H.edges)) % 10))
+    edges_kwargs.setdefault("facecolors", "none")
+
+    polys = draw_hyper_edges(
+        HG,
+        pos,
+        node_radius=node_radius,
+        ax=ax,
+        contain_hyper_edges=contain_hyper_edges,
+        **edges_kwargs
+    )
+
+def draw_hyper_edges(HG, pos, node_radius={}, contain_hyper_edges=False, dr=None, **kwargs):
+    points = layout_hyper_edges(
+        HG, pos, node_radius=node_radius, dr=dr, contain_hyper_edges=contain_hyper_edges
+    )
+
+    polys = PolyCollection(points, **inflate_kwargs(HG.edges, kwargs))
+
+    (ax or plt.gca()).add_collection(polys)
+
+    return polys
+
+# TODO: this method acts differently than networkx
+def get_node_radius(node):
+    return 10
+
+def layout_node_link(HG, layout=nx.spring_layout, **kwargs):
+    # TODO: impliment HG.bipartite
+    B = HG.bipartite()
+    return layout(B, **kwargs)
+
+def inflate(items, v):
+    if type(v) in {str, tuple, int, float}:
+        return [v] * len(items)
+    elif callable(v):
+        return [v(i) for i in items]
+    elif type(v) not in {list, np.ndarray} and hasattr(v, "__getitem__"):
+        return [v[i] for i in items]
+    return v
+
+
+def inflate_kwargs(items, kwargs):
+    """
+    Helper function to expand keyword arguments.
+
+    Parameters
+    ----------
+    n: int
+        length of resulting list if argument is expanded
+    kwargs: dict
+        keyword arguments to be expanded
+
+    Returns
+    -------
+    dict
+        dictionary with same keys as kwargs and whose values are lists of length n
+    """
+
+    return {k: inflate(items, v) for k, v in kwargs.items()}
+
+

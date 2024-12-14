@@ -13,6 +13,9 @@ import pandas as pd
 # Nice printing
 from rich import print
 
+# HAT modules
+from HAT import graph
+
 class Hypergraph:
     """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.
 
@@ -363,6 +366,14 @@ class Hypergraph:
             self._set_adjacency_tensor()  # Automatically set if not yet defined
         self._reset['adjacency tensor'] = False
         return self._adjacency_tensor
+    
+    @property
+    def star_graph(self):
+        return graph.star_graph(self)
+    
+    @property
+    def clique_graph(self):
+        return graph.clique_graph(self)
 
     def _set_incidence_matrix(self):
         """Sets self._incidence_matrix based on self._edges
