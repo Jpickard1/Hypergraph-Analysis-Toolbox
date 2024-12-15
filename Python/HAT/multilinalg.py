@@ -87,7 +87,7 @@ def SpectralHSimilarity(L1, L2):
     S = sum(abs(S1 - S2)**2)/len(S1)
     return S
     
-def kronExponentiation(M, x):
+def kronecker_exponentiation(M, x):
     """Kronecker Product Exponential.
 
     :param M: a matrix
@@ -108,8 +108,15 @@ def kronExponentiation(M, x):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Dec 2, 2022
-    T = M
-    for i in range(x-1):
-        T = np.kron(T, M)
-    return T
+
+    # Base cases
+    if x == 1:
+        return M
+    elif x % 2 == 0:
+        half_kron = kronecker_exponentiation(M, x // 2)
+        return np.kron(half_kron, half_kron)
+    else:
+        return np.kron(M, kronecker_exponentiation(M, x - 1))
+
+    
     
