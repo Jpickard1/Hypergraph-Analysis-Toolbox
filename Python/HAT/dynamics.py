@@ -30,7 +30,7 @@ def ctrbk(HG, inputVxc):
     ctrbMatrix = HG.bMatrix(inputVxc)
     j = 0
     while j < n and np.linalg.matrix_rank(ctrbMatrix) < n:
-        kprod = kronExponentiation(ctrbMatrix, len(modes)-1)
+        kprod = mla.kronecker_exponentiation(ctrbMatrix, len(modes)-1)
         nextCtrbMatrix = Aflat @ kprod;
         ctrbMatrix = np.concatenate((ctrbMatrix, nextCtrbMatrix), axis=1)
         r = np.linalg.matrix_rank(ctrbMatrix)
