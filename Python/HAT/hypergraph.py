@@ -15,6 +15,7 @@ from rich import print
 
 # HAT modules
 from HAT import graph
+from HAT import export
 
 class Hypergraph:
     """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.
@@ -503,6 +504,7 @@ class Hypergraph:
         for key in self._reset.keys():
             self._reset[key] = True
 
+    @property
     def dual(self):
         """The dual hypergraph is constructed.
         Let :math:`H=(V,E)` be a hypergraph. In the dual hypergraph each original edge :math:`e in E`
@@ -519,23 +521,8 @@ class Hypergraph:
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        IM = self.IM.T
-        return Hypergraph(IM)
-    
-    def draw(self, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
-        """ This function draws the incidence matrix of the hypergraph object. It calls the function
-        ``HAT.draw.incidencePlot``, but is provided to generate the plot directly from the object.
+        return Hypergraph(incidence_matrix=self.incidence_matrix.T)
 
-        :param shadeRows: shade rows (bool)
-        :param connectNodes: connect nodes in each hyperedge (bool)
-        :param dpi: the resolution of the image (int)
-        :param edgeColors: The colors of edges represented in the incidence matrix. This is random by default
-        
-        :return: *matplotlib* axes with figure drawn on to it
-        """
-        # Auth: Joshua Pickard
-        #       jpic@umich.edu
-        # Date: Nov 30, 2022
-        # return HAT.draw.incidencePlot(self, shadeRows=shadeRows, connectNodes=connectNodes, dpi=dpi, edgeColors=edgeColors)
-        pass
-
+    @property
+    def hypernetx(self):
+        return export.to_hypernetx(self)
