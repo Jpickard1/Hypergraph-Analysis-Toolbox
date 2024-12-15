@@ -10,6 +10,8 @@ from matplotlib import colormaps
 from itertools import combinations
 from collections import Counter
 
+
+from HAT.export import to_hypernetx
 # from HAT.graph import graph
 # from HAT.Hypergraph import Hypergraph as HG
 
@@ -183,81 +185,40 @@ def rubber_bands(
     with_additional_edges=None,
     contain_hyper_edges=False,
     additional_edges_kwargs={},
-    return_pos=False,
+    return_pos=False
 ):
-    ax = ax or plt.gca()
-    if pos is None:
-        pos = layout_node_link(HG, with_additional_edges, layout=layout, **layout_kwargs)
-
-    # TODO: this line will not work
-    r0 =0.0125 * np.median(
-            [pdist(np.vstack(list(map(pos.get, HG.nodes)))).max() for nodes in HG.edges()]
-        )
-    a0 = np.pi * r0**2
-
-    # TODO: this line will not work
-    node_radius = {v: get_node_radius(v) for v in HG.nodes}
-
-    edges_kwargs = edges_kwargs.copy()
-    edges_kwargs.setdefault("edgecolors", plt.cm.tab10(np.arange(len(H.edges)) % 10))
-    edges_kwargs.setdefault("facecolors", "none")
-
-    polys = draw_hyper_edges(
-        HG,
-        pos,
-        node_radius=node_radius,
+    try:
+        import hypernetx as hnx
+    except ImportError as e:
+        raise ImportError(
+            "The 'hypernetx' library is required to use the 'rubber_bands' function. "
+            "Please install it using `pip install hypernetx`."
+        ) from e
+    HG_hnx = to_hypernetx(HG)
+    hnx.draw(
+        HG_hnx,
+        pos=pos,
+        with_color=with_color,
+        with_node_counts=with_node_counts,
+        with_edge_counts=with_edge_counts,
+        layout=layout,
+        layout_kwargs=layout_kwargs,
         ax=ax,
+        node_radius=node_radius,
+        edges_kwargs=edges_kwargs,
+        nodes_kwargs=nodes_kwargs,
+        edge_labels_on_edge=edge_labels_on_edge,
+        edge_labels=edge_labels,
+        edge_labels_kwargs=edge_labels_kwargs,
+        node_labels=node_labels,
+        node_labels_kwargs=node_labels_kwargs,
+        with_edge_labels=with_edge_labels,
+        with_node_labels=with_node_labels,
+        node_label_alpha=node_label_alpha,
+        edge_label_alpha=edge_label_alpha,
+        with_additional_edges=with_additional_edges,
         contain_hyper_edges=contain_hyper_edges,
-        **edges_kwargs
+        additional_edges_kwargs=additional_edges_kwargs,
+        return_pos=return_pos
     )
-
-def draw_hyper_edges(HG, pos, node_radius={}, contain_hyper_edges=False, dr=None, **kwargs):
-    points = layout_hyper_edges(
-        HG, pos, node_radius=node_radius, dr=dr, contain_hyper_edges=contain_hyper_edges
-    )
-
-    polys = PolyCollection(points, **inflate_kwargs(HG.edges, kwargs))
-
-    (ax or plt.gca()).add_collection(polys)
-
-    return polys
-
-# TODO: this method acts differently than networkx
-def get_node_radius(node):
-    return 10
-
-def layout_node_link(HG, layout=nx.spring_layout, **kwargs):
-    # TODO: impliment HG.bipartite
-    B = HG.bipartite()
-    return layout(B, **kwargs)
-
-def inflate(items, v):
-    if type(v) in {str, tuple, int, float}:
-        return [v] * len(items)
-    elif callable(v):
-        return [v(i) for i in items]
-    elif type(v) not in {list, np.ndarray} and hasattr(v, "__getitem__"):
-        return [v[i] for i in items]
-    return v
-
-
-def inflate_kwargs(items, kwargs):
-    """
-    Helper function to expand keyword arguments.
-
-    Parameters
-    ----------
-    n: int
-        length of resulting list if argument is expanded
-    kwargs: dict
-        keyword arguments to be expanded
-
-    Returns
-    -------
-    dict
-        dictionary with same keys as kwargs and whose values are lists of length n
-    """
-
-    return {k: inflate(items, v) for k, v in kwargs.items()}
-
 
