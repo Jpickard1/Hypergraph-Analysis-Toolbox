@@ -526,3 +526,8 @@ class Hypergraph:
     @property
     def hypernetx(self):
         return export.to_hypernetx(self)
+    
+    @property
+    def hypergraphx(self):
+        return export.to_hypergraphx(self)
+    
