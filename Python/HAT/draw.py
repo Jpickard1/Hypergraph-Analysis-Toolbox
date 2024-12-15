@@ -7,6 +7,8 @@ from scipy.spatial.distance import pdist
 import matplotlib.pyplot as plt
 from matplotlib.collections import PolyCollection
 from matplotlib import colormaps
+from itertools import combinations
+from collections import Counter
 
 # from HAT.graph import graph
 # from HAT.Hypergraph import Hypergraph as HG
@@ -31,39 +33,60 @@ def pairwise(
     nx.draw(G, pos=pos)
     return ax
 
-def clique(
-    HG,
-    ax=None
-):
+
+def clique(HG, ax=None, node_size=20, marker='o', cmap='viridis', edgewidth=5):
+    """
+    Plot the clique graph of a hypergraph, with edges of each clique sharing the same color.
+    
+    Parameters:
+    - HG: Hypergraph object with attributes `clique_graph` (Graph) and `edges['Nodes']` (DataFrame).
+    - ax: matplotlib.axes.Axes, optional. Axes to plot on.
+    - node_size: int, optional. Size of the scatter plot points (default: 10).
+    - marker: str, optional. Marker style for scatter plot points (default: 'o').
+    - cmap: str or Colormap, optional. Colormap for clique edges (default: 'viridis').
+
+    Returns:
+    - ax: matplotlib.axes.Axes with the plot.
+    """
     G = HG.clique_graph
-    pos = nx.layout.spring_layout(G)
-    pos_list = []
-    for k, v in pos.items():
-        pos_list.append(v)
-    pos_arr = np.array(pos_list)
+    pos = np.array(list(nx.layout.spring_layout(G).values()))  # Positions as an array
 
     ax = ax or plt.gca()
+    cmap = colormaps[cmap] if isinstance(cmap, str) else cmap  # Resolve colormap
 
-    cmap = colormaps['viridis']
-    for edge in range(HG.nedges):
-        color = cmap(edge)
-        print(color)
-        nodes = HG.edges['Nodes'].iloc[edge]
-        for i, nodei in enumerate(nodes):
-            for j, nodej in enumerate(nodes):
-                if j <= i:
-                    continue
-                plt.plot(
-                    [pos_arr[nodei, 0], pos_arr[nodej, 0]],
-                    [pos_arr[nodei, 1], pos_arr[nodej, 1]],
-                    color
-                )
+    edge_counter = Counter()
+    for nodes in HG.edges['Nodes']:
+        for nodei, nodej in combinations(nodes, 2):
+            edge_counter[tuple(sorted((nodei, nodej)))] += edgewidth
 
-    plt.scatter(pos_arr[:,0], pos_arr[:,1], s=10)
+    for edge_idx, nodes in enumerate(HG.edges['Nodes']):
+        color = cmap(edge_idx / HG.nedges)  # Normalize edge_idx to [0, 1] for colormap
+        for nodei, nodej in combinations(nodes, 2):  # All pairs in the clique
+            linewidth = edge_counter[tuple(sorted((nodei, nodej)))]
+            edge_counter[tuple(sorted((nodei, nodej)))] -= edgewidth
+            ax.plot(
+                [pos[nodei, 0], pos[nodej, 0]],
+                [pos[nodei, 1], pos[nodej, 1]],
+                color=color,
+                linewidth=linewidth,
+                zorder=edge_idx,
+            )
 
+    # Scatter plot for nodes
+    ax.scatter(
+        pos[:, 0],
+        pos[:, 1],
+        s=node_size,
+        marker=marker,
+        zorder=HG.nedges + 1,
+        color="black"
+    )
+
+    # Remove axis ticks
     ax.set_xticks([])
     ax.set_yticks([])
     return ax
+
 
 
 def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors=None):
