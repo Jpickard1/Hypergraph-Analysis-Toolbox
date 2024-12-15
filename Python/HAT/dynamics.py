@@ -1,3 +1,7 @@
+import numpy as np
+from HAT import Hypergraph
+from HAT import multilinalg as mla
+
 """
 This contains miscilaneous methods related to hypergraph dynamics, controllability, and observability.
 """
@@ -18,7 +22,7 @@ def ctrbk(HG, inputVxc):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    A = HG.adjTensor()
+    A = HG.adjacency_tensor
     modes = A.shape
     n = modes[0]
     order = len(modes)
@@ -26,7 +30,7 @@ def ctrbk(HG, inputVxc):
     ctrbMatrix = HG.bMatrix(inputVxc)
     j = 0
     while j < n and np.linalg.matrix_rank(ctrbMatrix) < n:
-        kprod = mla.kronExponentiation(ctrbMatrix, len(modes)-1)
+        kprod = kronExponentiation(ctrbMatrix, len(modes)-1)
         nextCtrbMatrix = Aflat @ kprod;
         ctrbMatrix = np.concatenate((ctrbMatrix, nextCtrbMatrix), axis=1)
         r = np.linalg.matrix_rank(ctrbMatrix)
@@ -54,7 +58,7 @@ def bMatrix(HG, inputVxc):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    B = np.zeros((len(HG.nodeWeights), len(inputVxc)))
+    B = np.zeros((len(HG.nnodes), len(inputVxc)))
     for i in range(len(inputVxc)):
         B[inputVxc[i], i] = 1
     return B
