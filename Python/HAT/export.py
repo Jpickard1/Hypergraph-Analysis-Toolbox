@@ -50,7 +50,7 @@ def to_hypernetx(HG):
     return hnx.Hypergraph(HG_df, edge_col='Edges', node_col='Nodes')
 
 def to_hypergraphx(HG):
-        """
+    """
     Converts a HAT hypergraph to a HypergraphX hypergraph.
 
     :param HG: The hypergraph object from the HAT library.
