@@ -1,6 +1,9 @@
 import numpy as np
+import scipy as sp
+
 from HAT import Hypergraph
 from HAT import multilinalg as mla
+
 
 """
 This contains miscilaneous methods related to hypergraph dynamics, controllability, and observability.
@@ -27,7 +30,7 @@ def ctrbk(HG, inputVxc):
     n = modes[0]
     order = len(modes)
     Aflat = np.reshape(A, (n, n**(order-1)))
-    ctrbMatrix = HG.bMatrix(inputVxc)
+    ctrbMatrix = b_matrix(HG, inputVxc)
     j = 0
     while j < n and np.linalg.matrix_rank(ctrbMatrix) < n:
         kprod = mla.kronecker_exponentiation(ctrbMatrix, len(modes)-1)
@@ -39,7 +42,7 @@ def ctrbk(HG, inputVxc):
         j += 1
     return ctrbMatrix
     
-def bMatrix(HG, inputVxc):
+def b_matrix(HG, inputVxc):
     """Constructs controllability :math:`B` matrix commonly used in the linear control system
     
     .. math::
@@ -58,7 +61,7 @@ def bMatrix(HG, inputVxc):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    B = np.zeros((len(HG.nnodes), len(inputVxc)))
+    B = np.zeros((HG.nnodes, len(inputVxc)))
     for i in range(len(inputVxc)):
         B[inputVxc[i], i] = 1
     return B

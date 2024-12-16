@@ -37,3 +37,4 @@ jobs:
     - name: Run test cases
       run: |
         python -m unittest -v ./Python/tests/hypergraph_constructors.py
+        python -m unittest -v ./Python/tests/control_can.py
