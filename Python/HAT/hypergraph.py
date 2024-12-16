@@ -238,7 +238,7 @@ class Hypergraph:
             self._order = nonzero_counts[0]
         elif self._edge_list is not None:
             # Determine if the hypergraph is directed
-            if isinstance(self._edge_list[0][0], int): # (undirected)
+            if not isinstance(self._edge_list[0][0], list): # (undirected)
                 k = len(self._edge_list[0])
                 self._uniform = True
                 self._order = k
@@ -526,8 +526,44 @@ class Hypergraph:
     @property
     def hypernetx(self):
         return export.to_hypernetx(self)
-    
+
+    @classmethod
+    def from_hypernetx(cls, HG_hnx):
+        node_df = pd.DataFrame(
+            {
+                'Nodes' : np.arange(HG_hnx.dataframe['nodes'].nunique()),
+                'Names': list(HG_hnx.dataframe['nodes'].unique())
+            }
+        )
+        edge_list, node_names, weight, properties = [], [], [], []
+        for _, df in HG_hnx.dataframe.groupby('edges'):
+            node_names.append(list(df['nodes'].unique()))
+            idxs = []
+            for node in node_names[-1]:
+                idxs.append(np.where(node_df['Names'] == node)[0][0])
+            edge_list.append(idxs)
+            if 'weight' in df.columns:
+                weight.append(df['weight'].iloc[0])
+            else:
+                weight.append(1)
+        edge_df = pd.DataFrame(
+            {
+                'Edges' : np.arange(len(edge_list)),
+                'Nodes' : edge_list,
+                'Node Names' : node_names,
+                'Weight': weight
+            }
+        )
+        print(f"{edge_list=}")
+        HG = Hypergraph(
+            edge_list = edge_list,
+            nodes     = node_df,
+            edges     = edge_df
+        )
+        return HG
+
     @property
     def hypergraphx(self):
         return export.to_hypergraphx(self)
     
+
