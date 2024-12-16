@@ -10,7 +10,6 @@ class HypergraphControlTests(unittest.TestCase):
         """
         Test construction of control configuration matrix
         """
-        logging.info('test_constructor_edge_set_1')
         incidence_matrix=np.array(
             [[1, 1],
             [1, 1],

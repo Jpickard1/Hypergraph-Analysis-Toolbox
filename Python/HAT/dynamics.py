@@ -1,7 +1,7 @@
 import numpy as np
 import scipy as sp
 
-from HAT import Hypergraph
+# from HAT import Hypergraph
 from HAT import multilinalg as mla
 
 

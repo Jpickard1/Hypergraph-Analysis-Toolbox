@@ -16,6 +16,8 @@ from rich import print
 # HAT modules
 from HAT import graph
 from HAT import export
+from HAT import laplacian
+
 
 class Hypergraph:
     """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.

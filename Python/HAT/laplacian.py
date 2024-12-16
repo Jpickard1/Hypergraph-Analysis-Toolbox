@@ -1,6 +1,6 @@
 import numpy as np
 import scipy as sp
-from HAT import Hypergraph
+# from HAT import Hypergraph
 
 """
 This file implements hypergraph laplacian methods.
@@ -16,8 +16,8 @@ def laplacian_matrix(HG, type='Bolla'):
 
     Several version of the hypergraph Laplacian are defined in [1-4]. These aim to capture
     the higher order structure as a matrix. This function serves as a wrapper to call functions
-    that generate different specific Laplacians (See ``bollaLaplacian()``, ``rodriguezLaplacian()``,
-    and ``zhouLaplacian()``).
+    that generate different specific Laplacians (See ``bolla_laplacian()``, ``rodriguez_laplacian()``,
+    and ``zhou_laplacian()``).
 
     References
     ----------
@@ -34,13 +34,13 @@ def laplacian_matrix(HG, type='Bolla'):
     #       jpic@umich.edu
     # Date: Nov 30, 2022
     if type == 'Bolla':
-        return bollaLaplacian(HG)
+        return bolla_laplacian(HG)
     elif type == 'Rodriguez':
-        return rodriguezLaplacian(HG)
+        return rodriguez_laplacian(HG)
     elif type == 'Zhou':
-        return zhouLaplacian(HG)
+        return zhou_laplacian(HG)
     
-def bollaLaplacian(HG):
+def bolla_laplacian(HG):
     """This function constructs the hypergraph Laplacian according to [1].
 
     :return: Bolla Laplacian matrix
@@ -64,7 +64,7 @@ def bollaLaplacian(HG):
     L = Dv - (HG.incidence_matrix @ DeInv @ HG.incidence_matrix.T)
     return L
     
-def rodriguezLaplacian(HG):
+def rodriguez_laplacian(HG):
     """This function constructs the hypergraph Laplacian according to [1, 2].
 
     :return: Rodriguez Laplacian matrix
@@ -85,7 +85,7 @@ def rodriguezLaplacian(HG):
     L = np.diag(sum(A)) - A
     return L
 
-def zhouLaplacian(HG):
+def zhou_laplacian(HG):
     """This function constructs the hypergraph Laplacian according to [1].
 
     :return: Zhou Laplacian matrix
