@@ -1,4 +1,4 @@
-Python/docs/_build/
+docs/_build/
 Python/HAT_Test.ipynb
 Python/HAT/__pycache__/
 *.ipynb*
