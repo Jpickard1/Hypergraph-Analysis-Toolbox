@@ -11,5 +11,5 @@ Python/del.py
 *.png
 *.asv
 Python/HAT/__pycache__/__init__.cpython-38.pyc
-.gitignore/*/*.pdf
-.gitignore/ISSUE_TEMPLATE/*.pdf
+.github/*/*.pdf
+.github/ISSUE_TEMPLATE/*.pdf
