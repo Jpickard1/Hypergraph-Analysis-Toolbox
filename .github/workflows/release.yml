@@ -10,6 +10,9 @@ jobs:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
 
+    permissions:
+          id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4  # Updated to latest version
@@ -33,9 +36,9 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.8.11  # Specific version instead of release/v1
         with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          packages_dir: Python/dist/
+          password: ${{ secrets.PYPI_HAT_RELEASE_YML_TOKEN }}
+          packages-dir: Python/dist/
           verbose: true
-          verify_metadata: true
-          skip_existing: false
+          verify-metadata: true
+          skip-existing: false
 
