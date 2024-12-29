@@ -27,7 +27,7 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install build twine
+          python -m pip install -U build twine
       
       - name: Build package
         run: python -m build Python/
@@ -41,6 +41,4 @@ jobs:
           password: ${{ secrets.PYPI_HAT_RELEASE_YML_TOKEN }}
           packages-dir: Python/dist/
           verbose: true
-          verify-metadata: true
-          skip-existing: false
 
