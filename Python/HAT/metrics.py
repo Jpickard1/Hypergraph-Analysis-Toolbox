@@ -8,7 +8,7 @@ Hypergraph metrics:
 """
 
 import numpy as np
-import networkx as np
+import networkx as nx
 import scipy as sp
 
 def matrix_entropy(HG, laplacian_type='Rodriguez'):
