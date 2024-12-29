@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - version2
     tags:
       - "v*"
 
@@ -11,9 +12,11 @@ jobs:
   build-n-publish:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
-
+    environment:
+      name: pypi
+      url: https://pypi.org/p/HypergraphAnalysisToolbox/
     permissions:
-          id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
 
     steps:
       - name: Checkout source
@@ -38,7 +41,6 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@v1.8.11  # Specific version instead of release/v1
         with:
-          password: ${{ secrets.PYPI_HAT_RELEASE_YML_TOKEN }}
           packages-dir: Python/dist/
           verbose: true
 
