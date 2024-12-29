@@ -44,4 +44,5 @@ jobs:
           password: ${{ secrets.PYPI_HAT_RELEASE_YML_TOKEN }}
           packages-dir: Python/dist/
           verbose: true
+          repository-url: https://pypi.org/p/HypergraphAnalysisToolbox/
 
