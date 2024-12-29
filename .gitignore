@@ -1,4 +1,4 @@
-Python/docs/_build/
+docs/_build/
 Python/HAT_Test.ipynb
 Python/HAT/__pycache__/
 *.ipynb*
@@ -11,3 +11,6 @@ Python/del.py
 *.png
 *.asv
 Python/HAT/__pycache__/__init__.cpython-38.pyc
+.github/*/*.pdf
+.github/ISSUE_TEMPLATE/*.pdf
+.github/ISSUE_TEMPLATE/*.jpeg

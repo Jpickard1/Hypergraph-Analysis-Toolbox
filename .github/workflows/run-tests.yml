@@ -36,4 +36,4 @@ jobs:
     # Run the test cases
     - name: Run test cases
       run: |
-        python -m unittest -v ./Python/tests/hypergraph_constructors.py
+        python ./Tests/run_tests.py

@@ -13,6 +13,12 @@ import pandas as pd
 # Nice printing
 from rich import print
 
+# HAT modules
+from HAT import graph
+from HAT import export
+from HAT import laplacian
+
+
 class Hypergraph:
     """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.
 
@@ -234,7 +240,7 @@ class Hypergraph:
             self._order = nonzero_counts[0]
         elif self._edge_list is not None:
             # Determine if the hypergraph is directed
-            if isinstance(self._edge_list[0][0], int): # (undirected)
+            if not isinstance(self._edge_list[0][0], list): # (undirected)
                 k = len(self._edge_list[0])
                 self._uniform = True
                 self._order = k
@@ -363,6 +369,18 @@ class Hypergraph:
             self._set_adjacency_tensor()  # Automatically set if not yet defined
         self._reset['adjacency tensor'] = False
         return self._adjacency_tensor
+    
+    @property
+    def star_graph(self):
+        return graph.star_graph(self)
+    
+    @property
+    def clique_graph(self):
+        return graph.clique_graph(self)
+    
+    @property
+    def laplacian_matrix(self, laplacian_type='bolla'):
+        return laplacian.laplacian_matrix(self, laplacian_type=laplacian_type)
 
     def _set_incidence_matrix(self):
         """Sets self._incidence_matrix based on self._edges
@@ -492,6 +510,7 @@ class Hypergraph:
         for key in self._reset.keys():
             self._reset[key] = True
 
+    @property
     def dual(self):
         """The dual hypergraph is constructed.
         Let :math:`H=(V,E)` be a hypergraph. In the dual hypergraph each original edge :math:`e in E`
@@ -508,23 +527,49 @@ class Hypergraph:
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
-        IM = self.IM.T
-        return Hypergraph(IM)
-    
-    def draw(self, shadeRows=True, connectNodes=True, dpi=200, edgeColors=None):
-        """ This function draws the incidence matrix of the hypergraph object. It calls the function
-        ``HAT.draw.incidencePlot``, but is provided to generate the plot directly from the object.
+        return Hypergraph(incidence_matrix=self.incidence_matrix.T)
 
-        :param shadeRows: shade rows (bool)
-        :param connectNodes: connect nodes in each hyperedge (bool)
-        :param dpi: the resolution of the image (int)
-        :param edgeColors: The colors of edges represented in the incidence matrix. This is random by default
-        
-        :return: *matplotlib* axes with figure drawn on to it
-        """
-        # Auth: Joshua Pickard
-        #       jpic@umich.edu
-        # Date: Nov 30, 2022
-        # return HAT.draw.incidencePlot(self, shadeRows=shadeRows, connectNodes=connectNodes, dpi=dpi, edgeColors=edgeColors)
-        pass
+    @property
+    def hypernetx(self):
+        return export.to_hypernetx(self)
+
+    @classmethod
+    def from_hypernetx(cls, HG_hnx):
+        node_df = pd.DataFrame(
+            {
+                'Nodes' : np.arange(HG_hnx.dataframe['nodes'].nunique()),
+                'Names': list(HG_hnx.dataframe['nodes'].unique())
+            }
+        )
+        edge_list, node_names, weight, properties = [], [], [], []
+        for _, df in HG_hnx.dataframe.groupby('edges'):
+            node_names.append(list(df['nodes'].unique()))
+            idxs = []
+            for node in node_names[-1]:
+                idxs.append(np.where(node_df['Names'] == node)[0][0])
+            edge_list.append(idxs)
+            if 'weight' in df.columns:
+                weight.append(df['weight'].iloc[0])
+            else:
+                weight.append(1)
+        edge_df = pd.DataFrame(
+            {
+                'Edges' : np.arange(len(edge_list)),
+                'Nodes' : edge_list,
+                'Node Names' : node_names,
+                'Weight': weight
+            }
+        )
+        print(f"{edge_list=}")
+        HG = Hypergraph(
+            edge_list = edge_list,
+            nodes     = node_df,
+            edges     = edge_df
+        )
+        return HG
+
+    @property
+    def hypergraphx(self):
+        return export.to_hypergraphx(self)
+    
 
