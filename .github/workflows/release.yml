@@ -39,7 +39,7 @@ jobs:
         run: twine check --strict Python/dist/*
 
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@v1
+        uses: pypa/gh-action-pypi-publish@v1.12.3
         with:
           password: ${{ secrets.PYPI_HAT_RELEASE_YML_TOKEN }}
           packages-dir: Python/dist/
