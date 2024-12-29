@@ -11,12 +11,12 @@ import numpy as np
 import networkx as np
 import scipy as sp
 
-def matrix_entropy(HG, type='Rodriguez'):
+def matrix_entropy(HG, laplacian_type='Rodriguez'):
     """Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.
 
-    :param type: Type of hypergraph Laplacian matrix. This defaults to 'Rodriguez' and other
+    :param laplacian_type: Type of hypergraph Laplacian matrix. This defaults to 'Rodriguez' and other
         choices inclue ``Bolla`` and ``Zhou`` (See: ``laplacianMatrix()``).
-    :type type: *str, optional*
+    :type laplacian_type: *str, optional*
     :return: Matrix based hypergraph entropy
     :rtype: *float*
 
@@ -31,7 +31,7 @@ def matrix_entropy(HG, type='Rodriguez'):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    L = HG.laplacianMatrix(type)
+    L = HG.laplacianMatrix(laplacian_type)
     U, V = np.linalg.eig(L)
     return sp.stats.entropy(U)
 

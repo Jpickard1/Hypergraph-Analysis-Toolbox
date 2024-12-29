@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 test_commands = [
     ["python", "-m", "unittest", "-v", "./Tests/hypergraph_constructors.py"],
     ["python", "-m", "unittest", "-v", "./Tests/control_can.py"],
-    ["python", "-m", "unittest", "-v", "./Tests/run_tests.py"],
+    ["python", "-m", "unittest", "-v", "./Tests/laplacians.py"],
 ]
 
 # Function to run a test command

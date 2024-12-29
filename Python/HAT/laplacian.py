@@ -6,7 +6,7 @@ import scipy as sp
 This file implements hypergraph laplacian methods.
 """
 
-def laplacian_matrix(HG, type='Bolla'):
+def laplacian_matrix(HG, laplacian_type='Bolla'):
     """This function returns a version of the higher order Laplacian matrix of the hypergraph.
 
     :param type: Indicates which version of the Laplacin matrix to return. It defaults to ``Bolla`` [1], but ``Rodriguez`` [2,3] and ``Zhou`` [4] are valid arguments as well.
@@ -33,11 +33,11 @@ def laplacian_matrix(HG, type='Bolla'):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    if type == 'Bolla':
+    if laplacian_type.lower() == 'bolla':
         return bolla_laplacian(HG)
-    elif type == 'Rodriguez':
+    elif laplacian_type.lower() == 'rodriguez':
         return rodriguez_laplacian(HG)
-    elif type == 'Zhou':
+    elif laplacian_type.lower() == 'zhou':
         return zhou_laplacian(HG)
     
 def bolla_laplacian(HG):

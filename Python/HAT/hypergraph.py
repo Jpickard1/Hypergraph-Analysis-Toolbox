@@ -377,6 +377,10 @@ class Hypergraph:
     @property
     def clique_graph(self):
         return graph.clique_graph(self)
+    
+    @property
+    def laplacian_matrix(self, laplacian_type='bolla'):
+        return laplacian.laplacian_matrix(self, laplacian_type=laplacian_type)
 
     def _set_incidence_matrix(self):
         """Sets self._incidence_matrix based on self._edges
