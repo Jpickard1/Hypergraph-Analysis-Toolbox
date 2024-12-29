@@ -5,9 +5,14 @@ import scipy as sp
 import scipy.io
 import networkx as nx
 import os
+import pandas as pd
 
-import HAT.multilinalg
-import HAT
+import multilinalg
+# import HAT
+
+"""
+HAT.HAT module contains miscilaneous hypergraph methods
+"""
 
 def directSimilarity(HG1, HG2, measure='Hamming'):
     """This function computes the direct similarity between two uniform hypergraphs.
@@ -104,7 +109,7 @@ def indirectSimilarity(G1, G2, measure='Hamming', eps=10e-3):
         s = (1 / len(v1)) * np.linalg.norm(M1-M2)
     return s
 
-def multicorrelations(D, order, mtype='Drezner', idxs=None):
+def multicorrelations(D, order, mtype='Drezner', idxs=None, v=False, vfreq=1000):
     """This function computes the multicorrelation among pairwise or 2D data.
 
     :param D: 2D or pairwise data
@@ -117,6 +122,10 @@ def multicorrelations(D, order, mtype='Drezner', idxs=None):
     :param idxs: specify which indices of ``D`` to compute multicorrelations of. The default is ``None``, in which case
         all combinations of ``order`` indices are computed.
     :type idxs: *ndarray*, optional
+    :param v: verbose, defaults to False
+    :type v: bool, optional
+    :param vfreq: frequency to display output in verbose mode
+    :type vfrea: int, optional
     :return: A vector of the multicorrelation scores computed and a vector of the column indices of
         ``D`` used to compute each multicorrelation.
     :rtype: *(ndarray, ndarray)*
@@ -150,6 +159,9 @@ def multicorrelations(D, order, mtype='Drezner', idxs=None):
         elif mtype == 'Taylor':
             w, _ = np.linalg.eigh(minor)
             M[i] = taylorCoef * np.std(w)
+
+        if v and i % vfreq == 0:
+            print(f"{i} / {len(idxs)} mcorrs complete")
 
     return M, idxs
 

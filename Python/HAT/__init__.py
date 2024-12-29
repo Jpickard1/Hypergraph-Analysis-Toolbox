@@ -1,6 +1,6 @@
 
-__all__ = ['Hypergraph', 'HAT', 'draw']
+__all__ = ['hypergraph', 'HAT', 'draw']
 
-from .Hypergraph import Hypergraph
-from .HAT import *
-from .draw import *
+from .hypergraph import Hypergraph
+# from .HAT import *
+# from .draw import *
