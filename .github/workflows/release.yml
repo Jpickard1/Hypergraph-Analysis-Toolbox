@@ -12,7 +12,9 @@ jobs:
   build-n-publish:
     name: Build and publish to PyPI
     runs-on: ubuntu-latest
-
+    environment:
+      name: pypi
+      url: https://pypi.org/p/HypergraphAnalysisToolbox/
     permissions:
       id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
 
@@ -42,3 +44,4 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
           packages-dir: Python/dist/
           verbose: true
+          repository-url: https://pypi.org/p/HypergraphAnalysisToolbox/
