@@ -1,21 +1,21 @@
 [build-system]
-requires = ["hatchling"]
+requires = [ "hatchling",]
 build-backend = "hatchling.build"
+
 [project]
-name = "HAT"
-version = "1.1.5"
-authors = [
-  { name="Joshua Pickard", email="jpic@umich.edu" },
-]
+name = "HypergraphAnalysisToolbox"
+version = "1.1.9"
 description = "This package performes hypergraph analysis."
 readme = "PYPIREADME.md"
 requires-python = ">=3.11"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
+classifiers = [ "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent",]
+[[project.authors]]
+name = "Joshua Pickard"
+email = "jpic@umich.edu"
 
 [project.urls]
-"Homepage" = "https://hypergraph-analysis-toolbox.readthedocs.io/en/latest/"
+Homepage = "https://hypergraph-analysis-toolbox.readthedocs.io/en/latest/"
 "Bug Tracker" = "https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = [ "HAT",]
