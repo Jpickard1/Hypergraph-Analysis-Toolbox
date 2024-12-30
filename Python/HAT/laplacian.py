@@ -21,13 +21,13 @@ def laplacian_matrix(HG, laplacian_type='Bolla'):
 
     References
     ----------
-    .. [1] Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117. 
+      - Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117. 
         https://www.sciencedirect.com/science/article/pii/0012365X9390322K
-    .. [2] Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
+      - Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
         https://www.tandfonline.com/doi/abs/10.1080/03081080290011692
-    .. [3] Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
+      - Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
         https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374
-    .. [4] Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
+      - Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
         https://dennyzhou.github.io/papers/hyper_tech.pdf
     """
     # Auth: Joshua Pickard
@@ -48,7 +48,7 @@ def bolla_laplacian(HG):
 
     References
     ----------
-    .. [1] Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
+      -  Bolla, M. (1993). Spectra, euclidean representations and clusterings of hypergraphs. Discrete Mathematics, 117.
            https://www.sciencedirect.com/science/article/pii/0012365X9390322K
     """
     # Auth: Joshua Pickard
@@ -72,9 +72,9 @@ def rodriguez_laplacian(HG):
 
     References
     ----------
-    .. [1] Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
+      -  Rodriguez, J. A. (2002). On the Laplacian eigenvalues and metric parameters of hypergraphs. Linear and Multilinear Algebra, 50(1), 1-14.
            https://www.tandfonline.com/doi/abs/10.1080/03081080290011692
-    .. [2] Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
+      -  Rodriguez, J. A. (2003). On the Laplacian spectrum and walk-regular hypergraphs. Linear and Multilinear Algebra, 51, 285–297.
            https://www.tandfonline.com/doi/abs/10.1080/0308108031000084374
     """
     # Auth: Joshua Pickard
@@ -93,7 +93,7 @@ def zhou_laplacian(HG):
 
     References
     ----------
-    .. [1] Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
+      - Zhou, D., Huang, J., & Schölkopf, B. (2005). Beyond pairwise classification and clustering using hypergraphs. (Equation 3.3)
            https://dennyzhou.github.io/papers/hyper_tech.pdf
     """
     # Auth: Joshua Pickard
