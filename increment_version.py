@@ -4,6 +4,11 @@ import toml
 from pathlib import Path
 
 def increment_version(file_path: str):
+    '''
+    This method updates the patch counter associated with the version of HAT.
+    Python/pyproject.toml is updated, which contains metadata used for distribution
+    by PYPI.
+    '''
     file = Path(file_path)
     data = toml.loads(file.read_text())
 
