@@ -171,7 +171,8 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
         data = {
             'Nodes': [[0, 1, 2], [0, 1, 3], [0, 1, 2], [0, 1, 3], [0, 1, 2], [0, 1, 3]],
             'Head': [[0], [0], [1], [1], [2], [3]],
-            'Tail': [[1, 2], [1, 3], [0, 2], [0, 3], [0, 1], [0, 1]]
+            'Tail': [[1, 2], [1, 3], [0, 2], [0, 3], [0, 1], [0, 1]],
+            'Edges':[0,1,2,3,4,5]
         }
 
         # Create the DataFrame with specified indices
@@ -216,6 +217,8 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
             logging.info(f"DataFrames are not equal: {e}")
 
         try:
+            print(f"{HG.edges=}")
+            print(f"{edges_df=}")
             assert_frame_equal(edges_df, HG.edges, check_dtype=False)
         except AssertionError as e:
             logging.info(f"DataFrames are not equal: {e}")
@@ -307,6 +310,7 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
         # Define expected edge DataFrame
         edge_df = pd.DataFrame({
             'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
+            'Edges': [0,1,2],
             'weight': [1.5, 2.5, 3.0]
         })
 
@@ -331,6 +335,7 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
         # Define expected edge DataFrame
         edge_df = pd.DataFrame({
             'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
+            'Edges': [0,1,2],
             'weight': [1.5, 2.5, pd.NA]
         })
 
@@ -352,10 +357,12 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
         # Define expected edge DataFrame
         edge_df = pd.DataFrame({
             'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
+            'Edges': [0,1,2],
             'weight': [pd.NA, pd.NA, 3.0]
         })
 
         # Assert the edges match
+        print(f"{HG.edges=}")
         assert_frame_equal(edge_df, HG.edges, check_dtype=False)
 
 logging.basicConfig(

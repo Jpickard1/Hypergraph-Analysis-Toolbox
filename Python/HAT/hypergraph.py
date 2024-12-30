@@ -191,16 +191,15 @@ class Hypergraph:
             # = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
             warnings.warn('"Edges" column not found in the provided nodes dataframe.')
             warnings.warn('This column has been appended.')
-            print(f"{self.edges=}")
 
         if compress:
             # TODO: filter self._edges to achieve:
             #   1. no duplicate rows (done)
             #   2. no duplicate tails (if directed)
             # Identify duplicate rows based on string representations
-            self._edges['row_hash'] = self._edges.apply(lambda row: str(row.values), axis=1)
+            self._edges['row_hash'] = self._edges.drop(["Edges"], axis=1).apply(lambda row: str(row.values), axis=1)
             self._edges = self._edges.drop_duplicates(subset=['row_hash']).drop(columns=['row_hash'])
-
+            self.edges['Edges'] = list(np.arange(self._edges.shape[0]))
             # reset the incidence matrix, edge list, or adjacency tensor based on self.edges
             if incidence_matrix is not None:
                 self._set_incidence_matrix()
@@ -501,6 +500,8 @@ class Hypergraph:
         else:
             properties['Nodes'] = nodes
 
+        properties['Edges'] = self.nedges
+
         # Append the edge to the DataFrame
         new_row = pd.DataFrame([properties])
         self._edges = pd.concat([self._edges, new_row], ignore_index=True)
@@ -560,7 +561,7 @@ class Hypergraph:
                 'Weight': weight
             }
         )
-        print(f"{edge_list=}")
+
         HG = Hypergraph(
             edge_list = edge_list,
             nodes     = node_df,
@@ -594,7 +595,6 @@ class Hypergraph:
             node_idx = list(nodes['Nodes'].values).index(node)
             edge_list[edge_idx].append(node_idx)
         edges['Nodes'] = edge_list
-        print(f"{edges=}")
 
         HG = Hypergraph(
             nodes = nodes,
@@ -616,7 +616,6 @@ class Hypergraph:
             node_idx = list(nodes['node'].values).index(node)
             edge_list[edge_idx].append(node_idx)
         edges['Nodes'] = edge_list
-        print(f"{edges=}")
         '''
         rename_column_nodes = list(nodes.columns).index('node')
         rename_column_edges = list(edges.columns).index('nodes')
