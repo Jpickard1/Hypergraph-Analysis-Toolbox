@@ -1,6 +1,8 @@
 import subprocess
 from concurrent.futures import ThreadPoolExecutor
 
+print('Executing: run_tests.py')
+
 # Define the test commands
 test_commands = [
     ["python", "-m", "unittest", "-v", "./Tests/hypergraph_constructors.py"],
