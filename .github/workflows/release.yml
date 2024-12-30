@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - version2
     tags:
       - "v*"
 
@@ -16,8 +15,8 @@ jobs:
       name: pypi
       url: https://pypi.org/p/HypergraphAnalysisToolbox/
     permissions:
-      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
-      contents: write
+      id-token: write # this permission is mandatory for Trusted Publishing (pypi)
+      contents: write # this permission is mandatory for editing the contents of the repository
 
     steps:
       - name: Checkout source
