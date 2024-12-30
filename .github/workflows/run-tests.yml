@@ -36,4 +36,4 @@ jobs:
     # Run the test cases
     - name: Run test cases
       run: |
-        python ./Tests/run_tests.py
+        pytest ./Tests/run_tests.py
