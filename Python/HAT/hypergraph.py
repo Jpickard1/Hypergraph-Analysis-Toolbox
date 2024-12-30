@@ -160,8 +160,8 @@ class Hypergraph:
                 self._edges = pd.DataFrame(
                     {
                         'Nodes' : edge_nodes,
-                        'Head'  : head,
-                        'Tail'  : tail
+                        "head"  : head,
+                        "tail"  : tail
                     }
                 )
             else:
@@ -249,7 +249,7 @@ class Hypergraph:
             warnings.warn('The provided and detected `order` are not in agreement!') if self._verbose else None
 
     def _detect_directed(self, directed):
-        if self._edges is not None and 'Head' in self._edges.columns and 'Tail' in self._edges.columns:
+        if self._edges is not None and "head" in self._edges.columns and "tail" in self._edges.columns:
             self._directed = True
 
         # The adjacency tensor is directed
@@ -371,8 +371,8 @@ class Hypergraph:
         incidence_matrix = np.zeros((self.nnodes, self.nedges))
         for iedge in range(self.nedges):
             if self.directed:
-                tail = self.edges['Tail'].iloc[iedge]
-                head = self.edges['Head'].iloc[iedge]
+                tail = self.edges["tail"].iloc[iedge]
+                head = self.edges["head"].iloc[iedge]
                 for node in tail:
                     incidence_matrix[node, iedge] = -1
                 for node in head:
@@ -389,7 +389,7 @@ class Hypergraph:
         edge_list = []
         if self.directed:
             for iedge in range(self.nedges):
-                edge_list.append(list([self.edges['Head'].iloc[iedge], self.edges['Tail'].iloc[iedge]]))
+                edge_list.append(list([self.edges["head"].iloc[iedge], self.edges["tail"].iloc[iedge]]))
         else:
             for iedge in range(self.nedges):
                 edge_list.append(list(self.edges['Nodes'].iloc[iedge]))
@@ -401,8 +401,8 @@ class Hypergraph:
         adjacency_tensor = np.zeros((self.nnodes,) * self.order, dtype=int)
         if self.directed:
             for iedge in range(self.nedges):
-                tail = self.edges['Tail'].iloc[iedge]
-                head = self.edges['Head'].iloc[iedge]
+                tail = self.edges["tail"].iloc[iedge]
+                head = self.edges["head"].iloc[iedge]
                 if not isinstance(head, list):
                     head = [head]
                 if not isinstance(tail, list):
@@ -478,8 +478,8 @@ class Hypergraph:
         if self.directed:
             if len(nodes) < 2:
                 raise ValueError("Directed edges require at least two nodes (Head and Tail).")
-            properties['Head'] = nodes[0]
-            properties['Tail'] = nodes[1]
+            properties["head"] = nodes[0]
+            properties["tail"] = nodes[1]
             properties['Nodes'] = nodes[0] + nodes[1]
         else:
             properties['Nodes'] = nodes
@@ -611,33 +611,57 @@ class Hypergraph:
         }
         incidence, nodes, edges = [], [], []
         for inode in range(self.nodes.shape[0]):
-            node = {'node': inode}
+            node = {
+                'node': inode,
+#                'weight':None,
+                'attrs': {}
+            }
             for property in self.nodes.columns:
                 if property in ['Nodes']:
                     continue
+                elif property == 'weight':
+                    node['weight'] = self.nodes[property].iloc[inode]
                 else:
-                    node[property] = self.nodes[property].iloc[inode]
+                    node['attrs'][property] = self.nodes[property].iloc[inode]
             nodes.append(node)
         for iedge in range(self.edges.shape[0]):
             incident_nodes = list(self.edges['Nodes'].iloc[iedge])
             edge = {
                 'edge' : iedge,
-                'nodes' : incident_nodes
+#                'weight': None,
+                'attrs': {
+                    'nodes' : incident_nodes
+                }
             }
             edge_incidence = {
                 'edge' : iedge,
-                'node' : None
+                'node' : None,
+#                'weight': None,
+#                'direction': None,
+                'attrs': {}
             }
             for property in self.edges.columns:
-                if property in ['Nodes']:
+                if property in ['Nodes', "head", "tail"]:
                     continue
+                if property == 'weight':
+                    edge['weight'] = self.edges[property].iloc[iedge]
+                    edge_incidence['weight'] = self.edges[property].iloc[iedge]
                 else:
-                    edge[property] = self.edges[property].iloc[iedge]
-                    edge_incidence[property] = self.edges[property].iloc[iedge]
+                    edge['attrs'][property] = self.edges[property].iloc[iedge]
+                    edge_incidence['attrs'][property] = self.edges[property].iloc[iedge]
+            if self.directed:
+                edge['attrs']['head'] = self.edges['head'].iloc[iedge]
+                edge['attrs']['tail'] = self.edges['tail'].iloc[iedge]
             edges.append(edge)
             for node in incident_nodes:
                 edge_incidence['node'] = node
+                if self.directed:
+                    if node in edge['attrs']['head']:
+                        edge_incidence['direction'] = 'head'
+                    else:
+                        edge_incidence['direction'] = 'tail'
                 incidence.append(edge_incidence.copy())
+
         hif = {
             'network-type': network_type,
             'metadata': metadata,
@@ -645,6 +669,7 @@ class Hypergraph:
             'edges': edges,
             'incidences': incidence
         }
+
         return hif
 
     @property
