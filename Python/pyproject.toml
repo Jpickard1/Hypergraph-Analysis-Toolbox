@@ -2,7 +2,7 @@
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 [project]
-name = "HAT"
+name = "HypergraphAnalysisToolbox"
 version = "1.1.5"
 authors = [
   { name="Joshua Pickard", email="jpic@umich.edu" },
@@ -15,6 +15,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["HAT"]
 
 [project.urls]
 "Homepage" = "https://hypergraph-analysis-toolbox.readthedocs.io/en/latest/"
