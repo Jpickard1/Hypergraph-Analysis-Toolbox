@@ -587,7 +587,7 @@ class Hypergraph:
 
         # Create the edge list
         edge_list = [[] for iedge in range(edges.shape[0])]
-        for incidence in hif['incidence']:
+        for incidence in hif['incidences']:
             edge = incidence['edge']
             node = incidence['node']
             edge_idx = list(edges['edge'].values).index(edge)
@@ -609,7 +609,7 @@ class Hypergraph:
         nodes = pd.DataFrame(hif['nodes'])
         edges = pd.DataFrame(hif['edges'])
         edge_list = [[] for iedge in range(edges.shape[0])]
-        for incidence in hif['incidence']:
+        for incidence in hif['incidences']:
             edge = incidence['edge']
             node = incidence['node']
             edge_idx = list(edges['edge'].values).index(edge)

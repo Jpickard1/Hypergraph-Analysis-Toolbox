@@ -1,3 +1,4 @@
+import pandas as pd
 
 def to_hypernetx(HG):
     """
@@ -150,7 +151,7 @@ def to_hif(HG):
         'metadata': metadata,
         'nodes': nodes,
         'edges': edges,
-        'incidence': incidence
+        'incidences': incidence
     }
     return hif
     
