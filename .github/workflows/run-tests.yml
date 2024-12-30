@@ -36,4 +36,5 @@ jobs:
     # Run the test cases
     - name: Run test cases
       run: |
+        pip install -U pytest
         pytest ./Tests/run_tests.py
