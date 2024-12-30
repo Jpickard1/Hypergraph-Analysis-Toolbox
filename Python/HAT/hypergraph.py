@@ -32,28 +32,6 @@ class Hypergraph:
     multi-way interactions. Uniform hypergraphs, where all edges have the same number of vertices, 
     can be efficiently represented using tensors.
 
-    Parameters
-    ----------
-    E : list of lists, optional
-        List of edges where each edge is represented by a list of node indices. 
-        Each list element corresponds to an edge.
-    A : ndarray, optional
-        Adjacency tensor of the hypergraph, primarily used if the hypergraph is uniform.
-    incidence_matrix : ndarray, optional
-        Incidence matrix representing node-edge connections, where rows represent nodes 
-        and columns represent edges.
-    nodes : ndarray, optional
-        Array of nodes or vertices in the hypergraph.
-    edges : ndarray, optional
-        Array of edges (or hyperedges), where each entry is a collection of nodes.
-    uniform : bool, optional
-        Whether the hypergraph is uniform (all edges contain the same number of vertices).
-        If not specified, it will be inferred from other inputs.
-    k : int, optional
-        The edge degree for uniform hypergraphs (i.e., the number of nodes per edge).
-    directed : bool, default=False
-        Indicates if the hypergraph is directed.
-
     Attributes
     ----------
     edge_list : list of lists or None
@@ -70,6 +48,10 @@ class Hypergraph:
         Indicates if the hypergraph is uniform.
     k : int
         The degree of uniformity in terms of edge size, if applicable.
+    directed : bool, default=False
+        Indicates if the hypergraph is directed.
+    verbose : bool, default=False
+        Additional warning messages display when true
     """
     def __init__(self,
             edge_list=None,
@@ -80,8 +62,9 @@ class Hypergraph:
             uniform=None,
             order=None,
             directed=None,
-            compress=True # this argument tells the constructor to rearrange the numerical 
+            compress=True,# this argument tells the constructor to rearrange the numerical 
                           # representation based on the set .edges dataframe.
+            verbose=False
         ):
         # Auth: Joshua Pickard
         #       jpic@umich.edu
@@ -108,6 +91,7 @@ class Hypergraph:
         self._uniform          = uniform
         self._order            = order
         self._directed         = directed
+        self._verbose          = verbose
 
         self._reset = {
             'adjacency tensor': True,
@@ -142,7 +126,7 @@ class Hypergraph:
             self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
         elif 'Nodes' not in self._nodes.columns:
             self._nodes['Nodes'] = np.arange(self._nodes.shape[0])
-            warnings.warn('`Nodes` column not found in the provided in self._nodes. It has been added')
+            warnings.warn('`Nodes` column not found in the provided in self._nodes. It has been added') if self._verbose else None
 
         # Set the edges dataframe
         if self._edges is None:
@@ -189,8 +173,8 @@ class Hypergraph:
         if 'Edges' not in self._edges.columns:
             self.edges['Edges'] = list(np.arange(self._edges.shape[0]))
             # = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
-            warnings.warn('"Edges" column not found in the provided nodes dataframe.')
-            warnings.warn('This column has been appended.')
+            warnings.warn('"Edges" column not found in the provided nodes dataframe.') if self._verbose else None
+            warnings.warn('This column has been appended.') if self._verbose else None
 
         if compress:
             # TODO: filter self._edges to achieve:
@@ -224,10 +208,10 @@ class Hypergraph:
         '''
         # At least one numerical representation should be supplied
         if edge_list is None and adjacency_tensor is None and incidence_matrix is None and edges is None:
-            warnings.warn("The edge list, incidence matrix, adjacency tensor, and edge DataFrame are None.", UserWarning)
+            warnings.warn("The edge list, incidence matrix, adjacency tensor, and edge DataFrame are None.", UserWarning) if self._verbose else None
 
         if order is not None and not (uniform == True):
-            warnings.warn("If the hypergraph order is fixed then it should be k-uniform")
+            warnings.warn("If the hypergraph order is fixed then it should be k-uniform") if self._verbose else None
 
     def _detect_uniform_and_order(self, uniform, order):
         if self._adjacency_tensor is not None:
@@ -259,10 +243,10 @@ class Hypergraph:
             self._order = -1
 
         if self._uniform != uniform and uniform is not None:
-            warnings.warn('The provided and detected `uniform` are not in agreement!')
+            warnings.warn('The provided and detected `uniform` are not in agreement!') if self._verbose else None
 
         if self._order != order and order is not None:
-            warnings.warn('The provided and detected `order` are not in agreement!')
+            warnings.warn('The provided and detected `order` are not in agreement!') if self._verbose else None
 
     def _detect_directed(self, directed):
         if self._edges is not None and 'Head' in self._edges.columns and 'Tail' in self._edges.columns:
@@ -288,7 +272,7 @@ class Hypergraph:
             self._directed = False
 
         if self._directed != directed and directed is not None:
-            warnings.warn('The provided and detected `directed` are not in agreement!')
+            warnings.warn('The provided and detected `directed` are not in agreement!') if self._verbose else None
 
     @property
     def nodes(self):
@@ -481,11 +465,11 @@ class Hypergraph:
         if isinstance(nodes[0], list):
             for node in nodes[0] + nodes[1]:
                 if node not in self.nodes.index:
-                    warnings.warn(f'Node {node} not found in the hypergraph')
+                    warnings.warn(f'Node {node} not found in the hypergraph') if self._verbose else None
         else:
             for node in nodes:
                 if node not in self.nodes.index:
-                    warnings.warn(f'Node {node} not found in the hypergraph')
+                    warnings.warn(f'Node {node} not found in the hypergraph') if self._verbose else None
 
         # Initialize properties if None
         properties = properties or {}
@@ -523,12 +507,16 @@ class Hypergraph:
 
         References
         ----------
-        .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
+          - Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
         """
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
         return Hypergraph(incidence_matrix=self.incidence_matrix.T)
+
+    @property
+    def hif(self):
+        export.to_hif(self)
 
     @property
     def hypernetx(self):
@@ -570,24 +558,32 @@ class Hypergraph:
         return HG
 
     @classmethod
-    def from_hif2(cls, hif):
+    def from_hif(cls, hif):
         # Create nodes dataframe
         nodes = pd.DataFrame(hif['nodes'])
-        rename_column_nodes = list(nodes.columns).index('node')
-        columns_nodes = list(nodes.columns)
-        columns_nodes[rename_column_nodes] = 'Nodes'
-        nodes.columns = columns_nodes
+        if 'node' in nodes.columns:
+            rename_column_nodes = list(nodes.columns).index('node')
+            columns_nodes = list(nodes.columns)
+            columns_nodes[rename_column_nodes] = 'Nodes'
+            nodes.columns = columns_nodes
 
         # Create edges dataframe
         edges = pd.DataFrame(hif['edges'])
-        rename_column_edges = list(edges.columns).index('nodes')
-        columns_edges = list(edges.columns)
-        columns_edges[rename_column_edges] = 'Nodes'
-        edges.columns = columns_edges
-        print(f"{edges=}")
+        if 'nodes' in edges.columns:
+            rename_column_edges = list(edges.columns).index('nodes')
+            columns_edges = list(edges.columns)
+            columns_edges[rename_column_edges] = 'Nodes'
+            edges.columns = columns_edges
+
+        if 'attrs' in edges.columns:
+            attrs_expanded = pd.json_normalize(edges['attrs'])
+            edges = pd.concat([edges.drop(columns=['attrs']), attrs_expanded], axis=1)
+        if 'attrs' in nodes.columns:
+            attrs_expanded = pd.json_normalize(nodes['attrs'])
+            nodes = pd.concat([nodes.drop(columns=['attrs']), attrs_expanded], axis=1)
 
         # Create the edge list
-        edge_list = [[] for iedge in range(edges.shape[0])]
+        edge_list = [[] for _ in range(edges.shape[0])]
         for incidence in hif['incidences']:
             edge = incidence['edge']
             node = incidence['node']
@@ -603,39 +599,53 @@ class Hypergraph:
             compress=False
         )
         return HG
-
-    @classmethod
-    def from_hif(cls, hif):
-        nodes = pd.DataFrame(hif['nodes'])
-        edges = pd.DataFrame(hif['edges'])
-        edge_list = [[] for iedge in range(edges.shape[0])]
-        for incidence in hif['incidences']:
-            edge = incidence['edge']
-            node = incidence['node']
-            edge_idx = list(edges['edge'].values).index(edge)
-            node_idx = list(nodes['node'].values).index(node)
-            edge_list[edge_idx].append(node_idx)
-        edges['Nodes'] = edge_list
-        '''
-        rename_column_nodes = list(nodes.columns).index('node')
-        rename_column_edges = list(edges.columns).index('nodes')
-        columns_nodes = list(nodes.columns)
-        columns_edges = list(edges.columns)
-        columns_nodes[rename_column_nodes] = 'Node'
-        columns_edges[rename_column_edges] = 'Nodes'
-        nodes.columns = columns_nodes
-        edges.columns = columns_edges
-        '''
-#        print(f"{nodes=}")
-#        print(f"{edges=}")
-#        print(f"{edge_list=}")
-        HG = Hypergraph(
-            nodes = nodes,
-            edges = edges,
-            edge_list=edge_list,
-            compress=False
-        )
-        return HG
+    
+    def to_hif(self):
+        """Converts HAT.Hypergraph to Hypergraph Interchange Format (HIF)
+        """
+        network_type = 'undirected'
+        metadata = {
+            'uniform' : self.uniform,
+            'order' : self.order,
+            'directed' : self.directed
+        }
+        incidence, nodes, edges = [], [], []
+        for inode in range(self.nodes.shape[0]):
+            node = {'node': inode}
+            for property in self.nodes.columns:
+                if property in ['Nodes']:
+                    continue
+                else:
+                    node[property] = self.nodes[property].iloc[inode]
+            nodes.append(node)
+        for iedge in range(self.edges.shape[0]):
+            incident_nodes = list(self.edges['Nodes'].iloc[iedge])
+            edge = {
+                'edge' : iedge,
+                'nodes' : incident_nodes
+            }
+            edge_incidence = {
+                'edge' : iedge,
+                'node' : None
+            }
+            for property in self.edges.columns:
+                if property in ['Nodes']:
+                    continue
+                else:
+                    edge[property] = self.edges[property].iloc[iedge]
+                    edge_incidence[property] = self.edges[property].iloc[iedge]
+            edges.append(edge)
+            for node in incident_nodes:
+                edge_incidence['node'] = node
+                incidence.append(edge_incidence.copy())
+        hif = {
+            'network-type': network_type,
+            'metadata': metadata,
+            'nodes': nodes,
+            'edges': edges,
+            'incidences': incidence
+        }
+        return hif
 
     @property
     def hypergraphx(self):
