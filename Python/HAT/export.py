@@ -107,3 +107,50 @@ def to_hypergraphx(HG):
     )
     return G
 
+def to_hif(HG):
+    """Converts HAT.Hypergraph to Hypergraph Interchange Format (HIF)
+    """
+    network_type = 'HAT'
+    metadata = {
+        'uniform' : HG.uniform,
+        'order' : HG.order,
+        'directed' : HG.directed
+    }
+    incidence, nodes, edges = [], [], []
+    for inode in range(HG.nodes.shape[0]):
+        node = {'node': inode}
+        for property in HG.nodes.columns:
+            if property in ['Nodes']:
+                continue
+            else:
+                node[property] = HG.nodes[property].iloc[inode]
+        nodes.append(node)
+    for iedge in range(HG.edges.shape[0]):
+        incident_nodes = list(HG.edges['Nodes'].iloc[iedge])
+        edge = {
+            'edge' : iedge,
+            'nodes' : incident_nodes
+        }
+        edge_incidence = {
+            'edge' : iedge,
+            'node' : None
+        }
+        for property in HG.edges.columns:
+            if property in ['Nodes']:
+                continue
+            else:
+                edge[property] = HG.edges[property].iloc[iedge]
+                edge_incidence[property] = HG.edges[property].iloc[iedge]
+        edges.append(edge)
+        for node in incident_nodes:
+            edge_incidence['node'] = node
+            incidence.append(edge_incidence.copy())
+    hif = {
+        'network-type': network_type,
+        'metadata': metadata,
+        'nodes': nodes,
+        'edges': edges,
+        'incidence': incidence
+    }
+    return hif
+    

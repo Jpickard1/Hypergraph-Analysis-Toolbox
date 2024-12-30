@@ -186,10 +186,12 @@ class Hypergraph:
                         'Nodes' : edge_nodes,
                     }
                 )
-        elif 'Edges' not in self._edges.columns:
-            self._edges = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
+        if 'Edges' not in self._edges.columns:
+            self.edges['Edges'] = list(np.arange(self._edges.shape[0]))
+            # = pd.DataFrame({'Edges': list(np.arange(self._edges.shape[0]))})
             warnings.warn('"Edges" column not found in the provided nodes dataframe.')
             warnings.warn('This column has been appended.')
+            print(f"{self.edges=}")
 
         if compress:
             # TODO: filter self._edges to achieve:
@@ -223,12 +225,10 @@ class Hypergraph:
         '''
         # At least one numerical representation should be supplied
         if edge_list is None and adjacency_tensor is None and incidence_matrix is None and edges is None:
-            warnings.warn("The edge list, incidence matrix, and adjacency tensor are None.", UserWarning)
+            warnings.warn("The edge list, incidence matrix, adjacency tensor, and edge DataFrame are None.", UserWarning)
 
         if order is not None and not (uniform == True):
             warnings.warn("If the hypergraph order is fixed then it should be k-uniform")
-
-        # TODO: add more conditions to validate / warn the user of during construction
 
     def _detect_uniform_and_order(self, uniform, order):
         if self._adjacency_tensor is not None:
@@ -565,6 +565,76 @@ class Hypergraph:
             edge_list = edge_list,
             nodes     = node_df,
             edges     = edge_df
+        )
+        return HG
+
+    @classmethod
+    def from_hif2(cls, hif):
+        # Create nodes dataframe
+        nodes = pd.DataFrame(hif['nodes'])
+        rename_column_nodes = list(nodes.columns).index('node')
+        columns_nodes = list(nodes.columns)
+        columns_nodes[rename_column_nodes] = 'Nodes'
+        nodes.columns = columns_nodes
+
+        # Create edges dataframe
+        edges = pd.DataFrame(hif['edges'])
+        rename_column_edges = list(edges.columns).index('nodes')
+        columns_edges = list(edges.columns)
+        columns_edges[rename_column_edges] = 'Nodes'
+        edges.columns = columns_edges
+        print(f"{edges=}")
+
+        # Create the edge list
+        edge_list = [[] for iedge in range(edges.shape[0])]
+        for incidence in hif['incidence']:
+            edge = incidence['edge']
+            node = incidence['node']
+            edge_idx = list(edges['edge'].values).index(edge)
+            node_idx = list(nodes['Nodes'].values).index(node)
+            edge_list[edge_idx].append(node_idx)
+        edges['Nodes'] = edge_list
+        print(f"{edges=}")
+
+        HG = Hypergraph(
+            nodes = nodes,
+            edges = edges,
+            edge_list=edge_list,
+            compress=False
+        )
+        return HG
+
+    @classmethod
+    def from_hif(cls, hif):
+        nodes = pd.DataFrame(hif['nodes'])
+        edges = pd.DataFrame(hif['edges'])
+        edge_list = [[] for iedge in range(edges.shape[0])]
+        for incidence in hif['incidence']:
+            edge = incidence['edge']
+            node = incidence['node']
+            edge_idx = list(edges['edge'].values).index(edge)
+            node_idx = list(nodes['node'].values).index(node)
+            edge_list[edge_idx].append(node_idx)
+        edges['Nodes'] = edge_list
+        print(f"{edges=}")
+        '''
+        rename_column_nodes = list(nodes.columns).index('node')
+        rename_column_edges = list(edges.columns).index('nodes')
+        columns_nodes = list(nodes.columns)
+        columns_edges = list(edges.columns)
+        columns_nodes[rename_column_nodes] = 'Node'
+        columns_edges[rename_column_edges] = 'Nodes'
+        nodes.columns = columns_nodes
+        edges.columns = columns_edges
+        '''
+#        print(f"{nodes=}")
+#        print(f"{edges=}")
+#        print(f"{edge_list=}")
+        HG = Hypergraph(
+            nodes = nodes,
+            edges = edges,
+            edge_list=edge_list,
+            compress=False
         )
         return HG
 
