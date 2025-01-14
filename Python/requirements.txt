@@ -1,6 +1,0 @@
-numpy
-scipy
-matplotlib
-pandas
-networkx
-rich
