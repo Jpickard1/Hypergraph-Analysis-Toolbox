@@ -13,6 +13,18 @@ classifiers = [ "Programming Language :: Python :: 3", "License :: OSI Approved 
 name = "Joshua Pickard"
 email = "jpic@umich.edu"
 
+[project.optional-dependencies]
+default = [
+    'numpy',
+    'scipy',
+    'matplotlib',
+    'pandas',
+    'networkx',
+    'rich',
+    'tqdm'
+]
+
+
 [project.urls]
 Homepage = "https://hypergraph-analysis-toolbox.readthedocs.io/en/latest/"
 "Bug Tracker" = "https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox/issues"
