@@ -47,7 +47,7 @@ def lineGraph(HG):
 
     References
     ----------
-    .. [1] Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
+      - Yang, Chaoqi, et al. "Hypergraph learning with line expansion." arXiv preprint arXiv:2005.04843 (2020).
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu

@@ -19,7 +19,7 @@ def ctrbk(HG, inputVxc):
 
     References
     ==========
-    .. [1] Chen C, Surana A, Bloch A, Rajapakse I. "Controllability of Hypergraphs."
+      - Chen C, Surana A, Bloch A, Rajapakse I. "Controllability of Hypergraphs."
         IEEE Transactions on Network Science and Engineering, 2021. https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view
     """
     # Auth: Joshua Pickard
@@ -55,7 +55,7 @@ def b_matrix(HG, inputVxc):
 
     References
     ==========
-    .. [1] Can Chen, Amit Surana, Anthony M Bloch, and Indika Rajapakse. Controllability of hypergraphs. IEEE Transactions
+      - Can Chen, Amit Surana, Anthony M Bloch, and Indika Rajapakse. Controllability of hypergraphs. IEEE Transactions
         on Network Science and Engineering, 8(2):1646–1657, 2021. https://drive.google.com/file/d/12aReE7mE4MVbycZUxUYdtICgrAYlzg8o/view
     """
     # Auth: Joshua Pickard

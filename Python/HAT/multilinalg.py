@@ -27,7 +27,7 @@ def supersymHosvd(T):
     
     References
     ----------
-    .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
+      - C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
@@ -49,7 +49,7 @@ def HammingSimilarity(A1, A2):
 
     References
     ==========
-    .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
+      - Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
 
     """
     # Auth: Joshua Pickard
@@ -75,7 +75,7 @@ def SpectralHSimilarity(L1, L2):
 
     References
     ==========
-    .. [1] Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
+      - Amit Surana, Can Chen, and Indika Rajapakse. Hypergraph similarity measures. IEEE Transactions on Network Science and Engineering, pages 1-16, 2022.
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu
