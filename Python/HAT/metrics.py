@@ -25,7 +25,7 @@ def matrix_entropy(HG, laplacian_type='Rodriguez'):
 
     References
     ==========
-    .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
+      - C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
         (Equation 1) https://arxiv.org/pdf/1912.09624.pdf
     """
     # Auth: Joshua Pickard
@@ -74,7 +74,7 @@ def clustering_coefficient(HG):
 
     References
     ==========
-    .. [1] Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph Similarity Measures."
+      - Surana, Amit, Can Chen, and Indika Rajapakse. "Hypergraph Similarity Measures."
         IEEE Transactions on Network Science and Engineering (2022). 
         https://drive.google.com/file/d/1JUYIQ2_u9YX7ky0U7QptUbJyjEMSYNNR/view
     """
@@ -111,7 +111,7 @@ def nonlinear_eigenvector_centrality(HG, tol=1e-4, maxIter=3000, model='LogExp',
     
     References
     ----------
-    .. [1] Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). https://doi.org/10.1038/s42005-021-00704-2
+      - Tudisco, F., Higham, D.J. Node and edge nonlinear eigenvector centrality for hypergraphs. Commun Phys 4, 201 (2021). https://doi.org/10.1038/s42005-021-00704-2
     """
     # Auth: Joshua Pickard
     #       jpic@umich.edu

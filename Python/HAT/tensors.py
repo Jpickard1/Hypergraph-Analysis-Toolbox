@@ -28,7 +28,7 @@ def adjTensor(HG):
 
     References
     ==========
-    .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
+      - C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
         (Equation 8) https://arxiv.org/pdf/1912.09624.pdf
     """
     # Auth: Joshua Pickard
@@ -59,7 +59,7 @@ def degreeTensor(HG):
 
     References
     ----------
-    .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
+      - C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
         https://arxiv.org/pdf/1912.09624.pdf
     """
     # Auth: Joshua Pickard
@@ -71,6 +71,8 @@ def degreeTensor(HG):
     for vx in range(len(HG.IM)):
         D[tuple((np.ones(order) * vx).astype(int))] = sum(HG.IM[vx])
     return D
+
+
 
 def laplacianTensor(HG):
     """This constructs the Laplacian tensor for uniform hypergraphs.
@@ -87,7 +89,7 @@ def laplacianTensor(HG):
 
     References
     ==========        
-    .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
+      - C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING (2020)
         (Equation 9) https://arxiv.org/pdf/1912.09624.pdf
     """
     # Auth: Joshua Pickard
@@ -98,6 +100,8 @@ def laplacianTensor(HG):
     L = D - A
     return L
     
+
+
 def tensorEntropy(HG):
     """Computes hypergraph entropy based on the singular values of the Laplacian tensor.
     
@@ -109,7 +113,7 @@ def tensorEntropy(HG):
     
     References
     ----------
-    .. [1] C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS
+      - C. Chen and I. Rajapakse, Tensor Entropy for Uniform Hypergraphs, IEEE TRANSACTIONS
          ON NETWORK SCIENCE AND ENGINEERING (2020) (Definition 7, Algorithm 1) 
          https://arxiv.org/pdf/1912.09624.pdf
     """
@@ -119,3 +123,4 @@ def tensorEntropy(HG):
     L = HG.laplacianTensor()
     _, S, _ = mla.hosvd(L, M=False, uniform=True)
     return sp.stats.entropy(S)
+
