@@ -8,13 +8,15 @@ import mock
 MOCK_MODULES = ['numpy',
                 'scipy',
                 'scipy.io',
+                'scipy.spatial'
                 'matplotlib',
                 'matplotlib.pyplot',
                 'scipy.linalg',
                 'networkx',
                 'pandas',
                 'pd',
-                'np'
+                'np',
+                'sp'
                ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
