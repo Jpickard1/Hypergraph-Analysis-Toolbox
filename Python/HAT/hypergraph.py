@@ -558,6 +558,43 @@ class Hypergraph:
         return HG
 
     @classmethod
+    def from_networkx(cls, nxg):
+        import networkx as nx
+        node_data = list(nxg.nodes(data=True)) 
+        nodes_df = pd.DataFrame(node_data, columns=['node', 'attributes'])
+        nodes_df['Nodes'] = [i for i in range(len(node_data))]
+        nodes, head, tail = [], [], []
+        edges_df = nx.to_pandas_edgelist(nxg)
+        edge_list = []
+        if isinstance(nxg, nx.classes.digraph.DiGraph):
+            directed = True
+            for edge in nxg.edges:
+                i0 = nodes_df[nodes_df['node'] == edge[0]]['Nodes'].iloc[0]
+                i1 = nodes_df[nodes_df['node'] == edge[1]]['Nodes'].iloc[0]
+                tail.append(i0)
+                head.append(i1)
+                nodes.append([i0, i1])
+                edge_list.append([[i0], [i1]])
+            edges_df['head'] = head
+            edges_df['tail'] = tail
+        else:
+            directed=False
+            for edge in nxg.edges:
+                i0 = nodes_df[nodes_df['node'] == edge[0]]['Nodes'].iloc[0]
+                i1 = nodes_df[nodes_df['node'] == edge[1]]['Nodes'].iloc[0]
+                nodes.append([i0, i1])
+                edge_list.append([i0, i1])
+        edges_df['Nodes'] = nodes
+        HG = Hypergraph(
+            nodes = nodes_df,
+            edges = edges_df,
+            edge_list=edge_list,
+            compress=False,
+            directed=directed
+        )
+        return HG
+
+    @classmethod
     def from_hif(cls, hif):
         # Create nodes dataframe
         nodes = pd.DataFrame(hif['nodes'])
