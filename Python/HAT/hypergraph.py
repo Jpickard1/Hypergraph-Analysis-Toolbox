@@ -13,6 +13,9 @@ import pandas as pd
 # Nice printing
 from rich import print
 
+# Possibly remove this dependency
+import copy
+
 # HAT modules
 from HAT import graph
 from HAT import export
@@ -69,6 +72,7 @@ class Hypergraph:
         # Auth: Joshua Pickard
         #       jpic@umich.edu
         # Date: Nov 30, 2022
+        # print("Hypergraph constructor!")
 
         # Validate arguments
         self._validate_constructor_arguments(
@@ -81,6 +85,12 @@ class Hypergraph:
             order            = order,
             directed         = directed
         )
+
+        # Convert all nodes to integers, and build a map between integers and names
+        if edge_list is not None:
+            new_edge_list, name_to_int = convert_nodes_to_integers(edge_list)
+            original_edge_list = copy.deepcopy(edge_list)
+            edge_list = new_edge_list
 
         # Assign object data
         self._edge_list        = edge_list
@@ -113,17 +123,26 @@ class Hypergraph:
 
         # Set the nodes dataframe
         if self._nodes is None:
+            flat_set = None
             if self._adjacency_tensor is not None:
                 num_nodes = self._adjacency_tensor.shape[0]
             elif self._edge_list is not None:
                 if isinstance(edge_list[0][0], list):
                     flat_list = [item for sublist in edge_list for subsublist in sublist for item in subsublist]
-                    num_nodes = len(list(set(flat_list)))
+                    flat_set = list(set(flat_list))
+                    num_nodes = len(flat_set)
                 else:
-                    num_nodes = len(list(set([j for edge in edge_list for j in edge])))
+                    flat_set = list(set([j for edge in edge_list for j in edge]))
+                    num_nodes = len(flat_set)
             elif self._incidence_matrix is not None:
                 num_nodes = self.incidence_matrix.shape[0]
             self._nodes = pd.DataFrame({'Nodes': np.arange(num_nodes)})
+            if name_to_int is not None:
+                int_to_name = {v: k for k, v in name_to_int.items()}
+                node_labels = []
+                for k in self._nodes['Nodes'].values:
+                    node_labels.append(int_to_name[k])
+                self._nodes['Names'] = node_labels
         elif 'Nodes' not in self._nodes.columns:
             self._nodes['Nodes'] = np.arange(self._nodes.shape[0])
             warnings.warn('`Nodes` column not found in the provided in self._nodes. It has been added') if self._verbose else None
@@ -713,4 +732,22 @@ class Hypergraph:
     def hypergraphx(self):
         return export.to_hypergraphx(self)
     
+def convert_nodes_to_integers(edge_list):
+    # Step 1: Check if the lowest level contains integers
+    # Flatten the edge_list and check if any of the elements are integers
+    all_elements = [elem for sublist in edge_list for elem in sublist]
+    
+    # If all elements are integers, no need to do anything
+    if all(isinstance(elem, int) for elem in all_elements):
+        return edge_list, None  # No changes, return original edge_list
 
+    # Step 2: Map each unique name to an integer if names are present
+    # Create a mapping from names to unique integers
+    unique_names = set(all_elements)
+    name_to_int = {name: idx for idx, name in enumerate(unique_names)}
+
+    # Step 3: Create a new edge_list with integer mappings
+    new_edge_list = [[name_to_int[name] for name in edge] for edge in edge_list]
+
+    # Step 4: Return the new edge_list and the mapping
+    return new_edge_list, name_to_int
