@@ -26,16 +26,21 @@ def bipartite(
 
 def pairwise(
     HG,
+    labels=True,
     ax=None
 ):
+    # TODO: get information from HG.nodes into networkx graph G nodes so that it is drawn with the node names
     G = HG.clique_graph
     pos = nx.layout.spring_layout(G)
     ax = ax or plt.gca()
-    nx.draw(G, pos=pos)
+    nx.draw(G, pos=pos, with_labels=False)
+    if labels:
+        labels = {node: str(HG.nodes['Names'].values[node]) for node in range(len(G.nodes))}
+        nx.draw_networkx_labels(G, pos, labels, ax=ax, font_size=10)
     return ax
 
 
-def clique(HG, ax=None, node_size=20, marker='o', cmap='viridis', edgewidth=5):
+def clique(HG, ax=None, node_size=20, marker='o', cmap='viridis', edgewidth=5, labels=True):
     """
     Plot the clique graph of a hypergraph, with edges of each clique sharing the same color.
     
@@ -49,9 +54,11 @@ def clique(HG, ax=None, node_size=20, marker='o', cmap='viridis', edgewidth=5):
     Returns:
     - ax: matplotlib.axes.Axes with the plot.
     """
+    zorder_offset = -1000
+    
     G = HG.clique_graph
     pos = np.array(list(nx.layout.spring_layout(G).values()))  # Positions as an array
-
+    
     ax = ax or plt.gca()
     cmap = colormaps[cmap] if isinstance(cmap, str) else cmap  # Resolve colormap
 
@@ -70,7 +77,7 @@ def clique(HG, ax=None, node_size=20, marker='o', cmap='viridis', edgewidth=5):
                 [pos[nodei, 1], pos[nodej, 1]],
                 color=color,
                 linewidth=linewidth,
-                zorder=edge_idx,
+                zorder=edge_idx+zorder_offset,
             )
 
     # Scatter plot for nodes
@@ -79,18 +86,24 @@ def clique(HG, ax=None, node_size=20, marker='o', cmap='viridis', edgewidth=5):
         pos[:, 1],
         s=node_size,
         marker=marker,
-        zorder=HG.nedges + 1,
+        zorder=HG.nedges + 1+zorder_offset,
         color="black"
     )
 
     # Remove axis ticks
     ax.set_xticks([])
     ax.set_yticks([])
+
+    if labels:
+        labels = {node: str(HG.nodes['Names'].values[node]) for node in range(len(G.nodes))}
+        nx.draw_networkx_labels(G, pos, labels, ax=ax, font_size=10, 
+                            bbox=dict(facecolor='white', edgecolor='none')) # , alpha=0.7))
+    
     return ax
 
 
 
-def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors=None):
+def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors=None, node_labels=None):
     """Plot the incidence matrix of a hypergraph.
     
     :param H: a HAT.hypergraph object
@@ -155,7 +168,12 @@ def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors
     plt.xlim([-0.5, m - 0.5])   
     
     # Turn of axis ticks. Keep labels on
-    plt.yticks([])
+    if node_labels is not None:
+        y_positions = list(np.arange(HG.nodes.shape[0]))
+        print(f"{y_positions=}")
+        plt.yticks(y_positions, list(HG.nodes[node_labels].values))
+    else:
+        plt.yticks([])
     plt.xticks([])
     
     return plt.gca()
@@ -197,9 +215,9 @@ def rubber_bands(
     hnx.draw(
         HG_hnx,
         pos=pos,
-        with_color=with_color,
-        with_node_counts=with_node_counts,
-        with_edge_counts=with_edge_counts,
+#        with_color=with_color,
+#        with_node_counts=with_node_counts,
+#        with_edge_counts=with_edge_counts,
         layout=layout,
         layout_kwargs=layout_kwargs,
         ax=ax,

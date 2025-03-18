@@ -7,7 +7,7 @@ import networkx as nx
 import os
 import pandas as pd
 
-import multilinalg
+import HAT.multilinalg
 # import HAT
 
 """

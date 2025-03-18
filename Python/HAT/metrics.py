@@ -10,6 +10,7 @@ Hypergraph metrics:
 import numpy as np
 import networkx as nx
 import scipy as sp
+from tqdm import tqdm
 
 def matrix_entropy(HG, laplacian_type='Rodriguez'):
     """Computes hypergraph entropy based on the eigenvalues values of the Laplacian matrix.
@@ -148,7 +149,7 @@ def nonlinear_eigenvector_centrality(HG, tol=1e-4, maxIter=3000, model='LogExp',
     x0 = np.ones(n,) / n
     y0 = np.ones(m,) / m
     
-    for _ in range(maxIter):
+    for _ in tqdm(range(maxIter), desc='Iterations'):
         u = np.sqrt(np.multiply(np.array(x0),np.array(g(B @ W @ f(y0)))))
         v = np.sqrt(np.multiply(np.array(y0),np.array(psi(B.T @ N @ phi(x0)))))
         x = u / sum(u)
@@ -163,6 +164,9 @@ def nonlinear_eigenvector_centrality(HG, tol=1e-4, maxIter=3000, model='LogExp',
             
     vertex_centrality = x
     edge_centrality = y
+
+    HG.nodes['NLEC'] = vertex_centrality
+    HG.edges['NLEC'] = edge_centrality
     
     return vertex_centrality, edge_centrality
 
