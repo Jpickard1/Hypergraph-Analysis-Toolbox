@@ -15,6 +15,11 @@ build:
 sphinx:
   configuration: docs/conf.py
 
+# building the python
+python:
+  install:
+    - requirements: docs/docs_requirements.txt
+
 # We recommend specifying your dependencies to enable reproducible builds:
 # https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
 # python:
