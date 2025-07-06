@@ -13,11 +13,10 @@ Hypergraph Analysis Toolbox (HAT) is a software for the analysis and visualizati
 higher-order structures. HAT implements tensor-based methods for the analysis of higher-order observability/controllability,
 coupling, similarity measures, and other structural properties. HAT contains methods for the following hypergraph tasks:
 
-1. Construction
-2. Visualization
-3. Expansion and numeric representation
+1. Construction and Visualization
+3. Graph Expansions and Numeric Representations
 4. Structural Properties
-5. Observability/Controllability
+5. Dynamics, Observability, and Controllability
 6. Similarity Measures
 
 This software was designed to analyze higher-order biological data, such as chromatin structures observed with Pore-C. The capabilities and use cases of HAT are outlined in `this PLOS Computational Biology article <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011190>`_. 
