@@ -19,6 +19,9 @@ dependencies = [
     'tqdm'
 ]
 
+[project.optional-dependencies]
+docs = ["mock"]
+
 [[project.authors]]
 name = "Joshua Pickard"
 email = "jpic@umich.edu"
