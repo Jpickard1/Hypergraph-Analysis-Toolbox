@@ -14,10 +14,10 @@ higher-order structures. HAT implements tensor-based methods for the analysis of
 coupling, similarity measures, and other structural properties. HAT contains methods for the following hypergraph tasks:
 
 1. Construction and Visualization
-3. Graph Expansions and Numeric Representations
-4. Structural Properties
-5. Dynamics, Observability, and Controllability
-6. Similarity Measures
+2. Graph Expansions and Numeric Representations
+3. Structural Properties
+4. Dynamics, Observability, and Controllability
+5. Similarity Measures
 
 This software was designed to analyze higher-order biological data, such as chromatin structures observed with Pore-C. The capabilities and use cases of HAT are outlined in `this PLOS Computational Biology article <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011190>`_. 
 
