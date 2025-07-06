@@ -12,6 +12,22 @@ Hypergraph Class
    :undoc-members:
    :show-inheritance:
 
+Tensor Representations
+----------------------
+
+.. automodule:: HAT.tensors
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Laplacians
+----------------------
+
+.. automodule:: HAT.laplacian
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Graph Interface
 ---------------------
 
@@ -36,22 +52,6 @@ Dynamics and Control
    :undoc-members:
    :show-inheritance:
 
-Tensor Representations
-----------------------
-
-.. automodule:: HAT.tensors
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Laplacians
-----------------------
-
-.. automodule:: HAT.laplacian
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 HAT.HAT module
 ---------------
 
@@ -59,7 +59,6 @@ HAT.HAT module
    :members:
    :undoc-members:
    :show-inheritance:
-
 
 HAT.draw module
 ---------------
