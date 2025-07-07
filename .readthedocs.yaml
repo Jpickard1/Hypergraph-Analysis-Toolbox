@@ -18,6 +18,9 @@ sphinx:
 # building the python
 python:
   install:
+    - method: pip
+      path: ./Python
+      editable: true
     - requirements: docs/docs_requirements.txt
 
 # We recommend specifying your dependencies to enable reproducible builds:
