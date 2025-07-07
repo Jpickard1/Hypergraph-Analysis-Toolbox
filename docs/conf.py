@@ -2,7 +2,9 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../HAT/'))
 sys.path.insert(0, os.path.abspath('../Python/HAT/'))
+sys.path.insert(0, os.path.abspath('../Python/'))
 sys.path.insert(0, os.path.abspath('..'))
+print(f"{sys.path=}")
 
 import mock
  
