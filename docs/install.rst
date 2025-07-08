@@ -36,11 +36,6 @@ The MATLAB distribution has the following dependencies which need to be installe
 
 1. `TenEig — Tensor Eigenpairs Solver <https://users.math.msu.edu/users/chenlipi/teneig.html>`_
 
-Development Distribution
-************************
-
-All implementations of HAT are managed through a `common git repository <https://github.com/Jpickard1/Hypergraph-Analysis-Toolbox>`_. This is public, so it may be
-cloned and modified. If interested in modifying or contributing to HAT, please see information on the Development page and contact Joshua Pickard at jpic@umich.edu.
 
 Bug Reporting
 -------------

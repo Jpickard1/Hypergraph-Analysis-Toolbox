@@ -10,6 +10,8 @@ import warnings
 # Hypergraph metadata
 import pandas as pd
 
+import networkx as nx
+
 # Nice printing
 from rich import print
 
@@ -379,6 +381,20 @@ class Hypergraph:
     @property
     def clique_graph(self):
         return graph.clique_graph(self)
+
+    @property
+    def connected_components(self):
+        G = self.clique_graph
+        components = list(nx.connected_components(G))
+        node_to_component = {}
+        for component_id, component_nodes in enumerate(components):
+            for node in component_nodes:
+                node_to_component[node] = component_id
+        connected_components = []
+        for i in range(self._nodes.shape[0]):
+            connected_components.append(node_to_component[i])
+        self._nodes['connected components'] = connected_components
+        return self._nodes[['Nodes', 'connected components']]
     
     @property
     def laplacian_matrix(self, laplacian_type='bolla'):

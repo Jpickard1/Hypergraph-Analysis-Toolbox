@@ -1,11 +1,14 @@
 HAT Documentation
 =================
+This page provides an overview of the ``Hypergraph`` class and its associated modules, which offer tools for analyzing, visualizing, and working with the structure and dynamics of hypergraphs.
 
-Submodules
-----------
 
 Hypergraph Class
 ---------------------
+
+The ``Hypergraph`` class serves as the core data structure in HAT. It represents a hypergraph's nodes, hyperedges, and related metadata. It also supports a variety of numerical representations, including tensors and incidence matrices.
+
+Creating a ``Hypergraph`` object provides access to additional analysis and visualization functionality across the toolbox’s modules.
 
 .. automodule:: HAT.hypergraph
    :members:
