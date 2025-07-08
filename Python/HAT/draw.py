@@ -16,12 +16,13 @@ from HAT.export import to_hypernetx
 
 def bipartite(
     HG,
+    node_size=50,
     ax=None
 ):
     G = HG.star_graph
     pos = nx.layout.bipartite_layout(G, nodes=np.arange(HG.nedges))
     ax = ax or plt.gca()
-    nx.draw(G, pos=pos, ax=ax)
+    nx.draw(G, pos=pos, ax=ax, node_size=node_size)
     return ax
 
 def pairwise(
@@ -177,65 +178,4 @@ def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors
     plt.xticks([])
     
     return plt.gca()
-
-def rubber_bands(
-    HG,
-    pos=None,
-    with_color=True,
-    with_node_counts=False,
-    with_edge_counts=False,
-    layout=nx.spring_layout,
-    layout_kwargs={},
-    ax=None,
-    node_radius=None,
-    edges_kwargs={},
-    nodes_kwargs={},
-    edge_labels_on_edge=True,
-    edge_labels={},
-    edge_labels_kwargs={},
-    node_labels={},
-    node_labels_kwargs={},
-    with_edge_labels=True,
-    with_node_labels=True,
-    node_label_alpha=0.35,
-    edge_label_alpha=0.35,
-    with_additional_edges=None,
-    contain_hyper_edges=False,
-    additional_edges_kwargs={},
-    return_pos=False
-):
-    try:
-        import hypernetx as hnx
-    except ImportError as e:
-        raise ImportError(
-            "The 'hypernetx' library is required to use the 'rubber_bands' function. "
-            "Please install it using `pip install hypernetx`."
-        ) from e
-    HG_hnx = to_hypernetx(HG)
-    hnx.draw(
-        HG_hnx,
-        pos=pos,
-#        with_color=with_color,
-#        with_node_counts=with_node_counts,
-#        with_edge_counts=with_edge_counts,
-        layout=layout,
-        layout_kwargs=layout_kwargs,
-        ax=ax,
-        node_radius=node_radius,
-        edges_kwargs=edges_kwargs,
-        nodes_kwargs=nodes_kwargs,
-        edge_labels_on_edge=edge_labels_on_edge,
-        edge_labels=edge_labels,
-        edge_labels_kwargs=edge_labels_kwargs,
-        node_labels=node_labels,
-        node_labels_kwargs=node_labels_kwargs,
-        with_edge_labels=with_edge_labels,
-        with_node_labels=with_node_labels,
-        node_label_alpha=node_label_alpha,
-        edge_label_alpha=edge_label_alpha,
-        with_additional_edges=with_additional_edges,
-        contain_hyper_edges=contain_hyper_edges,
-        additional_edges_kwargs=additional_edges_kwargs,
-        return_pos=return_pos
-    )
 

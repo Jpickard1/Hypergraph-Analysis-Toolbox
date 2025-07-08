@@ -91,7 +91,12 @@ def clustering_coefficient(HG):
         avgClusterCoef += (len(edges) / sp.special.comb(len(neighbors), order))
     avgClusterCoef /= n
     return avgClusterCoef
-                               
+
+def degree_centrality(HG):
+    B = HG.incidence_matrix
+    HG.nodes['degree'] = np.sum(B, axis=1)
+    return HG.nodes['degree']
+
 def nonlinear_eigenvector_centrality(HG, tol=1e-4, maxIter=3000, model='LogExp', alpha=10):
     """Computes node and edge centralities.
 
