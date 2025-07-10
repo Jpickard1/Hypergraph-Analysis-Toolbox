@@ -93,6 +93,8 @@ class Hypergraph:
             new_edge_list, name_to_int = convert_nodes_to_integers(edge_list)
             original_edge_list = copy.deepcopy(edge_list)
             edge_list = new_edge_list
+        else:
+            name_to_int = None
 
         # Assign object data
         self._edge_list        = edge_list
@@ -552,45 +554,6 @@ class Hypergraph:
     @property
     def hif(self):
         export.to_hif(self)
-
-    @property
-    def hypernetx(self):
-        return export.to_hypernetx(self)
-
-    @classmethod
-    def from_hypernetx(cls, HG_hnx):
-        node_df = pd.DataFrame(
-            {
-                'Nodes' : np.arange(HG_hnx.dataframe['nodes'].nunique()),
-                'Names': list(HG_hnx.dataframe['nodes'].unique())
-            }
-        )
-        edge_list, node_names, weight, properties = [], [], [], []
-        for _, df in HG_hnx.dataframe.groupby('edges'):
-            node_names.append(list(df['nodes'].unique()))
-            idxs = []
-            for node in node_names[-1]:
-                idxs.append(np.where(node_df['Names'] == node)[0][0])
-            edge_list.append(idxs)
-            if 'weight' in df.columns:
-                weight.append(df['weight'].iloc[0])
-            else:
-                weight.append(1)
-        edge_df = pd.DataFrame(
-            {
-                'Edges' : np.arange(len(edge_list)),
-                'Nodes' : edge_list,
-                'Node Names' : node_names,
-                'Weight': weight
-            }
-        )
-
-        HG = Hypergraph(
-            edge_list = edge_list,
-            nodes     = node_df,
-            edges     = edge_df
-        )
-        return HG
 
     @classmethod
     def from_networkx(cls, nxg):

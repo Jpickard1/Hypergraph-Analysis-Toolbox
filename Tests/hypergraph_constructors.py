@@ -29,7 +29,8 @@ class HypergraphConstructorTestCase1(unittest.TestCase):
         self.expected_edges_df = pd.DataFrame(
             {
                 'Nodes': [[0,1,2],
-                          [0,1,3]]
+                          [0,1,3]],
+                'Edges': [0,1]
             }
         )
         self.expected_incidence_matrix = np.array([
