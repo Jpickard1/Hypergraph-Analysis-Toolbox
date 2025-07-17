@@ -151,6 +151,14 @@ def get_file_size_mb(filepath):
     """Get file size in MB"""
     return os.path.getsize(filepath) / (1024 * 1024)
 
+def list_datasets():
+    """List all datasets at HIF-datasets"""
+    files = get_hif_datasets()
+    pattern = re.compile(r'^(.*?)(?:_\d+of\d+)?\.hif$')
+    unique_datasets = sorted({pattern.match(f).group(1) for f in files})
+    return unique_datasets
+
+
 def get_hif_datasets():
     """
     Retrieve list of all HIF dataset files from the GitHub repository.
