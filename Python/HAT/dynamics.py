@@ -5,9 +5,49 @@ import scipy as sp
 from HAT import multilinalg as mla
 
 
-"""
-This contains miscilaneous methods related to hypergraph dynamics, controllability, and observability.
-"""
+def detect_hyperedge_dilation(HG)
+    G = HG.star_graph
+    from networkx.algorithms import bipartite
+    matching = nx.algorithms.matching.max_weight_matching(G, maxcardinality=True)
+    if len(matching) == HG.nnodes
+        dilation_exists = False
+    else:
+        dilation_exists = True
+    return dilation_exists, matching
+
+def walk_breadth_first_search(HG, start_nodes):
+    from collections import deque
+    if not HG.directed:
+        print("HG must be directed")
+        return
+
+    accessible_nodes = set(start_nodes)
+    visited_edges = set()
+
+    queue = deque()
+
+    # Initial step: add edges whose tails are fully accessible
+    for idx, tail in enumerate(HG.edges['tail']):
+        if set(tail).issubset(accessible_nodes):
+            queue.append(idx)
+            visited_edges.add(idx)
+
+    # Breadth-first traversal
+    while queue:
+        idx = queue.popleft()
+
+        # Add head nodes to accessible set
+        head_nodes = HG.edges['head'][idx]
+        accessible_nodes.update(head_nodes)
+
+        # Check for new edges that can now be activated
+        for jdx, tail in enumerate(HG.edges['tail']):
+            if jdx not in visited_edges and set(tail).issubset(accessible_nodes):
+                queue.append(jdx)
+                visited_edges.add(jdx)
+
+    return accessible_nodes, visited_edges
+
 
 def ctrbk(HG, inputVxc):
     """Compute the reduced controllability matrix for :math:`k-` uniform hypergraphs.
@@ -65,3 +105,4 @@ def b_matrix(HG, inputVxc):
     for i in range(len(inputVxc)):
         B[inputVxc[i], i] = 1
     return B
+

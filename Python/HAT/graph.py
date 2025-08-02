@@ -65,7 +65,7 @@ def star_graph(HG):
     by introducing a new set of vertices :math:`{V}_s={V}\cup {E}_h` where some vertices in the star graph
     represent hyperedges of the original hypergraph. There exists an edge between each vertex :math:`v,e\in {V}_s`
     when :math:`v\in {V}`, :math:`e\in {E}_h,` and :math:`v\in e`. Each hyperedge in :math:`{E}_h` induces
-    a star in :math:`S`. This is a lossless process, so the hypergraph structure of :math:`H` is well-defined]
+    a star in :math:`S`. This is a lossless process, so the hypergraph structure of :math:`H` is well-defined
     given a star graph :math:`S`.
     
     References
@@ -75,10 +75,51 @@ def star_graph(HG):
     # Auth: Joshua Pickard
     #       jpic@umich.edu
     # Date: Nov 30, 2022
-    n = len(HG.incidence_matrix) + len(HG.incidence_matrix[0])
-    A = np.zeros((n,n))
-    A[len(A) - len(HG.incidence_matrix):len(A),0:len(HG.incidence_matrix[0])] = HG.incidence_matrix
-    A[0:len(HG.incidence_matrix[0]),len(A) - len(HG.incidence_matrix):len(A)] = HG.incidence_matrix.T
-    return nx.from_numpy_array(A)
+
+    if not HG.directed:
+        G = nx.Graph()
+    
+        edge_labels = HG.edges.index
+        nodes_labels = [f"n{i}" for i in range(HG.nnodes)]
+        
+        G.add_nodes_from(nodes_labels, bipartite=0)
+        for edge_id in edge_labels:
+            edge_node = f"e{edge_id}"  # Prefix to distinguish from normal nodes
+            G.add_node(edge_node, bipartite=1)
+            
+            incident_nodes = HG.edges.loc[edge_id, 'Nodes']
+            for node in incident_nodes:
+                G.add_edge(edge_node, node)
+    
+    else:
+        G = nx.DiGraph()
+    
+        edge_labels = HG.edges.index
+        nodes_labels = [f"n{i}" for i in range(HG.nnodes)]
+        
+        G.add_nodes_from(nodes_labels, bipartite=0)
+        for edge_id in edge_labels:
+            edge_node = f"e{edge_id}"  # Prefix to distinguish from normal nodes
+            G.add_node(edge_node, bipartite=1)
+            
+            head_nodes = HG.edges.loc[edge_id, 'head']
+            for node in head_nodes:
+                G.add_edge(edge_node, node)
+    
+            tail_nodes = HG.edges.loc[edge_id, 'tail']
+            for node in tail_nodes:
+                G.add_edge(node, edge_node)
+    
+    return G
+
+#    n = HG.nnodes + HG.nedges
+#    A = np.zeros((n,n))
+#    if not HG.directed:
+#        A[len(A) - len(HG.incidence_matrix):len(A),0:len(HG.incidence_matrix[0])] = np.abs(HG.incidence_matrix)
+#        A[0:len(HG.incidence_matrix[0]),len(A) - len(HG.incidence_matrix):len(A)] = np.abs(HG.incidence_matrix.T)
+#    else:
+#        A[len(A) - len(HG.incidence_matrix):len(A),0:len(HG.incidence_matrix[0])] = (HG.incidence_matrix > 0)
+#        A[0:len(HG.incidence_matrix[0]),len(A) - len(HG.incidence_matrix):len(A)] = (HG.incidence_matrix.T < 0)
+#    return nx.from_numpy_array(A)
 
 

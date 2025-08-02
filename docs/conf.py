@@ -25,12 +25,7 @@ MOCK_MODULES = ['numpy',
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
-# import HAT.HAT
-# import HAT.Hypergraph
-# import HAT.multilinalg
-# import HAT.draw
-# import Hypergraph
-# from HAT.HAT import *
+
 
 # Configuration file for the Sphinx documentation builder.
 #
@@ -58,6 +53,26 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.extlinks'
 ]
+
+# Napoleon settings for NumPy style docstrings
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
+napoleon_include_init_with_doc = False
+napoleon_include_private_with_doc = False
+napoleon_include_special_with_doc = True
+napoleon_use_admonition_for_examples = False
+napoleon_use_admonition_for_notes = False
+napoleon_use_admonition_for_references = False
+napoleon_use_ivar = False
+napoleon_use_param = True
+napoleon_use_rtype = True
+napoleon_preprocess_types = True
+napoleon_type_aliases = None
+napoleon_attr_annotations = True
+
+# Autosummary settings
+autosummary_generate = True
+autosummary_generate_overwrite = False
 
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']

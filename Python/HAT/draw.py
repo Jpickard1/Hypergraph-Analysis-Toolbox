@@ -179,3 +179,5 @@ def incidence_plot(HG, shade_rows=True, connect_nodes=True, dpi=200, edge_colors
     
     return plt.gca()
 
+
+

@@ -25,38 +25,57 @@ from HAT import laplacian
 
 
 class Hypergraph:
-    """Represents a hypergraph structure, enabling complex multi-way relationships between nodes.
+    """
+    Base class for undirected and directed hypergraphs.
 
-    This class implements a hypergraph where edges (or hyperedges) can connect multiple vertices. 
-    Internally, the hypergraph can be represented by an incidence matrix, an adjacency tensor, or an 
-    edge list, depending on the available inputs and the uniformity of the hypergraph.
+    A hypergraph is a generalization of a graph where edges (hyperedges) can connect
+    any number of vertices. This class supports multiple internal representations
+    and automatic conversion between them.
 
-    Formally, a hypergraph :math:`H=(V,E)` is defined by a set of vertices :math:`V` and a set of 
-    edges :math:`E`, where each edge :math:`e \\in E` may contain any subset of vertices in :math:`V`. 
-    Unlike traditional graphs, hypergraph edges can connect more than two vertices, allowing for 
-    multi-way interactions. Uniform hypergraphs, where all edges have the same number of vertices, 
-    can be efficiently represented using tensors.
-
-    Attributes
+    Parameters
     ----------
-    edge_list : list of lists or None
-        Stores the list of edges if provided during initialization.
-    adjacency_tensor : ndarray or None
-        Stores the adjacency tensor if provided during initialization.
-    incidence_matrix : ndarray or None
-        Stores the incidence matrix if generated or provided during initialization.
-    nodes : ndarray or None
-        Array of nodes (vertices) in the hypergraph.
-    edges : ndarray or None
-        Array of edges (hyperedges) in the hypergraph.
-    uniform : bool
-        Indicates if the hypergraph is uniform.
-    k : int
-        The degree of uniformity in terms of edge size, if applicable.
-    directed : bool, default=False
-        Indicates if the hypergraph is directed.
-    verbose : bool, default=False
-        Additional warning messages display when true
+    edge_list : list of lists, optional
+        List of hyperedges. For undirected: ``[[1,2,3], [2,4,5]]``.
+        For directed: ``[[[1], [2,3]], [[4], [5,6]]]`` where first sublist 
+        is head, second is tail.
+    adjacency_tensor : ndarray, optional
+        Tensor representation of the hypergraph.
+    incidence_matrix : ndarray, optional
+        Matrix where rows represent nodes and columns represent edges.
+    nodes : DataFrame, optional
+        Node metadata. Must contain a 'Nodes' column with integer indices.
+    edges : DataFrame, optional
+        Edge metadata. Must contain a 'Nodes' column with lists of node indices.
+    uniform : bool, optional
+        Whether all edges have the same size. If None, automatically detected.
+    order : int, optional
+        Size of edges for uniform hypergraphs. If None, automatically detected.
+    directed : bool, optional
+        Whether the hypergraph is directed. If None, automatically detected.
+    compress : bool, default True
+        Remove duplicate edges during construction.
+    verbose : bool, default False
+        Enable warning messages during construction.
+    
+    .. note::
+        At least one of `edge_list`, `adjacency_tensor`, `incidence_matrix`, 
+        or `edges` must be provided.
+
+    Examples
+    --------
+    Create a simple hypergraph:
+
+    >>> edges = [[0, 1, 2], [1, 2, 3], [2, 3, 4]]
+    >>> hg = Hypergraph(edge_list=edges)
+    >>> print(f"Nodes: {hg.nnodes}, Edges: {hg.nedges}")
+    Nodes: 5, Edges: 3
+
+    Create a directed hypergraph:
+
+    >>> directed_edges = [[[0], [1, 2]], [[1], [2, 3]]]
+    >>> hg = Hypergraph(edge_list=directed_edges)
+    >>> print(hg.directed)
+    True
     """
     def __init__(self,
             edge_list=None,
@@ -299,57 +318,51 @@ class Hypergraph:
 
     @property
     def nodes(self):
+        """(dataframe) nodes of the hypergraph and their metadata"""
         return self._nodes
         
     @property
     def edges(self):
+        """(dataframe) edges of the hypergraph and their metadata"""
         return self._edges
 
     @property
     def directed(self):
+        """(bool) if the hypergraph is directed"""
         return self._directed
 
     @property
     def nnodes(self):
-        """Returns the number of nodes (vertices) in the hypergraph.
-
-        Returns
-        -------
-        int
-            Number of nodes in the hypergraph.
-        """
+        """(int) number of nodes (vertices) in the hypergraph."""
         return self._nodes.shape[0] if self._nodes is not None else 0
 
     @property
     def nedges(self):
-        """Returns the number of edges (hyperedges) in the hypergraph.
-
-        Returns
-        -------
-        int or bool
-            Number of edges if available, otherwise False if edges are not defined.
-        """
+        """(int) number of edges (hyperedges) in the hypergraph."""
         return self.edges.shape[0]
 
     @property
     def edge_weights(self):
+        """weight column of Hypergraph.edges"""
         if 'weight' not in self.edges.columns:
             self.edges['weight'] = np.ones((self.nedges,))
         return np.array(self.edges['weight'].values)
 
     @property
     def node_weights(self):
+        """weight column of Hypergraph.nodes"""
         if 'weight' not in self.nodes.columns:
             self.nodes['weight'] = np.ones((self.nnodes,))
         return np.array(self.nodes['weight'].values)
 
     @property
     def uniform(self):
-        """Returns if the hypergraph was uniform."""
+        """(bool) if the hypergraph was uniform."""
         return self._uniform
     
     @property
     def order(self):
+        """(int) for uniform hypergraphs, the number of nodes per edge"""
         return self._order
     
     @property
@@ -710,6 +723,48 @@ class Hypergraph:
     @property
     def hypergraphx(self):
         return export.to_hypergraphx(self)
+
+    @classmethod
+    def chain(cls, nnodes, order):
+        """
+        Create a chain hypergraph.
+
+        Each hyperedge connects 'order' consecutive nodes along a chain of 'nnodes' nodes.
+        For example, if order=3 and nnodes=5, edges are: [0,1,2], [1,2,3], [2,3,4]
+
+        Parameters:
+            nnodes (int): Total number of nodes.
+            order (int): Number of nodes in each hyperedge (edge cardinality).
+
+        Returns:
+            Hypergraph: A new Hypergraph instance representing the chain.
+        """
+        incidence_matrix = np.zeros((nnodes, nnodes - order + 1))
+        for i in range(incidence_matrix.shape[1]):
+            incidence_matrix[i:i + order, i] = 1
+        return cls(incidence_matrix=incidence_matrix)
+
+    @classmethod
+    def ring(cls, nnodes, order):
+        """
+        Create a ring (cyclic) hypergraph.
+
+        Each hyperedge connects 'order' consecutive nodes in a circular fashion.
+        For example, if order=3 and nnodes=5, edges are: [0,1,2], [1,2,3], [2,3,4], [3,4,0], [4,0,1]
+
+        Parameters:
+            nnodes (int): Number of nodes in the ring.
+            order (int): Number of nodes per hyperedge.
+
+        Returns:
+            Hypergraph: A new Hypergraph instance representing the ring.
+        """
+        incidence_matrix = np.zeros((nnodes, nnodes))
+        for i in range(nnodes):
+            for j in range(order):
+                node_idx = (i + j) % nnodes
+                incidence_matrix[node_idx, i] = 1
+        return cls(incidence_matrix=incidence_matrix)
     
 def convert_nodes_to_integers(edge_list):
     # Step 1: Check if the lowest level contains integers
