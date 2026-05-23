@@ -65,9 +65,7 @@ Full documentation — including API reference, tutorials, and examples — is a
 
 ---
 
-## Publications
-
-HAT consolidates and contains methods from the following works:
+## Related Publications
 
 | Paper | Link |
 |---|---|
@@ -75,8 +73,8 @@ HAT consolidates and contains methods from the following works:
 | Data-Driven Tensor Decomposition Identification of Homogeneous Polynomial Dynamical Systems | [Preprint](https://arxiv.org/pdf/2604.03508) |
 | Scalable Hypergraph Algorithms for Observability of Gene Regulation | [European Control Conference](https://ieeexplore.ieee.org/document/11186979) |
 | Deciphering Multiway Interactions in the Human Genome | [Nature Communications](https://drive.google.com/file/d/1rp6ZtKf_DxUL0xOpcUzRg1rJGA6xlu-f/view) |
-| Geometric Aspects of Observability of Hypergraphs | [IFAC LHMNC](https://drive.google.com/file/d/1-5AL_rOvAm-aUClSfyy9MpED7h7_L76o/view) |
-| Observability of Hypergraphs | [IEEE CDC](https://drive.google.com/file/d/1FQxRj5VdPkY-P64ek7rq4lp9jQW9MLFP/view) |
+| Geometric Aspects of Observability of Hypergraphs | [IFAC Workshop on Lagrangian and Hamiltonian Methods for Non Linear Control](https://drive.google.com/file/d/1-5AL_rOvAm-aUClSfyy9MpED7h7_L76o/view) |
+| Observability of Hypergraphs | [IEEE Conference on Decision and Control](https://drive.google.com/file/d/1FQxRj5VdPkY-P64ek7rq4lp9jQW9MLFP/view) |
 | Kronecker Products of Tensors and Hypergraphs | [SIAM Journal on Matrix Analysis and Applications](https://epubs.siam.org/doi/full/10.1137/23M1592547) |
 | HAT: Hypergraph Analysis Toolbox | [PLOS Computational Biology](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1011190) |
 | Hypergraph Similarity Measures | [IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING](https://drive.google.com/file/d/1Dc4nSkkZyk4axOAshdRDXo8Gx24h4M-d/view) |
