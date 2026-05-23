@@ -89,6 +89,7 @@ class Hypergraph:
         )
 
         # Convert all nodes to integers, and build a map between integers and names
+        name_to_int = None
         if edge_list is not None:
             new_edge_list, name_to_int = convert_nodes_to_integers(edge_list)
             original_edge_list = copy.deepcopy(edge_list)
