@@ -336,7 +336,7 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
         edge_df = pd.DataFrame({
             'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
             'Edges': [0,1,2],
-            'weight': [1.5, 2.5, pd.NA]
+            'weight': [1.5, 2.5, np.nan]
         })
 
         # Assert the edges match
@@ -358,7 +358,7 @@ class HypergraphConstructorTestCase2(unittest.TestCase):
         edge_df = pd.DataFrame({
             'Nodes': [[0, 1, 2], [0, 1, 3], [2, 3]],
             'Edges': [0,1,2],
-            'weight': [pd.NA, pd.NA, 3.0]
+            'weight': [np.nan, np.nan, 3.0]
         })
 
         # Assert the edges match
